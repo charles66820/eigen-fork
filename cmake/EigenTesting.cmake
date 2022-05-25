@@ -389,6 +389,12 @@ macro(ei_testing_print_summary)
       message(STATUS "HIP:               OFF")
     endif()
 
+    if(EIGEN_TEST_MIPP)
+      message(STATUS "MIPP:               ON")
+    else()
+      message(STATUS "MIPP:               Using architecture defaults")
+    endif()
+
   endif() # vectorization / alignment options
 
   message(STATUS "\n${EIGEN_TESTING_SUMMARY}")
@@ -551,6 +557,8 @@ macro(ei_get_cxxflags VAR)
     set(${VAR} SSE2)
   elseif(EIGEN_TEST_MSA)
     set(${VAR} MSA)
+  elseif(EIGEN_TEST_MIPP)
+    set(${VAR} MIPP)
   endif()
 
   if(EIGEN_TEST_OPENMP)
