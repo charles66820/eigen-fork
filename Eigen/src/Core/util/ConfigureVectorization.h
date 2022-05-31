@@ -196,11 +196,8 @@
   #if defined __MIPP__
     #define EIGEN_VECTORIZE
     #define EIGEN_VECTORIZE_MIPP
-
-    extern "C" {
-      #include <immintrin.h>
-    }
-  #elif defined (EIGEN_SSE2_ON_NON_MSVC_BUT_NOT_OLD_GCC) || defined(EIGEN_SSE2_ON_MSVC_2008_OR_LATER)
+  #endif
+  #if defined (EIGEN_SSE2_ON_NON_MSVC_BUT_NOT_OLD_GCC) || defined(EIGEN_SSE2_ON_MSVC_2008_OR_LATER)
 
     // Defines symbols for compile-time detection of which instructions are
     // used.
