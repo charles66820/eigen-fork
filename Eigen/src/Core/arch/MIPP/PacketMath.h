@@ -255,7 +255,7 @@ template<> struct is_arithmetic<Packet8bf> { enum { value = true }; };
 #ifdef EIGEN_VECTORIZE_AVX2
 template<> struct is_arithmetic<Packet4l> { enum { value = true }; };
 #endif
-/*
+
 // Use the packet_traits defined in AVX512/PacketMath.h instead if we're going
 // to leverage AVX512 instructions.
 #ifndef EIGEN_VECTORIZE_AVX512
@@ -432,7 +432,7 @@ template<> struct packet_traits<int64_t> : default_packet_traits
 #endif
 
 #endif
-*/
+
 
 #ifndef EIGEN_VECTORIZE_AVX
 template<> struct scalar_div_cost<float,true> { enum { value = 7 }; };
@@ -508,7 +508,7 @@ EIGEN_STRONG_INLINE __m128i Pack16To8(Packet8f rf) {
 #ifdef EIGEN_VECTORIZE_AVX2
 template <>
 EIGEN_STRONG_INLINE Packet4l pset1<Packet4l>(const int64_t& from) {
-  return _mm256_set1_epi64x(from);
+  return (__m256i) mipp::set1<long>(from);
 }
 template <>
 EIGEN_STRONG_INLINE Packet4l pzero(const Packet4l& /*a*/) {
@@ -681,14 +681,14 @@ EIGEN_STRONG_INLINE Packet4l pmul<Packet4l>(const Packet4l& a, const Packet4l& b
 }
 #endif
 
-template<> EIGEN_STRONG_INLINE Packet4f pset1<Packet4f>(const float&  from) { return _mm_set_ps1(from); }
-template<> EIGEN_STRONG_INLINE Packet2d pset1<Packet2d>(const double& from) { return _mm_set1_pd(from); }
-template<> EIGEN_STRONG_INLINE Packet4i pset1<Packet4i>(const int&    from) { return _mm_set1_epi32(from); }
-template<> EIGEN_STRONG_INLINE Packet16b pset1<Packet16b>(const bool&    from) { return _mm_set1_epi8(static_cast<char>(from)); }
+template<> EIGEN_STRONG_INLINE Packet4f pset1<Packet4f>(const float&  from) { return (Packet4f) mipp::low<float>(mipp::set1<float>(from)); }
+template<> EIGEN_STRONG_INLINE Packet2d pset1<Packet2d>(const double& from) { return (Packet2d) mipp::low<double>(mipp::set1<double>(from)); }
+template<> EIGEN_STRONG_INLINE Packet4i pset1<Packet4i>(const int&    from) { return (__m128i) mipp::low<int>(mipp::set1<int>(from)); }
+template<> EIGEN_STRONG_INLINE Packet16b pset1<Packet16b>(const bool&    from) { return (__m128i) mipp::low<int8_t>(mipp::set1<int8_t>(static_cast<char>(from))); }
 
-template<> EIGEN_STRONG_INLINE Packet8f pset1<Packet8f>(const float&  from) { return _mm256_set1_ps(from); }
-template<> EIGEN_STRONG_INLINE Packet4d pset1<Packet4d>(const double& from) { return _mm256_set1_pd(from); }
-template<> EIGEN_STRONG_INLINE Packet8i pset1<Packet8i>(const int&    from) { return _mm256_set1_epi32(from); }
+template<> EIGEN_STRONG_INLINE Packet8f pset1<Packet8f>(const float&  from) { return (Packet8f) mipp::set1<float>(from); }
+template<> EIGEN_STRONG_INLINE Packet4d pset1<Packet4d>(const double& from) { return (Packet4d) mipp::set1<double>(from); }
+template<> EIGEN_STRONG_INLINE Packet8i pset1<Packet8i>(const int&    from) { return (__m256i) mipp::set1<int>(from); }
 
 template<> EIGEN_STRONG_INLINE Packet4f pset1frombits<Packet4f>(unsigned int from) { return _mm_castsi128_ps(pset1<Packet4i>(from)); }
 template<> EIGEN_STRONG_INLINE Packet2d pset1frombits<Packet2d>(uint64_t from) { return _mm_castsi128_pd(_mm_set1_epi64x(from)); }
@@ -2723,7 +2723,7 @@ EIGEN_STRONG_INLINE __m128i float2half(__m128 f) {
 template<> struct unpacket_traits<Packet8h> { typedef Eigen::half type; enum {size=8, alignment=Aligned16, vectorizable=true, masked_load_available=false, masked_store_available=false}; typedef Packet8h half; };
 
 template<> EIGEN_STRONG_INLINE Packet8h pset1<Packet8h>(const Eigen::half& from) {
-  return _mm_set1_epi16(numext::bit_cast<numext::uint16_t>(from));
+  return (__m128i) mipp::low<short>(mipp::set1<short>(numext::bit_cast<numext::uint16_t>(from)));
 }
 
 template<> EIGEN_STRONG_INLINE Eigen::half pfirst<Packet8h>(const Packet8h& from) {
@@ -3090,7 +3090,7 @@ EIGEN_STRONG_INLINE Packet8bf F32ToBf16(const Packet8f& a) {
 }
 
 template<> EIGEN_STRONG_INLINE Packet8bf pset1<Packet8bf>(const bfloat16& from) {
-  return _mm_set1_epi16(numext::bit_cast<numext::uint16_t>(from));
+  return (__m128i) mipp::low<short>(mipp::set1<short>(numext::bit_cast<numext::uint16_t>(from)));
 }
 
 template<> EIGEN_STRONG_INLINE bfloat16 pfirst<Packet8bf>(const Packet8bf& from) {
