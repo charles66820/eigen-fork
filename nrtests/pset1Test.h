@@ -108,8 +108,12 @@ void pset1Tests() {
 
   /* bfloat16 = Packet8bf */
   std::cout << "pset1 bfloat16 tests" << std::endl;
-  bfloat16 valbf16[8] = { bfloat16(0), bfloat16(1), bfloat16(2), bfloat16(3),
-                          bfloat16(4), bfloat16(5), bfloat16(6), bfloat16(7) };
-  pset1Bfloat16Test(*valbf16);
+  pset1Bfloat16Test(bfloat16(FLT_MAX));
+  pset1Bfloat16Test(bfloat16(36.7f));
+  pset1Bfloat16Test(bfloat16(0.0f));
+  pset1Bfloat16Test(bfloat16(-240.98f));
+  pset1Bfloat16Test(bfloat16(FLT_MIN));
+
+}
 
 #endif // EIGEN_MIPP_PSET1_TEST_H
