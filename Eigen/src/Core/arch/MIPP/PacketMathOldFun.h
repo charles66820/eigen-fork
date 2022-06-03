@@ -27,5 +27,21 @@ template<> EIGEN_STRONG_INLINE Packet8bf pset1_old<Packet8bf>(const bfloat16& fr
   return _mm_set1_epi16(numext::bit_cast<numext::uint16_t>(from));
 }
 
+/** \internal \returns packet of zeros */
+template<typename Packet> EIGEN_DEVICE_FUNC inline Packet
+pzero_old(const Packet& a) {
+  return pzero_impl<Packet>::run(a);
+}
+
+template <> EIGEN_STRONG_INLINE Packet4l pzero_old(const Packet4l& /*a*/) { return _mm256_setzero_si256(); }
+
+template<> EIGEN_STRONG_INLINE Packet4f pzero_old(const Packet4f& /*a*/) { return _mm_setzero_ps(); }
+template<> EIGEN_STRONG_INLINE Packet2d pzero_old(const Packet2d& /*a*/) { return _mm_setzero_pd(); }
+template<> EIGEN_STRONG_INLINE Packet4i pzero_old(const Packet4i& /*a*/) { return _mm_setzero_si128(); }
+
+template<> EIGEN_STRONG_INLINE Packet8f pzero_old(const Packet8f& /*a*/) { return _mm256_setzero_ps(); }
+template<> EIGEN_STRONG_INLINE Packet4d pzero_old(const Packet4d& /*a*/) { return _mm256_setzero_pd(); }
+template<> EIGEN_STRONG_INLINE Packet8i pzero_old(const Packet8i& /*a*/) { return _mm256_setzero_si256(); }
+
 
 #endif // EIGEN_PACKET_MATH_OLD_FUN_MIPP_H
