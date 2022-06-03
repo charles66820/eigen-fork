@@ -7,55 +7,55 @@
 void pset1LongTest(long val) {
   mipp::Reg<long> rFull = (mipp::reg)(__m256i) pset1<Packet4l>(val);
   mipp::Reg<long> rFull_old = (mipp::reg)(__m256i)pset1_old<Packet4l>(val);
-  printWhenDiff("pset1<Packet4l>", val, rFull, rFull_old);
+  printWhenDiff("pset1<Packet4l> with " + std::to_string(val), rFull, rFull_old);
 }
 
 void pset1FloatTest(float val) {
   mipp::Reg_2<float> rHalf = pset1<Packet4f>(val);
   mipp::Reg_2<float> rHalf_old = pset1_old<Packet4f>(val);
-  printWhenDiff("pset1<Packet4f> (half)", val, rHalf, rHalf_old);
+  printWhenDiff("pset1<Packet4f> (half) with " + std::to_string(val), rHalf, rHalf_old);
 
   mipp::Reg<float> rFull = pset1<Packet8f>(val);
   mipp::Reg<float> rFull_old = pset1_old<Packet8f>(val);
-  printWhenDiff("pset1<Packet8f> (full)", val, rFull, rFull_old);
+  printWhenDiff("pset1<Packet8f> (full) with " + std::to_string(val), rFull, rFull_old);
 }
 
 void pset1DoubleTest(double val) {
   mipp::Reg_2<double> rHalf = (mipp::reg_2)pset1<Packet2d>(val);
   mipp::Reg_2<double> rHalf_old = (mipp::reg_2)pset1_old<Packet2d>(val);
-  printWhenDiff("pset1<Packet2d> (half)", val, rHalf, rHalf_old);
+  printWhenDiff("pset1<Packet2d> (half) with " + std::to_string(val), rHalf, rHalf_old);
 
   mipp::Reg<double> rFull = (mipp::reg)pset1<Packet4d>(val);
   mipp::Reg<double> rFull_old = (mipp::reg)pset1_old<Packet4d>(val);
-  printWhenDiff("pset1<Packet4d> (full)", val, rFull, rFull_old);
+  printWhenDiff("pset1<Packet4d> (full) with " + std::to_string(val), rFull, rFull_old);
 }
 
 void pset1IntTest(int val) {
   mipp::Reg_2<int> rHalf = (mipp::reg_2)(__m128i)pset1<Packet4i>(val);
   mipp::Reg_2<int> rHalf_old = (mipp::reg_2)(__m128i)pset1_old<Packet4i>(val);
-  printWhenDiff("pset1<Packet4i> (half)", val, rHalf, rHalf_old);
+  printWhenDiff("pset1<Packet4i> (half) with " + std::to_string(val), rHalf, rHalf_old);
 
   mipp::Reg<int> rFull = (mipp::reg)(__m256i)pset1<Packet8i>(val);
   mipp::Reg<int> rFull_old = (mipp::reg)(__m256i)pset1_old<Packet8i>(val);
-  printWhenDiff("pset1<Packet8i> (full)", val, rFull, rFull_old);
+  printWhenDiff("pset1<Packet8i> (full) with " + std::to_string(val), rFull, rFull_old);
 }
 
 void pset1BoolTest(int val) {
   mipp::Reg_2<int> rFull = (mipp::reg_2)(__m128i)pset1<Packet16b>(val);
   mipp::Reg_2<int> rFull_old = (mipp::reg_2)(__m128i)pset1_old<Packet16b>(val);
-  printWhenDiff("pset1<Packet16b>", val, rFull, rFull_old);
+  printWhenDiff("pset1<Packet16b> with " + std::to_string(val), rFull, rFull_old);
 }
 
 void pset1EigenHalfTest(Eigen::half val) {
   mipp::Reg_2<short> rFull = (mipp::reg_2)(__m128i)pset1<Packet8h>(val);
   mipp::Reg_2<short> rFull_old = (mipp::reg_2)(__m128i)pset1_old<Packet8h>(val);
-  printWhenDiff("pset1<Packet8h>", (short)val, rFull, rFull_old);
+  printWhenDiff("pset1<Packet8h> with " + std::to_string((short)val), rFull, rFull_old);
 }
 
 void pset1Bfloat16Test(bfloat16 val) {
   mipp::Reg_2<short> rFull = (mipp::reg_2)(__m128i)pset1<Packet8bf>(val);
   mipp::Reg_2<short> rFull_old = (mipp::reg_2)(__m128i)pset1_old<Packet8bf>(val);
-  printWhenDiff("pset1<Packet8bf>", (short)val, rFull, rFull_old);
+  printWhenDiff("pset1<Packet8bf> with " + std::to_string((short)val), rFull, rFull_old);
 }
 
 void pset1Tests() {

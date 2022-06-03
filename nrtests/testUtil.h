@@ -12,20 +12,21 @@ using namespace Eigen;
 #endif  // VERBOSE
 
 template <typename T>
-void printWhenDiff(std::string msg, T val, mipp::Reg<T> reg, mipp::Reg<T> reg_old) {
+void printWhenDiff(std::string msg, mipp::Reg<T> reg, mipp::Reg<T> reg_old) {
+
   if (!mipp::testz(reg != reg_old) || VERBOSE)
-    std::cout << "diff for " << msg << " with " << val << " : " << std::endl
+    std::cout << "diff for " << msg << " : " << std::endl
               << "old " << reg_old << std::endl
               << "new " << reg << std::endl
               << std::endl;
 }
 
 template <typename T>
-void printWhenDiff(std::string msg, T val, mipp::Reg_2<T> reg, mipp::Reg_2<T> reg_old) {
+void printWhenDiff(std::string msg, mipp::Reg_2<T> reg, mipp::Reg_2<T> reg_old) {
   mipp::Reg<T> rf0 = 0.0;
   mipp::Reg_2<T> rf0_h = rf0.low();
 
-  printWhenDiff(msg, val, mipp::combine(reg, rf0_h), mipp::combine(reg_old, rf0_h));
+  printWhenDiff(msg, mipp::combine(reg, rf0_h), mipp::combine(reg_old, rf0_h));
 }
 
 #endif  // EIGEN_MIPP_TEST_UTIL_H
