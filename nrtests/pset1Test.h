@@ -4,115 +4,60 @@
 #ifndef EIGEN_MIPP_PSET1_TEST_H
 #define EIGEN_MIPP_PSET1_TEST_H
 
-void pset1LongTest(long val) {
-  mipp::Reg<long> rFull = (mipp::reg)(__m256i) pset1<Packet4l>(val);
-  mipp::Reg<long> rFull_old = (mipp::reg)(__m256i)pset1_old<Packet4l>(val);
-  printWhenDiff("pset1<Packet4l> with " + std::to_string(val), rFull, rFull_old);
-}
-
-void pset1FloatTest(float val) {
-  mipp::Reg_2<float> rHalf = pset1<Packet4f>(val);
-  mipp::Reg_2<float> rHalf_old = pset1_old<Packet4f>(val);
-  printWhenDiff("pset1<Packet4f> (half) with " + std::to_string(val), rHalf, rHalf_old);
-
-  mipp::Reg<float> rFull = pset1<Packet8f>(val);
-  mipp::Reg<float> rFull_old = pset1_old<Packet8f>(val);
-  printWhenDiff("pset1<Packet8f> (full) with " + std::to_string(val), rFull, rFull_old);
-}
-
-void pset1DoubleTest(double val) {
-  mipp::Reg_2<double> rHalf = (mipp::reg_2)pset1<Packet2d>(val);
-  mipp::Reg_2<double> rHalf_old = (mipp::reg_2)pset1_old<Packet2d>(val);
-  printWhenDiff("pset1<Packet2d> (half) with " + std::to_string(val), rHalf, rHalf_old);
-
-  mipp::Reg<double> rFull = (mipp::reg)pset1<Packet4d>(val);
-  mipp::Reg<double> rFull_old = (mipp::reg)pset1_old<Packet4d>(val);
-  printWhenDiff("pset1<Packet4d> (full) with " + std::to_string(val), rFull, rFull_old);
-}
-
-void pset1IntTest(int val) {
-  mipp::Reg_2<int> rHalf = (mipp::reg_2)(__m128i)pset1<Packet4i>(val);
-  mipp::Reg_2<int> rHalf_old = (mipp::reg_2)(__m128i)pset1_old<Packet4i>(val);
-  printWhenDiff("pset1<Packet4i> (half) with " + std::to_string(val), rHalf, rHalf_old);
-
-  mipp::Reg<int> rFull = (mipp::reg)(__m256i)pset1<Packet8i>(val);
-  mipp::Reg<int> rFull_old = (mipp::reg)(__m256i)pset1_old<Packet8i>(val);
-  printWhenDiff("pset1<Packet8i> (full) with " + std::to_string(val), rFull, rFull_old);
-}
-
-void pset1BoolTest(int val) {
-  mipp::Reg_2<int> rFull = (mipp::reg_2)(__m128i)pset1<Packet16b>(val);
-  mipp::Reg_2<int> rFull_old = (mipp::reg_2)(__m128i)pset1_old<Packet16b>(val);
-  printWhenDiff("pset1<Packet16b> with " + std::to_string(val), rFull, rFull_old);
-}
-
-void pset1EigenHalfTest(Eigen::half val) {
-  mipp::Reg_2<short> rFull = (mipp::reg_2)(__m128i)pset1<Packet8h>(val);
-  mipp::Reg_2<short> rFull_old = (mipp::reg_2)(__m128i)pset1_old<Packet8h>(val);
-  printWhenDiff("pset1<Packet8h> with " + std::to_string((short)val), rFull, rFull_old);
-}
-
-void pset1Bfloat16Test(bfloat16 val) {
-  mipp::Reg_2<short> rFull = (mipp::reg_2)(__m128i)pset1<Packet8bf>(val);
-  mipp::Reg_2<short> rFull_old = (mipp::reg_2)(__m128i)pset1_old<Packet8bf>(val);
-  printWhenDiff("pset1<Packet8bf> with " + std::to_string((short)val), rFull, rFull_old);
-}
-
 void pset1Tests() {
   /* long = Packet4l */
   std::cout << "pset1 long tests" << std::endl;
-  pset1LongTest(LONG_MAX);
-  pset1LongTest(36.7L);
-  pset1LongTest(0.0L);
-  pset1LongTest(-240.98L);
-  pset1LongTest(LONG_MIN);
+  dymLongTest(pset1, LONG_MAX);
+  dymLongTest(pset1, 36L);
+  dymLongTest(pset1, 0L);
+  dymLongTest(pset1, -240L);
+  dymLongTest(pset1, LONG_MIN);
 
   /* float = half : Packet4f, full : Packet8f */
   std::cout << "pset1 float tests" << std::endl;
-  pset1FloatTest(FLT_MAX);
-  pset1FloatTest(36.7f);
-  pset1FloatTest(0.0f);
-  pset1FloatTest(-240.98f);
-  pset1FloatTest(FLT_MIN);
-
+  dymFloatTest(pset1, FLT_MAX);
+  dymFloatTest(pset1, 36.7f);
+  dymFloatTest(pset1, 0.0f);
+  dymFloatTest(pset1, -240.98f);
+  dymFloatTest(pset1, FLT_MIN);
   /* double = half : Packet2d, full : Packet4d */
   std::cout << "pset1 double tests" << std::endl;
-  pset1DoubleTest(DBL_MAX);
-  pset1DoubleTest(36.7d);
-  pset1DoubleTest(0.0d);
-  pset1DoubleTest(-240.98d);
-  pset1DoubleTest(DBL_MIN);
+  dymDoubleTest(pset1, DBL_MAX);
+  dymDoubleTest(pset1, 36.7d);
+  dymDoubleTest(pset1, 0.0d);
+  dymDoubleTest(pset1, -240.98d);
+  dymDoubleTest(pset1, DBL_MIN);
 
   /* int = half : Packet4i, full : Packet8i */
   std::cout << "pset1 int tests" << std::endl;
-  pset1IntTest(INT_MAX);
-  pset1IntTest(36);
-  pset1IntTest(0);
-  pset1IntTest(-240);
-  pset1IntTest(INT_MIN);
+  dymIntTest(pset1, INT_MAX);
+  dymIntTest(pset1, 36);
+  dymIntTest(pset1, 0);
+  dymIntTest(pset1, -240);
+  dymIntTest(pset1, INT_MIN);
 
   /* bool = Packet16b */
   std::cout << "pset1 bool tests" << std::endl;
-  pset1BoolTest(true);
-  pset1BoolTest(false);
-  pset1BoolTest(CHAR_MAX);
-  pset1BoolTest(CHAR_MIN);
+  dymBoolTest(pset1, true);
+  dymBoolTest(pset1, false);
+  dymBoolTest(pset1, CHAR_MAX);
+  dymBoolTest(pset1, CHAR_MIN);
 
   /* Eigen::half = Packet8h */
   std::cout << "pset1 Eigen::half tests" << std::endl;
-  pset1EigenHalfTest(half(FLT_MAX));
-  pset1EigenHalfTest(half(36.7f));
-  pset1EigenHalfTest(half(0.0f));
-  pset1EigenHalfTest(half(-240.98f));
-  pset1EigenHalfTest(half(FLT_MIN));
+  dymEigenHalfTest(pset1, half(FLT_MAX));
+  dymEigenHalfTest(pset1, half(36.7f));
+  dymEigenHalfTest(pset1, half(0.0f));
+  dymEigenHalfTest(pset1, half(-240.98f));
+  dymEigenHalfTest(pset1, half(FLT_MIN));
 
   /* bfloat16 = Packet8bf */
   std::cout << "pset1 bfloat16 tests" << std::endl;
-  pset1Bfloat16Test(bfloat16(FLT_MAX));
-  pset1Bfloat16Test(bfloat16(36.7f));
-  pset1Bfloat16Test(bfloat16(0.0f));
-  pset1Bfloat16Test(bfloat16(-240.98f));
-  pset1Bfloat16Test(bfloat16(FLT_MIN));
+  dymBfloat16Test(pset1, bfloat16(FLT_MAX));
+  dymBfloat16Test(pset1, bfloat16(36.7f));
+  dymBfloat16Test(pset1, bfloat16(0.0f));
+  dymBfloat16Test(pset1, bfloat16(-240.98f));
+  dymBfloat16Test(pset1, bfloat16(FLT_MIN));
 
 }
 
