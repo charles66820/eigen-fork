@@ -43,5 +43,29 @@ template<> EIGEN_STRONG_INLINE Packet8f pzero_old(const Packet8f& /*a*/) { retur
 template<> EIGEN_STRONG_INLINE Packet4d pzero_old(const Packet4d& /*a*/) { return _mm256_setzero_pd(); }
 template<> EIGEN_STRONG_INLINE Packet8i pzero_old(const Packet8i& /*a*/) { return _mm256_setzero_si256(); }
 
+template<typename Packet> EIGEN_DEVICE_FUNC inline Packet
+pload_old(const typename unpacket_traits<Packet>::type* from) { return *from; }
+
+template <>
+EIGEN_STRONG_INLINE Packet4l pload_old<Packet4l>(const int64_t* from) {
+  EIGEN_DEBUG_ALIGNED_LOAD return _mm256_load_si256(reinterpret_cast<const __m256i*>(from));
+}
+
+template<> EIGEN_STRONG_INLINE Packet4f pload_old<Packet4f>(const float*   from) { EIGEN_DEBUG_ALIGNED_LOAD return _mm_load_ps(from); }
+template<> EIGEN_STRONG_INLINE Packet2d pload_old<Packet2d>(const double*  from) { EIGEN_DEBUG_ALIGNED_LOAD return _mm_load_pd(from); }
+template<> EIGEN_STRONG_INLINE Packet4i pload_old<Packet4i>(const int*     from) { EIGEN_DEBUG_ALIGNED_LOAD return _mm_load_si128(reinterpret_cast<const __m128i*>(from)); }
+template<> EIGEN_STRONG_INLINE Packet16b pload_old<Packet16b>(const bool*     from) { EIGEN_DEBUG_ALIGNED_LOAD return  _mm_load_si128(reinterpret_cast<const __m128i*>(from)); }
+
+template<> EIGEN_STRONG_INLINE Packet8f pload_old<Packet8f>(const float*   from) { EIGEN_DEBUG_ALIGNED_LOAD return _mm256_load_ps(from); }
+template<> EIGEN_STRONG_INLINE Packet4d pload_old<Packet4d>(const double*  from) { EIGEN_DEBUG_ALIGNED_LOAD return _mm256_load_pd(from); }
+template<> EIGEN_STRONG_INLINE Packet8i pload_old<Packet8i>(const int*     from) { EIGEN_DEBUG_ALIGNED_LOAD return _mm256_load_si256(reinterpret_cast<const __m256i*>(from)); }
+
+template<> EIGEN_STRONG_INLINE Packet8h pload_old<Packet8h>(const Eigen::half* from) {
+  return _mm_load_si128(reinterpret_cast<const __m128i*>(from));
+}
+
+template<> EIGEN_STRONG_INLINE Packet8bf pload_old<Packet8bf>(const bfloat16* from) {
+  return _mm_load_si128(reinterpret_cast<const __m128i*>(from));
+}
 
 #endif // EIGEN_PACKET_MATH_OLD_FUN_MIPP_H
