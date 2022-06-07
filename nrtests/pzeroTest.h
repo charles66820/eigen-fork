@@ -6,7 +6,7 @@
 
 void pzeroLongTest() {
   Packet4l a;
-  mipp::Reg<long> rFull = (mipp::reg)(__m256i) pzero<Packet4l>(a);
+  mipp::Reg<long> rFull = (mipp::reg)(__m256i)pzero<Packet4l>(a);
   mipp::Reg<long> rFull_old = (mipp::reg)(__m256i)pzero_old<Packet4l>(a);
   printWhenDiff("pzero<Packet4l>", rFull, rFull_old);
 }
@@ -49,21 +49,39 @@ void pzeroIntTest() {
 
 void pzeroTests() {
   /* long = Packet4l */
-  std::cout << "pzero long tests" << std::endl;
-  pzeroLongTest();
+  std::cout << "pzero half long tests" << std::endl;
+  Packet4l a;
+  dynFullLongTest(pzero, a);
 
-  /* float = half : Packet4f, full : Packet8f */
-  std::cout << "pzero float tests" << std::endl;
-  pzeroFloatTest();
+  /* float = Packet4f (half) */
+  std::cout << "pzero half float tests" << std::endl;
+  Packet4f bh;
+  dynHalfFloatTest(pzero, bh);
 
-  /* double = half : Packet2d, full : Packet4d */
-  std::cout << "pzero double tests" << std::endl;
-  pzeroDoubleTest();
+  /* float = Packet8f (full) */
+  std::cout << "pzero full float tests" << std::endl;
+  Packet8f b;
+  dynFullFloatTest(pzero, b);
 
-  /* int = half : Packet4i, full : Packet8i */
-  std::cout << "pzero int tests" << std::endl;
-  pzeroIntTest();
+  /* double = Packet2d (half) */
+  std::cout << "pzero half double tests" << std::endl;
+  Packet2d ch;
+  dynHalfDoubleTest(pzero, ch);
 
+  /* double = Packet4d (full) */
+  std::cout << "pzero full double tests" << std::endl;
+  Packet4d c;
+  dynFullDoubleTest(pzero, c);
+
+  /* int = Packet4i (half) */
+  std::cout << "pzero half int tests" << std::endl;
+  Packet4i dh;
+  dynHalfIntTest(pzero, dh);
+
+  /* int = Packet8i (full) */
+  std::cout << "pzero full int tests" << std::endl;
+  Packet8i d;
+  dynFullIntTest(pzero, d);
 }
 
-#endif // EIGEN_MIPP_PZERO_TEST_H
+#endif  // EIGEN_MIPP_PZERO_TEST_H
