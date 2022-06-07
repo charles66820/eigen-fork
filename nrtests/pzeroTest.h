@@ -14,7 +14,7 @@ void pzeroTests() {
   std::cout << xstr(FUN2TEST) << " :" << std::endl;
 
   /* long = Packet4l */
-  std::cout << "half long tests" << std::endl;
+  std::cout << "long tests" << std::endl;
   Packet4l a;
   dynFullLongTest(FUN2TEST, a);
 
