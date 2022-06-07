@@ -4,85 +4,93 @@
 #ifndef EIGEN_MIPP_PSET1_TEST_H
 #define EIGEN_MIPP_PSET1_TEST_H
 
+#undef FUN2TEST
+#define FUN2TEST pset1
+
+#define str(s) #s
+#define xstr(s) str(s)
+
 void pset1Tests() {
+  std::cout << xstr(FUN2TEST) << " :" << std::endl;
+
   /* long = Packet4l */
-  std::cout << "pset1 long tests" << std::endl;
-  dynFullLongTest(pset1, LONG_MAX);
-  dynFullLongTest(pset1, 36L);
-  dynFullLongTest(pset1, 0L);
-  dynFullLongTest(pset1, -240L);
-  dynFullLongTest(pset1, LONG_MIN);
+  std::cout << "long tests" << std::endl;
+  dynFullLongTest(FUN2TEST, LONG_MAX);
+  dynFullLongTest(FUN2TEST, 36L);
+  dynFullLongTest(FUN2TEST, 0L);
+  dynFullLongTest(FUN2TEST, -240L);
+  dynFullLongTest(FUN2TEST, LONG_MIN);
 
   /* float = Packet4f (half) */
-  std::cout << "pset1 half float tests" << std::endl;
-  dynHalfFloatTest(pset1, FLT_MAX);
-  dynHalfFloatTest(pset1, 36.7f);
-  dynHalfFloatTest(pset1, 0.0f);
-  dynHalfFloatTest(pset1, -240.98f);
-  dynHalfFloatTest(pset1, FLT_MIN);
+  std::cout << "half float tests" << std::endl;
+  dynHalfFloatTest(FUN2TEST, FLT_MAX);
+  dynHalfFloatTest(FUN2TEST, 36.7f);
+  dynHalfFloatTest(FUN2TEST, 0.0f);
+  dynHalfFloatTest(FUN2TEST, -240.98f);
+  dynHalfFloatTest(FUN2TEST, FLT_MIN);
 
   /* float = Packet8f (full) */
-  std::cout << "pset1 full float tests" << std::endl;
-  dynFullFloatTest(pset1, FLT_MAX);
-  dynFullFloatTest(pset1, 36.7f);
-  dynFullFloatTest(pset1, 0.0f);
-  dynFullFloatTest(pset1, -240.98f);
-  dynFullFloatTest(pset1, FLT_MIN);
+  std::cout << "full float tests" << std::endl;
+  dynFullFloatTest(FUN2TEST, FLT_MAX);
+  dynFullFloatTest(FUN2TEST, 36.7f);
+  dynFullFloatTest(FUN2TEST, 0.0f);
+  dynFullFloatTest(FUN2TEST, -240.98f);
+  dynFullFloatTest(FUN2TEST, FLT_MIN);
 
   /* double =  Packet2d (half) */
-  std::cout << "pset1 half double tests" << std::endl;
-  dynHalfDoubleTest(pset1, DBL_MAX);
-  dynHalfDoubleTest(pset1, 36.7d);
-  dynHalfDoubleTest(pset1, 0.0d);
-  dynHalfDoubleTest(pset1, -240.98d);
-  dynHalfDoubleTest(pset1, DBL_MIN);
+  std::cout << "half double tests" << std::endl;
+  dynHalfDoubleTest(FUN2TEST, DBL_MAX);
+  dynHalfDoubleTest(FUN2TEST, 36.7d);
+  dynHalfDoubleTest(FUN2TEST, 0.0d);
+  dynHalfDoubleTest(FUN2TEST, -240.98d);
+  dynHalfDoubleTest(FUN2TEST, DBL_MIN);
 
   /* double = Packet4d (full) */
-  std::cout << "pset1 full double tests" << std::endl;
-  dynFullDoubleTest(pset1, DBL_MAX);
-  dynFullDoubleTest(pset1, 36.7d);
-  dynFullDoubleTest(pset1, 0.0d);
-  dynFullDoubleTest(pset1, -240.98d);
-  dynFullDoubleTest(pset1, DBL_MIN);
+  std::cout << "full double tests" << std::endl;
+  dynFullDoubleTest(FUN2TEST, DBL_MAX);
+  dynFullDoubleTest(FUN2TEST, 36.7d);
+  dynFullDoubleTest(FUN2TEST, 0.0d);
+  dynFullDoubleTest(FUN2TEST, -240.98d);
+  dynFullDoubleTest(FUN2TEST, DBL_MIN);
 
   /* int = Packet4i (half) */
-  std::cout << "pset1 half int tests" << std::endl;
-  dynHalfIntTest(pset1, INT_MAX);
-  dynHalfIntTest(pset1, 36);
-  dynHalfIntTest(pset1, 0);
-  dynHalfIntTest(pset1, -240);
-  dynHalfIntTest(pset1, INT_MIN);
+  std::cout << "half int tests" << std::endl;
+  dynHalfIntTest(FUN2TEST, INT_MAX);
+  dynHalfIntTest(FUN2TEST, 36);
+  dynHalfIntTest(FUN2TEST, 0);
+  dynHalfIntTest(FUN2TEST, -240);
+  dynHalfIntTest(FUN2TEST, INT_MIN);
 
   /* int = Packet8i (full) */
-  std::cout << "pset1 full int tests" << std::endl;
-  dynFullIntTest(pset1, INT_MAX);
-  dynFullIntTest(pset1, 36);
-  dynFullIntTest(pset1, 0);
-  dynFullIntTest(pset1, -240);
-  dynFullIntTest(pset1, INT_MIN);
+  std::cout << "full int tests" << std::endl;
+  dynFullIntTest(FUN2TEST, INT_MAX);
+  dynFullIntTest(FUN2TEST, 36);
+  dynFullIntTest(FUN2TEST, 0);
+  dynFullIntTest(FUN2TEST, -240);
+  dynFullIntTest(FUN2TEST, INT_MIN);
 
   /* bool = Packet16b */
-  std::cout << "pset1 bool tests" << std::endl;
-  dynHalfBoolTest(pset1, true);
-  dynHalfBoolTest(pset1, false);
-  dynHalfBoolTest(pset1, CHAR_MAX);
-  dynHalfBoolTest(pset1, CHAR_MIN);
+  std::cout << "bool tests" << std::endl;
+  dynHalfBoolTest(FUN2TEST, true);
+  dynHalfBoolTest(FUN2TEST, false);
+  dynHalfBoolTest(FUN2TEST, CHAR_MAX);
+  dynHalfBoolTest(FUN2TEST, CHAR_MIN);
 
   /* Eigen::half = Packet8h */
-  std::cout << "pset1 Eigen::half tests" << std::endl;
-  dynHalfEigenHalfTest(pset1, half(FLT_MAX));
-  dynHalfEigenHalfTest(pset1, half(36.7f));
-  dynHalfEigenHalfTest(pset1, half(0.0f));
-  dynHalfEigenHalfTest(pset1, half(-240.98f));
-  dynHalfEigenHalfTest(pset1, half(FLT_MIN));
+  std::cout << "Eigen::half tests" << std::endl;
+  dynHalfEigenHalfTest(FUN2TEST, half(FLT_MAX));
+  dynHalfEigenHalfTest(FUN2TEST, half(36.7f));
+  dynHalfEigenHalfTest(FUN2TEST, half(0.0f));
+  dynHalfEigenHalfTest(FUN2TEST, half(-240.98f));
+  dynHalfEigenHalfTest(FUN2TEST, half(FLT_MIN));
 
   /* bfloat16 = Packet8bf */
-  std::cout << "pset1 bfloat16 tests" << std::endl;
-  dynHalfBfloat16Test(pset1, bfloat16(FLT_MAX));
-  dynHalfBfloat16Test(pset1, bfloat16(36.7f));
-  dynHalfBfloat16Test(pset1, bfloat16(0.0f));
-  dynHalfBfloat16Test(pset1, bfloat16(-240.98f));
-  dynHalfBfloat16Test(pset1, bfloat16(FLT_MIN));
+  std::cout << "bfloat16 tests" << std::endl;
+  dynHalfBfloat16Test(FUN2TEST, bfloat16(FLT_MAX));
+  dynHalfBfloat16Test(FUN2TEST, bfloat16(36.7f));
+  dynHalfBfloat16Test(FUN2TEST, bfloat16(0.0f));
+  dynHalfBfloat16Test(FUN2TEST, bfloat16(-240.98f));
+  dynHalfBfloat16Test(FUN2TEST, bfloat16(FLT_MIN));
 
 }
 
