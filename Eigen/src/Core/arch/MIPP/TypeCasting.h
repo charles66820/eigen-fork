@@ -20,46 +20,9 @@ namespace Eigen {
 
 namespace internal {
 
-#ifndef EIGEN_VECTORIZE_AVX
-template <>
-struct type_casting_traits<float, int> {
-  enum {
-    VectorizedCast = 1,
-    SrcCoeffRatio = 1,
-    TgtCoeffRatio = 1
-  };
-};
-
-template <>
-struct type_casting_traits<int, float> {
-  enum {
-    VectorizedCast = 1,
-    SrcCoeffRatio = 1,
-    TgtCoeffRatio = 1
-  };
-};
-
-template <>
-struct type_casting_traits<double, float> {
-  enum {
-    VectorizedCast = 1,
-    SrcCoeffRatio = 2,
-    TgtCoeffRatio = 1
-  };
-};
-
-template <>
-struct type_casting_traits<float, double> {
-  enum {
-    VectorizedCast = 1,
-    SrcCoeffRatio = 1,
-    TgtCoeffRatio = 2
-  };
-};
-#else
-
 // For now we use SSE to handle integers, so we can't use AVX instructions to cast
 // from int to float
+#if defined(EIGEN_VECTORIZE_AVX512) || defined(EIGEN_VECTORIZE_AVX)
 template <>
 struct type_casting_traits<float, int> {
   enum {
@@ -77,10 +40,7 @@ struct type_casting_traits<int, float> {
     TgtCoeffRatio = 1
   };
 };
-#endif
 
-
-#ifndef EIGEN_VECTORIZE_AVX512
 
 template <>
 struct type_casting_traits<Eigen::half, float> {
@@ -118,8 +78,45 @@ struct type_casting_traits<float, bfloat16> {
     TgtCoeffRatio = 1
   };
 };
+#else
+template <>
+struct type_casting_traits<float, int> {
+  enum {
+    VectorizedCast = 1,
+    SrcCoeffRatio = 1,
+    TgtCoeffRatio = 1
+  };
+};
 
-#endif  // EIGEN_VECTORIZE_AVX512
+template <>
+struct type_casting_traits<int, float> {
+  enum {
+    VectorizedCast = 1,
+    SrcCoeffRatio = 1,
+    TgtCoeffRatio = 1
+  };
+};
+
+template <>
+struct type_casting_traits<double, float> {
+  enum {
+    VectorizedCast = 1,
+    SrcCoeffRatio = 2,
+    TgtCoeffRatio = 1
+  };
+};
+
+template <>
+struct type_casting_traits<float, double> {
+  enum {
+    VectorizedCast = 1,
+    SrcCoeffRatio = 1,
+    TgtCoeffRatio = 2
+  };
+};
+#endif
+
+// SSE
 
 template<> EIGEN_STRONG_INLINE Packet4i pcast<Packet4f, Packet4i>(const Packet4f& a) {
   return _mm_cvttps_epi32(a);
@@ -154,6 +151,7 @@ template<> EIGEN_STRONG_INLINE Packet4i preinterpret<Packet4i,Packet2d>(const Pa
   return _mm_castpd_si128(a);
 }
 
+#ifdef EIGEN_VECTORIZE_AVX
 template<> EIGEN_STRONG_INLINE Packet8i pcast<Packet8f, Packet8i>(const Packet8f& a) {
   return _mm256_cvttps_epi32(a);
 }
@@ -185,6 +183,62 @@ template<> EIGEN_STRONG_INLINE Packet8h pcast<Packet8f, Packet8h>(const Packet8f
 template<> EIGEN_STRONG_INLINE Packet8bf pcast<Packet8f, Packet8bf>(const Packet8f& a) {
   return F32ToBf16(a);
 }
+#endif
+
+#ifdef EIGEN_VECTORIZE_AVX512
+template<> EIGEN_STRONG_INLINE Packet16i pcast<Packet16f, Packet16i>(const Packet16f& a) {
+  return _mm512_cvttps_epi32(a);
+}
+
+template<> EIGEN_STRONG_INLINE Packet16f pcast<Packet16i, Packet16f>(const Packet16i& a) {
+  return _mm512_cvtepi32_ps(a);
+}
+
+template<> EIGEN_STRONG_INLINE Packet16i preinterpret<Packet16i, Packet16f>(const Packet16f& a) {
+  return _mm512_castps_si512(a);
+}
+
+template<> EIGEN_STRONG_INLINE Packet16f preinterpret<Packet16f, Packet16i>(const Packet16i& a) {
+  return _mm512_castsi512_ps(a);
+}
+
+template<> EIGEN_STRONG_INLINE Packet8d preinterpret<Packet8d, Packet16f>(const Packet16f& a) {
+  return _mm512_castps_pd(a);
+}
+
+template<> EIGEN_STRONG_INLINE Packet16f preinterpret<Packet16f, Packet8d>(const Packet8d& a) {
+  return _mm512_castpd_ps(a);
+}
+
+template<> EIGEN_STRONG_INLINE Packet8f preinterpret<Packet8f, Packet16f>(const Packet16f& a) {
+  return _mm512_castps512_ps256(a);
+}
+
+template<> EIGEN_STRONG_INLINE Packet16f preinterpret<Packet16f, Packet16f>(const Packet16f& a) {
+  return a;
+}
+
+template<> EIGEN_STRONG_INLINE Packet8d preinterpret<Packet8d, Packet8d>(const Packet8d& a) {
+  return a;
+}
+
+template<> EIGEN_STRONG_INLINE Packet16f pcast<Packet16h, Packet16f>(const Packet16h& a) {
+  return half2float(a);
+}
+
+template<> EIGEN_STRONG_INLINE Packet16h pcast<Packet16f, Packet16h>(const Packet16f& a) {
+  return float2half(a);
+}
+
+template<> EIGEN_STRONG_INLINE Packet16f pcast<Packet16bf, Packet16f>(const Packet16bf& a) {
+  return Bf16ToF32(a);
+}
+
+template<> EIGEN_STRONG_INLINE Packet16bf pcast<Packet16f, Packet16bf>(const Packet16f& a) {
+  return F32ToBf16(a);
+}
+#endif
+
 
 } // end namespace internal
 
