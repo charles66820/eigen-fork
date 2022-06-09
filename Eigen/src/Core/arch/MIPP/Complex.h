@@ -46,12 +46,12 @@ struct Packet8cf
 
 template<> struct packet_traits<std::complex<float> >  : default_packet_traits
 {
-  typedef Packet4cf type;
-  typedef Packet2cf half;
+  typedef Packet8cf type;
+  typedef Packet4cf half;
   enum {
     Vectorizable = 1,
     AlignedOnScalar = 1,
-    size = 4,
+    size = 8,
     HasHalfPacket = 1,
 
     HasAdd    = 1,
