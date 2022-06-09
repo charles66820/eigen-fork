@@ -42,8 +42,6 @@ struct Packet8cf
 };
 #endif
 
-// Use the packet_traits defined in AVX/PacketMath.h instead if we're going
-// to leverage AVX instructions.
 #ifdef EIGEN_VECTORIZE_AVX512
 
 template<> struct packet_traits<std::complex<float> >  : default_packet_traits
@@ -124,6 +122,7 @@ template<> struct packet_traits<std::complex<float> >  : default_packet_traits
 };
 #endif
 
+// sse
 template<> struct unpacket_traits<Packet2cf> {
   typedef std::complex<float> type;
   typedef Packet2cf half;

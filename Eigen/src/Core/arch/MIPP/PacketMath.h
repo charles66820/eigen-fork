@@ -113,6 +113,7 @@ template <> struct is_arithmetic<__m512> { enum { value = true }; };
 template <> struct is_arithmetic<__m512i> { enum { value = true }; };
 template <> struct is_arithmetic<__m512d> { enum { value = true }; };
 template<> struct is_arithmetic<Packet16h> { enum { value = true }; };
+template <> struct is_arithmetic<Packet16bf> { enum { value = true }; };
 
 #endif
 
@@ -185,49 +186,6 @@ EIGEN_STRONG_INLINE Packet2d vec2d_unpackhi(const Packet2d& a, const Packet2d& b
 
 #ifdef EIGEN_VECTORIZE_AVX512
 
-template <>
-struct packet_traits<half> : default_packet_traits {
-  typedef Packet16h type;
-  // There is no half-size packet for Packet16h.
-  typedef Packet16h half;
-  enum {
-    Vectorizable = 1,
-    AlignedOnScalar = 1,
-    size = 16,
-    HasHalfPacket = 1,
-
-    HasCmp    = 1,
-    HasAdd    = 1,
-    HasSub    = 1,
-    HasMul    = 1,
-    HasDiv    = 1,
-    HasNegate = 1,
-    HasAbs    = 1,
-    HasAbs2   = 0,
-    HasMin    = 1,
-    HasMax    = 1,
-    HasConj   = 1,
-    HasSetLinear = 0,
-    HasLog    = EIGEN_HAS_AVX512_MATH,
-    HasLog1p  = EIGEN_HAS_AVX512_MATH,
-    HasExp    = EIGEN_HAS_AVX512_MATH,
-    HasExpm1  = EIGEN_HAS_AVX512_MATH,
-    HasSqrt   = EIGEN_HAS_AVX512_MATH,
-    HasRsqrt  = EIGEN_HAS_AVX512_MATH,
-    HasBessel = EIGEN_HAS_AVX512_MATH,
-    HasNdtri  = EIGEN_HAS_AVX512_MATH,
-    HasSin    = EIGEN_FAST_MATH,
-    HasCos    = EIGEN_FAST_MATH,
-    HasTanh   = EIGEN_FAST_MATH,
-    HasErf    = EIGEN_FAST_MATH,
-    HasBlend = 0,
-    HasRound  = 1,
-    HasFloor  = 1,
-    HasCeil   = 1,
-    HasRint   = 1
-  };
-};
-
 template<> struct packet_traits<float>  : default_packet_traits
 {
   typedef Packet16f type;
@@ -298,6 +256,81 @@ template<> struct packet_traits<int> : default_packet_traits
     Vectorizable = 1,
     AlignedOnScalar = 1,
     size=16
+  };
+};
+
+template <>
+struct packet_traits<half> : default_packet_traits {
+  typedef Packet16h type;
+  // There is no half-size packet for Packet16h.
+  typedef Packet16h half;
+  enum {
+    Vectorizable = 1,
+    AlignedOnScalar = 1,
+    size = 16,
+    HasHalfPacket = 1,
+
+    HasCmp    = 1,
+    HasAdd    = 1,
+    HasSub    = 1,
+    HasMul    = 1,
+    HasDiv    = 1,
+    HasNegate = 1,
+    HasAbs    = 1,
+    HasAbs2   = 0,
+    HasMin    = 1,
+    HasMax    = 1,
+    HasConj   = 1,
+    HasSetLinear = 0,
+    HasLog    = EIGEN_HAS_AVX512_MATH,
+    HasLog1p  = EIGEN_HAS_AVX512_MATH,
+    HasExp    = EIGEN_HAS_AVX512_MATH,
+    HasExpm1  = EIGEN_HAS_AVX512_MATH,
+    HasSqrt   = EIGEN_HAS_AVX512_MATH,
+    HasRsqrt  = EIGEN_HAS_AVX512_MATH,
+    HasBessel = EIGEN_HAS_AVX512_MATH,
+    HasNdtri  = EIGEN_HAS_AVX512_MATH,
+    HasSin    = EIGEN_FAST_MATH,
+    HasCos    = EIGEN_FAST_MATH,
+    HasTanh   = EIGEN_FAST_MATH,
+    HasErf    = EIGEN_FAST_MATH,
+    HasBlend = 0,
+    HasRound  = 1,
+    HasFloor  = 1,
+    HasCeil   = 1,
+    HasRint   = 1
+  };
+};
+
+template <>
+struct packet_traits<bfloat16> : default_packet_traits {
+  typedef Packet16bf type;
+  typedef Packet8bf half;
+  enum {
+    Vectorizable = 1,
+    AlignedOnScalar = 1,
+    size = 16,
+    HasHalfPacket = 1,
+    HasBlend = 0,
+    HasInsert = 1,
+    HasSin = EIGEN_FAST_MATH,
+    HasCos = EIGEN_FAST_MATH,
+#if EIGEN_HAS_AVX512_MATH
+#ifdef EIGEN_VECTORIZE_AVX512DQ
+    HasLog = 1,  // Currently fails test with bad accuracy.
+    HasLog1p  = 1,
+    HasExpm1  = 1,
+    HasNdtri = 1,
+    HasBessel  = 1,
+#endif
+    HasExp = 1,
+    HasSqrt = EIGEN_FAST_MATH,
+    HasRsqrt = EIGEN_FAST_MATH,
+    HasTanh = EIGEN_FAST_MATH,
+    HasErf = EIGEN_FAST_MATH,
+#endif
+    HasCmp  = 1,
+    HasDiv = 1
   };
 };
 
@@ -607,6 +640,12 @@ template<> struct unpacket_traits<Packet16b> {
   enum {size=16, alignment=Aligned16, vectorizable=true, masked_load_available=false, masked_store_available=false};
 };
 
+template<> struct unpacket_traits<Packet8h> {
+  typedef Eigen::half type;
+  typedef Packet8h half;
+  enum {size=8, alignment=Aligned16, vectorizable=true, masked_load_available=false, masked_store_available=false};
+};
+
 #ifdef EIGEN_VECTORIZE_AVX
 
 template<> struct unpacket_traits<Packet8f> {
@@ -676,9 +715,19 @@ struct unpacket_traits<Packet16h> {
   enum {size=16, alignment=Aligned32, vectorizable=true, masked_load_available=false, masked_store_available=false};
 };
 
+template <>
+struct unpacket_traits<Packet16bf>
+{
+  typedef bfloat16 type;
+  typedef Packet8bf half;
+  enum {size=16, alignment=Aligned32, vectorizable=true, masked_load_available=false, masked_store_available=false};
+};
+
 #endif
 
 // sse
+#if true
+
 template<> EIGEN_STRONG_INLINE Packet4f pset1<Packet4f>(const float&  from) { return (Packet4f) mipp::low<float>(mipp::set1<float>(from)); }
 template<> EIGEN_STRONG_INLINE Packet2d pset1<Packet2d>(const double& from) { return (Packet2d) mipp::low<double>(mipp::set1<double>(from)); }
 template<> EIGEN_STRONG_INLINE Packet4i pset1<Packet4i>(const int&    from) { return (__m128i) mipp::low<int>(mipp::set1<int>(from)); }
@@ -2716,8 +2765,6 @@ template<> EIGEN_STRONG_INLINE Packet4d pblend(const Selector<4>& ifPacket, cons
 
 // Packet math for Eigen::half
 
-template<> struct unpacket_traits<Packet8h> { typedef Eigen::half type; enum {size=8, alignment=Aligned16, vectorizable=true, masked_load_available=false, masked_store_available=false}; typedef Packet8h half; };
-
 template<> EIGEN_STRONG_INLINE Packet8h pset1<Packet8h>(const Eigen::half& from) {
   return (__m128i) mipp::low<short>(mipp::set1<short>(numext::bit_cast<numext::uint16_t>(from)));
 }
@@ -3338,6 +3385,8 @@ ptranspose(PacketBlock<Packet8bf,4>& kernel) {
   kernel.packet[2] = _mm_unpacklo_epi32(ab_47, cd_47);
   kernel.packet[3] = _mm_unpackhi_epi32(ab_47, cd_47);
 }
+
+#endif
 
 #endif
 
@@ -5559,48 +5608,6 @@ ptranspose(PacketBlock<Packet16h,4>& kernel) {
   kernel.packet[2] = pload<Packet16h>(out[2]);
   kernel.packet[3] = pload<Packet16h>(out[3]);
 }
-
-template <> struct is_arithmetic<Packet16bf> { enum { value = true }; };
-
-template <>
-struct packet_traits<bfloat16> : default_packet_traits {
-  typedef Packet16bf type;
-  typedef Packet8bf half;
-  enum {
-    Vectorizable = 1,
-    AlignedOnScalar = 1,
-    size = 16,
-    HasHalfPacket = 1,
-    HasBlend = 0,
-    HasInsert = 1,
-    HasSin = EIGEN_FAST_MATH,
-    HasCos = EIGEN_FAST_MATH,
-#if EIGEN_HAS_AVX512_MATH
-#ifdef EIGEN_VECTORIZE_AVX512DQ
-    HasLog = 1,  // Currently fails test with bad accuracy.
-    HasLog1p  = 1,
-    HasExpm1  = 1,
-    HasNdtri = 1,
-    HasBessel  = 1,
-#endif
-    HasExp = 1,
-    HasSqrt = EIGEN_FAST_MATH,
-    HasRsqrt = EIGEN_FAST_MATH,
-    HasTanh = EIGEN_FAST_MATH,
-    HasErf = EIGEN_FAST_MATH,
-#endif
-    HasCmp  = 1,
-    HasDiv = 1
-  };
-};
-
-template <>
-struct unpacket_traits<Packet16bf>
-{
-  typedef bfloat16 type;
-  enum {size=16, alignment=Aligned32, vectorizable=true, masked_load_available=false, masked_store_available=false};
-  typedef Packet8bf half;
-};
 
 template <>
 EIGEN_STRONG_INLINE Packet16bf pset1<Packet16bf>(const bfloat16& from) {
