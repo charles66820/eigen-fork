@@ -15,6 +15,9 @@
         "panel": "shared",
         "showReuseMessage": true,
         "clear": false
+      },
+      "group": {
+        "kind":"build"
       }
     }
   ]

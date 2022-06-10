@@ -8,11 +8,25 @@
       "name": "Start non regression test",
       "type": "cppdbg",
       "request": "launch",
-      "program": "${workspaceFolder}${pathSeparator}nrtests${pathSeparator}testEigen",
-      "args": [],
+      "program": "${workspaceFolder}${pathSeparator}nrtests${pathSeparator}${input:binaryFile}",
+      "args": ["${input:args}"],
       "cwd": "${workspaceFolder}${pathSeparator}nrtests",
       "environment": [],
       "preLaunchTask": "makenrtest"
+    }
+  ],
+  "inputs": [
+    {
+      "id": "binaryFile",
+      "description": "Executable:",
+      "default": "testEigen",
+      "type": "promptString"
+    },
+    {
+      "id": "args",
+      "description": "Executable args:",
+      "default": "",
+      "type": "promptString"
     }
   ]
 }
