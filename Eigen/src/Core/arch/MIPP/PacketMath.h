@@ -1870,6 +1870,8 @@ EIGEN_STRONG_INLINE __m128i float2half(__m128 f) {
 }
 #endif
 
+#endif
+
 #ifdef EIGEN_VECTORIZE_AVX
 
 template<> EIGEN_STRONG_INLINE Packet8f pset1<Packet8f>(const float&  from) { return (Packet8f) mipp::set1<float>(from); }
@@ -3385,8 +3387,6 @@ ptranspose(PacketBlock<Packet8bf,4>& kernel) {
   kernel.packet[2] = _mm_unpacklo_epi32(ab_47, cd_47);
   kernel.packet[3] = _mm_unpackhi_epi32(ab_47, cd_47);
 }
-
-#endif
 
 #endif
 
