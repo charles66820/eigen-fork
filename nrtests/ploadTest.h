@@ -1,5 +1,6 @@
 #include <float.h>
 #include <limits.h>
+#include "testVector.h"
 
 #ifndef EIGEN_MIPP_PLOAD_TEST_H
 #define EIGEN_MIPP_PLOAD_TEST_H
@@ -9,40 +10,6 @@
 
 #define str(s) #s
 #define xstr(s) str(s)
-
-#define vector2(type, name, value, delta) type name[] __attribute__((aligned(32))) = {value, value + delta};
-#define vector4(type, name, value, delta) \
-  type name[]                             \
-      __attribute__((aligned(32))) = {value, value + delta, value + delta + delta, value + delta + delta + delta};
-#define vector8(type, name, value, delta)                                                            \
-  type name[] __attribute__((aligned(32))) = {value,                                                 \
-                                              value + delta,                                         \
-                                              value + delta + delta,                                 \
-                                              value + delta + delta + delta,                         \
-                                              value + delta + delta + delta + delta,                 \
-                                              value + delta + delta + delta + delta + delta,         \
-                                              value + delta + delta + delta + delta + delta + delta, \
-                                              value + delta + delta + delta + delta + delta + delta + delta};
-#define vector16(type, name, value, delta)                                                                            \
-  type name[] __attribute__((aligned(32))) = {                                                                        \
-      value,                                                                                                          \
-      value + delta,                                                                                                  \
-      value + delta + delta,                                                                                          \
-      value + delta + delta + delta,                                                                                  \
-      value + delta + delta + delta + delta,                                                                          \
-      value + delta + delta + delta + delta + delta,                                                                  \
-      value + delta + delta + delta + delta + delta + delta,                                                          \
-      value + delta + delta + delta + delta + delta + delta + delta,                                                  \
-      value + delta + delta + delta + delta + delta + delta + delta + delta,                                          \
-      value + delta + delta + delta + delta + delta + delta + delta + delta + delta,                                  \
-      value + delta + delta + delta + delta + delta + delta + delta + delta + delta + delta,                          \
-      value + delta + delta + delta + delta + delta + delta + delta + delta + delta + delta + delta,                  \
-      value + delta + delta + delta + delta + delta + delta + delta + delta + delta + delta + delta + delta,          \
-      value + delta + delta + delta + delta + delta + delta + delta + delta + delta + delta + delta + delta + delta,  \
-      value + delta + delta + delta + delta + delta + delta + delta + delta + delta + delta + delta + delta + delta + \
-          delta,                                                                                                      \
-      value + delta + delta + delta + delta + delta + delta + delta + delta + delta + delta + delta + delta + delta + \
-          delta + delta};
 
 #define runTest(vec, type, test, value, delta) \
   {                                            \

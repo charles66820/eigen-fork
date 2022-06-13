@@ -68,4 +68,55 @@ template<> EIGEN_STRONG_INLINE Packet8bf pload_old<Packet8bf>(const bfloat16* fr
   return _mm_load_si128(reinterpret_cast<const __m128i*>(from));
 }
 
+template<typename Packet> EIGEN_DEVICE_FUNC inline Packet
+ploadu_old(const typename unpacket_traits<Packet>::type* from) { return *from; }
+
+template <>
+EIGEN_STRONG_INLINE Packet4f ploadu_old<Packet4f>(const float* from) {
+  EIGEN_DEBUG_UNALIGNED_LOAD
+  return _mm_loadu_ps(from);
+}
+template <>
+EIGEN_STRONG_INLINE Packet2d ploadu_old<Packet2d>(const double* from) {
+  EIGEN_DEBUG_UNALIGNED_LOAD
+  return _mm_loadu_pd(from);
+}
+template <>
+EIGEN_STRONG_INLINE Packet4i ploadu_old<Packet4i>(const int* from) {
+  EIGEN_DEBUG_UNALIGNED_LOAD
+  return _mm_loadu_si128(reinterpret_cast<const __m128i*>(from));
+}
+template <>
+EIGEN_STRONG_INLINE Packet16b ploadu_old<Packet16b>(const bool* from) {
+  EIGEN_DEBUG_UNALIGNED_LOAD
+  return _mm_loadu_si128(reinterpret_cast<const __m128i*>(from));
+}
+
+template <>
+EIGEN_STRONG_INLINE Packet8f ploadu_old<Packet8f>(const float* from) {
+  EIGEN_DEBUG_UNALIGNED_LOAD return _mm256_loadu_ps(from);
+}
+template <>
+EIGEN_STRONG_INLINE Packet4d ploadu_old<Packet4d>(const double* from) {
+  EIGEN_DEBUG_UNALIGNED_LOAD return _mm256_loadu_pd(from);
+}
+template <>
+EIGEN_STRONG_INLINE Packet8i ploadu_old<Packet8i>(const int* from) {
+  EIGEN_DEBUG_UNALIGNED_LOAD return _mm256_loadu_si256(reinterpret_cast<const __m256i*>(from));
+}
+
+template <>
+EIGEN_STRONG_INLINE Packet8h ploadu_old<Packet8h>(const Eigen::half* from) {
+  return _mm_loadu_si128(reinterpret_cast<const __m128i*>(from));
+}
+template <>
+EIGEN_STRONG_INLINE Packet8bf ploadu_old<Packet8bf>(const bfloat16* from) {
+  return _mm_loadu_si128(reinterpret_cast<const __m128i*>(from));
+}
+
+template <>
+EIGEN_STRONG_INLINE Packet4l ploadu_old<Packet4l>(const int64_t* from) {
+  EIGEN_DEBUG_UNALIGNED_LOAD return _mm256_loadu_si256(reinterpret_cast<const __m256i*>(from));
+}
+
 #endif // EIGEN_PACKET_MATH_OLD_FUN_MIPP_H
