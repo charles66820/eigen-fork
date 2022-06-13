@@ -69,7 +69,7 @@ std::string toString(Arg1 arg1, Args... args) {
 #define dynOneTypeTest(MIPP_Reg, type, cast, eigenType, name, args...)               \
   {                                                                                  \
     mipp::MIPP_Reg<type> rVar = cast name<eigenType>(args);                          \
-    mipp::MIPP_Reg<type> rVar_old = cast name<eigenType>(args);                      \
+    mipp::MIPP_Reg<type> rVar_old = cast name ## _old<eigenType>(args);                      \
     printWhenDiff(#name "<" #eigenType ">(" + to_sting(args) + ")", rVar, rVar_old); \
   }
 
