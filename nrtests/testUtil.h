@@ -11,6 +11,11 @@ using namespace Eigen;
 #define VERBOSE false
 #endif  // VERBOSE
 
+#define HALF_CAST (mipp::reg_2)
+#define FULL_CAST (mipp::reg)
+#define INT_HALF_CAST HALF_CAST(__m128i)
+#define INT_FULL_CAST FULL_CAST(__m256i)
+
 // prints
 template <typename T>
 void printWhenDiff(std::string msg, mipp::Reg<T> reg, mipp::Reg<T> reg_old) {
@@ -61,33 +66,30 @@ std::string toString(Arg1 arg1, Args... args) {
 }
 
 // Tests macro structure
-#define dynOneTypeFullTest(type, full, fullCast, name, args...)                   \
-  {                                                                               \
-    mipp::Reg<type> rFull = fullCast name<full>(args);                            \
-    mipp::Reg<type> rFull_old = fullCast name<full>(args);                        \
-    printWhenDiff(#name "<" #full ">(" + to_sting(args) + ")", rFull, rFull_old); \
+#define dynOneTypeTest(MIPP_Reg, type, cast, eigenType, name, args...)               \
+  {                                                                                  \
+    mipp::MIPP_Reg<type> rVar = cast name<eigenType>(args);                          \
+    mipp::MIPP_Reg<type> rVar_old = cast name<eigenType>(args);                      \
+    printWhenDiff(#name "<" #eigenType ">(" + to_sting(args) + ")", rVar, rVar_old); \
   }
 
-#define dynOneTypeHalfTest(type, half, halfCast, name, args...)                   \
-  {                                                                               \
-    mipp::Reg_2<type> rHalf = halfCast name<half>(args);                          \
-    mipp::Reg_2<type> rHalf_old = halfCast name<half>(args);                      \
-    printWhenDiff(#name "<" #half ">(" + to_sting(args) + ")", rHalf, rHalf_old); \
-  }
+#define dynOneTypeFullTest(type, full, fullCast, name, args...) dynOneTypeTest(Reg, type, fullCast, full, name, args)
+
+#define dynOneTypeHalfTest(type, half, halfCast, name, args...) dynOneTypeTest(Reg_2, type, halfCast, half, name, args)
 
 // Tests macro definition
-#define dynFullLongTest(name, args...) dynOneTypeFullTest(long, Packet4l, (mipp::reg)(__m256i), name, args)
+#define dynFullLongTest(name, args...) dynOneTypeFullTest(long, Packet4l, INT_FULL_CAST, name, args)
 
 #define dynHalfFloatTest(name, args...) dynOneTypeHalfTest(float, Packet4f, , name, args)
-#define dynHalfDoubleTest(name, args...) dynOneTypeHalfTest(double, Packet2d, (mipp::reg_2), name, args)
-#define dynHalfIntTest(name, args...) dynOneTypeHalfTest(int, Packet4i, (mipp::reg_2)(__m128i), name, args)
+#define dynHalfDoubleTest(name, args...) dynOneTypeHalfTest(double, Packet2d, HALF_CAST, name, args)
+#define dynHalfIntTest(name, args...) dynOneTypeHalfTest(int, Packet4i, INT_HALF_CAST, name, args)
 
 #define dynFullFloatTest(name, args...) dynOneTypeFullTest(float, Packet8f, , name, args)
-#define dynFullDoubleTest(name, args...) dynOneTypeFullTest(double, Packet4d, (mipp::reg), name, args)
-#define dynFullIntTest(name, args...) dynOneTypeFullTest(int, Packet8i, (mipp::reg)(__m256i), name, args)
+#define dynFullDoubleTest(name, args...) dynOneTypeFullTest(double, Packet4d, FULL_CAST, name, args)
+#define dynFullIntTest(name, args...) dynOneTypeFullTest(int, Packet8i, INT_FULL_CAST, name, args)
 
-#define dynHalfBoolTest(name, args...) dynOneTypeHalfTest(int, Packet16b, (mipp::reg_2)(__m128i), name, args)
-#define dynHalfEigenHalfTest(name, args...) dynOneTypeHalfTest(short, Packet8h, (mipp::reg_2)(__m128i), name, args)
-#define dynHalfBfloat16Test(name, args...) dynOneTypeHalfTest(short, Packet8bf, (mipp::reg_2)(__m128i), name, args)
+#define dynHalfBoolTest(name, args...) dynOneTypeHalfTest(int, Packet16b, INT_HALF_CAST, name, args)
+#define dynHalfEigenHalfTest(name, args...) dynOneTypeHalfTest(short, Packet8h, INT_HALF_CAST, name, args)
+#define dynHalfBfloat16Test(name, args...) dynOneTypeHalfTest(short, Packet8bf, INT_HALF_CAST, name, args)
 
 #endif  // EIGEN_MIPP_TEST_UTIL_H
