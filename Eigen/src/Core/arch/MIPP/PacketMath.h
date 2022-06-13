@@ -1191,10 +1191,10 @@ template<> EIGEN_STRONG_INLINE Packet2d pceil<Packet2d>(const Packet2d& a)
 }
 #endif
 
-template<> EIGEN_STRONG_INLINE Packet4f pload<Packet4f>(const float*   from) { EIGEN_DEBUG_ALIGNED_LOAD return _mm_load_ps(from); }
-template<> EIGEN_STRONG_INLINE Packet2d pload<Packet2d>(const double*  from) { EIGEN_DEBUG_ALIGNED_LOAD return _mm_load_pd(from); }
-template<> EIGEN_STRONG_INLINE Packet4i pload<Packet4i>(const int*     from) { EIGEN_DEBUG_ALIGNED_LOAD return _mm_load_si128(reinterpret_cast<const __m128i*>(from)); }
-template<> EIGEN_STRONG_INLINE Packet16b pload<Packet16b>(const bool*     from) { EIGEN_DEBUG_ALIGNED_LOAD return  _mm_load_si128(reinterpret_cast<const __m128i*>(from)); }
+template<> EIGEN_STRONG_INLINE Packet4f pload<Packet4f>(const float*   from) { EIGEN_DEBUG_ALIGNED_LOAD return (Packet4f) mipp::low<float>(mipp::load<float>(from)); }
+template<> EIGEN_STRONG_INLINE Packet2d pload<Packet2d>(const double*  from) { EIGEN_DEBUG_ALIGNED_LOAD return (Packet2d) mipp::low<double>(mipp::load<double>(from)); }
+template<> EIGEN_STRONG_INLINE Packet4i pload<Packet4i>(const int*     from) { EIGEN_DEBUG_ALIGNED_LOAD return (__m128i) mipp::low<int>(mipp::load<int>(from)); }
+template<> EIGEN_STRONG_INLINE Packet16b pload<Packet16b>(const bool*     from) { EIGEN_DEBUG_ALIGNED_LOAD return  (__m128i) mipp::low<int8_t>(mipp::load<int8_t>((const signed char*)from)); }
 
 #if EIGEN_COMP_MSVC
   template<> EIGEN_STRONG_INLINE Packet4f ploadu<Packet4f>(const float*  from) {
@@ -2279,9 +2279,9 @@ template<int N> EIGEN_STRONG_INLINE Packet8i plogical_shift_left(Packet8i a) {
 #endif
 }
 
-template<> EIGEN_STRONG_INLINE Packet8f pload<Packet8f>(const float*   from) { EIGEN_DEBUG_ALIGNED_LOAD return _mm256_load_ps(from); }
-template<> EIGEN_STRONG_INLINE Packet4d pload<Packet4d>(const double*  from) { EIGEN_DEBUG_ALIGNED_LOAD return _mm256_load_pd(from); }
-template<> EIGEN_STRONG_INLINE Packet8i pload<Packet8i>(const int*     from) { EIGEN_DEBUG_ALIGNED_LOAD return _mm256_load_si256(reinterpret_cast<const __m256i*>(from)); }
+template<> EIGEN_STRONG_INLINE Packet8f pload<Packet8f>(const float*   from) { EIGEN_DEBUG_ALIGNED_LOAD return (Packet8f) mipp::load<float>(from); }
+template<> EIGEN_STRONG_INLINE Packet4d pload<Packet4d>(const double*  from) { EIGEN_DEBUG_ALIGNED_LOAD return (Packet4d) mipp::load<double>(from);}
+template<> EIGEN_STRONG_INLINE Packet8i pload<Packet8i>(const int*     from) { EIGEN_DEBUG_ALIGNED_LOAD return (__m256i) mipp::load<int>(from); }
 
 template<> EIGEN_STRONG_INLINE Packet8f ploadu<Packet8f>(const float* from) { EIGEN_DEBUG_UNALIGNED_LOAD return _mm256_loadu_ps(from); }
 template<> EIGEN_STRONG_INLINE Packet4d ploadu<Packet4d>(const double* from) { EIGEN_DEBUG_UNALIGNED_LOAD return _mm256_loadu_pd(from); }
@@ -2776,7 +2776,7 @@ template<> EIGEN_STRONG_INLINE Eigen::half pfirst<Packet8h>(const Packet8h& from
 }
 
 template<> EIGEN_STRONG_INLINE Packet8h pload<Packet8h>(const Eigen::half* from) {
-  return _mm_load_si128(reinterpret_cast<const __m128i*>(from));
+  return (__m128i) mipp::low<short>(mipp::load<short>((const short int*)from));
 }
 
 template<> EIGEN_STRONG_INLINE Packet8h ploadu<Packet8h>(const Eigen::half* from) {
@@ -3150,7 +3150,7 @@ template<> EIGEN_STRONG_INLINE bfloat16 pfirst<Packet8bf>(const Packet8bf& from)
 }
 
 template<> EIGEN_STRONG_INLINE Packet8bf pload<Packet8bf>(const bfloat16* from) {
-  return _mm_load_si128(reinterpret_cast<const __m128i*>(from));
+  return (__m128i) mipp::low<short>(mipp::load<short>((const short int*)from));
 }
 
 template<> EIGEN_STRONG_INLINE Packet8bf ploadu<Packet8bf>(const bfloat16* from) {
@@ -3469,7 +3469,7 @@ EIGEN_STRONG_INLINE Packet4l plogical_shift_left(Packet4l a) {
 }
 template <>
 EIGEN_STRONG_INLINE Packet4l pload<Packet4l>(const int64_t* from) {
-  EIGEN_DEBUG_ALIGNED_LOAD return _mm256_load_si256(reinterpret_cast<const __m256i*>(from));
+  EIGEN_DEBUG_ALIGNED_LOAD return (__m256i) mipp::load<long>(from);
 }
 template <>
 EIGEN_STRONG_INLINE Packet4l ploadu<Packet4l>(const int64_t* from) {
