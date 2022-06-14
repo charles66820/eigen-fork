@@ -6,6 +6,10 @@
 #include "ploadTest.h"
 #include "ploaduTest.h"
 #include "paddTest.h"
+#include "psubTest.h"
+#include "pnegateTest.h"
+#include "pmulTest.h"
+#include "pdivTest.h"
 
 int main() {
   pset1Tests();
@@ -13,4 +17,8 @@ int main() {
   ploadTests();
   ploaduTests();
   paddTests();
+  psubTests();
+  pnegateTests();
+  pmulTests();
+  pdivTests();
 }
