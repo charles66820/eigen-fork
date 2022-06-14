@@ -8,9 +8,6 @@
 #undef FUN2TEST
 #define FUN2TEST pdiv
 
-#define str(s) #s
-#define xstr(s) str(s)
-
 #define loadVector(vec, type, typeReg, name, cast, EigenType, value, delta, MIPP_reg) \
   vec(type, name##_tab, value, delta);                                                \
   mipp::MIPP_reg<typeReg> name = cast pload<EigenType>(name##_tab);
@@ -25,7 +22,7 @@
   loadVector(vec, type, typeReg, name, cast, half, value, delta, Reg_2)
 
 void pdivTests() {
-  std::cout << xstr(FUN2TEST) << " :" << std::endl;
+  std::cout << printTestTitle(FUN2TEST) << std::endl;
 
 #ifdef __SSE__
   /* float = Packet4f (half) */

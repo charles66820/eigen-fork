@@ -8,9 +8,6 @@
 #undef FUN2TEST
 #define FUN2TEST ploadu
 
-#define str(s) #s
-#define xstr(s) str(s)
-
 #define runTest(vec, type, test, value, delta) \
   {                                            \
     vec(type, v, value, delta);                \
@@ -18,7 +15,7 @@
   }
 
 void ploaduTests() {
-  std::cout << xstr(FUN2TEST) << " :" << std::endl;
+  std::cout << printTestTitle(FUN2TEST) << std::endl;
 
 #ifdef __SSE__
   /* float = Packet4f (half) */

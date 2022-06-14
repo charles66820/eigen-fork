@@ -7,11 +7,8 @@
 #undef FUN2TEST
 #define FUN2TEST pset1
 
-#define str(s) #s
-#define xstr(s) str(s)
-
 void pset1Tests() {
-  std::cout << xstr(FUN2TEST) << " :" << std::endl;
+  std::cout << printTestTitle(FUN2TEST) << std::endl;
 
 #ifdef __SSE__
   /* float = Packet4f (half) */

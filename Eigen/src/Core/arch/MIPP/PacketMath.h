@@ -53,6 +53,11 @@ namespace internal {
 
 #endif
 
+#define HALF_MIPP_CAST (mipp::reg_2)
+#define FULL_MIPP_CAST (mipp::reg)
+#define INT_HALF_MIPP_CAST HALF_MIPP_CAST(__m128i)
+#define INT_FULL_MIPP_CAST FULL_MIPP_CAST(__m256i)
+
 // sse
 #if ((defined EIGEN_VECTORIZE_AVX) && (EIGEN_COMP_GNUC_STRICT || EIGEN_COMP_MINGW || EIGEN_COMP_LCC) && \
      (__GXX_ABI_VERSION < 1004)) ||                                                                     \
@@ -71,11 +76,6 @@ typedef __m128d Packet2d;
 
 typedef eigen_packet_wrapper<__m128i, 0> Packet4i;
 typedef eigen_packet_wrapper<__m128i, 1> Packet16b;
-
-#define HALF_MIPP_CAST (mipp::reg_2)
-#define FULL_MIPP_CAST (mipp::reg)
-#define INT_HALF_MIPP_CAST HALF_MIPP_CAST(__m128i)
-#define INT_FULL_MIPP_CAST FULL_MIPP_CAST(__m256i)
 
 template <>
 struct is_arithmetic<__m128> {

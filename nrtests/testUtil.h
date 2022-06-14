@@ -16,6 +16,9 @@ using namespace Eigen;
 #define INT_HALF_CAST HALF_CAST(__m128i)
 #define INT_FULL_CAST FULL_CAST(__m256i)
 
+#define TO_STRING(s) #s
+#define printTestTitle(t) "================ " TO_STRING(t) " ================"
+
 // prints
 template <typename T>
 void printWhenDiff(std::string msg, mipp::Reg<T> reg, mipp::Reg<T> reg_old) {
