@@ -993,19 +993,39 @@ EIGEN_STRONG_INLINE Packet16b padd<Packet16b>(const Packet16b& a, const Packet16
 
 template <>
 EIGEN_STRONG_INLINE Packet4f psub<Packet4f>(const Packet4f& a, const Packet4f& b) {
-  return _mm_sub_ps(a, b);
+  mipp::Reg_2<float> r2a = a;
+  mipp::Reg_2<float> r2b = b;
+  mipp::Reg<float> ra = mipp::combine<float>(r2a, r2a);
+  mipp::Reg<float> rb = mipp::combine<float>(r2b, r2b);
+  mipp::Reg<float> res = ra - rb;
+  return (Packet4f) res.low().r;
 }
 template <>
 EIGEN_STRONG_INLINE Packet2d psub<Packet2d>(const Packet2d& a, const Packet2d& b) {
-  return _mm_sub_pd(a, b);
+  mipp::Reg_2<double> r2a = HALF_MIPP_CAST a;
+  mipp::Reg_2<double> r2b = HALF_MIPP_CAST b;
+  mipp::Reg<double> ra = mipp::combine<double>(r2a, r2a);
+  mipp::Reg<double> rb = mipp::combine<double>(r2b, r2b);
+  mipp::Reg<double> res = ra - rb;
+  return (Packet2d) res.low().r;
 }
 template <>
 EIGEN_STRONG_INLINE Packet4i psub<Packet4i>(const Packet4i& a, const Packet4i& b) {
-  return _mm_sub_epi32(a, b);
+  mipp::Reg_2<int> r2a = INT_HALF_MIPP_CAST a;
+  mipp::Reg_2<int> r2b = INT_HALF_MIPP_CAST b;
+  mipp::Reg<int> ra = mipp::combine<int>(r2a, r2a);
+  mipp::Reg<int> rb = mipp::combine<int>(r2b, r2b);
+  mipp::Reg<int> res = ra - rb;
+  return (__m128i) res.low().r;
 }
 template <>
 EIGEN_STRONG_INLINE Packet16b psub<Packet16b>(const Packet16b& a, const Packet16b& b) {
-  return _mm_xor_si128(a, b);
+  mipp::Reg_2<short> r2a = INT_HALF_MIPP_CAST a;
+  mipp::Reg_2<short> r2b = INT_HALF_MIPP_CAST b;
+  mipp::Reg<short> ra = mipp::combine<short>(r2a, r2a);
+  mipp::Reg<short> rb = mipp::combine<short>(r2b, r2b);
+  mipp::Reg<short> res = ra ^ rb;
+  return (__m128i) res.low().r;
 }
 
 template <>
@@ -2472,21 +2492,24 @@ EIGEN_STRONG_INLINE Packet8i plset<Packet8i>(const int& a) {
 
 template <>
 EIGEN_STRONG_INLINE Packet8f psub<Packet8f>(const Packet8f& a, const Packet8f& b) {
-  return _mm256_sub_ps(a, b);
+  mipp::Reg<float> ra = a;
+  mipp::Reg<float> rb = b;
+  mipp::Reg<float> res = ra - rb;
+  return (Packet8f) res.r;
 }
 template <>
 EIGEN_STRONG_INLINE Packet4d psub<Packet4d>(const Packet4d& a, const Packet4d& b) {
-  return _mm256_sub_pd(a, b);
+  mipp::Reg<double> ra = FULL_MIPP_CAST a;
+  mipp::Reg<double> rb = FULL_MIPP_CAST b;
+  mipp::Reg<double> res = ra - rb;
+  return (Packet4d) res.r;
 }
 template <>
 EIGEN_STRONG_INLINE Packet8i psub<Packet8i>(const Packet8i& a, const Packet8i& b) {
-#ifdef EIGEN_VECTORIZE_AVX2
-  return _mm256_sub_epi32(a, b);
-#else
-  __m128i lo = _mm_sub_epi32(_mm256_extractf128_si256(a, 0), _mm256_extractf128_si256(b, 0));
-  __m128i hi = _mm_sub_epi32(_mm256_extractf128_si256(a, 1), _mm256_extractf128_si256(b, 1));
-  return _mm256_insertf128_si256(_mm256_castsi128_si256(lo), (hi), 1);
-#endif
+  mipp::Reg<int> ra = INT_FULL_MIPP_CAST a;
+  mipp::Reg<int> rb = INT_FULL_MIPP_CAST b;
+  mipp::Reg<int> res = ra - rb;
+  return (__m256i) res.r;
 }
 
 template <>
@@ -4187,7 +4210,6 @@ EIGEN_STRONG_INLINE Packet4l pload1<Packet4l>(const int64_t* from) {
 }
 template <>
 EIGEN_STRONG_INLINE Packet4l padd<Packet4l>(const Packet4l& a, const Packet4l& b) {
-  return _mm256_add_epi64(a, b);
   mipp::Reg<long> ra = INT_FULL_MIPP_CAST a;
   mipp::Reg<long> rb = INT_FULL_MIPP_CAST b;
   mipp::Reg<long> res = ra + rb;
@@ -4199,7 +4221,10 @@ EIGEN_STRONG_INLINE Packet4l plset<Packet4l>(const int64_t& a) {
 }
 template <>
 EIGEN_STRONG_INLINE Packet4l psub<Packet4l>(const Packet4l& a, const Packet4l& b) {
-  return _mm256_sub_epi64(a, b);
+  mipp::Reg<long> ra = INT_FULL_MIPP_CAST a;
+  mipp::Reg<long> rb = INT_FULL_MIPP_CAST b;
+  mipp::Reg<long> res = ra - rb;
+  return (__m256i) res.r;
 }
 template <>
 EIGEN_STRONG_INLINE Packet4l pnegate(const Packet4l& a) {
