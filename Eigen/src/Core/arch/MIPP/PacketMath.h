@@ -1054,17 +1054,21 @@ EIGEN_STRONG_INLINE Packet2d paddsub<Packet2d>(const Packet2d& a, const Packet2d
 
 template <>
 EIGEN_STRONG_INLINE Packet4f pnegate(const Packet4f& a) {
-  const Packet4f mask = _mm_castsi128_ps(_mm_setr_epi32(0x80000000, 0x80000000, 0x80000000, 0x80000000));
-  return _mm_xor_ps(a, mask);
+  // mipp::Reg_2<float> r2a = a;
+  // mipp::Reg<float> ra = mipp::combine<float>(r2a, r2a);
+  // mipp::Reg<int> rmask = {(int)0x80000000, (int)0x80000000, (int)0x80000000, (int)0x80000000, (int)0x0, (int)0x0, (int)0x0, (int)0x0};
+  // mipp::Reg<float> rb = rmask.r;
+  // mipp::Reg<float> res = ra ^ rb;
+  // return (Packet4f) res.low().r;
+  return psub(pzero(a), a);
 }
 template <>
 EIGEN_STRONG_INLINE Packet2d pnegate(const Packet2d& a) {
-  const Packet2d mask = _mm_castsi128_pd(_mm_setr_epi32(0x0, 0x80000000, 0x0, 0x80000000));
-  return _mm_xor_pd(a, mask);
+  return psub(pzero(a), a);
 }
 template <>
 EIGEN_STRONG_INLINE Packet4i pnegate(const Packet4i& a) {
-  return psub(Packet4i(_mm_setr_epi32(0, 0, 0, 0)), a);
+  return psub(pset1<Packet4i>(0), a);
 }
 
 template <>
@@ -2514,11 +2518,13 @@ EIGEN_STRONG_INLINE Packet8i psub<Packet8i>(const Packet8i& a, const Packet8i& b
 
 template <>
 EIGEN_STRONG_INLINE Packet8f pnegate(const Packet8f& a) {
-  return _mm256_sub_ps(_mm256_set1_ps(0.0), a);
+  // return psub(pset1<Packet8f>(0.0), a);
+  return psub(pzero(a), a);
 }
 template <>
 EIGEN_STRONG_INLINE Packet4d pnegate(const Packet4d& a) {
-  return _mm256_sub_pd(_mm256_set1_pd(0.0), a);
+  // return psub(pset1<Packet4d>(0.0), a);
+  return psub(pzero(a), a);
 }
 template <>
 EIGEN_STRONG_INLINE Packet8i pnegate(const Packet8i& a) {
@@ -3686,8 +3692,10 @@ EIGEN_STRONG_INLINE Packet8h pconj(const Packet8h& a) {
 
 template <>
 EIGEN_STRONG_INLINE Packet8h pnegate(const Packet8h& a) {
-  Packet8h sign_mask = _mm_set1_epi16(static_cast<numext::uint16_t>(0x8000));
-  return _mm_xor_si128(a, sign_mask);
+  // Packet8h sign_mask = _mm_set1_epi16(static_cast<numext::uint16_t>(0x8000));
+  // return _mm_xor_si128(a, sign_mask);
+  Packet8h sign_mask = (__m128i) mipp::low<short>(mipp::set1<short>(0x8000));
+  return pxor(a, sign_mask);
 }
 
 template <>
@@ -4057,8 +4065,8 @@ EIGEN_STRONG_INLINE Packet8bf pconj(const Packet8bf& a) {
 
 template <>
 EIGEN_STRONG_INLINE Packet8bf pnegate(const Packet8bf& a) {
-  Packet8bf sign_mask = _mm_set1_epi16(static_cast<numext::uint16_t>(0x8000));
-  return _mm_xor_si128(a, sign_mask);
+  Packet8bf sign_mask = (__m128i) mipp::low<short>(mipp::set1<short>(0x8000));
+  return pxor(a, sign_mask);
 }
 
 template <>
