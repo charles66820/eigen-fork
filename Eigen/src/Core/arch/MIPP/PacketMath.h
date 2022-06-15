@@ -1091,28 +1091,39 @@ EIGEN_STRONG_INLINE Packet4i pconj(const Packet4i& a) {
 
 template <>
 EIGEN_STRONG_INLINE Packet4f pmul<Packet4f>(const Packet4f& a, const Packet4f& b) {
-  return _mm_mul_ps(a, b);
+  mipp::Reg_2<float> r2a = a;
+  mipp::Reg_2<float> r2b = b;
+  mipp::Reg<float> ra = mipp::combine<float>(r2a, r2a);
+  mipp::Reg<float> rb = mipp::combine<float>(r2b, r2b);
+  mipp::Reg<float> res = ra * rb;
+  return (Packet4f) res.low().r;
 }
 template <>
 EIGEN_STRONG_INLINE Packet2d pmul<Packet2d>(const Packet2d& a, const Packet2d& b) {
-  return _mm_mul_pd(a, b);
+  mipp::Reg_2<double> r2a = HALF_MIPP_CAST a;
+  mipp::Reg_2<double> r2b = HALF_MIPP_CAST b;
+  mipp::Reg<double> ra = mipp::combine<double>(r2a, r2a);
+  mipp::Reg<double> rb = mipp::combine<double>(r2b, r2b);
+  mipp::Reg<double> res = ra * rb;
+  return (Packet2d) res.low().r;
 }
 template <>
 EIGEN_STRONG_INLINE Packet4i pmul<Packet4i>(const Packet4i& a, const Packet4i& b) {
-#ifdef EIGEN_VECTORIZE_SSE4_1
-  return _mm_mullo_epi32(a, b);
-#else
-  // this version is slightly faster than 4 scalar products
-  return vec4i_swizzle1(
-      vec4i_swizzle2(_mm_mul_epu32(a, b), _mm_mul_epu32(vec4i_swizzle1(a, 1, 0, 3, 2), vec4i_swizzle1(b, 1, 0, 3, 2)),
-                     0, 2, 0, 2),
-      0, 2, 1, 3);
-#endif
+  mipp::Reg_2<int> r2a = INT_HALF_MIPP_CAST a;
+  mipp::Reg_2<int> r2b = INT_HALF_MIPP_CAST b;
+  mipp::Reg<int> ra = mipp::combine<int>(r2a, r2a);
+  mipp::Reg<int> rb = mipp::combine<int>(r2b, r2b);
+  mipp::Reg<int> res = ra * rb;
+  return (__m128i) res.low().r;
 }
-
 template <>
 EIGEN_STRONG_INLINE Packet16b pmul<Packet16b>(const Packet16b& a, const Packet16b& b) {
-  return _mm_and_si128(a, b);
+  mipp::Reg_2<short> r2a = INT_HALF_MIPP_CAST a;
+  mipp::Reg_2<short> r2b = INT_HALF_MIPP_CAST b;
+  mipp::Reg<short> ra = mipp::combine<short>(r2a, r2a);
+  mipp::Reg<short> rb = mipp::combine<short>(r2b, r2b);
+  mipp::Reg<short> res = ra & rb;
+  return (__m128i) res.low().r;
 }
 
 template <>
@@ -2546,21 +2557,24 @@ EIGEN_STRONG_INLINE Packet8i pconj(const Packet8i& a) {
 
 template <>
 EIGEN_STRONG_INLINE Packet8f pmul<Packet8f>(const Packet8f& a, const Packet8f& b) {
-  return _mm256_mul_ps(a, b);
+  mipp::Reg<float> ra = a;
+  mipp::Reg<float> rb = b;
+  mipp::Reg<float> res = ra * rb;
+  return (Packet8f) res.r;
 }
 template <>
 EIGEN_STRONG_INLINE Packet4d pmul<Packet4d>(const Packet4d& a, const Packet4d& b) {
-  return _mm256_mul_pd(a, b);
+  mipp::Reg<double> ra = FULL_MIPP_CAST a;
+  mipp::Reg<double> rb = FULL_MIPP_CAST b;
+  mipp::Reg<double> res = ra * rb;
+  return (Packet4d) res.r;
 }
 template <>
 EIGEN_STRONG_INLINE Packet8i pmul<Packet8i>(const Packet8i& a, const Packet8i& b) {
-#ifdef EIGEN_VECTORIZE_AVX2
-  return _mm256_mullo_epi32(a, b);
-#else
-  const __m128i lo = _mm_mullo_epi32(_mm256_extractf128_si256(a, 0), _mm256_extractf128_si256(b, 0));
-  const __m128i hi = _mm_mullo_epi32(_mm256_extractf128_si256(a, 1), _mm256_extractf128_si256(b, 1));
-  return _mm256_insertf128_si256(_mm256_castsi128_si256(lo), (hi), 1);
-#endif
+  mipp::Reg<int> ra = INT_FULL_MIPP_CAST a;
+  mipp::Reg<int> rb = INT_FULL_MIPP_CAST b;
+  mipp::Reg<int> res = ra * rb;
+  return (__m256i) res.r;
 }
 
 template <>
