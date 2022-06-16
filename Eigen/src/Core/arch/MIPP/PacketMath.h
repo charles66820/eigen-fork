@@ -1128,11 +1128,21 @@ EIGEN_STRONG_INLINE Packet16b pmul<Packet16b>(const Packet16b& a, const Packet16
 
 template <>
 EIGEN_STRONG_INLINE Packet4f pdiv<Packet4f>(const Packet4f& a, const Packet4f& b) {
-  return _mm_div_ps(a, b);
+  mipp::Reg_2<float> r2a = a;
+  mipp::Reg_2<float> r2b = b;
+  mipp::Reg<float> ra = mipp::combine<float>(r2a, r2a);
+  mipp::Reg<float> rb = mipp::combine<float>(r2b, r2b);
+  mipp::Reg<float> res = ra / rb;
+  return (Packet4f) res.low().r;
 }
 template <>
 EIGEN_STRONG_INLINE Packet2d pdiv<Packet2d>(const Packet2d& a, const Packet2d& b) {
-  return _mm_div_pd(a, b);
+  mipp::Reg_2<double> r2a = HALF_MIPP_CAST a;
+  mipp::Reg_2<double> r2b = HALF_MIPP_CAST b;
+  mipp::Reg<double> ra = mipp::combine<double>(r2a, r2a);
+  mipp::Reg<double> rb = mipp::combine<double>(r2b, r2b);
+  mipp::Reg<double> res = ra / rb;
+  return (Packet2d) res.low().r;
 }
 
 // for some weird raisons, it has to be overloaded for packet of integers
@@ -2579,11 +2589,17 @@ EIGEN_STRONG_INLINE Packet8i pmul<Packet8i>(const Packet8i& a, const Packet8i& b
 
 template <>
 EIGEN_STRONG_INLINE Packet8f pdiv<Packet8f>(const Packet8f& a, const Packet8f& b) {
-  return _mm256_div_ps(a, b);
+  mipp::Reg<float> ra = a;
+  mipp::Reg<float> rb = b;
+  mipp::Reg<float> res = ra / rb;
+  return (Packet8f) res.r;
 }
 template <>
 EIGEN_STRONG_INLINE Packet4d pdiv<Packet4d>(const Packet4d& a, const Packet4d& b) {
-  return _mm256_div_pd(a, b);
+  mipp::Reg<double> ra = FULL_MIPP_CAST a;
+  mipp::Reg<double> rb = FULL_MIPP_CAST b;
+  mipp::Reg<double> res = ra / rb;
+  return (Packet4d) res.r;
 }
 template <>
 EIGEN_STRONG_INLINE Packet8i pdiv<Packet8i>(const Packet8i& /*a*/, const Packet8i& /*b*/) {
@@ -4384,6 +4400,7 @@ EIGEN_STRONG_INLINE Packet4l pabs<Packet4l>(const Packet4l& a) {
 }
 template <>
 EIGEN_STRONG_INLINE Packet4l pmul<Packet4l>(const Packet4l& a, const Packet4l& b) {
+  //*
   // 64-bit mul requires avx512, so do this with 32-bit multiplication
   __m256i upper32_a = _mm256_srli_epi64(a, 32);
   __m256i upper32_b = _mm256_srli_epi64(b, 32);
@@ -4396,6 +4413,15 @@ EIGEN_STRONG_INLINE Packet4l pmul<Packet4l>(const Packet4l& a, const Packet4l& b
 
   __m256i high = _mm256_slli_epi64(_mm256_add_epi64(mul1, mul2), 32);
   return _mm256_add_epi64(high, mul3);
+  //*/
+
+  /*
+  mipp::Reg<long> ral = INT_FULL_MIPP_CAST a;
+  return (__m256i) (ral >> 32).r; // 2147483647
+
+  mipp::Reg<long> res = ra * rb;
+  return (__m256i) res.r;
+  //*/
 }
 #endif
 
