@@ -53,10 +53,27 @@ namespace internal {
 
 #endif
 
-#define HALF_MIPP_CAST (mipp::reg_2)
-#define FULL_MIPP_CAST (mipp::reg)
-#define INT_HALF_MIPP_CAST HALF_MIPP_CAST(__m128i)
-#define INT_FULL_MIPP_CAST FULL_MIPP_CAST(__m256i)
+#ifdef EIGEN_VECTORIZE_AVX512
+#define HALF_DOUBLE_CAST (__m256d)
+#define HALF_INT_CAST (__m256i)
+#define FULL_DOUBLE_CAST (__m512d)
+#define FULL_INT_CAST (__m512i)
+#elif defined(EIGEN_VECTORIZE_SSE)
+#define HALF_DOUBLE_CAST (__m128d)
+#define HALF_INT_CAST (__m128i)
+#ifdef EIGEN_VECTORIZE_AVX
+#define FULL_DOUBLE_CAST (__m256d)
+#define FULL_INT_CAST (__m256i)
+#else
+#define FULL_DOUBLE_CAST (__m128d)
+#define FULL_INT_CAST (__m128i)
+#endif
+#endif
+#define HALF_CAST (mipp::reg_2)
+#define FULL_CAST (mipp::reg)
+
+#define INT_HALF_MIPP_CAST HALF_CAST HALF_INT_CAST
+#define INT_FULL_MIPP_CAST FULL_CAST FULL_INT_CAST
 
 #ifdef EIGEN_VECTORIZE_SSE
 
@@ -883,19 +900,19 @@ struct unpacket_traits<Packet16bf> {
 
 template <>
 EIGEN_STRONG_INLINE Packet4f pset1<Packet4f>(const float& from) {
-  return (Packet4f)mipp::low<float>(mipp::set1<float>(from));
+  return HALF_CAST mipp::low<float>(mipp::set1<float>(from));
 }
 template <>
 EIGEN_STRONG_INLINE Packet2d pset1<Packet2d>(const double& from) {
-  return (Packet2d)mipp::low<double>(mipp::set1<double>(from));
+  return HALF_DOUBLE_CAST mipp::low<double>(mipp::set1<double>(from));
 }
 template <>
 EIGEN_STRONG_INLINE Packet4i pset1<Packet4i>(const int& from) {
-  return (__m128i)mipp::low<int>(mipp::set1<int>(from));
+  return HALF_INT_CAST mipp::low<int>(mipp::set1<int>(from));
 }
 template <>
 EIGEN_STRONG_INLINE Packet16b pset1<Packet16b>(const bool& from) {
-  return (__m128i)mipp::low<int8_t>(mipp::set1<int8_t>(static_cast<char>(from)));
+  return HALF_INT_CAST mipp::low<int8_t>(mipp::set1<int8_t>(static_cast<char>(from)));
 }
 
 template <>
@@ -922,15 +939,15 @@ EIGEN_STRONG_INLINE Packet2d peven_mask(const Packet2d& /*a*/) {
 
 template <>
 EIGEN_STRONG_INLINE Packet4f pzero(const Packet4f& /*a*/) {
-  return (Packet4f)mipp::low<float>(mipp::set0<float>());
+  return HALF_CAST mipp::low<float>(mipp::set0<float>());
 }
 template <>
 EIGEN_STRONG_INLINE Packet2d pzero(const Packet2d& /*a*/) {
-  return (Packet2d)mipp::low<double>(mipp::set0<double>());
+  return HALF_DOUBLE_CAST mipp::low<double>(mipp::set0<double>());
 }
 template <>
 EIGEN_STRONG_INLINE Packet4i pzero(const Packet4i& /*a*/) {
-  return (__m128i)mipp::low<int>(mipp::set0<int>());
+  return HALF_INT_CAST mipp::low<int>(mipp::set0<int>());
 }
 
 // GCC generates a shufps instruction for _mm_set1_ps/_mm_load1_ps instead of the more efficient pshufd instruction.
@@ -965,16 +982,16 @@ EIGEN_STRONG_INLINE Packet4f padd<Packet4f>(const Packet4f& a, const Packet4f& b
   mipp::Reg<float> ra = mipp::combine<float>(r2a, r2a);
   mipp::Reg<float> rb = mipp::combine<float>(r2b, r2b);
   mipp::Reg<float> res = ra + rb;
-  return (Packet4f) res.low().r;
+  return HALF_CAST res.low().r;
 }
 template <>
 EIGEN_STRONG_INLINE Packet2d padd<Packet2d>(const Packet2d& a, const Packet2d& b) {
-  mipp::Reg_2<double> r2a = HALF_MIPP_CAST a;
-  mipp::Reg_2<double> r2b = HALF_MIPP_CAST b;
+  mipp::Reg_2<double> r2a = HALF_CAST a;
+  mipp::Reg_2<double> r2b = HALF_CAST b;
   mipp::Reg<double> ra = mipp::combine<double>(r2a, r2a);
   mipp::Reg<double> rb = mipp::combine<double>(r2b, r2b);
   mipp::Reg<double> res = ra + rb;
-  return (Packet2d) res.low().r;
+  return HALF_DOUBLE_CAST res.low().r;
 }
 template <>
 EIGEN_STRONG_INLINE Packet4i padd<Packet4i>(const Packet4i& a, const Packet4i& b) {
@@ -983,7 +1000,7 @@ EIGEN_STRONG_INLINE Packet4i padd<Packet4i>(const Packet4i& a, const Packet4i& b
   mipp::Reg<int> ra = mipp::combine<int>(r2a, r2a);
   mipp::Reg<int> rb = mipp::combine<int>(r2b, r2b);
   mipp::Reg<int> res = ra + rb;
-  return (__m128i) res.low().r;
+  return HALF_INT_CAST res.low().r;
 }
 
 template <>
@@ -993,7 +1010,7 @@ EIGEN_STRONG_INLINE Packet16b padd<Packet16b>(const Packet16b& a, const Packet16
   mipp::Reg<short> ra = mipp::combine<short>(r2a, r2a);
   mipp::Reg<short> rb = mipp::combine<short>(r2b, r2b);
   mipp::Reg<short> res = ra | rb;
-  return (__m128i) res.low().r;
+  return HALF_INT_CAST res.low().r;
 }
 
 template <>
@@ -1003,16 +1020,16 @@ EIGEN_STRONG_INLINE Packet4f psub<Packet4f>(const Packet4f& a, const Packet4f& b
   mipp::Reg<float> ra = mipp::combine<float>(r2a, r2a);
   mipp::Reg<float> rb = mipp::combine<float>(r2b, r2b);
   mipp::Reg<float> res = ra - rb;
-  return (Packet4f) res.low().r;
+  return HALF_CAST res.low().r;
 }
 template <>
 EIGEN_STRONG_INLINE Packet2d psub<Packet2d>(const Packet2d& a, const Packet2d& b) {
-  mipp::Reg_2<double> r2a = HALF_MIPP_CAST a;
-  mipp::Reg_2<double> r2b = HALF_MIPP_CAST b;
+  mipp::Reg_2<double> r2a = HALF_CAST a;
+  mipp::Reg_2<double> r2b = HALF_CAST b;
   mipp::Reg<double> ra = mipp::combine<double>(r2a, r2a);
   mipp::Reg<double> rb = mipp::combine<double>(r2b, r2b);
   mipp::Reg<double> res = ra - rb;
-  return (Packet2d) res.low().r;
+  return HALF_DOUBLE_CAST res.low().r;
 }
 template <>
 EIGEN_STRONG_INLINE Packet4i psub<Packet4i>(const Packet4i& a, const Packet4i& b) {
@@ -1021,7 +1038,7 @@ EIGEN_STRONG_INLINE Packet4i psub<Packet4i>(const Packet4i& a, const Packet4i& b
   mipp::Reg<int> ra = mipp::combine<int>(r2a, r2a);
   mipp::Reg<int> rb = mipp::combine<int>(r2b, r2b);
   mipp::Reg<int> res = ra - rb;
-  return (__m128i) res.low().r;
+  return HALF_INT_CAST res.low().r;
 }
 template <>
 EIGEN_STRONG_INLINE Packet16b psub<Packet16b>(const Packet16b& a, const Packet16b& b) {
@@ -1030,7 +1047,7 @@ EIGEN_STRONG_INLINE Packet16b psub<Packet16b>(const Packet16b& a, const Packet16
   mipp::Reg<short> ra = mipp::combine<short>(r2a, r2a);
   mipp::Reg<short> rb = mipp::combine<short>(r2b, r2b);
   mipp::Reg<short> res = ra ^ rb;
-  return (__m128i) res.low().r;
+  return HALF_INT_CAST res.low().r;
 }
 
 template <>
@@ -1061,10 +1078,8 @@ template <>
 EIGEN_STRONG_INLINE Packet4f pnegate(const Packet4f& a) {
   // mipp::Reg_2<float> r2a = a;
   // mipp::Reg<float> ra = mipp::combine<float>(r2a, r2a);
-  // mipp::Reg<int> rmask = {(int)0x80000000, (int)0x80000000, (int)0x80000000, (int)0x80000000, (int)0x0, (int)0x0, (int)0x0, (int)0x0};
-  // mipp::Reg<float> rb = rmask.r;
-  // mipp::Reg<float> res = ra ^ rb;
-  // return (Packet4f) res.low().r;
+  // mipp::Reg<int> rmask = {(int)0x80000000, (int)0x80000000, (int)0x80000000, (int)0x80000000, (int)0x0, (int)0x0,
+  // (int)0x0, (int)0x0}; mipp::Reg<float> rb = rmask.r; mipp::Reg<float> res = ra ^ rb; return HALF_CAST  res.low().r;
   return psub(pzero(a), a);
 }
 template <>
@@ -1101,16 +1116,16 @@ EIGEN_STRONG_INLINE Packet4f pmul<Packet4f>(const Packet4f& a, const Packet4f& b
   mipp::Reg<float> ra = mipp::combine<float>(r2a, r2a);
   mipp::Reg<float> rb = mipp::combine<float>(r2b, r2b);
   mipp::Reg<float> res = ra * rb;
-  return (Packet4f) res.low().r;
+  return HALF_CAST res.low().r;
 }
 template <>
 EIGEN_STRONG_INLINE Packet2d pmul<Packet2d>(const Packet2d& a, const Packet2d& b) {
-  mipp::Reg_2<double> r2a = HALF_MIPP_CAST a;
-  mipp::Reg_2<double> r2b = HALF_MIPP_CAST b;
+  mipp::Reg_2<double> r2a = HALF_CAST a;
+  mipp::Reg_2<double> r2b = HALF_CAST b;
   mipp::Reg<double> ra = mipp::combine<double>(r2a, r2a);
   mipp::Reg<double> rb = mipp::combine<double>(r2b, r2b);
   mipp::Reg<double> res = ra * rb;
-  return (Packet2d) res.low().r;
+  return HALF_DOUBLE_CAST res.low().r;
 }
 template <>
 EIGEN_STRONG_INLINE Packet4i pmul<Packet4i>(const Packet4i& a, const Packet4i& b) {
@@ -1119,7 +1134,7 @@ EIGEN_STRONG_INLINE Packet4i pmul<Packet4i>(const Packet4i& a, const Packet4i& b
   mipp::Reg<int> ra = mipp::combine<int>(r2a, r2a);
   mipp::Reg<int> rb = mipp::combine<int>(r2b, r2b);
   mipp::Reg<int> res = ra * rb;
-  return (__m128i) res.low().r;
+  return HALF_INT_CAST res.low().r;
 }
 template <>
 EIGEN_STRONG_INLINE Packet16b pmul<Packet16b>(const Packet16b& a, const Packet16b& b) {
@@ -1128,7 +1143,7 @@ EIGEN_STRONG_INLINE Packet16b pmul<Packet16b>(const Packet16b& a, const Packet16
   mipp::Reg<short> ra = mipp::combine<short>(r2a, r2a);
   mipp::Reg<short> rb = mipp::combine<short>(r2b, r2b);
   mipp::Reg<short> res = ra & rb;
-  return (__m128i) res.low().r;
+  return HALF_INT_CAST res.low().r;
 }
 
 template <>
@@ -1138,16 +1153,16 @@ EIGEN_STRONG_INLINE Packet4f pdiv<Packet4f>(const Packet4f& a, const Packet4f& b
   mipp::Reg<float> ra = mipp::combine<float>(r2a, r2a);
   mipp::Reg<float> rb = mipp::combine<float>(r2b, r2b);
   mipp::Reg<float> res = ra / rb;
-  return (Packet4f) res.low().r;
+  return HALF_CAST res.low().r;
 }
 template <>
 EIGEN_STRONG_INLINE Packet2d pdiv<Packet2d>(const Packet2d& a, const Packet2d& b) {
-  mipp::Reg_2<double> r2a = HALF_MIPP_CAST a;
-  mipp::Reg_2<double> r2b = HALF_MIPP_CAST b;
+  mipp::Reg_2<double> r2a = HALF_CAST a;
+  mipp::Reg_2<double> r2b = HALF_CAST b;
   mipp::Reg<double> ra = mipp::combine<double>(r2a, r2a);
   mipp::Reg<double> rb = mipp::combine<double>(r2b, r2b);
   mipp::Reg<double> res = ra / rb;
-  return (Packet2d) res.low().r;
+  return HALF_DOUBLE_CAST res.low().r;
 }
 
 // for some weird raisons, it has to be overloaded for packet of integers
@@ -1654,36 +1669,36 @@ EIGEN_STRONG_INLINE Packet2d pceil<Packet2d>(const Packet2d& a) {
 
 template <>
 EIGEN_STRONG_INLINE Packet4f pload<Packet4f>(const float* from) {
-  EIGEN_DEBUG_ALIGNED_LOAD return (Packet4f)mipp::low<float>(mipp::load<float>(from));
+  EIGEN_DEBUG_ALIGNED_LOAD return HALF_CAST mipp::low<float>(mipp::load<float>(from));
 }
 template <>
 EIGEN_STRONG_INLINE Packet2d pload<Packet2d>(const double* from) {
-  EIGEN_DEBUG_ALIGNED_LOAD return (Packet2d)mipp::low<double>(mipp::load<double>(from));
+  EIGEN_DEBUG_ALIGNED_LOAD return HALF_DOUBLE_CAST mipp::low<double>(mipp::load<double>(from));
 }
 template <>
 EIGEN_STRONG_INLINE Packet4i pload<Packet4i>(const int* from) {
-  EIGEN_DEBUG_ALIGNED_LOAD return (__m128i)mipp::low<int>(mipp::load<int>(from));
+  EIGEN_DEBUG_ALIGNED_LOAD return HALF_INT_CAST mipp::low<int>(mipp::load<int>(from));
 }
 template <>
 EIGEN_STRONG_INLINE Packet16b pload<Packet16b>(const bool* from) {
-  EIGEN_DEBUG_ALIGNED_LOAD return (__m128i)mipp::low<int8_t>(mipp::load<int8_t>((const signed char*)from));
+  EIGEN_DEBUG_ALIGNED_LOAD return HALF_INT_CAST mipp::low<int8_t>(mipp::load<int8_t>((const signed char*)from));
 }
 
 template <>
 EIGEN_STRONG_INLINE Packet4f ploadu<Packet4f>(const float* from) {
-  EIGEN_DEBUG_UNALIGNED_LOAD return (Packet4f)mipp::low<float>(mipp::loadu<float>(from));
+  EIGEN_DEBUG_UNALIGNED_LOAD return HALF_CAST mipp::low<float>(mipp::loadu<float>(from));
 }
 template <>
 EIGEN_STRONG_INLINE Packet2d ploadu<Packet2d>(const double* from) {
-  EIGEN_DEBUG_UNALIGNED_LOAD return (Packet2d)mipp::low<double>(mipp::loadu<double>(from));
+  EIGEN_DEBUG_UNALIGNED_LOAD return HALF_DOUBLE_CAST mipp::low<double>(mipp::loadu<double>(from));
 }
 template <>
 EIGEN_STRONG_INLINE Packet4i ploadu<Packet4i>(const int* from) {
-  EIGEN_DEBUG_UNALIGNED_LOAD return (__m128i)mipp::low<int>(mipp::loadu<int>(from));
+  EIGEN_DEBUG_UNALIGNED_LOAD return HALF_INT_CAST mipp::low<int>(mipp::loadu<int>(from));
 }
 template <>
 EIGEN_STRONG_INLINE Packet16b ploadu<Packet16b>(const bool* from) {
-  EIGEN_DEBUG_UNALIGNED_LOAD return (__m128i)mipp::low<int8_t>(mipp::loadu<int8_t>((const signed char*)from));
+  EIGEN_DEBUG_UNALIGNED_LOAD return HALF_INT_CAST mipp::low<int8_t>(mipp::loadu<int8_t>((const signed char*)from));
 }
 
 template <>
@@ -2423,15 +2438,15 @@ EIGEN_STRONG_INLINE __m128i float2half(__m128 f) {
 
 template <>
 EIGEN_STRONG_INLINE Packet8f pset1<Packet8f>(const float& from) {
-  return (Packet8f)mipp::set1<float>(from);
+  return FULL_CAST mipp::set1<float>(from);
 }
 template <>
 EIGEN_STRONG_INLINE Packet4d pset1<Packet4d>(const double& from) {
-  return (Packet4d)mipp::set1<double>(from);
+  return FULL_DOUBLE_CAST mipp::set1<double>(from);
 }
 template <>
 EIGEN_STRONG_INLINE Packet8i pset1<Packet8i>(const int& from) {
-  return (__m256i)mipp::set1<int>(from);
+  return FULL_INT_CAST mipp::set1<int>(from);
 }
 
 template <>
@@ -2445,15 +2460,15 @@ EIGEN_STRONG_INLINE Packet4d pset1frombits<Packet4d>(uint64_t from) {
 
 template <>
 EIGEN_STRONG_INLINE Packet8f pzero(const Packet8f& /*a*/) {
-  return (Packet8f)mipp::set0<float>();
+  return FULL_CAST mipp::set0<float>();
 }
 template <>
 EIGEN_STRONG_INLINE Packet4d pzero(const Packet4d& /*a*/) {
-  return (Packet4d)mipp::set0<double>();
+  return FULL_DOUBLE_CAST mipp::set0<double>();
 }
 template <>
 EIGEN_STRONG_INLINE Packet8i pzero(const Packet8i& /*a*/) {
-  return (__m256i)mipp::set0<int>();
+  return FULL_INT_CAST mipp::set0<int>();
 }
 
 template <>
@@ -2483,7 +2498,7 @@ EIGEN_STRONG_INLINE Packet8f padd<Packet8f>(const Packet8f& a, const Packet8f& b
   mipp::Reg<float> ra = a;
   mipp::Reg<float> rb = b;
   mipp::Reg<float> res = ra + rb;
-  return (Packet8f) res.r;
+  return FULL_CAST res.r;
 }
 #ifdef EIGEN_VECTORIZE_AVX512
 template <>
@@ -2494,17 +2509,17 @@ EIGEN_STRONG_INLINE Packet8f padd<Packet8f>(const Packet8f& a, const Packet8f& b
 #endif
 template <>
 EIGEN_STRONG_INLINE Packet4d padd<Packet4d>(const Packet4d& a, const Packet4d& b) {
-  mipp::Reg<double> ra = FULL_MIPP_CAST a;
-  mipp::Reg<double> rb = FULL_MIPP_CAST b;
+  mipp::Reg<double> ra = FULL_CAST a;
+  mipp::Reg<double> rb = FULL_CAST b;
   mipp::Reg<double> res = ra + rb;
-  return (Packet4d) res.r;
+  return FULL_DOUBLE_CAST res.r;
 }
 template <>
 EIGEN_STRONG_INLINE Packet8i padd<Packet8i>(const Packet8i& a, const Packet8i& b) {
   mipp::Reg<int> ra = INT_FULL_MIPP_CAST a;
   mipp::Reg<int> rb = INT_FULL_MIPP_CAST b;
   mipp::Reg<int> res = ra + rb;
-  return (__m256i) res.r;
+  return FULL_INT_CAST res.r;
 }
 
 template <>
@@ -2525,21 +2540,21 @@ EIGEN_STRONG_INLINE Packet8f psub<Packet8f>(const Packet8f& a, const Packet8f& b
   mipp::Reg<float> ra = a;
   mipp::Reg<float> rb = b;
   mipp::Reg<float> res = ra - rb;
-  return (Packet8f) res.r;
+  return FULL_CAST res.r;
 }
 template <>
 EIGEN_STRONG_INLINE Packet4d psub<Packet4d>(const Packet4d& a, const Packet4d& b) {
-  mipp::Reg<double> ra = FULL_MIPP_CAST a;
-  mipp::Reg<double> rb = FULL_MIPP_CAST b;
+  mipp::Reg<double> ra = FULL_CAST a;
+  mipp::Reg<double> rb = FULL_CAST b;
   mipp::Reg<double> res = ra - rb;
-  return (Packet4d) res.r;
+  return FULL_DOUBLE_CAST res.r;
 }
 template <>
 EIGEN_STRONG_INLINE Packet8i psub<Packet8i>(const Packet8i& a, const Packet8i& b) {
   mipp::Reg<int> ra = INT_FULL_MIPP_CAST a;
   mipp::Reg<int> rb = INT_FULL_MIPP_CAST b;
   mipp::Reg<int> res = ra - rb;
-  return (__m256i) res.r;
+  return FULL_INT_CAST res.r;
 }
 
 template <>
@@ -2575,21 +2590,21 @@ EIGEN_STRONG_INLINE Packet8f pmul<Packet8f>(const Packet8f& a, const Packet8f& b
   mipp::Reg<float> ra = a;
   mipp::Reg<float> rb = b;
   mipp::Reg<float> res = ra * rb;
-  return (Packet8f) res.r;
+  return FULL_CAST res.r;
 }
 template <>
 EIGEN_STRONG_INLINE Packet4d pmul<Packet4d>(const Packet4d& a, const Packet4d& b) {
-  mipp::Reg<double> ra = FULL_MIPP_CAST a;
-  mipp::Reg<double> rb = FULL_MIPP_CAST b;
+  mipp::Reg<double> ra = FULL_CAST a;
+  mipp::Reg<double> rb = FULL_CAST b;
   mipp::Reg<double> res = ra * rb;
-  return (Packet4d) res.r;
+  return FULL_DOUBLE_CAST res.r;
 }
 template <>
 EIGEN_STRONG_INLINE Packet8i pmul<Packet8i>(const Packet8i& a, const Packet8i& b) {
   mipp::Reg<int> ra = INT_FULL_MIPP_CAST a;
   mipp::Reg<int> rb = INT_FULL_MIPP_CAST b;
   mipp::Reg<int> res = ra * rb;
-  return (__m256i) res.r;
+  return FULL_INT_CAST res.r;
 }
 
 template <>
@@ -2597,14 +2612,14 @@ EIGEN_STRONG_INLINE Packet8f pdiv<Packet8f>(const Packet8f& a, const Packet8f& b
   mipp::Reg<float> ra = a;
   mipp::Reg<float> rb = b;
   mipp::Reg<float> res = ra / rb;
-  return (Packet8f) res.r;
+  return FULL_CAST res.r;
 }
 template <>
 EIGEN_STRONG_INLINE Packet4d pdiv<Packet4d>(const Packet4d& a, const Packet4d& b) {
-  mipp::Reg<double> ra = FULL_MIPP_CAST a;
-  mipp::Reg<double> rb = FULL_MIPP_CAST b;
+  mipp::Reg<double> ra = FULL_CAST a;
+  mipp::Reg<double> rb = FULL_CAST b;
   mipp::Reg<double> res = ra / rb;
-  return (Packet4d) res.r;
+  return FULL_DOUBLE_CAST res.r;
 }
 template <>
 EIGEN_STRONG_INLINE Packet8i pdiv<Packet8i>(const Packet8i& /*a*/, const Packet8i& /*b*/) {
@@ -3014,28 +3029,28 @@ EIGEN_STRONG_INLINE Packet8i plogical_shift_left(Packet8i a) {
 
 template <>
 EIGEN_STRONG_INLINE Packet8f pload<Packet8f>(const float* from) {
-  EIGEN_DEBUG_ALIGNED_LOAD return (Packet8f)mipp::load<float>(from);
+  EIGEN_DEBUG_ALIGNED_LOAD return FULL_CAST mipp::load<float>(from);
 }
 template <>
 EIGEN_STRONG_INLINE Packet4d pload<Packet4d>(const double* from) {
-  EIGEN_DEBUG_ALIGNED_LOAD return (Packet4d)mipp::load<double>(from);
+  EIGEN_DEBUG_ALIGNED_LOAD return FULL_DOUBLE_CAST mipp::load<double>(from);
 }
 template <>
 EIGEN_STRONG_INLINE Packet8i pload<Packet8i>(const int* from) {
-  EIGEN_DEBUG_ALIGNED_LOAD return (__m256i)mipp::load<int>(from);
+  EIGEN_DEBUG_ALIGNED_LOAD return FULL_INT_CAST mipp::load<int>(from);
 }
 
 template <>
 EIGEN_STRONG_INLINE Packet8f ploadu<Packet8f>(const float* from) {
-  EIGEN_DEBUG_UNALIGNED_LOAD return (Packet8f)mipp::loadu<float>(from);
+  EIGEN_DEBUG_UNALIGNED_LOAD return FULL_CAST mipp::loadu<float>(from);
 }
 template <>
 EIGEN_STRONG_INLINE Packet4d ploadu<Packet4d>(const double* from) {
-  EIGEN_DEBUG_UNALIGNED_LOAD return (Packet4d)mipp::loadu<double>(from);
+  EIGEN_DEBUG_UNALIGNED_LOAD return FULL_DOUBLE_CAST mipp::loadu<double>(from);
 }
 template <>
 EIGEN_STRONG_INLINE Packet8i ploadu<Packet8i>(const int* from) {
-  EIGEN_DEBUG_UNALIGNED_LOAD return (__m256i)mipp::loadu<int>(from);
+  EIGEN_DEBUG_UNALIGNED_LOAD return FULL_INT_CAST mipp::loadu<int>(from);
 }
 
 template <>
@@ -3559,7 +3574,7 @@ EIGEN_STRONG_INLINE Packet4d pblend(const Selector<4>& ifPacket, const Packet4d&
 
 template <>
 EIGEN_STRONG_INLINE Packet8h pset1<Packet8h>(const Eigen::half& from) {
-  return (__m128i)mipp::low<short>(mipp::set1<short>(numext::bit_cast<numext::uint16_t>(from)));
+  return HALF_INT_CAST mipp::low<short>(mipp::set1<short>(numext::bit_cast<numext::uint16_t>(from)));
 }
 
 template <>
@@ -3569,12 +3584,12 @@ EIGEN_STRONG_INLINE Eigen::half pfirst<Packet8h>(const Packet8h& from) {
 
 template <>
 EIGEN_STRONG_INLINE Packet8h pload<Packet8h>(const Eigen::half* from) {
-  return (__m128i)mipp::low<short>(mipp::load<short>((const short int*)from));
+  return HALF_INT_CAST mipp::low<short>(mipp::load<short>((const short int*)from));
 }
 
 template <>
 EIGEN_STRONG_INLINE Packet8h ploadu<Packet8h>(const Eigen::half* from) {
-  return (__m128i)mipp::low<short>(mipp::loadu<short>((const short int*)from));
+  return HALF_INT_CAST mipp::low<short>(mipp::loadu<short>((const short int*)from));
 }
 
 template <>
@@ -3729,7 +3744,7 @@ template <>
 EIGEN_STRONG_INLINE Packet8h pnegate(const Packet8h& a) {
   // Packet8h sign_mask = _mm_set1_epi16(static_cast<numext::uint16_t>(0x8000));
   // return _mm_xor_si128(a, sign_mask);
-  Packet8h sign_mask = (__m128i) mipp::low<short>(mipp::set1<short>(0x8000));
+  Packet8h sign_mask = HALF_INT_CAST mipp::low<short>(mipp::set1<short>(0x8000));
   return pxor(a, sign_mask);
 }
 
@@ -3961,7 +3976,7 @@ EIGEN_STRONG_INLINE Packet8bf F32ToBf16(const Packet8f& a) {
 
 template <>
 EIGEN_STRONG_INLINE Packet8bf pset1<Packet8bf>(const bfloat16& from) {
-  return (__m128i)mipp::low<short>(mipp::set1<short>(numext::bit_cast<numext::uint16_t>(from)));
+  return HALF_INT_CAST mipp::low<short>(mipp::set1<short>(numext::bit_cast<numext::uint16_t>(from)));
 }
 
 template <>
@@ -3971,12 +3986,12 @@ EIGEN_STRONG_INLINE bfloat16 pfirst<Packet8bf>(const Packet8bf& from) {
 
 template <>
 EIGEN_STRONG_INLINE Packet8bf pload<Packet8bf>(const bfloat16* from) {
-  return (__m128i)mipp::low<short>(mipp::load<short>((const short int*)from));
+  return HALF_INT_CAST mipp::low<short>(mipp::load<short>((const short int*)from));
 }
 
 template <>
 EIGEN_STRONG_INLINE Packet8bf ploadu<Packet8bf>(const bfloat16* from) {
-  return (__m128i)mipp::low<short>(mipp::loadu<short>((const short int*)from));
+  return HALF_INT_CAST mipp::low<short>(mipp::loadu<short>((const short int*)from));
 }
 
 template <>
@@ -4100,7 +4115,7 @@ EIGEN_STRONG_INLINE Packet8bf pconj(const Packet8bf& a) {
 
 template <>
 EIGEN_STRONG_INLINE Packet8bf pnegate(const Packet8bf& a) {
-  Packet8bf sign_mask = (__m128i) mipp::low<short>(mipp::set1<short>(0x8000));
+  Packet8bf sign_mask = HALF_INT_CAST mipp::low<short>(mipp::set1<short>(0x8000));
   return pxor(a, sign_mask);
 }
 
@@ -4237,11 +4252,11 @@ EIGEN_STRONG_INLINE void ptranspose(PacketBlock<Packet8bf, 4>& kernel) {
 #ifdef EIGEN_VECTORIZE_AVX2
 template <>
 EIGEN_STRONG_INLINE Packet4l pset1<Packet4l>(const int64_t& from) {
-  return (__m256i)mipp::set1<long>(from);
+  return FULL_INT_CAST mipp::set1<long>(from);
 }
 template <>
 EIGEN_STRONG_INLINE Packet4l pzero(const Packet4l& /*a*/) {
-  return (__m256i)mipp::set0<long>();
+  return FULL_INT_CAST mipp::set0<long>();
 }
 template <>
 EIGEN_STRONG_INLINE Packet4l peven_mask(const Packet4l& /*a*/) {
@@ -4256,7 +4271,7 @@ EIGEN_STRONG_INLINE Packet4l padd<Packet4l>(const Packet4l& a, const Packet4l& b
   mipp::Reg<long> ra = INT_FULL_MIPP_CAST a;
   mipp::Reg<long> rb = INT_FULL_MIPP_CAST b;
   mipp::Reg<long> res = ra + rb;
-  return (__m256i) res.r;
+  return FULL_INT_CAST res.r;
 }
 template <>
 EIGEN_STRONG_INLINE Packet4l plset<Packet4l>(const int64_t& a) {
@@ -4267,7 +4282,7 @@ EIGEN_STRONG_INLINE Packet4l psub<Packet4l>(const Packet4l& a, const Packet4l& b
   mipp::Reg<long> ra = INT_FULL_MIPP_CAST a;
   mipp::Reg<long> rb = INT_FULL_MIPP_CAST b;
   mipp::Reg<long> res = ra - rb;
-  return (__m256i) res.r;
+  return FULL_INT_CAST res.r;
 }
 template <>
 EIGEN_STRONG_INLINE Packet4l pnegate(const Packet4l& a) {
@@ -4319,11 +4334,11 @@ EIGEN_STRONG_INLINE Packet4l plogical_shift_left(Packet4l a) {
 }
 template <>
 EIGEN_STRONG_INLINE Packet4l pload<Packet4l>(const int64_t* from) {
-  EIGEN_DEBUG_ALIGNED_LOAD return (__m256i)mipp::load<long>(from);
+  EIGEN_DEBUG_ALIGNED_LOAD return FULL_INT_CAST mipp::load<long>(from);
 }
 template <>
 EIGEN_STRONG_INLINE Packet4l ploadu<Packet4l>(const int64_t* from) {
-  EIGEN_DEBUG_UNALIGNED_LOAD return (__m256i)mipp::load<long>(from);
+  EIGEN_DEBUG_UNALIGNED_LOAD return FULL_INT_CAST mipp::load<long>(from);
 }
 // Loads 2 int64_ts from memory a returns the packet {a0, a0, a1, a1}
 template <>
@@ -4422,10 +4437,10 @@ EIGEN_STRONG_INLINE Packet4l pmul<Packet4l>(const Packet4l& a, const Packet4l& b
 
   /*
   mipp::Reg<long> ral = INT_FULL_MIPP_CAST a;
-  return (__m256i) (ral >> 32).r; // 2147483647
+  return FULL_INT_CAST  (ral >> 32).r; // 2147483647
 
   mipp::Reg<long> res = ra * rb;
-  return (__m256i) res.r;
+  return FULL_INT_CAST  res.r;
   //*/
 }
 #endif
