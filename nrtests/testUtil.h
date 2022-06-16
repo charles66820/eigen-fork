@@ -19,22 +19,39 @@ using namespace Eigen;
 #define TO_STRING(s) #s
 #define printTestTitle(t) "================ " TO_STRING(t) " ================"
 
+// Return test state
+bool hasFailed = false;
+
+void resetFail() { hasFailed = false; }
+
+#define beginTest(str) \
+  std::cout << str;    \
+  resetFail();
+
+#define endTest() \
+  if (!hasFailed) std::cout << " done" << std::endl;
+
 // prints
 template <typename T>
-void printWhenDiff(std::string msg, mipp::Reg<T> reg, mipp::Reg<T> reg_old) {
-  if (!mipp::testz(reg != reg_old) || VERBOSE)
+bool printWhenDiff(std::string msg, mipp::Reg<T> reg, mipp::Reg<T> reg_old) {
+  bool isDiffer = !mipp::testz(reg != reg_old);
+
+  if (!hasFailed && isDiffer) std::cout << " failed" << std::endl;
+
+  if (isDiffer || VERBOSE)
     std::cout << "diff for " << msg << " : " << std::endl
               << "old " << reg_old << std::endl
               << "new " << reg << std::endl
               << std::endl;
+  return isDiffer;
 }
 
 template <typename T>
-void printWhenDiff(std::string msg, mipp::Reg_2<T> reg, mipp::Reg_2<T> reg_old) {
+bool printWhenDiff(std::string msg, mipp::Reg_2<T> reg, mipp::Reg_2<T> reg_old) {
   mipp::Reg<T> rf0 = 0.0;
   mipp::Reg_2<T> rf0_h = rf0.low();
 
-  printWhenDiff(msg, mipp::combine(reg, rf0_h), mipp::combine(reg_old, rf0_h));
+  return printWhenDiff(msg, mipp::combine(reg, rf0_h), mipp::combine(reg_old, rf0_h));
 }
 
 // code inspered by
@@ -69,11 +86,11 @@ std::string toString(Arg1 arg1, Args... args) {
 }
 
 // Tests macro structure
-#define dynOneTypeTest(MIPP_Reg, type, cast, eigenType, name, args...)               \
-  {                                                                                  \
-    mipp::MIPP_Reg<type> rVar = cast name<eigenType>(args);                          \
-    mipp::MIPP_Reg<type> rVar_old = cast name ## _old<eigenType>(args);                      \
-    printWhenDiff(#name "<" #eigenType ">(" + to_sting(args) + ")", rVar, rVar_old); \
+#define dynOneTypeTest(MIPP_Reg, type, cast, eigenType, name, args...)                            \
+  {                                                                                               \
+    mipp::MIPP_Reg<type> rVar = cast name<eigenType>(args);                                       \
+    mipp::MIPP_Reg<type> rVar_old = cast name##_old<eigenType>(args);                             \
+    hasFailed |= printWhenDiff(#name "<" #eigenType ">(" + to_sting(args) + ")", rVar, rVar_old); \
   }
 
 #define dynOneTypeFullTest(type, full, fullCast, name, args...) dynOneTypeTest(Reg, type, fullCast, full, name, args)

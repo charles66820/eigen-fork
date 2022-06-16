@@ -26,7 +26,7 @@ void pnegateTests() {
 
 #ifdef __SSE__
   /* float = Packet4f (half) */
-  std::cout << "half float tests" << std::endl;
+  beginTest("half float tests");
 
   loadVectorHalf(vector4, float, fhvmax, , Packet4f, FLT_MAX, 0.0f);
   loadVectorHalf(vector4, float, fhv36, , Packet4f, 36.7f, 0.0f);
@@ -40,8 +40,10 @@ void pnegateTests() {
   dynHalfFloatTest(FUN2TEST, fhv_240.r);
   dynHalfFloatTest(FUN2TEST, fhvmin.r);
 
+  endTest();
+
   /* double =  Packet2d (half) */
-  std::cout << "half double tests" << std::endl;
+  beginTest("half double tests");
 
   loadVectorHalf(vector2, double, dhvmax, HALF_CAST, Packet2d, DBL_MAX, 0.0d);
   loadVectorHalf(vector2, double, dhv36, HALF_CAST, Packet2d, 36.7d, 0.0d);
@@ -55,8 +57,10 @@ void pnegateTests() {
   dynHalfDoubleTest(FUN2TEST, (Packet2d)dhv_240.r);
   dynHalfDoubleTest(FUN2TEST, (Packet2d)dhvmin.r);
 
+  endTest();
+
   /* int = Packet4i (half) */
-  std::cout << "half int tests" << std::endl;
+  beginTest("half int tests");
 
   loadVectorHalf(vector4, int, ihvmax, INT_HALF_CAST, Packet4i, INT_MAX, 0);
   loadVectorHalf(vector4, int, ihv36, INT_HALF_CAST, Packet4i, 36, 0);
@@ -70,19 +74,24 @@ void pnegateTests() {
   dynHalfIntTest(FUN2TEST, (__m128i)ihv_240.r);
   dynHalfIntTest(FUN2TEST, (__m128i)ihvmin.r);
 
+  endTest();
+
   /* bool = Packet16b */
-  std::cout << "bool tests" << std::endl;
+  beginTest("bool tests");
 
   loadVectorHalf(vector16, bool, bvtrue, INT_HALF_CAST, Packet16b, true, 0);
   loadVectorHalf(vector16, bool, bvfalse, INT_HALF_CAST, Packet16b, false, 0);
 
   dynHalfBoolTest(FUN2TEST, (__m128i)bvtrue.r);
   dynHalfBoolTest(FUN2TEST, (__m128i)bvfalse.r);
+
+  endTest();
+
 #endif
 
 #ifdef __AVX__
   /* float = Packet8f (full) */
-  std::cout << "full float tests" << std::endl;
+  beginTest("full float tests");
   loadVectorFull(vector8, float, fvmax, , Packet8f, FLT_MAX, 0.0f);
   loadVectorFull(vector8, float, fv36, , Packet8f, 36.7f, 0.0f);
   loadVectorFull(vector8, float, fv0, , Packet8f, 0.0f, 0.0f);
@@ -95,8 +104,10 @@ void pnegateTests() {
   dynFullFloatTest(FUN2TEST, fv_240.r);
   dynFullFloatTest(FUN2TEST, fvmin.r);
 
+  endTest();
+
   /* double = Packet4d (full) */
-  std::cout << "full double tests" << std::endl;
+  beginTest("full double tests");
 
   loadVectorFull(vector4, double, dvmax, FULL_CAST, Packet4d, DBL_MAX, 0.0d);
   loadVectorFull(vector4, double, dv36, FULL_CAST, Packet4d, 36.7d, 0.0d);
@@ -110,8 +121,10 @@ void pnegateTests() {
   dynFullDoubleTest(FUN2TEST, (Packet4d)dv_240.r);
   dynFullDoubleTest(FUN2TEST, (Packet4d)dvmin.r);
 
+  endTest();
+
   /* int = Packet8i (full) */
-  std::cout << "full int tests" << std::endl;
+  beginTest("full int tests");
 
   loadVectorFull(vector8, int, ivmax, INT_FULL_CAST, Packet8i, INT_MAX, 0);
   loadVectorFull(vector8, int, iv36, INT_FULL_CAST, Packet8i, 36, 0);
@@ -125,8 +138,10 @@ void pnegateTests() {
   dynFullIntTest(FUN2TEST, (__m256i)iv_240.r);
   dynFullIntTest(FUN2TEST, (__m256i)ivmin.r);
 
+  endTest();
+
   /* Eigen::half = Packet8h */
-  std::cout << "Eigen::half tests" << std::endl;
+  beginTest("Eigen::half tests");
 
   loadVectorHalfRegType(vector8, Eigen::half, short, hvmax, INT_HALF_CAST, Packet8h, half(FLT_MAX), half(0.0f));
   loadVectorHalfRegType(vector8, Eigen::half, short, hv36, INT_HALF_CAST, Packet8h, half(36.7f), half(0.0f));
@@ -139,8 +154,10 @@ void pnegateTests() {
   dynHalfEigenHalfTest(FUN2TEST, (__m128i)hv0.r);
   dynHalfEigenHalfTest(FUN2TEST, (__m128i)hvmin.r);
 
+  endTest();
+
   /* bfloat16 = Packet8bf */
-  std::cout << "bfloat16 tests" << std::endl;
+  beginTest("bfloat16 tests");
 
   loadVectorHalfRegType(vector8, bfloat16, short, bfvmax, INT_HALF_CAST, Packet8bf, bfloat16(FLT_MAX), bfloat16(0.0f));
   loadVectorHalfRegType(vector8, bfloat16, short, bfv36, INT_HALF_CAST, Packet8bf, bfloat16(36.7f), bfloat16(0.0f));
@@ -154,11 +171,14 @@ void pnegateTests() {
   dynHalfBfloat16Test(FUN2TEST, (__m128i)bfv0.r);
   dynHalfBfloat16Test(FUN2TEST, (__m128i)bfv_240.r);
   dynHalfBfloat16Test(FUN2TEST, (__m128i)bfvmin.r);
+
+  endTest();
+
 #endif
 
 #ifdef __AVX2__
   /* long = Packet4l */
-  std::cout << "long tests" << std::endl;
+  beginTest("long tests");
 
   loadVectorFull(vector4, long, lvmax, INT_FULL_CAST, Packet4l, LONG_MAX, 0L);
   loadVectorFull(vector4, long, lv36, INT_FULL_CAST, Packet4l, 36L, 0L);
@@ -171,6 +191,9 @@ void pnegateTests() {
   dynFullLongTest(FUN2TEST, (__m256i)lv0.r);
   dynFullLongTest(FUN2TEST, (__m256i)lv_240.r);
   dynFullLongTest(FUN2TEST, (__m256i)lvmin.r);
+
+  endTest();
+
 #endif
 
 #ifdef __AVX512__
