@@ -58,7 +58,8 @@ namespace internal {
 #define INT_HALF_MIPP_CAST HALF_MIPP_CAST(__m128i)
 #define INT_FULL_MIPP_CAST FULL_MIPP_CAST(__m256i)
 
-// sse
+#ifdef EIGEN_VECTORIZE_SSE
+
 #if ((defined EIGEN_VECTORIZE_AVX) && (EIGEN_COMP_GNUC_STRICT || EIGEN_COMP_MINGW || EIGEN_COMP_LCC) && \
      (__GXX_ABI_VERSION < 1004)) ||                                                                     \
     EIGEN_OS_QNX
@@ -97,6 +98,8 @@ template <>
 struct is_arithmetic<Packet16b> {
   enum { value = true };
 };
+
+#endif
 
 #ifdef EIGEN_VECTORIZE_AVX
 
@@ -543,7 +546,7 @@ struct packet_traits<int64_t> : default_packet_traits {
 };
 #endif
 
-#else
+#elif defined(EIGEN_VECTORIZE_SSE)
 
 template <>
 struct packet_traits<float> : default_packet_traits {
@@ -653,7 +656,7 @@ template <>
 struct scalar_div_cost<double, true> {
   enum { value = 16 };
 };
-#else
+#elif defined(EIGEN_VECTORIZE_SSE)
 template <>
 struct scalar_div_cost<float, true> {
   enum { value = 7 };
@@ -664,7 +667,8 @@ struct scalar_div_cost<double, true> {
 };
 #endif
 
-// sse
+#ifdef EIGEN_VECTORIZE_SSE
+
 template <>
 struct unpacket_traits<Packet4f> {
   typedef float type;
@@ -727,6 +731,8 @@ struct unpacket_traits<Packet8h> {
     masked_store_available = false
   };
 };
+
+#endif
 
 #ifdef EIGEN_VECTORIZE_AVX
 
@@ -873,8 +879,7 @@ struct unpacket_traits<Packet16bf> {
 
 #endif
 
-// sse
-#if true
+#ifdef EIGEN_VECTORIZE_SSE
 
 template <>
 EIGEN_STRONG_INLINE Packet4f pset1<Packet4f>(const float& from) {
