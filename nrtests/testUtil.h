@@ -98,18 +98,32 @@ std::string toString(Arg1 arg1, Args... args) {
 #define dynOneTypeHalfTest(type, half, halfCast, name, args...) dynOneTypeTest(Reg_2, type, halfCast, half, name, args)
 
 // Tests macro definition
-#define dynFullLongTest(name, args...) dynOneTypeFullTest(long, Packet4l, INT_FULL_CAST, name, args)
+#define dynFullLongTemplateTest(template, name, args...) dynOneTypeFullTest(long, template, INT_FULL_CAST, name, args)
 
-#define dynHalfFloatTest(name, args...) dynOneTypeHalfTest(float, Packet4f, , name, args)
-#define dynHalfDoubleTest(name, args...) dynOneTypeHalfTest(double, Packet2d, HALF_CAST, name, args)
-#define dynHalfIntTest(name, args...) dynOneTypeHalfTest(int, Packet4i, INT_HALF_CAST, name, args)
+#define dynHalfFloatTemplateTest(template, name, args...) dynOneTypeHalfTest(float, template, , name, args)
+#define dynHalfDoubleTemplateTest(template, name, args...) dynOneTypeHalfTest(double, template, HALF_CAST, name, args)
+#define dynHalfIntTemplateTest(template, name, args...) dynOneTypeHalfTest(int, template, INT_HALF_CAST, name, args)
 
-#define dynFullFloatTest(name, args...) dynOneTypeFullTest(float, Packet8f, , name, args)
-#define dynFullDoubleTest(name, args...) dynOneTypeFullTest(double, Packet4d, FULL_CAST, name, args)
-#define dynFullIntTest(name, args...) dynOneTypeFullTest(int, Packet8i, INT_FULL_CAST, name, args)
+#define dynFullFloatTemplateTest(template, name, args...) dynOneTypeFullTest(float, template, , name, args)
+#define dynFullDoubleTemplateTest(template, name, args...) dynOneTypeFullTest(double, template, FULL_CAST, name, args)
+#define dynFullIntTemplateTest(template, name, args...) dynOneTypeFullTest(int, template, INT_FULL_CAST, name, args)
 
-#define dynHalfBoolTest(name, args...) dynOneTypeHalfTest(int, Packet16b, INT_HALF_CAST, name, args)
-#define dynHalfEigenHalfTest(name, args...) dynOneTypeHalfTest(short, Packet8h, INT_HALF_CAST, name, args)
-#define dynHalfBfloat16Test(name, args...) dynOneTypeHalfTest(short, Packet8bf, INT_HALF_CAST, name, args)
+#define dynHalfBoolTemplateTest(template, name, args...) dynOneTypeHalfTest(int, template, INT_HALF_CAST, name, args)
+#define dynHalfEigenHalfTemplateTest(template, name, args...) dynOneTypeHalfTest(short, template, INT_HALF_CAST, name, args)
+#define dynHalfBfloat16TemplateTest(template, name, args...) dynOneTypeHalfTest(short, template, INT_HALF_CAST, name, args)
+
+#define dynFullLongTest(name, args...) dynFullLongTemplateTest(Packet4l, name, args)
+
+#define dynHalfFloatTest(name, args...) dynHalfFloatTemplateTest(Packet4f, name, args)
+#define dynHalfDoubleTest(name, args...) dynHalfDoubleTemplateTest(Packet2d, name, args)
+#define dynHalfIntTest(name, args...) dynHalfIntTemplateTest(Packet4i, name, args)
+
+#define dynFullFloatTest(name, args...) dynFullFloatTemplateTest(Packet8f, name, args)
+#define dynFullDoubleTest(name, args...) dynFullDoubleTemplateTest(Packet4d, name, args)
+#define dynFullIntTest(name, args...) dynFullIntTemplateTest(Packet8i, name, args)
+
+#define dynHalfBoolTest(name, args...) dynHalfBoolTemplateTest(Packet16b, name, args)
+#define dynHalfEigenHalfTest(name, args...) dynHalfEigenHalfTemplateTest(Packet8h, name, args)
+#define dynHalfBfloat16Test(name, args...) dynHalfBfloat16TemplateTest(Packet8bf, name, args)
 
 #endif  // EIGEN_MIPP_TEST_UTIL_H
