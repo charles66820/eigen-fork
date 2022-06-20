@@ -4420,30 +4420,30 @@ EIGEN_STRONG_INLINE Packet8d pmax_old<PropagateNaN, Packet8d>(const Packet8d& a,
 
 #ifdef EIGEN_VECTORIZE_AVX512DQ
 template <int I_>
-EIGEN_STRONG_INLINE Packet8f extract256(Packet16f x) {
+EIGEN_STRONG_INLINE Packet8f extract256_old(Packet16f x) {
   return _mm512_extractf32x8_ps(x, I_);
 }
 template <int I_>
-EIGEN_STRONG_INLINE Packet2d extract128(Packet8d x) {
+EIGEN_STRONG_INLINE Packet2d extract128_old(Packet8d x) {
   return _mm512_extractf64x2_pd(x, I_);
 }
-EIGEN_STRONG_INLINE Packet16f cat256(Packet8f a, Packet8f b) {
+EIGEN_STRONG_INLINE Packet16f cat256_old(Packet8f a, Packet8f b) {
   return _mm512_insertf32x8(_mm512_castps256_ps512(a), b, 1);
 }
 #else
 // AVX512F does not define _mm512_extractf32x8_ps to extract _m256 from _m512
 template <int I_>
-EIGEN_STRONG_INLINE Packet8f extract256(Packet16f x) {
+EIGEN_STRONG_INLINE Packet8f extract256_old(Packet16f x) {
   return _mm256_castsi256_ps(_mm512_extracti64x4_epi64(_mm512_castps_si512(x), I_));
 }
 
 // AVX512F does not define _mm512_extractf64x2_pd to extract _m128 from _m512
 template <int I_>
-EIGEN_STRONG_INLINE Packet2d extract128(Packet8d x) {
+EIGEN_STRONG_INLINE Packet2d extract128_old(Packet8d x) {
   return _mm_castsi128_pd(_mm512_extracti32x4_epi32(_mm512_castpd_si512(x), I_));
 }
 
-EIGEN_STRONG_INLINE Packet16f cat256(Packet8f a, Packet8f b) {
+EIGEN_STRONG_INLINE Packet16f cat256_old(Packet8f a, Packet8f b) {
   return _mm512_castsi512_ps(
       _mm512_inserti64x4(_mm512_castsi256_si512(_mm256_castps_si256(a)), _mm256_castps_si256(b), 1));
 }
@@ -4459,8 +4459,8 @@ EIGEN_STRONG_INLINE __m256i Pack32To16(Packet16f rf) {
   //   dst[31:16]   := Saturate16(rf[63:32])
   //   ...
   //   dst[255:240] := Saturate16(rf[255:224])
-  __m256i lo = _mm256_castps_si256(extract256<0>(rf));
-  __m256i hi = _mm256_castps_si256(extract256<1>(rf));
+  __m256i lo = _mm256_castps_si256(extract256_old<0>(rf));
+  __m256i hi = _mm256_castps_si256(extract256_old<1>(rf));
   __m128i result_lo = _mm_packs_epi32(_mm256_extractf128_si256(lo, 0), _mm256_extractf128_si256(lo, 1));
   __m128i result_hi = _mm_packs_epi32(_mm256_extractf128_si256(hi, 0), _mm256_extractf128_si256(hi, 1));
   return _mm256_insertf128_si256(_mm256_castsi128_si256(result_lo), result_hi, 1);
