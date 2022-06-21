@@ -128,6 +128,9 @@ void ploadTests() {
   runTest(vector4, long, dynFullLongTest, 0L, 1L);
   runTest(vector4, long, dynFullLongTest, -240L, 1L);
   runTest(vector4, long, dynFullLongTest, LONG_MIN, 1L);
+
+  endTest();
+
 #endif
 
 #ifdef __AVX512__

@@ -108,7 +108,7 @@ std::string toString(Arg1 arg1, Args... args) {
 #define dynFullDoubleTemplateTest(template, name, args...) dynOneTypeFullTest(double, template, FULL_CAST, name, args)
 #define dynFullIntTemplateTest(template, name, args...) dynOneTypeFullTest(int, template, INT_FULL_CAST, name, args)
 
-#define dynHalfBoolTemplateTest(template, name, args...) dynOneTypeHalfTest(int, template, INT_HALF_CAST, name, args)
+#define dynHalfBoolTemplateTest(template, name, args...) dynOneTypeHalfTest(int8_t, template, INT_HALF_CAST, name, args)
 #define dynHalfEigenHalfTemplateTest(template, name, args...) dynOneTypeHalfTest(short, template, INT_HALF_CAST, name, args)
 #define dynHalfBfloat16TemplateTest(template, name, args...) dynOneTypeHalfTest(short, template, INT_HALF_CAST, name, args)
 
