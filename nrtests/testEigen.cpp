@@ -36,6 +36,7 @@
 #include "pfloorTest.h"
 #include "ploaddupTest.h"
 #include "ploadquadTest.h"
+#include "pgatherTest.h"
 
 int main() {
   pset1Tests();
@@ -73,4 +74,5 @@ int main() {
   pfloorTests();
   ploaddupTests();
   ploadquadTests();
+  pgatherTests();
 }
