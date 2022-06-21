@@ -109,8 +109,10 @@ std::string toString(Arg1 arg1, Args... args) {
 #define dynFullIntTemplateTest(template, name, args...) dynOneTypeFullTest(int, template, INT_FULL_CAST, name, args)
 
 #define dynHalfBoolTemplateTest(template, name, args...) dynOneTypeHalfTest(int8_t, template, INT_HALF_CAST, name, args)
-#define dynHalfEigenHalfTemplateTest(template, name, args...) dynOneTypeHalfTest(short, template, INT_HALF_CAST, name, args)
-#define dynHalfBfloat16TemplateTest(template, name, args...) dynOneTypeHalfTest(short, template, INT_HALF_CAST, name, args)
+#define dynHalfEigenHalfTemplateTest(template, name, args...) \
+  dynOneTypeHalfTest(short, template, INT_HALF_CAST, name, args)
+#define dynHalfBfloat16TemplateTest(template, name, args...) \
+  dynOneTypeHalfTest(short, template, INT_HALF_CAST, name, args)
 
 #define dynFullLongTest(name, args...) dynFullLongTemplateTest(Packet4l, name, args)
 
@@ -125,5 +127,47 @@ std::string toString(Arg1 arg1, Args... args) {
 #define dynHalfBoolTest(name, args...) dynHalfBoolTemplateTest(Packet16b, name, args)
 #define dynHalfEigenHalfTest(name, args...) dynHalfEigenHalfTemplateTest(Packet8h, name, args)
 #define dynHalfBfloat16Test(name, args...) dynHalfBfloat16TemplateTest(Packet8bf, name, args)
+
+// test and print for tab
+template <typename T>
+std::string toStringTab(T *tab, size_t size) {
+  std::stringstream stream;
+  stream << "[";
+
+  for (size_t i = 0; i < size; i++) {
+    if (i != 0) stream << ", ";
+    stream << tab[i];
+  }
+
+  stream << "]";
+  return stream.str();
+}
+
+template <typename T>
+bool printWhenTabDiff(std::string msg, T tab[], T tab_old[], size_t size) {
+  bool isDiffer = !std::equal(tab, tab + size, tab_old);
+
+  if (!hasFailed && isDiffer) std::cout << " failed" << std::endl;
+
+  if (isDiffer || VERBOSE)
+    std::cout << "diff for " << msg << " : " << std::endl
+              << "old " << toStringTab(tab_old, size) << std::endl
+              << "new " << toStringTab(tab, size) << std::endl
+              << std::endl;
+  return isDiffer;
+}
+
+#define tabTypeSizeTest(name, type, size, args...)                                                \
+  {                                                                                               \
+    type to[size] __attribute__((aligned(32)));                                                                                \
+    memset(to, 0, sizeof to);                                                                     \
+    type to_old[size] __attribute__((aligned(32)));                                                                            \
+    memset(to_old, 0, sizeof to_old);                                                             \
+                                                                                                  \
+    name<type>(to, args);                                                        \
+    name##_old<type>(to_old, args);                                                \
+    hasFailed |= printWhenTabDiff(#name "<" #type ">(" + to_sting(args) + ")", to, to_old, size); \
+  }
+#define tabTypeTest(name, type, size, args...) tabTypeSizeTest(name, type, size, args)
 
 #endif  // EIGEN_MIPP_TEST_UTIL_H
