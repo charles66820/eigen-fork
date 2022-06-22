@@ -21,11 +21,11 @@ void pnegateTests() {
   loadVectorHalf(vector4, float, fhv_240, , Packet4f, -240.98f, 0.0f);
   loadVectorHalf(vector4, float, fhvmin, , Packet4f, FLT_MAX, 0.0f);
 
-  dynHalfFloatTest(FUN2TEST, fhvmax.r);
-  dynHalfFloatTest(FUN2TEST, fhv36.r);
-  dynHalfFloatTest(FUN2TEST, fhv0.r);
-  dynHalfFloatTest(FUN2TEST, fhv_240.r);
-  dynHalfFloatTest(FUN2TEST, fhvmin.r);
+  vectorHalfFloatTest(FUN2TEST, fhvmax.r);
+  vectorHalfFloatTest(FUN2TEST, fhv36.r);
+  vectorHalfFloatTest(FUN2TEST, fhv0.r);
+  vectorHalfFloatTest(FUN2TEST, fhv_240.r);
+  vectorHalfFloatTest(FUN2TEST, fhvmin.r);
 
   endTest();
 
@@ -38,11 +38,11 @@ void pnegateTests() {
   loadVectorHalf(vector2, double, dhv_240, HALF_CAST, Packet2d, -240.98d, 0.0d);
   loadVectorHalf(vector2, double, dhvmin, HALF_CAST, Packet2d, DBL_MIN, 0.0d);
 
-  dynHalfDoubleTest(FUN2TEST, (Packet2d)dhvmax.r);
-  dynHalfDoubleTest(FUN2TEST, (Packet2d)dhv36.r);
-  dynHalfDoubleTest(FUN2TEST, (Packet2d)dhv0.r);
-  dynHalfDoubleTest(FUN2TEST, (Packet2d)dhv_240.r);
-  dynHalfDoubleTest(FUN2TEST, (Packet2d)dhvmin.r);
+  vectorHalfDoubleTest(FUN2TEST, (Packet2d)dhvmax.r);
+  vectorHalfDoubleTest(FUN2TEST, (Packet2d)dhv36.r);
+  vectorHalfDoubleTest(FUN2TEST, (Packet2d)dhv0.r);
+  vectorHalfDoubleTest(FUN2TEST, (Packet2d)dhv_240.r);
+  vectorHalfDoubleTest(FUN2TEST, (Packet2d)dhvmin.r);
 
   endTest();
 
@@ -55,11 +55,11 @@ void pnegateTests() {
   loadVectorHalf(vector4, int, ihv_240, INT_HALF_CAST, Packet4i, -240, 0);
   loadVectorHalf(vector4, int, ihvmin, INT_HALF_CAST, Packet4i, INT_MIN, 0);
 
-  dynHalfIntTest(FUN2TEST, (__m128i)ihvmax.r);
-  dynHalfIntTest(FUN2TEST, (__m128i)ihv36.r);
-  dynHalfIntTest(FUN2TEST, (__m128i)ihv0.r);
-  dynHalfIntTest(FUN2TEST, (__m128i)ihv_240.r);
-  dynHalfIntTest(FUN2TEST, (__m128i)ihvmin.r);
+  vectorHalfIntTest(FUN2TEST, (__m128i)ihvmax.r);
+  vectorHalfIntTest(FUN2TEST, (__m128i)ihv36.r);
+  vectorHalfIntTest(FUN2TEST, (__m128i)ihv0.r);
+  vectorHalfIntTest(FUN2TEST, (__m128i)ihv_240.r);
+  vectorHalfIntTest(FUN2TEST, (__m128i)ihvmin.r);
 
   endTest();
 
@@ -69,8 +69,8 @@ void pnegateTests() {
   loadVectorHalf(vector16, bool, bvtrue, INT_HALF_CAST, Packet16b, true, 0);
   loadVectorHalf(vector16, bool, bvfalse, INT_HALF_CAST, Packet16b, false, 0);
 
-  dynHalfBoolTest(FUN2TEST, (__m128i)bvtrue.r);
-  dynHalfBoolTest(FUN2TEST, (__m128i)bvfalse.r);
+  vectorHalfBoolTest(FUN2TEST, (__m128i)bvtrue.r);
+  vectorHalfBoolTest(FUN2TEST, (__m128i)bvfalse.r);
 
   endTest();
 
@@ -85,11 +85,11 @@ void pnegateTests() {
   loadVectorFull(vector8, float, fv_240, , Packet8f, -240.98f, 0.0f);
   loadVectorFull(vector8, float, fvmin, , Packet8f, FLT_MAX, 0.0f);
 
-  dynFullFloatTest(FUN2TEST, fvmax.r);
-  dynFullFloatTest(FUN2TEST, fv36.r);
-  dynFullFloatTest(FUN2TEST, fv0.r);
-  dynFullFloatTest(FUN2TEST, fv_240.r);
-  dynFullFloatTest(FUN2TEST, fvmin.r);
+  vectorFullFloatTest(FUN2TEST, fvmax.r);
+  vectorFullFloatTest(FUN2TEST, fv36.r);
+  vectorFullFloatTest(FUN2TEST, fv0.r);
+  vectorFullFloatTest(FUN2TEST, fv_240.r);
+  vectorFullFloatTest(FUN2TEST, fvmin.r);
 
   endTest();
 
@@ -102,11 +102,11 @@ void pnegateTests() {
   loadVectorFull(vector4, double, dv_240, FULL_CAST, Packet4d, -240.98d, 0.0d);
   loadVectorFull(vector4, double, dvmin, FULL_CAST, Packet4d, DBL_MIN, 0.0d);
 
-  dynFullDoubleTest(FUN2TEST, (Packet4d)dvmax.r);
-  dynFullDoubleTest(FUN2TEST, (Packet4d)dv36.r);
-  dynFullDoubleTest(FUN2TEST, (Packet4d)dv0.r);
-  dynFullDoubleTest(FUN2TEST, (Packet4d)dv_240.r);
-  dynFullDoubleTest(FUN2TEST, (Packet4d)dvmin.r);
+  vectorFullDoubleTest(FUN2TEST, (Packet4d)dvmax.r);
+  vectorFullDoubleTest(FUN2TEST, (Packet4d)dv36.r);
+  vectorFullDoubleTest(FUN2TEST, (Packet4d)dv0.r);
+  vectorFullDoubleTest(FUN2TEST, (Packet4d)dv_240.r);
+  vectorFullDoubleTest(FUN2TEST, (Packet4d)dvmin.r);
 
   endTest();
 
@@ -119,11 +119,11 @@ void pnegateTests() {
   loadVectorFull(vector8, int, iv_240, INT_FULL_CAST, Packet8i, -240, 0);
   loadVectorFull(vector8, int, ivmin, INT_FULL_CAST, Packet8i, INT_MIN, 0);
 
-  dynFullIntTest(FUN2TEST, (__m256i)ivmax.r);
-  dynFullIntTest(FUN2TEST, (__m256i)iv36.r);
-  dynFullIntTest(FUN2TEST, (__m256i)iv0.r);
-  dynFullIntTest(FUN2TEST, (__m256i)iv_240.r);
-  dynFullIntTest(FUN2TEST, (__m256i)ivmin.r);
+  vectorFullIntTest(FUN2TEST, (__m256i)ivmax.r);
+  vectorFullIntTest(FUN2TEST, (__m256i)iv36.r);
+  vectorFullIntTest(FUN2TEST, (__m256i)iv0.r);
+  vectorFullIntTest(FUN2TEST, (__m256i)iv_240.r);
+  vectorFullIntTest(FUN2TEST, (__m256i)ivmin.r);
 
   endTest();
 
@@ -136,10 +136,10 @@ void pnegateTests() {
   loadVectorHalfRegType(vector8, Eigen::half, short, hv_240, INT_HALF_CAST, Packet8h, half(-240.98f), half(0.0f));
   loadVectorHalfRegType(vector8, Eigen::half, short, hvmin, INT_HALF_CAST, Packet8h, half(FLT_MAX), half(0.0f));
 
-  dynHalfEigenHalfTest(FUN2TEST, (__m128i)hvmax.r);
-  dynHalfEigenHalfTest(FUN2TEST, (__m128i)hv36.r);
-  dynHalfEigenHalfTest(FUN2TEST, (__m128i)hv0.r);
-  dynHalfEigenHalfTest(FUN2TEST, (__m128i)hvmin.r);
+  vectorHalfEigenHalfTest(FUN2TEST, (__m128i)hvmax.r);
+  vectorHalfEigenHalfTest(FUN2TEST, (__m128i)hv36.r);
+  vectorHalfEigenHalfTest(FUN2TEST, (__m128i)hv0.r);
+  vectorHalfEigenHalfTest(FUN2TEST, (__m128i)hvmin.r);
 
   endTest();
 
@@ -153,11 +153,11 @@ void pnegateTests() {
                         bfloat16(0.0f));
   loadVectorHalfRegType(vector8, bfloat16, short, bfvmin, INT_HALF_CAST, Packet8bf, bfloat16(FLT_MAX), bfloat16(0.0f));
 
-  dynHalfBfloat16Test(FUN2TEST, (__m128i)bfvmax.r);
-  dynHalfBfloat16Test(FUN2TEST, (__m128i)bfv36.r);
-  dynHalfBfloat16Test(FUN2TEST, (__m128i)bfv0.r);
-  dynHalfBfloat16Test(FUN2TEST, (__m128i)bfv_240.r);
-  dynHalfBfloat16Test(FUN2TEST, (__m128i)bfvmin.r);
+  vectorHalfBfloat16Test(FUN2TEST, (__m128i)bfvmax.r);
+  vectorHalfBfloat16Test(FUN2TEST, (__m128i)bfv36.r);
+  vectorHalfBfloat16Test(FUN2TEST, (__m128i)bfv0.r);
+  vectorHalfBfloat16Test(FUN2TEST, (__m128i)bfv_240.r);
+  vectorHalfBfloat16Test(FUN2TEST, (__m128i)bfvmin.r);
 
   endTest();
 
@@ -173,11 +173,11 @@ void pnegateTests() {
   loadVectorFull(vector4, long, lv_240, INT_FULL_CAST, Packet4l, -240L, 0L);
   loadVectorFull(vector4, long, lvmin, INT_FULL_CAST, Packet4l, LONG_MIN, 0L);
 
-  dynFullLongTest(FUN2TEST, (__m256i)lvmax.r);
-  dynFullLongTest(FUN2TEST, (__m256i)lv36.r);
-  dynFullLongTest(FUN2TEST, (__m256i)lv0.r);
-  dynFullLongTest(FUN2TEST, (__m256i)lv_240.r);
-  dynFullLongTest(FUN2TEST, (__m256i)lvmin.r);
+  vectorFullLongTest(FUN2TEST, (__m256i)lvmax.r);
+  vectorFullLongTest(FUN2TEST, (__m256i)lv36.r);
+  vectorFullLongTest(FUN2TEST, (__m256i)lv0.r);
+  vectorFullLongTest(FUN2TEST, (__m256i)lv_240.r);
+  vectorFullLongTest(FUN2TEST, (__m256i)lvmin.r);
 
   endTest();
 

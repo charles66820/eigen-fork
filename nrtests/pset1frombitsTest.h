@@ -14,22 +14,22 @@ void pset1frombitsTests() {
   /* float = Packet4f (half) */
   beginTest("half float tests");
 
-  dynHalfFloatTest(FUN2TEST, (uint32_t)INT_MAX);
-  dynHalfFloatTest(FUN2TEST, (uint32_t)0x4212cccd);
-  dynHalfFloatTest(FUN2TEST, (uint32_t)0x00000000);
-  dynHalfFloatTest(FUN2TEST, (uint32_t)0xc370fae1);
-  dynHalfFloatTest(FUN2TEST, (uint32_t)INT_MIN);
+  vectorHalfFloatTest(FUN2TEST, (uint32_t)INT_MAX);
+  vectorHalfFloatTest(FUN2TEST, (uint32_t)0x4212cccd);
+  vectorHalfFloatTest(FUN2TEST, (uint32_t)0x00000000);
+  vectorHalfFloatTest(FUN2TEST, (uint32_t)0xc370fae1);
+  vectorHalfFloatTest(FUN2TEST, (uint32_t)INT_MIN);
 
   endTest();
 
   /* double =  Packet2d (half) */
   beginTest("half double tests");
 
-  dynHalfDoubleTest(FUN2TEST, (uint64_t)LONG_MAX);
-  dynHalfDoubleTest(FUN2TEST, (uint64_t)0x404259999999999a);
-  dynHalfDoubleTest(FUN2TEST, (uint64_t)0x0000000000000000);
-  dynHalfDoubleTest(FUN2TEST, (uint64_t)0xc06e1f5c28f5c28f);
-  dynHalfDoubleTest(FUN2TEST, (uint64_t)LONG_MIN);
+  vectorHalfDoubleTest(FUN2TEST, (uint64_t)LONG_MAX);
+  vectorHalfDoubleTest(FUN2TEST, (uint64_t)0x404259999999999a);
+  vectorHalfDoubleTest(FUN2TEST, (uint64_t)0x0000000000000000);
+  vectorHalfDoubleTest(FUN2TEST, (uint64_t)0xc06e1f5c28f5c28f);
+  vectorHalfDoubleTest(FUN2TEST, (uint64_t)LONG_MIN);
 
   endTest();
 
@@ -39,22 +39,22 @@ void pset1frombitsTests() {
   /* float = Packet8f (full) */
   beginTest("full float tests");
 
-  dynFullFloatTest(FUN2TEST, (uint32_t)INT_MAX);
-  dynFullFloatTest(FUN2TEST, (uint32_t)0x4212cccd);
-  dynFullFloatTest(FUN2TEST, (uint32_t)0x00000000);
-  dynFullFloatTest(FUN2TEST, (uint32_t)0xc370fae1);
-  dynFullFloatTest(FUN2TEST, (uint32_t)INT_MIN);
+  vectorFullFloatTest(FUN2TEST, (uint32_t)INT_MAX);
+  vectorFullFloatTest(FUN2TEST, (uint32_t)0x4212cccd);
+  vectorFullFloatTest(FUN2TEST, (uint32_t)0x00000000);
+  vectorFullFloatTest(FUN2TEST, (uint32_t)0xc370fae1);
+  vectorFullFloatTest(FUN2TEST, (uint32_t)INT_MIN);
 
   endTest();
 
   /* double = Packet4d (full) */
   beginTest("full double tests");
 
-  dynFullDoubleTest(FUN2TEST, (uint64_t)LONG_MAX);
-  dynFullDoubleTest(FUN2TEST, (uint64_t)0x404259999999999a);
-  dynFullDoubleTest(FUN2TEST, (uint64_t)0x0000000000000000);
-  dynFullDoubleTest(FUN2TEST, (uint64_t)0xc06e1f5c28f5c28f);
-  dynFullDoubleTest(FUN2TEST, (uint64_t)LONG_MIN);
+  vectorFullDoubleTest(FUN2TEST, (uint64_t)LONG_MAX);
+  vectorFullDoubleTest(FUN2TEST, (uint64_t)0x404259999999999a);
+  vectorFullDoubleTest(FUN2TEST, (uint64_t)0x0000000000000000);
+  vectorFullDoubleTest(FUN2TEST, (uint64_t)0xc06e1f5c28f5c28f);
+  vectorFullDoubleTest(FUN2TEST, (uint64_t)LONG_MIN);
 
   endTest();
 

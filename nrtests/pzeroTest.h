@@ -15,7 +15,7 @@ void pzeroTests() {
   beginTest("half float tests");
 
   Packet4f bh;
-  dynHalfFloatTest(FUN2TEST, bh);
+  vectorHalfFloatTest(FUN2TEST, bh);
 
   endTest();
 
@@ -23,7 +23,7 @@ void pzeroTests() {
   beginTest("half double tests");
 
   Packet2d ch;
-  dynHalfDoubleTest(FUN2TEST, ch);
+  vectorHalfDoubleTest(FUN2TEST, ch);
 
   endTest();
 
@@ -31,7 +31,7 @@ void pzeroTests() {
   beginTest("half int tests");
 
   Packet4i dh;
-  dynHalfIntTest(FUN2TEST, dh);
+  vectorHalfIntTest(FUN2TEST, dh);
 
   endTest();
 
@@ -42,7 +42,7 @@ void pzeroTests() {
   beginTest("full float tests");
 
   Packet8f b;
-  dynFullFloatTest(FUN2TEST, b);
+  vectorFullFloatTest(FUN2TEST, b);
 
   endTest();
 
@@ -50,7 +50,7 @@ void pzeroTests() {
   beginTest("full double tests");
 
   Packet4d c;
-  dynFullDoubleTest(FUN2TEST, c);
+  vectorFullDoubleTest(FUN2TEST, c);
 
   endTest();
 
@@ -58,7 +58,7 @@ void pzeroTests() {
   beginTest("full int tests");
 
   Packet8i d;
-  dynFullIntTest(FUN2TEST, d);
+  vectorFullIntTest(FUN2TEST, d);
 
   endTest();
 
@@ -69,7 +69,7 @@ void pzeroTests() {
   beginTest("long tests");
 
   Packet4l a;
-  dynFullLongTest(FUN2TEST, a);
+  vectorFullLongTest(FUN2TEST, a);
 
   endTest();
 
@@ -80,7 +80,7 @@ void pzeroTests() {
   // beginTest("full float tests");
 
   // Packet8f b;
-  // dynFullFloatTest(FUN2TEST, b);
+  // vectorFullFloatTest(FUN2TEST, b);
 
   endTest();
 
@@ -88,7 +88,7 @@ void pzeroTests() {
   // beginTest("full double tests");
 
   // Packet4d c;
-  // dynFullDoubleTest(FUN2TEST, c);
+  // vectorFullDoubleTest(FUN2TEST, c);
 
   endTest();
 
@@ -96,7 +96,7 @@ void pzeroTests() {
   // beginTest("full int tests");
 
   // Packet8i d;
-  // dynFullIntTest(FUN2TEST, d);
+  // vectorFullIntTest(FUN2TEST, d);
 
   endTest();
 

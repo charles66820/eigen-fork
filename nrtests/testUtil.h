@@ -85,48 +85,56 @@ std::string toString(Arg1 arg1, Args... args) {
   return toString(arg1) + ", " + toString(args...);
 }
 
-// Tests macro structure
-#define dynOneTypeTest(MIPP_Reg, type, cast, eigenType, name, args...)                            \
+// Macros for test that return vector
+#define vectorSingleTypeTest(MIPP_Reg, type, cast, eigenType, name, args...)                            \
   {                                                                                               \
     mipp::MIPP_Reg<type> rVar = cast name<eigenType>(args);                                       \
     mipp::MIPP_Reg<type> rVar_old = cast name##_old<eigenType>(args);                             \
     hasFailed |= printWhenDiff(#name "<" #eigenType ">(" + to_sting(args) + ")", rVar, rVar_old); \
   }
 
-#define dynOneTypeFullTest(type, full, fullCast, name, args...) dynOneTypeTest(Reg, type, fullCast, full, name, args)
+#define vectorSingleTypeFullTest(type, full, fullCast, name, args...) \
+  vectorSingleTypeTest(Reg, type, fullCast, full, name, args)
 
-#define dynOneTypeHalfTest(type, half, halfCast, name, args...) dynOneTypeTest(Reg_2, type, halfCast, half, name, args)
+#define vectorSingleTypeHalfTest(type, half, halfCast, name, args...) \
+  vectorSingleTypeTest(Reg_2, type, halfCast, half, name, args)
 
 // Tests macro definition
-#define dynFullLongTemplateTest(template, name, args...) dynOneTypeFullTest(long, template, INT_FULL_CAST, name, args)
+#define vectorFullLongTemplateTest(template, name, args...) \
+  vectorSingleTypeFullTest(long, template, INT_FULL_CAST, name, args)
 
-#define dynHalfFloatTemplateTest(template, name, args...) dynOneTypeHalfTest(float, template, , name, args)
-#define dynHalfDoubleTemplateTest(template, name, args...) dynOneTypeHalfTest(double, template, HALF_CAST, name, args)
-#define dynHalfIntTemplateTest(template, name, args...) dynOneTypeHalfTest(int, template, INT_HALF_CAST, name, args)
+#define vectorHalfFloatTemplateTest(template, name, args...) vectorSingleTypeHalfTest(float, template, , name, args)
+#define vectorHalfDoubleTemplateTest(template, name, args...) \
+  vectorSingleTypeHalfTest(double, template, HALF_CAST, name, args)
+#define vectorHalfIntTemplateTest(template, name, args...) \
+  vectorSingleTypeHalfTest(int, template, INT_HALF_CAST, name, args)
 
-#define dynFullFloatTemplateTest(template, name, args...) dynOneTypeFullTest(float, template, , name, args)
-#define dynFullDoubleTemplateTest(template, name, args...) dynOneTypeFullTest(double, template, FULL_CAST, name, args)
-#define dynFullIntTemplateTest(template, name, args...) dynOneTypeFullTest(int, template, INT_FULL_CAST, name, args)
+#define vectorFullFloatTemplateTest(template, name, args...) vectorSingleTypeFullTest(float, template, , name, args)
+#define vectorFullDoubleTemplateTest(template, name, args...) \
+  vectorSingleTypeFullTest(double, template, FULL_CAST, name, args)
+#define vectorFullIntTemplateTest(template, name, args...) \
+  vectorSingleTypeFullTest(int, template, INT_FULL_CAST, name, args)
 
-#define dynHalfBoolTemplateTest(template, name, args...) dynOneTypeHalfTest(int8_t, template, INT_HALF_CAST, name, args)
-#define dynHalfEigenHalfTemplateTest(template, name, args...) \
-  dynOneTypeHalfTest(short, template, INT_HALF_CAST, name, args)
-#define dynHalfBfloat16TemplateTest(template, name, args...) \
-  dynOneTypeHalfTest(short, template, INT_HALF_CAST, name, args)
+#define vectorHalfBoolTemplateTest(template, name, args...) \
+  vectorSingleTypeHalfTest(int8_t, template, INT_HALF_CAST, name, args)
+#define vectorHalfEigenHalfTemplateTest(template, name, args...) \
+  vectorSingleTypeHalfTest(short, template, INT_HALF_CAST, name, args)
+#define vectorHalfBfloat16TemplateTest(template, name, args...) \
+  vectorSingleTypeHalfTest(short, template, INT_HALF_CAST, name, args)
 
-#define dynFullLongTest(name, args...) dynFullLongTemplateTest(Packet4l, name, args)
+#define vectorFullLongTest(name, args...) vectorFullLongTemplateTest(Packet4l, name, args)
 
-#define dynHalfFloatTest(name, args...) dynHalfFloatTemplateTest(Packet4f, name, args)
-#define dynHalfDoubleTest(name, args...) dynHalfDoubleTemplateTest(Packet2d, name, args)
-#define dynHalfIntTest(name, args...) dynHalfIntTemplateTest(Packet4i, name, args)
+#define vectorHalfFloatTest(name, args...) vectorHalfFloatTemplateTest(Packet4f, name, args)
+#define vectorHalfDoubleTest(name, args...) vectorHalfDoubleTemplateTest(Packet2d, name, args)
+#define vectorHalfIntTest(name, args...) vectorHalfIntTemplateTest(Packet4i, name, args)
 
-#define dynFullFloatTest(name, args...) dynFullFloatTemplateTest(Packet8f, name, args)
-#define dynFullDoubleTest(name, args...) dynFullDoubleTemplateTest(Packet4d, name, args)
-#define dynFullIntTest(name, args...) dynFullIntTemplateTest(Packet8i, name, args)
+#define vectorFullFloatTest(name, args...) vectorFullFloatTemplateTest(Packet8f, name, args)
+#define vectorFullDoubleTest(name, args...) vectorFullDoubleTemplateTest(Packet4d, name, args)
+#define vectorFullIntTest(name, args...) vectorFullIntTemplateTest(Packet8i, name, args)
 
-#define dynHalfBoolTest(name, args...) dynHalfBoolTemplateTest(Packet16b, name, args)
-#define dynHalfEigenHalfTest(name, args...) dynHalfEigenHalfTemplateTest(Packet8h, name, args)
-#define dynHalfBfloat16Test(name, args...) dynHalfBfloat16TemplateTest(Packet8bf, name, args)
+#define vectorHalfBoolTest(name, args...) vectorHalfBoolTemplateTest(Packet16b, name, args)
+#define vectorHalfEigenHalfTest(name, args...) vectorHalfEigenHalfTemplateTest(Packet8h, name, args)
+#define vectorHalfBfloat16Test(name, args...) vectorHalfBfloat16TemplateTest(Packet8bf, name, args)
 
 // test and print for tab
 template <typename T>

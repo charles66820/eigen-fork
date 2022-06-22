@@ -22,11 +22,11 @@ void parithmetic_shift_rightTests() {
   loadVectorHalf(vector4, int, ihv_240, INT_HALF_CAST, Packet4i, -240, 0);
   loadVectorHalf(vector4, int, ihvmin, INT_HALF_CAST, Packet4i, INT_MIN, 0);
 
-  dynHalfIntTemplateTest(3, FUN2TEST, (__m128i)ihvmax.r);
-  dynHalfIntTemplateTest(3, FUN2TEST, (__m128i)ihv36.r);
-  dynHalfIntTemplateTest(3, FUN2TEST, (__m128i)ihv0.r);
-  dynHalfIntTemplateTest(3, FUN2TEST, (__m128i)ihv_240.r);
-  dynHalfIntTemplateTest(3, FUN2TEST, (__m128i)ihvmin.r);
+  vectorHalfIntTemplateTest(3, FUN2TEST, (__m128i)ihvmax.r);
+  vectorHalfIntTemplateTest(3, FUN2TEST, (__m128i)ihv36.r);
+  vectorHalfIntTemplateTest(3, FUN2TEST, (__m128i)ihv0.r);
+  vectorHalfIntTemplateTest(3, FUN2TEST, (__m128i)ihv_240.r);
+  vectorHalfIntTemplateTest(3, FUN2TEST, (__m128i)ihvmin.r);
 
   endTest();
 
@@ -43,11 +43,11 @@ void parithmetic_shift_rightTests() {
   loadVectorFull(vector8, int, iv_240, INT_FULL_CAST, Packet8i, -240, 0);
   loadVectorFull(vector8, int, ivmin, INT_FULL_CAST, Packet8i, INT_MIN, 0);
 
-  dynFullIntTemplateTest(3, FUN2TEST, (__m256i)ivmax.r);
-  dynFullIntTemplateTest(3, FUN2TEST, (__m256i)iv36.r);
-  dynFullIntTemplateTest(3, FUN2TEST, (__m256i)iv0.r);
-  dynFullIntTemplateTest(3, FUN2TEST, (__m256i)iv_240.r);
-  dynFullIntTemplateTest(3, FUN2TEST, (__m256i)ivmin.r);
+  vectorFullIntTemplateTest(3, FUN2TEST, (__m256i)ivmax.r);
+  vectorFullIntTemplateTest(3, FUN2TEST, (__m256i)iv36.r);
+  vectorFullIntTemplateTest(3, FUN2TEST, (__m256i)iv0.r);
+  vectorFullIntTemplateTest(3, FUN2TEST, (__m256i)iv_240.r);
+  vectorFullIntTemplateTest(3, FUN2TEST, (__m256i)ivmin.r);
 
   endTest();
 
@@ -63,11 +63,11 @@ void parithmetic_shift_rightTests() {
   loadVectorFull(vector4, long, lv_240, INT_FULL_CAST, Packet4l, -240L, 0L);
   loadVectorFull(vector4, long, lvmin, INT_FULL_CAST, Packet4l, LONG_MIN, 0L);
 
-  dynFullLongTemplateTest(3, FUN2TEST, (__m256i)lvmax.r);
-  dynFullLongTemplateTest(3, FUN2TEST, (__m256i)lv36.r);
-  dynFullLongTemplateTest(3, FUN2TEST, (__m256i)lv0.r);
-  dynFullLongTemplateTest(3, FUN2TEST, (__m256i)lv_240.r);
-  dynFullLongTemplateTest(3, FUN2TEST, (__m256i)lvmin.r);
+  vectorFullLongTemplateTest(3, FUN2TEST, (__m256i)lvmax.r);
+  vectorFullLongTemplateTest(3, FUN2TEST, (__m256i)lv36.r);
+  vectorFullLongTemplateTest(3, FUN2TEST, (__m256i)lv0.r);
+  vectorFullLongTemplateTest(3, FUN2TEST, (__m256i)lv_240.r);
+  vectorFullLongTemplateTest(3, FUN2TEST, (__m256i)lvmin.r);
 
   endTest();
 

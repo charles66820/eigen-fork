@@ -23,11 +23,11 @@ void pload1Tests() {
   /* float = Packet4f (half) */
   beginTest("half float tests");
 
-  runTest(vector4, float, dynHalfFloatTest, FLT_MAX, -0.1f);
-  runTest(vector4, float, dynHalfFloatTest, 36.7f, 0.1f);
-  runTest(vector4, float, dynHalfFloatTest, 0.0f, 0.1f);
-  runTest(vector4, float, dynHalfFloatTest, -240.98f, 0.1f);
-  runTest(vector4, float, dynHalfFloatTest, FLT_MIN, 0.1f);
+  runTest(vector4, float, vectorHalfFloatTest, FLT_MAX, -0.1f);
+  runTest(vector4, float, vectorHalfFloatTest, 36.7f, 0.1f);
+  runTest(vector4, float, vectorHalfFloatTest, 0.0f, 0.1f);
+  runTest(vector4, float, vectorHalfFloatTest, -240.98f, 0.1f);
+  runTest(vector4, float, vectorHalfFloatTest, FLT_MIN, 0.1f);
 
   endTest();
 
@@ -39,22 +39,22 @@ void pload1Tests() {
   /* float = Packet8f (full) */
   beginTest("full float tests");
 
-  runTest(vector8, float, dynFullFloatTest, FLT_MAX, -0.1f);
-  runTest(vector8, float, dynFullFloatTest, 36.7f, 0.1f);
-  runTest(vector8, float, dynFullFloatTest, 0.0f, 0.1f);
-  runTest(vector8, float, dynFullFloatTest, -240.98f, 0.1f);
-  runTest(vector8, float, dynFullFloatTest, FLT_MIN, 0.1f);
+  runTest(vector8, float, vectorFullFloatTest, FLT_MAX, -0.1f);
+  runTest(vector8, float, vectorFullFloatTest, 36.7f, 0.1f);
+  runTest(vector8, float, vectorFullFloatTest, 0.0f, 0.1f);
+  runTest(vector8, float, vectorFullFloatTest, -240.98f, 0.1f);
+  runTest(vector8, float, vectorFullFloatTest, FLT_MIN, 0.1f);
 
   endTest();
 
   /* double = Packet4d (full) */
   beginTest("full double tests");
 
-  runTest(vector4, double, dynFullDoubleTest, DBL_MAX, -0.1d);
-  runTest(vector4, double, dynFullDoubleTest, 36.7d, 0.1d);
-  runTest(vector4, double, dynFullDoubleTest, 0.0d, 0.1d);
-  runTest(vector4, double, dynFullDoubleTest, -240.98d, 0.1d);
-  runTest(vector4, double, dynFullDoubleTest, DBL_MIN, 0.1d);
+  runTest(vector4, double, vectorFullDoubleTest, DBL_MAX, -0.1d);
+  runTest(vector4, double, vectorFullDoubleTest, 36.7d, 0.1d);
+  runTest(vector4, double, vectorFullDoubleTest, 0.0d, 0.1d);
+  runTest(vector4, double, vectorFullDoubleTest, -240.98d, 0.1d);
+  runTest(vector4, double, vectorFullDoubleTest, DBL_MIN, 0.1d);
 
   endTest();
 
@@ -64,11 +64,11 @@ void pload1Tests() {
   /* long = Packet4l */
   beginTest("long tests");
 
-  runTest(vector4, long, dynFullLongTest, LONG_MAX, -1L);
-  runTest(vector4, long, dynFullLongTest, 36L, 1L);
-  runTest(vector4, long, dynFullLongTest, 0L, 1L);
-  runTest(vector4, long, dynFullLongTest, -240L, 1L);
-  runTest(vector4, long, dynFullLongTest, LONG_MIN, 1L);
+  runTest(vector4, long, vectorFullLongTest, LONG_MAX, -1L);
+  runTest(vector4, long, vectorFullLongTest, 36L, 1L);
+  runTest(vector4, long, vectorFullLongTest, 0L, 1L);
+  runTest(vector4, long, vectorFullLongTest, -240L, 1L);
+  runTest(vector4, long, vectorFullLongTest, LONG_MIN, 1L);
 
   endTest();
 
