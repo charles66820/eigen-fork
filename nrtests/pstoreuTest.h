@@ -21,11 +21,11 @@ void pstoreuTests() {
   loadVectorHalf(vector4u, float, fhv_240, , Packet4f, -240.98f, 0.0f);
   loadVectorHalf(vector4u, float, fhvmin, , Packet4f, FLT_MAX, 0.0f);
 
-  tabTypeTest(FUN2TEST, float, 4, (Packet4f)fhvmax.r) tabTypeTest(FUN2TEST, float, 4, (Packet4f)fhvmax.r);
-  tabTypeTest(FUN2TEST, float, 4, (Packet4f)fhv36.r);
-  tabTypeTest(FUN2TEST, float, 4, (Packet4f)fhv0.r);
-  tabTypeTest(FUN2TEST, float, 4, (Packet4f)fhv_240.r);
-  tabTypeTest(FUN2TEST, float, 4, (Packet4f)fhvmin.r);
+  uRefSingleType(FUN2TEST, float, 4, (Packet4f)fhvmax.r);
+  uRefSingleType(FUN2TEST, float, 4, (Packet4f)fhv36.r);
+  uRefSingleType(FUN2TEST, float, 4, (Packet4f)fhv0.r);
+  uRefSingleType(FUN2TEST, float, 4, (Packet4f)fhv_240.r);
+  uRefSingleType(FUN2TEST, float, 4, (Packet4f)fhvmin.r);
 
   endTest();
 
@@ -38,11 +38,11 @@ void pstoreuTests() {
   loadVectorHalf(vector2u, double, dhv_240, HALF_CAST, Packet2d, -240.98d, 0.0d);
   loadVectorHalf(vector2u, double, dhvmin, HALF_CAST, Packet2d, DBL_MIN, 0.0d);
 
-  tabTypeTest(FUN2TEST, double, 2, (Packet2d)dhvmax.r);
-  tabTypeTest(FUN2TEST, double, 2, (Packet2d)dhv36.r);
-  tabTypeTest(FUN2TEST, double, 2, (Packet2d)dhv0.r);
-  tabTypeTest(FUN2TEST, double, 2, (Packet2d)dhv_240.r);
-  tabTypeTest(FUN2TEST, double, 2, (Packet2d)dhvmin.r);
+  uRefSingleType(FUN2TEST, double, 2, (Packet2d)dhvmax.r);
+  uRefSingleType(FUN2TEST, double, 2, (Packet2d)dhv36.r);
+  uRefSingleType(FUN2TEST, double, 2, (Packet2d)dhv0.r);
+  uRefSingleType(FUN2TEST, double, 2, (Packet2d)dhv_240.r);
+  uRefSingleType(FUN2TEST, double, 2, (Packet2d)dhvmin.r);
 
   endTest();
 
@@ -55,11 +55,11 @@ void pstoreuTests() {
   loadVectorHalf(vector4u, int, ihv_240, INT_HALF_CAST, Packet4i, -240, 0);
   loadVectorHalf(vector4u, int, ihvmin, INT_HALF_CAST, Packet4i, INT_MIN, 0);
 
-  tabTypeTest(FUN2TEST, int, 4, (Packet4i)(__m128i)ihvmax.r);
-  tabTypeTest(FUN2TEST, int, 4, (Packet4i)(__m128i)ihv36.r);
-  tabTypeTest(FUN2TEST, int, 4, (Packet4i)(__m128i)ihv0.r);
-  tabTypeTest(FUN2TEST, int, 4, (Packet4i)(__m128i)ihv_240.r);
-  tabTypeTest(FUN2TEST, int, 4, (Packet4i)(__m128i)ihvmin.r);
+  uRefSingleType(FUN2TEST, int, 4, (Packet4i)(__m128i)ihvmax.r);
+  uRefSingleType(FUN2TEST, int, 4, (Packet4i)(__m128i)ihv36.r);
+  uRefSingleType(FUN2TEST, int, 4, (Packet4i)(__m128i)ihv0.r);
+  uRefSingleType(FUN2TEST, int, 4, (Packet4i)(__m128i)ihv_240.r);
+  uRefSingleType(FUN2TEST, int, 4, (Packet4i)(__m128i)ihvmin.r);
 
   endTest();
 
@@ -69,8 +69,8 @@ void pstoreuTests() {
   loadVectorHalf(vector16u, bool, bvtrue, INT_HALF_CAST, Packet16b, true, 0);
   loadVectorHalf(vector16u, bool, bvfalse, INT_HALF_CAST, Packet16b, false, 0);
 
-  tabTypeTest(FUN2TEST, bool, 16, (Packet16b)(__m128i)bvtrue.r);
-  tabTypeTest(FUN2TEST, bool, 16, (Packet16b)(__m128i)bvfalse.r);
+  uRefSingleType(FUN2TEST, bool, 16, (Packet16b)(__m128i)bvtrue.r);
+  uRefSingleType(FUN2TEST, bool, 16, (Packet16b)(__m128i)bvfalse.r);
 
   endTest();
 
@@ -85,11 +85,11 @@ void pstoreuTests() {
   loadVectorFull(vector8u, float, fv_240, , Packet8f, -240.98f, 0.0f);
   loadVectorFull(vector8u, float, fvmin, , Packet8f, FLT_MAX, 0.0f);
 
-  tabTypeTest(FUN2TEST, float, 8, (Packet8f)fvmax.r);
-  tabTypeTest(FUN2TEST, float, 8, (Packet8f)fv36.r);
-  tabTypeTest(FUN2TEST, float, 8, (Packet8f)fv0.r);
-  tabTypeTest(FUN2TEST, float, 8, (Packet8f)fv_240.r);
-  tabTypeTest(FUN2TEST, float, 8, (Packet8f)fvmin.r);
+  uRefSingleType(FUN2TEST, float, 8, (Packet8f)fvmax.r);
+  uRefSingleType(FUN2TEST, float, 8, (Packet8f)fv36.r);
+  uRefSingleType(FUN2TEST, float, 8, (Packet8f)fv0.r);
+  uRefSingleType(FUN2TEST, float, 8, (Packet8f)fv_240.r);
+  uRefSingleType(FUN2TEST, float, 8, (Packet8f)fvmin.r);
 
   endTest();
 
@@ -102,11 +102,11 @@ void pstoreuTests() {
   loadVectorFull(vector4u, double, dv_240, FULL_CAST, Packet4d, -240.98d, 0.0d);
   loadVectorFull(vector4u, double, dvmin, FULL_CAST, Packet4d, DBL_MIN, 0.0d);
 
-  tabTypeTest(FUN2TEST, double, 4, (Packet4d)dvmax.r);
-  tabTypeTest(FUN2TEST, double, 4, (Packet4d)dv36.r);
-  tabTypeTest(FUN2TEST, double, 4, (Packet4d)dv0.r);
-  tabTypeTest(FUN2TEST, double, 4, (Packet4d)dv_240.r);
-  tabTypeTest(FUN2TEST, double, 4, (Packet4d)dvmin.r);
+  uRefSingleType(FUN2TEST, double, 4, (Packet4d)dvmax.r);
+  uRefSingleType(FUN2TEST, double, 4, (Packet4d)dv36.r);
+  uRefSingleType(FUN2TEST, double, 4, (Packet4d)dv0.r);
+  uRefSingleType(FUN2TEST, double, 4, (Packet4d)dv_240.r);
+  uRefSingleType(FUN2TEST, double, 4, (Packet4d)dvmin.r);
 
   endTest();
 
@@ -119,11 +119,11 @@ void pstoreuTests() {
   loadVectorFull(vector8u, int, iv_240, INT_FULL_CAST, Packet8i, -240, 0);
   loadVectorFull(vector8u, int, ivmin, INT_FULL_CAST, Packet8i, INT_MIN, 0);
 
-  tabTypeTest(FUN2TEST, int, 8, (Packet8i)(__m256i)ivmax.r);
-  tabTypeTest(FUN2TEST, int, 8, (Packet8i)(__m256i)iv36.r);
-  tabTypeTest(FUN2TEST, int, 8, (Packet8i)(__m256i)iv0.r);
-  tabTypeTest(FUN2TEST, int, 8, (Packet8i)(__m256i)iv_240.r);
-  tabTypeTest(FUN2TEST, int, 8, (Packet8i)(__m256i)ivmin.r);
+  uRefSingleType(FUN2TEST, int, 8, (Packet8i)(__m256i)ivmax.r);
+  uRefSingleType(FUN2TEST, int, 8, (Packet8i)(__m256i)iv36.r);
+  uRefSingleType(FUN2TEST, int, 8, (Packet8i)(__m256i)iv0.r);
+  uRefSingleType(FUN2TEST, int, 8, (Packet8i)(__m256i)iv_240.r);
+  uRefSingleType(FUN2TEST, int, 8, (Packet8i)(__m256i)ivmin.r);
 
   endTest();
 
@@ -136,11 +136,11 @@ void pstoreuTests() {
   loadVectorHalfRegType(vector8u, Eigen::half, short, hv_240, INT_HALF_CAST, Packet8h, half(-240.98f), half(0.0f));
   loadVectorHalfRegType(vector8u, Eigen::half, short, hvmin, INT_HALF_CAST, Packet8h, half(FLT_MAX), half(0.0f));
 
-  tabTypeTest(FUN2TEST, Eigen::half, 8, (Packet8h)(__m128i)hvmax.r);
-  tabTypeTest(FUN2TEST, Eigen::half, 8, (Packet8h)(__m128i)hv36.r);
-  tabTypeTest(FUN2TEST, Eigen::half, 8, (Packet8h)(__m128i)hv0.r);
-  tabTypeTest(FUN2TEST, Eigen::half, 8, (Packet8h)(__m128i)hv_240.r);
-  tabTypeTest(FUN2TEST, Eigen::half, 8, (Packet8h)(__m128i)hvmin.r);
+  uRefSingleType(FUN2TEST, Eigen::half, 8, (Packet8h)(__m128i)hvmax.r);
+  uRefSingleType(FUN2TEST, Eigen::half, 8, (Packet8h)(__m128i)hv36.r);
+  uRefSingleType(FUN2TEST, Eigen::half, 8, (Packet8h)(__m128i)hv0.r);
+  uRefSingleType(FUN2TEST, Eigen::half, 8, (Packet8h)(__m128i)hv_240.r);
+  uRefSingleType(FUN2TEST, Eigen::half, 8, (Packet8h)(__m128i)hvmin.r);
 
   endTest();
 
@@ -154,11 +154,11 @@ void pstoreuTests() {
                         bfloat16(0.0f));
   loadVectorHalfRegType(vector8u, bfloat16, short, bfvmin, INT_HALF_CAST, Packet8bf, bfloat16(FLT_MAX), bfloat16(0.0f));
 
-  tabTypeTest(FUN2TEST, bfloat16, 8, (Packet8bf)(__m128i)bfvmax.r);
-  tabTypeTest(FUN2TEST, bfloat16, 8, (Packet8bf)(__m128i)bfv36.r);
-  tabTypeTest(FUN2TEST, bfloat16, 8, (Packet8bf)(__m128i)bfv0.r);
-  tabTypeTest(FUN2TEST, bfloat16, 8, (Packet8bf)(__m128i)bfv_240.r);
-  tabTypeTest(FUN2TEST, bfloat16, 8, (Packet8bf)(__m128i)bfvmin.r);
+  uRefSingleType(FUN2TEST, bfloat16, 8, (Packet8bf)(__m128i)bfvmax.r);
+  uRefSingleType(FUN2TEST, bfloat16, 8, (Packet8bf)(__m128i)bfv36.r);
+  uRefSingleType(FUN2TEST, bfloat16, 8, (Packet8bf)(__m128i)bfv0.r);
+  uRefSingleType(FUN2TEST, bfloat16, 8, (Packet8bf)(__m128i)bfv_240.r);
+  uRefSingleType(FUN2TEST, bfloat16, 8, (Packet8bf)(__m128i)bfvmin.r);
 
   endTest();
 
@@ -174,11 +174,11 @@ void pstoreuTests() {
   loadVectorFull(vector4u, long, lv_240, INT_FULL_CAST, Packet4l, -240L, 0L);
   loadVectorFull(vector4u, long, lvmin, INT_FULL_CAST, Packet4l, LONG_MIN, 0L);
 
-  tabTypeTest(FUN2TEST, long, 4, (Packet4l)(__m256i)lvmax.r);
-  tabTypeTest(FUN2TEST, long, 4, (Packet4l)(__m256i)lv36.r);
-  tabTypeTest(FUN2TEST, long, 4, (Packet4l)(__m256i)lv0.r);
-  tabTypeTest(FUN2TEST, long, 4, (Packet4l)(__m256i)lv_240.r);
-  tabTypeTest(FUN2TEST, long, 4, (Packet4l)(__m256i)lvmin.r);
+  uRefSingleType(FUN2TEST, long, 4, (Packet4l)(__m256i)lvmax.r);
+  uRefSingleType(FUN2TEST, long, 4, (Packet4l)(__m256i)lv36.r);
+  uRefSingleType(FUN2TEST, long, 4, (Packet4l)(__m256i)lv0.r);
+  uRefSingleType(FUN2TEST, long, 4, (Packet4l)(__m256i)lv_240.r);
+  uRefSingleType(FUN2TEST, long, 4, (Packet4l)(__m256i)lvmin.r);
 
   endTest();
 

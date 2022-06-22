@@ -86,7 +86,7 @@ std::string toString(Arg1 arg1, Args... args) {
 }
 
 // Macros for test that return vector
-#define vectorSingleTypeTest(MIPP_Reg, type, cast, eigenType, name, args...)                            \
+#define vectorSingleTypeTest(MIPP_Reg, type, cast, eigenType, name, args...)                      \
   {                                                                                               \
     mipp::MIPP_Reg<type> rVar = cast name<eigenType>(args);                                       \
     mipp::MIPP_Reg<type> rVar_old = cast name##_old<eigenType>(args);                             \
@@ -165,30 +165,22 @@ bool printWhenTabDiff(std::string msg, T tab[], T tab_old[], size_t size) {
   return isDiffer;
 }
 
-#define tabTypeSizeTest(name, type, size, args...)                                                \
+// Macros for test that return vector
+#define refSingleTypeGenericTest(name, type, size, attr, args...)                                 \
   {                                                                                               \
-    type to[size] __attribute__((aligned(32)));                                                   \
+    type to[size] attr;                                                                           \
     memset(to, 0, sizeof to);                                                                     \
-    type to_old[size] __attribute__((aligned(32)));                                               \
+    type to_old[size] attr;                                                                       \
     memset(to_old, 0, sizeof to_old);                                                             \
                                                                                                   \
     name<type>(to, args);                                                                         \
     name##_old<type>(to_old, args);                                                               \
     hasFailed |= printWhenTabDiff(#name "<" #type ">(" + to_sting(args) + ")", to, to_old, size); \
   }
-#define tabTypeTest(name, type, size, args...) tabTypeSizeTest(name, type, size, args)
 
-#define tabuTypeSizeTest(name, type, size, args...)                                               \
-  {                                                                                               \
-    type to[size];                                                                                \
-    memset(to, 0, sizeof to);                                                                     \
-    type to_old[size];                                                                            \
-    memset(to_old, 0, sizeof to_old);                                                             \
-                                                                                                  \
-    name<type>(to, args);                                                                         \
-    name##_old<type>(to_old, args);                                                               \
-    hasFailed |= printWhenTabDiff(#name "<" #type ">(" + to_sting(args) + ")", to, to_old, size); \
-  }
-#define tabuTypeTest(name, type, size, args...) tabuTypeSizeTest(name, type, size, args)
+#define refSingleType(name, type, size, args...) \
+  refSingleTypeGenericTest(name, type, size, __attribute__((aligned(32))), args)
+
+#define uRefSingleType(name, type, size, args...) refSingleTypeGenericTest(name, type, size, , args)
 
 #endif  // EIGEN_MIPP_TEST_UTIL_H
