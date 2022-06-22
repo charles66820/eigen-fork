@@ -1,6 +1,10 @@
 #ifndef EIGEN_PACKET_MATH_OLD_FUN_MIPP_H
 #define EIGEN_PACKET_MATH_OLD_FUN_MIPP_H
 
+namespace Eigen {
+
+namespace internal {
+
 // definition in `Eigen/src/Core/GenericPacketMath.h`
 
 #if 1 // definition
@@ -6510,6 +6514,10 @@ EIGEN_STRONG_INLINE void ptranspose_old(PacketBlock<Packet16bf, 4>& kernel) {
 #endif
 
 #endif
+
+}  // end namespace internal
+
+}  // end namespace Eigen
 
 #undef EIGEN_BINARY_OP_NAN_PROPAGATION
 
