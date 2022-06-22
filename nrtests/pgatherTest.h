@@ -8,11 +8,11 @@
 #undef FUN2TEST
 #define FUN2TEST pgather
 
-#define mvTest(MIPP_Reg, typeMipp, cast, type, eigenType, name, args...)                          \
-  {                                                                                               \
-    mipp::MIPP_Reg<typeMipp> rVar = cast name<type, eigenType>(args);                             \
-    mipp::MIPP_Reg<typeMipp> rVar_old = cast name##_old<type, eigenType>(args);                   \
-    hasFailed |= printWhenDiff(#name "<" #eigenType ">(" + to_sting(args) + ")", rVar, rVar_old); \
+#define mvTest(MIPP_Reg, typeMipp, cast, type, eigenType, name, args...)                             \
+  {                                                                                                  \
+    mipp::MIPP_Reg<typeMipp> rVar = cast name<type, eigenType>(args);                                \
+    mipp::MIPP_Reg<typeMipp> rVar_old = cast name##_old<type, eigenType>(args);                      \
+    hasFailed |= printWhenRegDiff(#name "<" #eigenType ">(" + to_sting(args) + ")", rVar, rVar_old); \
   }
 
 #define mvTestUnarg(MIPP_Reg, typeMipp, cast, type, eigenType, name, args...) \
