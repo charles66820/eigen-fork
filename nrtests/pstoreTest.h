@@ -34,7 +34,7 @@ void pstoreTests() {
   loadVectorHalf(vector4, float, fhv_240, , Packet4f, -240.98f, 0.0f);
   loadVectorHalf(vector4, float, fhvmin, , Packet4f, FLT_MAX, 0.0f);
 
-  tabTypeTest(FUN2TEST, float, 4, (Packet4f)fhvmax.r) tabTypeTest(FUN2TEST, float, 4, (Packet4f)fhvmax.r);
+  tabTypeTest(FUN2TEST, float, 4, (Packet4f)fhvmax.r);
   tabTypeTest(FUN2TEST, float, 4, (Packet4f)fhv36.r);
   tabTypeTest(FUN2TEST, float, 4, (Packet4f)fhv0.r);
   tabTypeTest(FUN2TEST, float, 4, (Packet4f)fhv_240.r);

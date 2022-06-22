@@ -39,6 +39,7 @@
 #include "pgatherTest.h"
 #include "pstoreTest.h"
 #include "pstoreuTest.h"
+#include "pscatterTest.h"
 
 int main() {
   pset1Tests();
@@ -79,4 +80,5 @@ int main() {
   pgatherTests();
   pstoreTests();
   pstoreuTests();
+  pscatterTests();
 }
