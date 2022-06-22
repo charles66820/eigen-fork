@@ -8,15 +8,6 @@
 #undef FUN2TEST
 #define FUN2TEST parithmetic_shift_right
 
-#define loadVector(vec, type, typeReg, name, cast, EigenType, value, delta, MIPP_reg) \
-  vec(type, name##_tab, value, delta);                                                \
-  mipp::MIPP_reg<typeReg> name = cast pload<EigenType>(name##_tab);
-
-#define loadVectorFull(vec, type, name, cast, full, value, delta) \
-  loadVector(vec, type, type, name, cast, full, value, delta, Reg)
-#define loadVectorHalf(vec, type, name, cast, half, value, delta) \
-  loadVector(vec, type, type, name, cast, half, value, delta, Reg_2)
-
 void parithmetic_shift_rightTests() {
   std::cout << printTestTitle(FUN2TEST) << std::endl;
 

@@ -68,4 +68,19 @@
       value + delta + delta + delta + delta + delta + delta + delta + delta + delta + delta + delta + delta + delta + \
           delta + delta};
 
+// Loader
+
+#define loadVector(vec, type, typeReg, name, cast, EigenType, value, delta, MIPP_reg) \
+  vec(type, name##_tab, value, delta);                                                \
+  mipp::MIPP_reg<typeReg> name = cast pload<EigenType>(name##_tab);
+
+#define loadVectorFull(vec, type, name, cast, full, value, delta) \
+  loadVector(vec, type, type, name, cast, full, value, delta, Reg)
+#define loadVectorHalf(vec, type, name, cast, half, value, delta) \
+  loadVector(vec, type, type, name, cast, half, value, delta, Reg_2)
+#define loadVectorFullRegType(vec, type, typeReg, name, cast, full, value, delta) \
+  loadVector(vec, type, typeReg, name, cast, full, value, delta, Reg)
+#define loadVectorHalfRegType(vec, type, typeReg, name, cast, half, value, delta) \
+  loadVector(vec, type, typeReg, name, cast, half, value, delta, Reg_2)
+
 #endif  // EIGEN_MIPP_TEST_VECTOR_H
