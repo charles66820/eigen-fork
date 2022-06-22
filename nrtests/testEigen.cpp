@@ -41,6 +41,7 @@
 #include "pstoreuTest.h"
 #include "pscatterTest.h"
 #include "pstore1Test.h"
+#include "pfirstTest.h"
 
 int main() {
   pset1Tests();
@@ -83,4 +84,5 @@ int main() {
   pstoreuTests();
   pscatterTests();
   pstore1Tests();
+  pfirstTests();
 }
