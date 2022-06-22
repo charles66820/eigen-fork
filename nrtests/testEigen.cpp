@@ -45,6 +45,7 @@
 #include "PacketMathTests/pstore1Test.h"
 #include "PacketMathTests/pfirstTest.h"
 #include "PacketMathTests/preverseTest.h"
+#include "PacketMathTests/preduxTest.h"
 
 int main() {
   pset1Tests();
@@ -89,4 +90,5 @@ int main() {
   pstore1Tests();
   pfirstTests();
   preverseTests();
+  preduxTests();
 }
