@@ -6879,8 +6879,6 @@ EIGEN_STRONG_INLINE void ptranspose(PacketBlock<Packet16bf, 4>& kernel) {
 
 }  // end namespace Eigen
 
-#include "PacketMathOldFun.h"
-
 #if EIGEN_COMP_PGI && EIGEN_COMP_PGI < 1900
 // PGI++ does not define the following intrinsics in C++ mode.
 static inline __m128 _mm_castpd_ps(__m128d x) { return reinterpret_cast<__m128&>(x); }
