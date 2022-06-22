@@ -152,6 +152,7 @@ void pstoreTests() {
   tabTypeTest(FUN2TEST, Eigen::half, 8, (Packet8h)(__m128i)hvmax.r);
   tabTypeTest(FUN2TEST, Eigen::half, 8, (Packet8h)(__m128i)hv36.r);
   tabTypeTest(FUN2TEST, Eigen::half, 8, (Packet8h)(__m128i)hv0.r);
+  tabTypeTest(FUN2TEST, Eigen::half, 8, (Packet8h)(__m128i)hv_240.r);
   tabTypeTest(FUN2TEST, Eigen::half, 8, (Packet8h)(__m128i)hvmin.r);
 
   endTest();
