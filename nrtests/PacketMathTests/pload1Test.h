@@ -78,4 +78,6 @@ void pload1Tests() {
 #endif
 }
 
+addTest(FUN2TEST)
+
 #endif  // EIGEN_MIPP_PLOAD1_TEST_H

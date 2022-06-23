@@ -218,4 +218,6 @@ void pscatterTests() {
 #endif
 }
 
+addTest(FUN2TEST)
+
 #endif  // EIGEN_MIPP_PSCATTER_TEST_H

@@ -280,4 +280,6 @@ void psubTests() {
 #endif
 }
 
+addTest(FUN2TEST)
+
 #endif  // EIGEN_MIPP_PSUB_TEST_H

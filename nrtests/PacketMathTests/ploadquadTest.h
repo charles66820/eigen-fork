@@ -137,4 +137,6 @@ void ploadquadTests() {
 #endif
 }
 
+addTest(FUN2TEST)
+
 #endif  // EIGEN_MIPP_PLOADQUAD_TEST_H

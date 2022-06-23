@@ -103,4 +103,6 @@ void pzeroTests() {
 #endif
 }
 
+addTest(FUN2TEST)
+
 #endif  // EIGEN_MIPP_PZERO_TEST_H

@@ -22,6 +22,8 @@ using namespace Eigen;
 
 // Return test state
 bool hasFailed = false;
+typedef void (*test_fun)();
+static std::vector<test_fun> testFunctions;
 
 #define beginTest(str) \
   std::cout << str;    \
@@ -29,6 +31,17 @@ bool hasFailed = false;
 
 #define endTest() \
   if (!hasFailed) std::cout << " done" << std::endl;
+
+int addTest2list(test_fun fun) {
+  testFunctions.push_back(fun);
+  return 0;
+}
+
+#define addTest_imp(name) static int name ## res = addTest2list(name ## Tests);
+#define addTest(name) addTest_imp(name)
+
+#define executeTest() \
+  for (auto fun : testFunctions) fun();
 
 // prints
 bool printWhenDiff(bool isDiffer, std::string msg, std::string newVal, std::string oldVal) {

@@ -187,4 +187,6 @@ void pabsTests() {
 #endif
 }
 
+addTest(FUN2TEST)
+
 #endif  // EIGEN_MIPP_PABS_TEST_H

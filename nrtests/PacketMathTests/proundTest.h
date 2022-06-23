@@ -125,4 +125,6 @@ void proundTests() {
 #endif
 }
 
+addTest(FUN2TEST)
+
 #endif  // EIGEN_MIPP_PROUND_TEST_H

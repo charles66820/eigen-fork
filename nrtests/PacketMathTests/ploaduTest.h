@@ -137,4 +137,6 @@ void ploaduTests() {
 #endif
 }
 
+addTest(FUN2TEST)
+
 #endif  // EIGEN_MIPP_PLOADU_TEST_H

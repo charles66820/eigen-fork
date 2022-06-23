@@ -79,4 +79,6 @@ void peven_maskTests() {
 #endif
 }
 
+addTest(FUN2TEST)
+
 #endif  // EIGEN_MIPP_PEVEN_MASK_TEST_H

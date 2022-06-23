@@ -187,4 +187,6 @@ void preduxTests() {
 #endif
 }
 
+addTest(FUN2TEST)
+
 #endif  // EIGEN_MIPP_PREDUX_TEST_H

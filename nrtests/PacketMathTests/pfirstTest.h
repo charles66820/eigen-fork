@@ -187,4 +187,6 @@ void pfirstTests() {
 #endif
 }
 
+addTest(FUN2TEST)
+
 #endif  // EIGEN_MIPP_PFIRST_TEST_H

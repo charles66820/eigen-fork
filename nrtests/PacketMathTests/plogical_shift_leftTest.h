@@ -77,4 +77,6 @@ void plogical_shift_leftTests() {
 #endif
 }
 
+addTest(FUN2TEST)
+
 #endif  // EIGEN_MIPP_PLOGICAL_SHIFT_LEFT_TEST_H

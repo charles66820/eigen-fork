@@ -187,4 +187,6 @@ void preverseTests() {
 #endif
 }
 
+addTest(FUN2TEST)
+
 #endif  // EIGEN_MIPP_PREVERSE_TEST_H

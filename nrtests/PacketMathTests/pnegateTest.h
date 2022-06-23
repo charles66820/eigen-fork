@@ -187,4 +187,6 @@ void pnegateTests() {
 #endif
 }
 
+addTest(FUN2TEST)
+
 #endif  // EIGEN_MIPP_PNEGATE_TEST_H

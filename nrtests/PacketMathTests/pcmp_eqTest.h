@@ -280,4 +280,6 @@ void pcmp_eqTests() {
 #endif
 }
 
+addTest(FUN2TEST)
+
 #endif  // EIGEN_MIPP_PCMP_EQ_TEST_H

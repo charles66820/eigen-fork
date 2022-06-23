@@ -280,4 +280,6 @@ void pandnotTests() {
 #endif
 }
 
+addTest(FUN2TEST)
+
 #endif  // EIGEN_MIPP_PANDNOT_TEST_H

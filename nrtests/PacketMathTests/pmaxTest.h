@@ -267,4 +267,6 @@ void pmaxTests() {
 #endif
 }
 
+addTest(FUN2TEST)
+
 #endif  // EIGEN_MIPP_PMAX_TEST_H

@@ -188,4 +188,6 @@ void pstoreuTests() {
 #endif
 }
 
+addTest(FUN2TEST)
+
 #endif  // EIGEN_MIPP_PSTOREU_TEST_H

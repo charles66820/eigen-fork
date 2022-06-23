@@ -280,4 +280,6 @@ void paddTests() {
 #endif
 }
 
+addTest(FUN2TEST)
+
 #endif  // EIGEN_MIPP_PADD_TEST_H

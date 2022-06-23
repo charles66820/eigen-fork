@@ -280,4 +280,6 @@ void porTests() {
 #endif
 }
 
+addTest(FUN2TEST)
+
 #endif  // EIGEN_MIPP_POR_TEST_H

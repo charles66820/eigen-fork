@@ -267,4 +267,6 @@ void pminTests() {
 #endif
 }
 
+addTest(FUN2TEST)
+
 #endif  // EIGEN_MIPP_PMIN_TEST_H

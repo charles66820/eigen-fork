@@ -67,4 +67,6 @@ void pset1frombitsTests() {
 #endif
 }
 
+addTest(FUN2TEST)
+
 #endif  // EIGEN_MIPP_PSET1FROMBITS_TEST_H

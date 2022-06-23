@@ -122,4 +122,6 @@ void plsetTests() {
 #endif
 }
 
+addTest(FUN2TEST)
+
 #endif  // EIGEN_MIPP_PLSET_TEST_H

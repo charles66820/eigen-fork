@@ -267,4 +267,6 @@ void pcmp_leTests() {
 #endif
 }
 
+addTest(FUN2TEST)
+
 #endif  // EIGEN_MIPP_PCMP_LE_TEST_H

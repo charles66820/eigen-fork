@@ -125,4 +125,6 @@ void pfloorTests() {
 #endif
 }
 
+addTest(FUN2TEST)
+
 #endif  // EIGEN_MIPP_PFLOOR_TEST_H

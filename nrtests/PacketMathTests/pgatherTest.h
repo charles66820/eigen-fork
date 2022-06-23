@@ -264,4 +264,6 @@ void pgatherTests() {
 #endif
 }
 
+addTest(FUN2TEST)
+
 #endif  // EIGEN_MIPP_PGATHER_TEST_H

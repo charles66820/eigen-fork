@@ -137,4 +137,6 @@ void ploaddupTests() {
 #endif
 }
 
+addTest(FUN2TEST)
+
 #endif  // EIGEN_MIPP_PLOADDUP_TEST_H

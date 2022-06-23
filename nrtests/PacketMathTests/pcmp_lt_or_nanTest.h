@@ -186,4 +186,6 @@ void pcmp_lt_or_nanTests() {
 #endif
 }
 
+addTest(FUN2TEST)
+
 #endif  // EIGEN_MIPP_PCMP_LT_OR_NAN_TEST_H

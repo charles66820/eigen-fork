@@ -132,4 +132,6 @@ void pset1Tests() {
 #endif
 }
 
+addTest(FUN2TEST)
+
 #endif  // EIGEN_MIPP_PSET1_TEST_H

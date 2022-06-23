@@ -183,4 +183,6 @@ void pdivTests() {
 #endif
 }
 
+addTest(FUN2TEST)
+
 #endif  // EIGEN_MIPP_PDIV_TEST_H

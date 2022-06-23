@@ -280,4 +280,6 @@ void pmulTests() {
 #endif
 }
 
+addTest(FUN2TEST)
+
 #endif  // EIGEN_MIPP_PMUL_TEST_H

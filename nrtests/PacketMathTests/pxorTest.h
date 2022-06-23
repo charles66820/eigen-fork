@@ -280,4 +280,6 @@ void pxorTests() {
 #endif
 }
 
+addTest(FUN2TEST)
+
 #endif  // EIGEN_MIPP_PXOR_TEST_H

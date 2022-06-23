@@ -280,4 +280,6 @@ void pandTests() {
 #endif
 }
 
+addTest(FUN2TEST)
+
 #endif  // EIGEN_MIPP_PAND_TEST_H

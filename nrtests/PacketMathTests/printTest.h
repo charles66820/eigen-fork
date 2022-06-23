@@ -125,4 +125,6 @@ void printTests() {
 #endif
 }
 
+addTest(FUN2TEST)
+
 #endif  // EIGEN_MIPP_PRINT_TEST_H

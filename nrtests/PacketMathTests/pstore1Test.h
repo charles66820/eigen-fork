@@ -131,4 +131,6 @@ void pstore1Tests() {
 #endif
 }
 
+addTest(FUN2TEST)
+
 #endif  // EIGEN_MIPP_PSTORE1_TEST_H

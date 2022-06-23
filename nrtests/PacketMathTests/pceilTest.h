@@ -125,4 +125,6 @@ void pceilTests() {
 #endif
 }
 
+addTest(FUN2TEST)
+
 #endif  // EIGEN_MIPP_PCEIL_TEST_H

@@ -187,4 +187,6 @@ void ptrueTests() {
 #endif
 }
 
+addTest(FUN2TEST)
+
 #endif  // EIGEN_MIPP_PTRUE_TEST_H
