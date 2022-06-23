@@ -46,6 +46,13 @@
 #include "PacketMathTests/pfirstTest.h"
 #include "PacketMathTests/preverseTest.h"
 #include "PacketMathTests/preduxTest.h"
+#include "PacketMathTests/pfrexp_generic_get_biased_exponentTest.h"
+#include "PacketMathTests/pldexpTest.h"
+#include "PacketMathTests/predux_half_dowto4Test.h"
+#include "PacketMathTests/predux_mulTest.h"
+#include "PacketMathTests/predux_minTest.h"
+#include "PacketMathTests/predux_maxTest.h"
+#include "PacketMathTests/predux_anyTest.h"
 
 int main() {
   executeTest();
