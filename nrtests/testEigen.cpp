@@ -58,6 +58,7 @@
 #include "PacketMathTests/pnmaddTest.h"
 #include "PacketMathTests/pnmsubTest.h"
 #include "PacketMathTests/pselectTest.h"
+#include "PacketMathTests/pblendTest.h"
 
 int main() {
   executeTest();
