@@ -53,6 +53,7 @@
 #include "PacketMathTests/predux_minTest.h"
 #include "PacketMathTests/predux_maxTest.h"
 #include "PacketMathTests/predux_anyTest.h"
+#include "PacketMathTests/pmaddTest.h"
 
 int main() {
   executeTest();
