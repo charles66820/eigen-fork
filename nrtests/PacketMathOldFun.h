@@ -4455,7 +4455,7 @@ EIGEN_STRONG_INLINE Packet16f cat256_old(Packet8f a, Packet8f b) {
 
 // Helper function for bit packing snippet of low precision comparison.
 // It packs the flags from 32x16 to 16x16.
-EIGEN_STRONG_INLINE __m256i Pack32To16(Packet16f rf) {
+EIGEN_STRONG_INLINE __m256i Pack32To16_old(Packet16f rf) {
   // Split data into small pieces and handle with AVX instructions
   // to guarantee internal order of vector.
   // Operation:
@@ -5811,22 +5811,22 @@ template <>
 EIGEN_STRONG_INLINE Packet16h pcmp_eq_old(const Packet16h& a, const Packet16h& b) {
   Packet16f af = half2float_old(a);
   Packet16f bf = half2float_old(b);
-  return Pack32To16(pcmp_eq_old(af, bf));
+  return Pack32To16_old(pcmp_eq_old(af, bf));
 }
 
 template <>
 EIGEN_STRONG_INLINE Packet16h pcmp_le_old(const Packet16h& a, const Packet16h& b) {
-  return Pack32To16(pcmp_le_old(half2float_old(a), half2float_old(b)));
+  return Pack32To16_old(pcmp_le_old(half2float_old(a), half2float_old(b)));
 }
 
 template <>
 EIGEN_STRONG_INLINE Packet16h pcmp_lt_old(const Packet16h& a, const Packet16h& b) {
-  return Pack32To16(pcmp_lt_old(half2float_old(a), half2float_old(b)));
+  return Pack32To16_old(pcmp_lt_old(half2float_old(a), half2float_old(b)));
 }
 
 template <>
 EIGEN_STRONG_INLINE Packet16h pcmp_lt_or_nan_old(const Packet16h& a, const Packet16h& b) {
-  return Pack32To16(pcmp_lt_or_nan_old(half2float_old(a), half2float_old(b)));
+  return Pack32To16_old(pcmp_lt_or_nan_old(half2float_old(a), half2float_old(b)));
 }
 
 template <>
@@ -6258,22 +6258,22 @@ EIGEN_STRONG_INLINE Packet16bf pfloor_old<Packet16bf>(const Packet16bf& a) {
 
 template <>
 EIGEN_STRONG_INLINE Packet16bf pcmp_eq_old(const Packet16bf& a, const Packet16bf& b) {
-  return Pack32To16(pcmp_eq_old(Bf16ToF32_old(a), Bf16ToF32_old(b)));
+  return Pack32To16_old(pcmp_eq_old(Bf16ToF32_old(a), Bf16ToF32_old(b)));
 }
 
 template <>
 EIGEN_STRONG_INLINE Packet16bf pcmp_le_old(const Packet16bf& a, const Packet16bf& b) {
-  return Pack32To16(pcmp_le_old(Bf16ToF32_old(a), Bf16ToF32_old(b)));
+  return Pack32To16_old(pcmp_le_old(Bf16ToF32_old(a), Bf16ToF32_old(b)));
 }
 
 template <>
 EIGEN_STRONG_INLINE Packet16bf pcmp_lt_old(const Packet16bf& a, const Packet16bf& b) {
-  return Pack32To16(pcmp_lt_old(Bf16ToF32_old(a), Bf16ToF32_old(b)));
+  return Pack32To16_old(pcmp_lt_old(Bf16ToF32_old(a), Bf16ToF32_old(b)));
 }
 
 template <>
 EIGEN_STRONG_INLINE Packet16bf pcmp_lt_or_nan_old(const Packet16bf& a, const Packet16bf& b) {
-  return Pack32To16(pcmp_lt_or_nan_old(Bf16ToF32_old(a), Bf16ToF32_old(b)));
+  return Pack32To16_old(pcmp_lt_or_nan_old(Bf16ToF32_old(a), Bf16ToF32_old(b)));
 }
 
 template <>
