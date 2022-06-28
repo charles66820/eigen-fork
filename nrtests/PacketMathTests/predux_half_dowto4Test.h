@@ -17,11 +17,8 @@ void predux_half_dowto4Tests() {
 #ifdef __AVX__
   /* float = Packet8f (full) -> Packet4f (half)*/
   beginTest("full2half float tests");
-  loadVectorFull(vector8, float, fvmax, , Packet8f, FLT_MAX, 0.0f);
-  loadVectorFull(vector8, float, fv36, , Packet8f, 36.7f, 0.0f);
-  loadVectorFull(vector8, float, fv0, , Packet8f, 0.0f, 0.0f);
-  loadVectorFull(vector8, float, fv_240, , Packet8f, -240.98f, 0.0f);
-  loadVectorFull(vector8, float, fvmin, , Packet8f, FLT_MAX, 0.0f);
+
+  MIN2MAX_FULL_FLOAT_VECTOR
 
   vectorHalfFloatTemplateTest(Packet8f, FUN2TEST, fvmax.r);
   vectorHalfFloatTemplateTest(Packet8f, FUN2TEST, fv36.r);
@@ -34,11 +31,7 @@ void predux_half_dowto4Tests() {
   /* int = Packet8i (full) -> Packet4i (half) */
   beginTest("full2half int tests");
 
-  loadVectorFull(vector8, int, ivmax, INT_FULL_CAST, Packet8i, INT_MAX, 0);
-  loadVectorFull(vector8, int, iv36, INT_FULL_CAST, Packet8i, 36, 0);
-  loadVectorFull(vector8, int, iv0, INT_FULL_CAST, Packet8i, 0, 0);
-  loadVectorFull(vector8, int, iv_240, INT_FULL_CAST, Packet8i, -240, 0);
-  loadVectorFull(vector8, int, ivmin, INT_FULL_CAST, Packet8i, INT_MIN, 0);
+  MIN2MAX_FULL_INT_VECTOR
 
   vectorHalfIntTemplateTest(Packet8i, FUN2TEST, (__m256i)ivmax.r);
   vectorHalfIntTemplateTest(Packet8i, FUN2TEST, (__m256i)iv36.r);

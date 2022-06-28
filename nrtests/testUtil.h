@@ -14,8 +14,35 @@ using namespace Eigen;
 
 #define HALF_CAST (mipp::reg_2)
 #define FULL_CAST (mipp::reg)
-#define INT_HALF_CAST HALF_CAST(__m128i)
-#define INT_FULL_CAST FULL_CAST(__m256i)
+
+#ifdef __AVX512F__
+
+#define INT_CAST_TO_MIPP_HALF HALF_CAST(__m256i) _mm256_castsi128_si256
+#define INT_CAST_TO_MIPP_FULL FULL_CAST(__m512i) _mm512_castsi256_si512
+#define FLOAT_CAST_TO_MIPP_HALF HALF_CAST _mm256_castps128_ps256
+#define FLOAT_CAST_TO_MIPP_FULL FULL_CAST _mm512_castps256_ps512
+#define DOUBLE_CAST_TO_MIPP_HALF HALF_CAST(__m256d) _mm256_castpd128_pd256
+#define DOUBLE_CAST_TO_MIPP_FULL FULL_CAST(__m512d) _mm512_castpd256_pd512
+
+#elif defined(__AVX__)
+
+#define INT_CAST_TO_MIPP_HALF HALF_CAST(__m128i)
+#define INT_CAST_TO_MIPP_FULL FULL_CAST(__m256i)
+#define FLOAT_CAST_TO_MIPP_HALF HALF_CAST
+#define FLOAT_CAST_TO_MIPP_FULL FULL_CAST
+#define DOUBLE_CAST_TO_MIPP_HALF HALF_CAST(__m128d)
+#define DOUBLE_CAST_TO_MIPP_FULL FULL_CAST(__m256d)
+
+#elif defined(__SSE__)
+
+#define INT_CAST_TO_MIPP_HALF HALF_CAST(__m128i)
+#define INT_CAST_TO_MIPP_FULL FULL_CAST(__m256i)
+#define FLOAT_CAST_TO_MIPP_HALF HALF_CAST
+#define FLOAT_CAST_TO_MIPP_FULL FULL_CAST
+#define DOUBLE_CAST_TO_MIPP_HALF HALF_CAST(__m128d)
+#define DOUBLE_CAST_TO_MIPP_FULL FULL_CAST(__m256d)
+
+#endif
 
 #define TO_STRING(s) #s
 #define printTestTitle(t) "================ " TO_STRING(t) " ================"
@@ -37,7 +64,7 @@ int addTest2list(test_fun fun) {
   return 0;
 }
 
-#define addTest_imp(name) static int name ## res = addTest2list(name ## Tests);
+#define addTest_imp(name) static int name##res = addTest2list(name##Tests);
 #define addTest(name) addTest_imp(name)
 
 #define executeTest() \
@@ -81,8 +108,8 @@ bool printWhenScalarDiff(std::string msg, T scal, T scal_old) {
 // Macros for test that return vector
 #define vectorSingleTypeTest(MIPP_Reg, type, cast, eigenType, name, args...)                         \
   {                                                                                                  \
-    mipp::MIPP_Reg<type> rVar = cast name<eigenType>(args);                                          \
-    mipp::MIPP_Reg<type> rVar_old = cast name##_old<eigenType>(args);                                \
+    mipp::MIPP_Reg<type> rVar = cast(name<eigenType>(args));                                         \
+    mipp::MIPP_Reg<type> rVar_old = cast(name##_old<eigenType>(args));                               \
     hasFailed |= printWhenRegDiff(#name "<" #eigenType ">(" + to_sting(args) + ")", rVar, rVar_old); \
   }
 
@@ -94,26 +121,28 @@ bool printWhenScalarDiff(std::string msg, T scal, T scal_old) {
 
 // Tests macro definition
 #define vectorFullLongTemplateTest(template, name, args...) \
-  vectorSingleTypeFullTest(long, template, INT_FULL_CAST, name, args)
+  vectorSingleTypeFullTest(long, template, INT_CAST_TO_MIPP_FULL, name, args)
 
-#define vectorHalfFloatTemplateTest(template, name, args...) vectorSingleTypeHalfTest(float, template, , name, args)
+#define vectorHalfFloatTemplateTest(template, name, args...) \
+  vectorSingleTypeHalfTest(float, template, FLOAT_CAST_TO_MIPP_HALF, name, args)
 #define vectorHalfDoubleTemplateTest(template, name, args...) \
-  vectorSingleTypeHalfTest(double, template, HALF_CAST, name, args)
+  vectorSingleTypeHalfTest(double, template, DOUBLE_CAST_TO_MIPP_HALF, name, args)
 #define vectorHalfIntTemplateTest(template, name, args...) \
-  vectorSingleTypeHalfTest(int, template, INT_HALF_CAST, name, args)
+  vectorSingleTypeHalfTest(int, template, INT_CAST_TO_MIPP_HALF, name, args)
 
-#define vectorFullFloatTemplateTest(template, name, args...) vectorSingleTypeFullTest(float, template, , name, args)
+#define vectorFullFloatTemplateTest(template, name, args...) \
+  vectorSingleTypeFullTest(float, template, FLOAT_CAST_TO_MIPP_FULL, name, args)
 #define vectorFullDoubleTemplateTest(template, name, args...) \
-  vectorSingleTypeFullTest(double, template, FULL_CAST, name, args)
+  vectorSingleTypeFullTest(double, template, DOUBLE_CAST_TO_MIPP_FULL, name, args)
 #define vectorFullIntTemplateTest(template, name, args...) \
-  vectorSingleTypeFullTest(int, template, INT_FULL_CAST, name, args)
+  vectorSingleTypeFullTest(int, template, INT_CAST_TO_MIPP_FULL, name, args)
 
 #define vectorHalfBoolTemplateTest(template, name, args...) \
-  vectorSingleTypeHalfTest(int8_t, template, INT_HALF_CAST, name, args)
+  vectorSingleTypeHalfTest(int8_t, template, INT_CAST_TO_MIPP_HALF, name, args)
 #define vectorHalfEigenHalfTemplateTest(template, name, args...) \
-  vectorSingleTypeHalfTest(short, template, INT_HALF_CAST, name, args)
+  vectorSingleTypeHalfTest(short, template, INT_CAST_TO_MIPP_HALF, name, args)
 #define vectorHalfBfloat16TemplateTest(template, name, args...) \
-  vectorSingleTypeHalfTest(short, template, INT_HALF_CAST, name, args)
+  vectorSingleTypeHalfTest(short, template, INT_CAST_TO_MIPP_HALF, name, args)
 
 #define vectorFullLongTest(name, args...) vectorFullLongTemplateTest(Packet4l, name, args)
 

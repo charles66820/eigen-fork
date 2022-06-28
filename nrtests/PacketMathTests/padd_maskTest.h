@@ -24,11 +24,8 @@ void padd2Tests() {
 #ifdef __AVX512F__
   /* float = Packet8f (full) */
   beginTest("full float tests");
-  loadVectorFull(vector8, float, fvmax, , Packet8f, FLT_MAX, 0.0f);
-  loadVectorFull(vector8, float, fv36, , Packet8f, 36.7f, 0.0f);
-  loadVectorFull(vector8, float, fv0, , Packet8f, 0.0f, 0.0f);
-  loadVectorFull(vector8, float, fv_240, , Packet8f, -240.98f, 0.0f);
-  loadVectorFull(vector8, float, fvmin, , Packet8f, FLT_MAX, 0.0f);
+
+  MIN2MAX_FULL_FLOAT_VECTOR
 
   allTwoCombRepArgs(vectorFullFloatTest, FUN2TEST, (Packet8f)fvmax.r, (Packet8f)fv36.r, (Packet8f)fv0.r, (Packet8f)fv_240.r, (Packet8f)fvmin.r, (uint8_t)0x00);
 

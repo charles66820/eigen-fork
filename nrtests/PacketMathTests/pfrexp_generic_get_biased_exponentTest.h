@@ -15,11 +15,7 @@ void pfrexp_generic_get_biased_exponentTests() {
   /* double =  Packet2d (half) */
   beginTest("half double tests");
 
-  loadVectorHalf(vector2, double, dhvmax, HALF_CAST, Packet2d, DBL_MAX, 0.0d);
-  loadVectorHalf(vector2, double, dhv36, HALF_CAST, Packet2d, 36.7d, 0.0d);
-  loadVectorHalf(vector2, double, dhv0, HALF_CAST, Packet2d, 0.0d, 0.0d);
-  loadVectorHalf(vector2, double, dhv_240, HALF_CAST, Packet2d, -240.98d, 0.0d);
-  loadVectorHalf(vector2, double, dhvmin, HALF_CAST, Packet2d, DBL_MIN, 0.0d);
+  MIN2MAX_HALF_DOUBLE_VECTOR
 
   vectorHalfDoubleTest(FUN2TEST, (Packet2d)dhvmax.r);
   vectorHalfDoubleTest(FUN2TEST, (Packet2d)dhv36.r);
@@ -35,12 +31,7 @@ void pfrexp_generic_get_biased_exponentTests() {
   /* double = Packet4d (full) */
   beginTest("full double tests");
 
-  loadVectorFull(vector4, double, dvmax, FULL_CAST, Packet4d, DBL_MAX, 0.0d);
-  loadVectorFull(vector4, double, dv36, FULL_CAST, Packet4d, 36.7d, 0.0d);
-  loadVectorFull(vector4, double, dv0, FULL_CAST, Packet4d, 0.0d, 0.0d);
-  loadVectorFull(vector4, double, dv_240, FULL_CAST, Packet4d, -240.98d, 0.0d);
-  loadVectorFull(vector4, double, dvmin, FULL_CAST, Packet4d, DBL_MIN, 0.0d);
-
+  MIN2MAX_FULL_DOUBLE_VECTOR
   vectorFullDoubleTest(FUN2TEST, (Packet4d)dvmax.r);
   vectorFullDoubleTest(FUN2TEST, (Packet4d)dv36.r);
   vectorFullDoubleTest(FUN2TEST, (Packet4d)dv0.r);

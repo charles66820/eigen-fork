@@ -10,8 +10,8 @@
 
 #define mvTest(MIPP_Reg, typeMipp, cast, type, eigenType, name, args...)                             \
   {                                                                                                  \
-    mipp::MIPP_Reg<typeMipp> rVar = cast name<type, eigenType>(args);                                \
-    mipp::MIPP_Reg<typeMipp> rVar_old = cast name##_old<type, eigenType>(args);                      \
+    mipp::MIPP_Reg<typeMipp> rVar = cast(name<type, eigenType>(args));                                \
+    mipp::MIPP_Reg<typeMipp> rVar_old = cast(name##_old<type, eigenType>(args));                      \
     hasFailed |= printWhenRegDiff(#name "<" #eigenType ">(" + to_sting(args) + ")", rVar, rVar_old); \
   }
 
@@ -36,7 +36,7 @@ void pgatherTests() {
   };
 
   for (size_t i = 1; i <= 4 + 1; i++) {
-    doTest(Reg_2, float, , float, Packet4f, (const float*)&fv4x4, i);
+    doTest(Reg_2, float, FLOAT_CAST_TO_MIPP_HALF, float, Packet4f, (const float*)&fv4x4, i);
   }
 
   endTest();
@@ -51,7 +51,7 @@ void pgatherTests() {
   };
 
   for (size_t i = 1; i <= 2 + 1; i++) {
-    doTest(Reg_2, double, HALF_CAST, double, Packet2d, (const double*)&dv2x2, i);
+    doTest(Reg_2, double, DOUBLE_CAST_TO_MIPP_HALF, double, Packet2d, (const double*)&dv2x2, i);
   }
 
   endTest();
@@ -68,7 +68,7 @@ void pgatherTests() {
   };
 
   for (size_t i = 1; i <= 4 + 1; i++) {
-    doTest(Reg_2, int, INT_HALF_CAST, int, Packet4i, (const int*)&iv4x4, i);
+    doTest(Reg_2, int, INT_CAST_TO_MIPP_HALF, int, Packet4i, (const int*)&iv4x4, i);
   }
 
   endTest();
@@ -113,7 +113,7 @@ void pgatherTests() {
   };
 
   for (size_t i = 1; i <= 16 + 1; i++) {
-    doTest(Reg_2, int8_t, INT_HALF_CAST, bool, Packet16b, (const bool*)&bv16x16, i);
+    doTest(Reg_2, int8_t, INT_CAST_TO_MIPP_HALF, bool, Packet16b, (const bool*)&bv16x16, i);
   }
 
   endTest();
@@ -137,7 +137,7 @@ void pgatherTests() {
   };
 
   for (size_t i = 1; i <= 8 + 1; i++) {
-    doTest(Reg, float, , float, Packet8f, (const float*)&fv8x8, i);
+    doTest(Reg, float, FLOAT_CAST_TO_MIPP_FULL, float, Packet8f, (const float*)&fv8x8, i);
   }
 
   endTest();
@@ -154,7 +154,7 @@ void pgatherTests() {
   };
 
   for (size_t i = 1; i <= 4 + 1; i++) {
-    doTest(Reg, double, FULL_CAST, double, Packet4d, (const double*)&dv4x4, i);
+    doTest(Reg, double, DOUBLE_CAST_TO_MIPP_FULL, double, Packet4d, (const double*)&dv4x4, i);
   }
 
   endTest();
@@ -175,7 +175,7 @@ void pgatherTests() {
   };
 
   for (size_t i = 1; i <= 8 + 1; i++) {
-    doTest(Reg, int, INT_FULL_CAST, int, Packet8i, (const int*)&iv8x8, i);
+    doTest(Reg, int, INT_CAST_TO_MIPP_FULL, int, Packet8i, (const int*)&iv8x8, i);
   }
 
   endTest();
@@ -204,7 +204,7 @@ void pgatherTests() {
   };
 
   for (size_t i = 1; i <= 8 + 1; i++) {
-    doTest(Reg_2, short, INT_HALF_CAST, Eigen::half, Packet8h, (const Eigen::half*)&hv8x8, i);
+    doTest(Reg_2, short, INT_CAST_TO_MIPP_HALF, Eigen::half, Packet8h, (const Eigen::half*)&hv8x8, i);
   }
 
   endTest();
@@ -233,7 +233,7 @@ void pgatherTests() {
   };
 
   for (size_t i = 1; i <= 8 + 1; i++) {
-    doTest(Reg_2, short, INT_HALF_CAST, bfloat16, Packet8bf, (const bfloat16*)&bfv8x8, i);
+    doTest(Reg_2, short, INT_CAST_TO_MIPP_HALF, bfloat16, Packet8bf, (const bfloat16*)&bfv8x8, i);
   }
 
   endTest();
@@ -253,7 +253,7 @@ void pgatherTests() {
   };
 
   for (size_t i = 1; i <= 4 + 1; i++) {
-    doTest(Reg, long, INT_FULL_CAST, long, Packet4l, (const long*)&lv4x4, i);
+    doTest(Reg, long, INT_CAST_TO_MIPP_FULL, long, Packet4l, (const long*)&lv4x4, i);
   }
 
   endTest();
