@@ -151,7 +151,7 @@ void pandnotTests() {
 
 #endif
 
-#ifdef __AVX512__
+#ifdef __AVX512F__
 #endif
 }
 

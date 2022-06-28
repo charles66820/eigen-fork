@@ -73,7 +73,7 @@ void plogical_shift_leftTests() {
 
 #endif
 
-#ifdef __AVX512__
+#ifdef __AVX512F__
 #endif
 }
 

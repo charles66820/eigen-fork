@@ -21,7 +21,7 @@ void padd2Tests() {
 #ifdef __AVX2__
 #endif
 
-#ifdef __AVX512__
+#ifdef __AVX512F__
   /* float = Packet8f (full) */
   beginTest("full float tests");
   loadVectorFull(vector8, float, fvmax, , Packet8f, FLT_MAX, 0.0f);

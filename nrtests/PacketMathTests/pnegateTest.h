@@ -183,7 +183,7 @@ void pnegateTests() {
 
 #endif
 
-#ifdef __AVX512__
+#ifdef __AVX512F__
 #endif
 }
 

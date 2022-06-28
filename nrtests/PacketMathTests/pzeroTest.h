@@ -75,14 +75,14 @@ void pzeroTests() {
 
 #endif
 
-#ifdef __AVX512__
+#ifdef __AVX512F__
   // /* float = Packet16f (full) */
   // beginTest("full float tests");
 
   // Packet8f b;
   // vectorFullFloatTest(FUN2TEST, b);
 
-  endTest();
+  // endTest();
 
   // /* double = Packet8d (full) */
   // beginTest("full double tests");
@@ -90,7 +90,7 @@ void pzeroTests() {
   // Packet4d c;
   // vectorFullDoubleTest(FUN2TEST, c);
 
-  endTest();
+  // endTest();
 
   // /* int = Packet16i (full) */
   // beginTest("full int tests");
@@ -98,7 +98,7 @@ void pzeroTests() {
   // Packet8i d;
   // vectorFullIntTest(FUN2TEST, d);
 
-  endTest();
+  // endTest();
 
 #endif
 }
