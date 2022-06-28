@@ -2523,8 +2523,8 @@ EIGEN_STRONG_INLINE Packet4d pload1<Packet4d>(const double* from) {
 
 template <>
 EIGEN_STRONG_INLINE Packet8f padd<Packet8f>(const Packet8f& a, const Packet8f& b) {
-  mipp::Reg<float> ra = a;
-  mipp::Reg<float> rb = b;
+  mipp::Reg<float> ra = FLOAT_CAST_INPUT_256(a);
+  mipp::Reg<float> rb = FLOAT_CAST_INPUT_256(b);
   mipp::Reg<float> res = ra + rb;
   return FLOAT_CAST_OUTPUT_256(res.r);
 }
