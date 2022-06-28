@@ -55,12 +55,12 @@ namespace internal {
 
 #ifdef EIGEN_VECTORIZE_AVX512
 
-#define INT_CAST_OUTPUT_128(vec) (__m128i)_mm256_castsi256_si128(vec)
-#define INT_CAST_OUTPUT_256(vec) (__m256i)_mm512_castsi512_si256(vec)
-#define FLOAT_CAST_OUTPUT_128(vec) (__m128)_mm256_castps256_ps128(vec)
-#define FLOAT_CAST_OUTPUT_256(vec) (__m256)_mm512_castps512_ps256(vec)
-#define DOUBLE_CAST_OUTPUT_128(vec) (__m128d)_mm256_castpd256_pd128(vec)
-#define DOUBLE_CAST_OUTPUT_256(vec) (__m256d)_mm512_castpd512_pd256(vec)
+#define INT_CAST_OUTPUT_128(vec) (__m128i)_mm256_castsi256_si128((__m256i)vec)
+#define INT_CAST_OUTPUT_256(vec) (__m256i)_mm512_castsi512_si256((__m512i)vec)
+#define FLOAT_CAST_OUTPUT_128(vec) (__m128)_mm256_castps256_ps128((__m256)vec)
+#define FLOAT_CAST_OUTPUT_256(vec) (__m256)_mm512_castps512_ps256((__m512)vec)
+#define DOUBLE_CAST_OUTPUT_128(vec) (__m128d)_mm256_castpd256_pd128((__m256d)vec)
+#define DOUBLE_CAST_OUTPUT_256(vec) (__m256d)_mm512_castpd512_pd256((__m512d)vec)
 
 #define INT_CAST_INPUT_128(vec) (mipp::reg_2)(__m256i)_mm256_castsi128_si256(vec)
 #define INT_CAST_INPUT_256(vec) (mipp::reg)(__m512i)_mm512_castsi256_si512(vec)
