@@ -19,6 +19,23 @@
   test(name, min, neg);                                     \
   test(name, min, min);
 
+#define allTwoCombRepArgs(test, name, max, pos, zero, neg, min, args...) \
+  test(name, max, max, args);                                     \
+  test(name, max, pos, args);                                     \
+  test(name, max, zero, args);                                    \
+  test(name, max, neg, args);                                     \
+  test(name, max, min, args);                                     \
+  test(name, pos, pos, args);                                     \
+  test(name, pos, zero, args);                                    \
+  test(name, neg, pos, args);                                     \
+  test(name, min, pos, args);                                     \
+  test(name, zero, zero, args);                                   \
+  test(name, neg, zero, args);                                    \
+  test(name, min, zero, args);                                    \
+  test(name, neg, neg, args);                                     \
+  test(name, min, neg, args);                                     \
+  test(name, min, min, args);
+
 // All three combinations with repetition
 #define allThreeCombRep(test, name, max, pos, zero, neg, min) \
   test(name, max, max, max);                                  \
