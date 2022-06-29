@@ -1,7 +1,5 @@
 #include <float.h>
 #include <limits.h>
-#include "../testVector.h"
-#include "../testCombinations.h"
 
 #ifndef EIGEN_MIPP_PDIV_TEST_H
 #define EIGEN_MIPP_PDIV_TEST_H

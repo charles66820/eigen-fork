@@ -14,33 +14,21 @@ void pset1Tests() {
   /* float = Packet4f (half) */
   beginTest("4 float tests");
 
-  vectorHalfFloatTest(FUN2TEST, FLT_MAX);
-  vectorHalfFloatTest(FUN2TEST, 36.7f);
-  vectorHalfFloatTest(FUN2TEST, 0.0f);
-  vectorHalfFloatTest(FUN2TEST, -240.98f);
-  vectorHalfFloatTest(FUN2TEST, FLT_MIN);
+  min2MaxTests(vectorHalfFloatTest, FUN2TEST, FLT_MAX, 36.7f, 0.0f, -240.98f, FLT_MIN);
 
   endTest();
 
   /* double =  Packet2d (half) */
   beginTest("2 double tests");
 
-  vectorHalfDoubleTest(FUN2TEST, DBL_MAX);
-  vectorHalfDoubleTest(FUN2TEST, 36.7d);
-  vectorHalfDoubleTest(FUN2TEST, 0.0d);
-  vectorHalfDoubleTest(FUN2TEST, -240.98d);
-  vectorHalfDoubleTest(FUN2TEST, DBL_MIN);
+  min2MaxTests(vectorHalfDoubleTest, FUN2TEST, DBL_MAX, 36.7d, 0.0d, -240.98d, DBL_MIN);
 
   endTest();
 
   /* int = Packet4i (half) */
   beginTest("4 int tests");
 
-  vectorHalfIntTest(FUN2TEST, INT_MAX);
-  vectorHalfIntTest(FUN2TEST, 36);
-  vectorHalfIntTest(FUN2TEST, 0);
-  vectorHalfIntTest(FUN2TEST, -240);
-  vectorHalfIntTest(FUN2TEST, INT_MIN);
+  min2MaxTests(vectorHalfIntTest, FUN2TEST, INT_MAX, 36, 0, -240, INT_MIN);
 
   endTest();
 
@@ -60,55 +48,35 @@ void pset1Tests() {
   /* float = Packet8f (full) */
   beginTest("8 float tests");
 
-  vectorFullFloatTest(FUN2TEST, FLT_MAX);
-  vectorFullFloatTest(FUN2TEST, 36.7f);
-  vectorFullFloatTest(FUN2TEST, 0.0f);
-  vectorFullFloatTest(FUN2TEST, -240.98f);
-  vectorFullFloatTest(FUN2TEST, FLT_MIN);
+  min2MaxTests(vectorFullFloatTest, FUN2TEST, FLT_MAX, 36.7f, 0.0f, -240.98f, FLT_MIN);
 
   endTest();
 
   /* double = Packet4d (full) */
   beginTest("4 double tests");
 
-  vectorFullDoubleTest(FUN2TEST, DBL_MAX);
-  vectorFullDoubleTest(FUN2TEST, 36.7d);
-  vectorFullDoubleTest(FUN2TEST, 0.0d);
-  vectorFullDoubleTest(FUN2TEST, -240.98d);
-  vectorFullDoubleTest(FUN2TEST, DBL_MIN);
+  min2MaxTests(vectorFullDoubleTest, FUN2TEST, DBL_MAX, 36.7d, 0.0d, -240.98d, DBL_MIN);
 
   endTest();
 
   /* int = Packet8i (full) */
   beginTest("8 int tests");
 
-  vectorFullIntTest(FUN2TEST, INT_MAX);
-  vectorFullIntTest(FUN2TEST, 36);
-  vectorFullIntTest(FUN2TEST, 0);
-  vectorFullIntTest(FUN2TEST, -240);
-  vectorFullIntTest(FUN2TEST, INT_MIN);
+  min2MaxTests(vectorFullIntTest, FUN2TEST, INT_MAX, 36, 0, -240, INT_MIN);
 
   endTest();
 
   /* Eigen::half = Packet8h */
   beginTest("8 Eigen::half tests");
 
-  vectorHalfEigenHalfTest(FUN2TEST, half(FLT_MAX));
-  vectorHalfEigenHalfTest(FUN2TEST, half(36.7f));
-  vectorHalfEigenHalfTest(FUN2TEST, half(0.0f));
-  vectorHalfEigenHalfTest(FUN2TEST, half(-240.98f));
-  vectorHalfEigenHalfTest(FUN2TEST, half(FLT_MIN));
+  min2MaxTests(vectorHalfEigenHalfTest, FUN2TEST, half(FLT_MAX), half(36.7f), half(0.0f), half(-240.98f), half(FLT_MIN));
 
   endTest();
 
   /* bfloat16 = Packet8bf */
   beginTest("8 bfloat16 tests");
 
-  vectorHalfBfloat16Test(FUN2TEST, bfloat16(FLT_MAX));
-  vectorHalfBfloat16Test(FUN2TEST, bfloat16(36.7f));
-  vectorHalfBfloat16Test(FUN2TEST, bfloat16(0.0f));
-  vectorHalfBfloat16Test(FUN2TEST, bfloat16(-240.98f));
-  vectorHalfBfloat16Test(FUN2TEST, bfloat16(FLT_MIN));
+  min2MaxTests(vectorHalfBfloat16Test, FUN2TEST, bfloat16(FLT_MAX), bfloat16(36.7f), bfloat16(0.0f), bfloat16(-240.98f), bfloat16(FLT_MIN));
 
   endTest();
 
@@ -118,11 +86,7 @@ void pset1Tests() {
   /* long = Packet4l */
   beginTest("4 long tests");
 
-  vectorFullLongTest(FUN2TEST, LONG_MAX);
-  vectorFullLongTest(FUN2TEST, 36L);
-  vectorFullLongTest(FUN2TEST, 0L);
-  vectorFullLongTest(FUN2TEST, -240L);
-  vectorFullLongTest(FUN2TEST, LONG_MIN);
+  min2MaxTests(vectorFullLongTest, FUN2TEST, LONG_MAX, 36L, 0L, -240L, LONG_MIN);
 
   endTest();
 

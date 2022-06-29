@@ -1,6 +1,6 @@
 #include <float.h>
 #include <limits.h>
-#include "../testVector.h"
+
 
 #ifndef EIGEN_MIPP_PSCATTER_TEST_H
 #define EIGEN_MIPP_PSCATTER_TEST_H

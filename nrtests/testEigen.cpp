@@ -1,6 +1,9 @@
 #define VERBOSE false
 
 #include "testUtil.h"
+#include "testVector.h"
+#include "testCombinations.h"
+
 #include "PacketMathOldFun.h"
 
 #include "PacketMathTests/pset1Test.h"

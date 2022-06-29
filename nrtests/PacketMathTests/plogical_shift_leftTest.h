@@ -1,6 +1,6 @@
 #include <float.h>
 #include <limits.h>
-#include "../testVector.h"
+
 
 #ifndef EIGEN_MIPP_PLOGICAL_SHIFT_LEFT_TEST_H
 #define EIGEN_MIPP_PLOGICAL_SHIFT_LEFT_TEST_H
@@ -16,7 +16,7 @@ void plogical_shift_leftTests() {
   /* int = Packet4i (half) */
   beginTest("4 int tests");
 
-  MIN2MAX_HALF_INT_VECTOR
+  MIN2MAX_4_INT_VECTOR
 
   vectorHalfIntTemplateTest(3, FUN2TEST, (Packet4i)ihvmax);
   vectorHalfIntTemplateTest(3, FUN2TEST, (Packet4i)ihv36);
@@ -33,7 +33,7 @@ void plogical_shift_leftTests() {
   /* int = Packet8i (full) */
   beginTest("8 int tests");
 
-  MIN2MAX_FULL_INT_VECTOR
+  MIN2MAX_8_INT_VECTOR
 
   vectorFullIntTemplateTest(3, FUN2TEST, (Packet8i)ivmax);
   vectorFullIntTemplateTest(3, FUN2TEST, (Packet8i)iv36);
@@ -49,7 +49,7 @@ void plogical_shift_leftTests() {
   /* long = Packet4l */
   beginTest("4 long tests");
 
-  MIN2MAX_FULL_LONG_VECTOR
+  MIN2MAX_4_LONG_VECTOR
 
   vectorFullLongTemplateTest(3, FUN2TEST, (Packet4l)lvmax);
   vectorFullLongTemplateTest(3, FUN2TEST, (Packet4l)lv36);

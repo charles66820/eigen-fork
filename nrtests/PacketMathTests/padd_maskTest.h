@@ -1,7 +1,5 @@
 #include <float.h>
 #include <limits.h>
-#include "../testVector.h"
-#include "../testCombinations.h"
 
 #ifndef EIGEN_MIPP_PADD_MASK_TEST_H
 #define EIGEN_MIPP_PADD_MASK_TEST_H
@@ -25,7 +23,7 @@ void padd2Tests() {
   /* float = Packet8f (full) */
   beginTest("8 float tests");
 
-  MIN2MAX_FULL_FLOAT_VECTOR
+  MIN2MAX_8_FLOAT_VECTOR
 
   allTwoCombRepArgs(vectorFullFloatTest, FUN2TEST, (Packet8f)fvmax, (Packet8f)fv36, (Packet8f)fv0, (Packet8f)fv_240, (Packet8f)fvmin, (uint8_t)0x00);
   allTwoCombRepArgs(vectorFullFloatTest, FUN2TEST, (Packet8f)fvmax, (Packet8f)fv36, (Packet8f)fv0, (Packet8f)fv_240, (Packet8f)fvmin, (uint8_t)0xFF);
