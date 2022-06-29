@@ -19,16 +19,7 @@ void pfrexp_generic_get_biased_exponentTests() {
 
 #ifdef __AVX__
   /* double = Packet4d (full) */
-  beginTest("4 double tests");
-
-  MIN2MAX_FULL_DOUBLE_VECTOR
-  vectorFullDoubleTest(FUN2TEST, (Packet4d)dvmax.r);
-  vectorFullDoubleTest(FUN2TEST, (Packet4d)dv36.r);
-  vectorFullDoubleTest(FUN2TEST, (Packet4d)dv0.r);
-  vectorFullDoubleTest(FUN2TEST, (Packet4d)dv_240.r);
-  vectorFullDoubleTest(FUN2TEST, (Packet4d)dvmin.r);
-
-  endTest();
+  tests4DoubleMin2MaxOneArg("4 double tests", FUN2TEST);
 
 #endif
 

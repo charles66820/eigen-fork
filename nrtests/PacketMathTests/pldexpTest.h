@@ -23,23 +23,10 @@ void pldexpTests() {
 
 #ifdef __AVX__
   /* float = Packet8f (full) */
-  beginTest("8 float tests");
-
-  MIN2MAX_FULL_FLOAT_VECTOR
-
-  allTwoPermRep(vectorFullFloatTest, FUN2TEST, fvmax.r, fv36.r, fv0.r, fv_240.r, fvmin.r);
-
-  endTest();
+  tests8FloatMin2MaxTwoArgsPermRep("8 float tests", FUN2TEST);
 
   /* double = Packet4d (full) */
-  beginTest("4 double tests");
-
-  MIN2MAX_FULL_DOUBLE_VECTOR
-
-  allTwoPermRep(vectorFullDoubleTest, FUN2TEST, (Packet4d)dvmax.r, (Packet4d)dv36.r, (Packet4d)dv0.r,
-                (Packet4d)dv_240.r, (Packet4d)dvmin.r);
-
-  endTest();
+  tests4DoubleMin2MaxTwoArgsPermRep("4 double tests", FUN2TEST);
 
 #endif
 
