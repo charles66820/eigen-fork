@@ -10,27 +10,14 @@
 #define FUN2TEST pmin
 
 void pminTests() {
-  std::cout << printTestTitle(FUN2TEST) << std::endl;
+  printTestTitle(FUN2TEST);
 
 #ifdef __SSE__
   /* float = Packet4f (half) */
-  beginTest("4 float tests");
-
-  MIN2MAX_HALF_FLOAT_VECTOR
-
-  allTwoPermRep(vectorHalfFloatTest, FUN2TEST, fhvmax.r, fhv36.r, fhv0.r, fhv_240.r, fhvmin.r);
-
-  endTest();
+  tests4FloatMin2MaxTwoArgsPermRep("4 float tests", FUN2TEST);
 
   /* double =  Packet2d (half) */
-  beginTest("2 double tests");
-
-  MIN2MAX_HALF_DOUBLE_VECTOR
-
-  allTwoPermRep(vectorHalfDoubleTest, FUN2TEST, (Packet2d)dhvmax.r, (Packet2d)dhv36.r, (Packet2d)dhv0.r,
-                (Packet2d)dhv_240.r, (Packet2d)dhvmin.r);
-
-  endTest();
+  tests2DoubleMin2MaxTwoArgsPermRep("2 double tests", FUN2TEST);
 
   /* int = Packet4i (half) */
   beginTest("4 int tests");

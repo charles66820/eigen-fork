@@ -15,7 +15,7 @@
   }
 
 void pload1Tests() {
-  std::cout << printTestTitle(FUN2TEST) << std::endl;
+  printTestTitle(FUN2TEST);
 
 #ifdef __SSE__
 

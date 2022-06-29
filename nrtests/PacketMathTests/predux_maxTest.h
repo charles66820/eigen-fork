@@ -9,7 +9,7 @@
 #define FUN2TEST predux_max
 
 void predux_maxTests() {
-  std::cout << printTestTitle(FUN2TEST) << std::endl;
+  printTestTitle(FUN2TEST);
 
 #ifdef __SSE__
   /* float = Packet4f (half) */

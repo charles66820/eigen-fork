@@ -8,7 +8,7 @@
 #define FUN2TEST peven_mask
 
 void peven_maskTests() {
-  std::cout << printTestTitle(FUN2TEST) << std::endl;
+  printTestTitle(FUN2TEST);
 
 #ifdef __SSE__
   /* float = Packet4f (half) */

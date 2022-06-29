@@ -9,7 +9,7 @@
 #define FUN2TEST predux_half_dowto4
 
 void predux_half_dowto4Tests() {
-  std::cout << printTestTitle(FUN2TEST) << std::endl;
+  printTestTitle(FUN2TEST);
 
 #ifdef __SSE__
 #endif

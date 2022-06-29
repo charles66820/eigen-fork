@@ -12,6 +12,7 @@ using namespace Eigen;
 #define VERBOSE false
 #endif  // VERBOSE
 
+// Cast
 #define HALF_CAST (mipp::reg_2)
 #define FULL_CAST (mipp::reg)
 
@@ -45,7 +46,7 @@ using namespace Eigen;
 #endif
 
 #define TO_STRING(s) #s
-#define printTestTitle(t) "================ " TO_STRING(t) " ================"
+#define printTestTitle(t) std::cout << "================ " TO_STRING(t) " ================" << std::endl;
 
 // Return test state
 bool hasFailed = false;
@@ -119,45 +120,6 @@ bool printWhenScalarDiff(std::string msg, T scal, T scal_old) {
 #define vectorSingleTypeHalfTest(type, half, halfCast, name, args...) \
   vectorSingleTypeTest(Reg_2, type, halfCast, half, name, args)
 
-// Tests macro definition
-#define vectorFullLongTemplateTest(template, name, args...) \
-  vectorSingleTypeFullTest(long, template, INT_CAST_TO_MIPP_FULL, name, args)
-
-#define vectorHalfFloatTemplateTest(template, name, args...) \
-  vectorSingleTypeHalfTest(float, template, FLOAT_CAST_TO_MIPP_HALF, name, args)
-#define vectorHalfDoubleTemplateTest(template, name, args...) \
-  vectorSingleTypeHalfTest(double, template, DOUBLE_CAST_TO_MIPP_HALF, name, args)
-#define vectorHalfIntTemplateTest(template, name, args...) \
-  vectorSingleTypeHalfTest(int, template, INT_CAST_TO_MIPP_HALF, name, args)
-
-#define vectorFullFloatTemplateTest(template, name, args...) \
-  vectorSingleTypeFullTest(float, template, FLOAT_CAST_TO_MIPP_FULL, name, args)
-#define vectorFullDoubleTemplateTest(template, name, args...) \
-  vectorSingleTypeFullTest(double, template, DOUBLE_CAST_TO_MIPP_FULL, name, args)
-#define vectorFullIntTemplateTest(template, name, args...) \
-  vectorSingleTypeFullTest(int, template, INT_CAST_TO_MIPP_FULL, name, args)
-
-#define vectorHalfBoolTemplateTest(template, name, args...) \
-  vectorSingleTypeHalfTest(int8_t, template, INT_CAST_TO_MIPP_HALF, name, args)
-#define vectorHalfEigenHalfTemplateTest(template, name, args...) \
-  vectorSingleTypeHalfTest(short, template, INT_CAST_TO_MIPP_HALF, name, args)
-#define vectorHalfBfloat16TemplateTest(template, name, args...) \
-  vectorSingleTypeHalfTest(short, template, INT_CAST_TO_MIPP_HALF, name, args)
-
-#define vectorFullLongTest(name, args...) vectorFullLongTemplateTest(Packet4l, name, args)
-
-#define vectorHalfFloatTest(name, args...) vectorHalfFloatTemplateTest(Packet4f, name, args)
-#define vectorHalfDoubleTest(name, args...) vectorHalfDoubleTemplateTest(Packet2d, name, args)
-#define vectorHalfIntTest(name, args...) vectorHalfIntTemplateTest(Packet4i, name, args)
-
-#define vectorFullFloatTest(name, args...) vectorFullFloatTemplateTest(Packet8f, name, args)
-#define vectorFullDoubleTest(name, args...) vectorFullDoubleTemplateTest(Packet4d, name, args)
-#define vectorFullIntTest(name, args...) vectorFullIntTemplateTest(Packet8i, name, args)
-
-#define vectorHalfBoolTest(name, args...) vectorHalfBoolTemplateTest(Packet16b, name, args)
-#define vectorHalfEigenHalfTest(name, args...) vectorHalfEigenHalfTemplateTest(Packet8h, name, args)
-#define vectorHalfBfloat16Test(name, args...) vectorHalfBfloat16TemplateTest(Packet8bf, name, args)
-
 // Macros for test that return vector
 #define refSingleTypeGenericTest(name, type, size, attr, args...)                                 \
   {                                                                                               \
@@ -185,5 +147,8 @@ bool printWhenScalarDiff(std::string msg, T scal, T scal_old) {
   }
 
 #define scalarSingleTypeTest(type, name, eigenType, args...) scalarSingleTypeGenericTest(type, name, eigenType, args)
+
+// Tests macro definition
+#include "testDef.h"
 
 #endif  // EIGEN_MIPP_TEST_UTIL_H

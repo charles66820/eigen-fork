@@ -9,21 +9,11 @@
 #define FUN2TEST pfrexp_generic_get_biased_exponent
 
 void pfrexp_generic_get_biased_exponentTests() {
-  std::cout << printTestTitle(FUN2TEST) << std::endl;
+  printTestTitle(FUN2TEST);
 
 #ifdef __SSE__
   /* double =  Packet2d (half) */
-  beginTest("2 double tests");
-
-  MIN2MAX_HALF_DOUBLE_VECTOR
-
-  vectorHalfDoubleTest(FUN2TEST, (Packet2d)dhvmax.r);
-  vectorHalfDoubleTest(FUN2TEST, (Packet2d)dhv36.r);
-  vectorHalfDoubleTest(FUN2TEST, (Packet2d)dhv0.r);
-  vectorHalfDoubleTest(FUN2TEST, (Packet2d)dhv_240.r);
-  vectorHalfDoubleTest(FUN2TEST, (Packet2d)dhvmin.r);
-
-  endTest();
+  tests2DoubleMin2MaxOneArg("2 double tests", FUN2TEST);
 
 #endif
 

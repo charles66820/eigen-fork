@@ -10,7 +10,7 @@
 #define FUN2TEST padd
 
 void padd2Tests() {
-  std::cout << printTestTitle(padd + mask) << std::endl;
+  printTestTitle(padd + mask);
 
 #ifdef __SSE__
 #endif

@@ -8,7 +8,7 @@
 #define FUN2TEST pset1frombits
 
 void pset1frombitsTests() {
-  std::cout << printTestTitle(FUN2TEST) << std::endl;
+  printTestTitle(FUN2TEST);
 
 #ifdef __SSE__
   /* float = Packet4f (half) */

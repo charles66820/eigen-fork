@@ -9,7 +9,7 @@
 #define FUN2TEST predux_min
 
 void predux_minTests() {
-  std::cout << printTestTitle(FUN2TEST) << std::endl;
+  printTestTitle(FUN2TEST);
 
 #ifdef __SSE__
   /* float = Packet4f (half) */

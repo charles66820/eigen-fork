@@ -9,7 +9,7 @@
 #define FUN2TEST plogical_shift_right
 
 void plogical_shift_rightTests() {
-  std::cout << printTestTitle(FUN2TEST) << std::endl;
+  printTestTitle(FUN2TEST);
 
 #ifdef __SSE__
 

@@ -10,27 +10,14 @@
 #define FUN2TEST pcmp_le
 
 void pcmp_leTests() {
-  std::cout << printTestTitle(FUN2TEST) << std::endl;
+  printTestTitle(FUN2TEST);
 
 #ifdef __SSE__
   /* float = Packet4f (half) */
-  beginTest("4 float tests");
+  tests4FloatMin2MaxTwoArgsPermRep("4 float tests", FUN2TEST);
 
-  MIN2MAX_HALF_FLOAT_VECTOR
-
-  allTwoPermRep(vectorHalfFloatTest, FUN2TEST, fhvmax.r, fhv36.r, fhv0.r, fhv_240.r, fhvmin.r);
-
-  endTest();
-
-  /* double = Packet2d (half) */
-  beginTest("2 double tests");
-
-  MIN2MAX_HALF_DOUBLE_VECTOR
-
-  allTwoPermRep(vectorHalfDoubleTest, FUN2TEST, (Packet2d)dhvmax.r, (Packet2d)dhv36.r, (Packet2d)dhv0.r,
-                (Packet2d)dhv_240.r, (Packet2d)dhvmin.r);
-
-  endTest();
+  /* double =  Packet2d (half) */
+  tests2DoubleMin2MaxTwoArgsPermRep("2 double tests", FUN2TEST);
 
   /* int = Packet4i (half) */
   beginTest("4 int tests");

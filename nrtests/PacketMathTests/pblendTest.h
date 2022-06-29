@@ -20,7 +20,7 @@
   for (int i = 0; i < PacketSize; ++i) selector##PacketSize##_##name.select[i] = val;
 
 void pblendTests() {
-  std::cout << printTestTitle(FUN2TEST) << std::endl;
+  printTestTitle(FUN2TEST);
 
   selectorNum(2);
   selectorNum(4);
