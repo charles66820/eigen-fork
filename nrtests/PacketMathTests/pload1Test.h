@@ -21,7 +21,7 @@ void pload1Tests() {
 
 #if EIGEN_COMP_GNUC_STRICT && (!defined __AVX__)
   /* float = Packet4f (half) */
-  beginTest("half float tests");
+  beginTest("4 float tests");
 
   runTest(vector4, float, vectorHalfFloatTest, FLT_MAX, -0.1f);
   runTest(vector4, float, vectorHalfFloatTest, 36.7f, 0.1f);
@@ -37,7 +37,7 @@ void pload1Tests() {
 
 #ifdef __AVX__
   /* float = Packet8f (full) */
-  beginTest("full float tests");
+  beginTest("8 float tests");
 
   runTest(vector8, float, vectorFullFloatTest, FLT_MAX, -0.1f);
   runTest(vector8, float, vectorFullFloatTest, 36.7f, 0.1f);
@@ -48,7 +48,7 @@ void pload1Tests() {
   endTest();
 
   /* double = Packet4d (full) */
-  beginTest("full double tests");
+  beginTest("4 double tests");
 
   runTest(vector4, double, vectorFullDoubleTest, DBL_MAX, -0.1d);
   runTest(vector4, double, vectorFullDoubleTest, 36.7d, 0.1d);
@@ -62,7 +62,7 @@ void pload1Tests() {
 
 #ifdef __AVX2__
   /* long = Packet4l */
-  beginTest("long tests");
+  beginTest("4 long tests");
 
   runTest(vector4, long, vectorFullLongTest, LONG_MAX, -1L);
   runTest(vector4, long, vectorFullLongTest, 36L, 1L);

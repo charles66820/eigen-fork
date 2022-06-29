@@ -13,7 +13,7 @@ void pstoreuTests() {
 
 #ifdef __SSE__
   /* float = Packet4f (half) */
-  beginTest("half float tests");
+  beginTest("4 float tests");
 
   MIN2MAX_HALF_FLOAT_VECTOR
 
@@ -26,7 +26,7 @@ void pstoreuTests() {
   endTest();
 
   /* double =  Packet2d (half) */
-  beginTest("half double tests");
+  beginTest("2 double tests");
 
   MIN2MAX_HALF_DOUBLE_VECTOR
 
@@ -39,7 +39,7 @@ void pstoreuTests() {
   endTest();
 
   /* int = Packet4i (half) */
-  beginTest("half int tests");
+  beginTest("4 int tests");
 
   MIN2MAX_HALF_INT_VECTOR
 
@@ -52,7 +52,7 @@ void pstoreuTests() {
   endTest();
 
   /* bool = Packet16b */
-  beginTest("bool tests");
+  beginTest("16 bool tests");
 
   MIN2MAX_HALF_BOOL_VECTOR
 
@@ -65,7 +65,7 @@ void pstoreuTests() {
 
 #ifdef __AVX__
   /* float = Packet8f (full) */
-  beginTest("full float tests");
+  beginTest("8 float tests");
 
   MIN2MAX_FULL_FLOAT_VECTOR
 
@@ -78,7 +78,7 @@ void pstoreuTests() {
   endTest();
 
   /* double = Packet4d (full) */
-  beginTest("full double tests");
+  beginTest("4 double tests");
 
   MIN2MAX_FULL_DOUBLE_VECTOR
 
@@ -91,7 +91,7 @@ void pstoreuTests() {
   endTest();
 
   /* int = Packet8i (full) */
-  beginTest("full int tests");
+  beginTest("8 int tests");
 
   MIN2MAX_FULL_INT_VECTOR
 
@@ -104,7 +104,7 @@ void pstoreuTests() {
   endTest();
 
   /* Eigen::half = Packet8h */
-  beginTest("Eigen::half tests");
+  beginTest("8 Eigen::half tests");
 
   MIN2MAX_HALF_HALF_VECTOR
 
@@ -117,7 +117,7 @@ void pstoreuTests() {
   endTest();
 
   /* bfloat16 = Packet8bf */
-  beginTest("bfloat16 tests");
+  beginTest("8 bfloat16 tests");
 
   MIN2MAX_HALF_BFLOAT16_VECTOR
 
@@ -133,7 +133,7 @@ void pstoreuTests() {
 
 #ifdef __AVX2__
   /* long = Packet4l */
-  beginTest("long tests");
+  beginTest("4 long tests");
 
   MIN2MAX_FULL_LONG_VECTOR
 

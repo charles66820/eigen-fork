@@ -19,7 +19,7 @@ void ploaduTests() {
 
 #ifdef __SSE__
   /* float = Packet4f (half) */
-  beginTest("half float tests");
+  beginTest("4 float tests");
 
   runTest(vector4u, float, vectorHalfFloatTest, FLT_MAX, -0.1f);
   runTest(vector4u, float, vectorHalfFloatTest, 36.7f, 0.1f);
@@ -30,7 +30,7 @@ void ploaduTests() {
   endTest();
 
   /* double =  Packet2d (half) */
-  beginTest("half double tests");
+  beginTest("2 double tests");
 
   runTest(vector2u, double, vectorHalfDoubleTest, DBL_MAX, -0.1d);
   runTest(vector2u, double, vectorHalfDoubleTest, 36.7d, 0.1d);
@@ -41,7 +41,7 @@ void ploaduTests() {
   endTest();
 
   /* int = Packet4i (half) */
-  beginTest("half int tests");
+  beginTest("4 int tests");
 
   runTest(vector4u, int, vectorHalfIntTest, INT_MAX, -1);
   runTest(vector4u, int, vectorHalfIntTest, 36, 1);
@@ -52,7 +52,7 @@ void ploaduTests() {
   endTest();
 
   /* bool = Packet16b */
-  beginTest("bool tests");
+  beginTest("16 bool tests");
 
   runTest(vector16u, bool, vectorHalfBoolTest, true, 0);
   runTest(vector16u, bool, vectorHalfBoolTest, false, 0);
@@ -63,7 +63,7 @@ void ploaduTests() {
 
 #ifdef __AVX__
   /* float = Packet8f (full) */
-  beginTest("full float tests");
+  beginTest("8 float tests");
 
   runTest(vector8u, float, vectorFullFloatTest, FLT_MAX, -0.1f);
   runTest(vector8u, float, vectorFullFloatTest, 36.7f, 0.1f);
@@ -74,7 +74,7 @@ void ploaduTests() {
   endTest();
 
   /* double = Packet4d (full) */
-  beginTest("full double tests");
+  beginTest("4 double tests");
 
   runTest(vector4u, double, vectorFullDoubleTest, DBL_MAX, -0.1d);
   runTest(vector4u, double, vectorFullDoubleTest, 36.7d, 0.1d);
@@ -85,7 +85,7 @@ void ploaduTests() {
   endTest();
 
   /* int = Packet8i (full) */
-  beginTest("full int tests");
+  beginTest("8 int tests");
 
   runTest(vector8u, int, vectorFullIntTest, INT_MAX, -1);
   runTest(vector8u, int, vectorFullIntTest, 36, 1);
@@ -96,7 +96,7 @@ void ploaduTests() {
   endTest();
 
   /* Eigen::half = Packet8h */
-  beginTest("Eigen::half tests");
+  beginTest("8 Eigen::half tests");
 
   runTest(vector8u, Eigen::half, vectorHalfEigenHalfTest, half(FLT_MAX), half(-0.1f));
   runTest(vector8u, Eigen::half, vectorHalfEigenHalfTest, half(36.7f), half(0.1f));
@@ -107,7 +107,7 @@ void ploaduTests() {
   endTest();
 
   /* bfloat16 = Packet8bf */
-  beginTest("bfloat16 tests");
+  beginTest("8 bfloat16 tests");
 
   runTest(vector8u, bfloat16, vectorHalfBfloat16Test, bfloat16(FLT_MAX), bfloat16(-0.1f));
   runTest(vector8u, bfloat16, vectorHalfBfloat16Test, bfloat16(36.7f), bfloat16(0.1f));
@@ -121,7 +121,7 @@ void ploaduTests() {
 
 #ifdef __AVX2__
   /* long = Packet4l */
-  beginTest("long tests");
+  beginTest("4 long tests");
 
   runTest(vector4u, long, vectorFullLongTest, LONG_MAX, -1L);
   runTest(vector4u, long, vectorFullLongTest, 36L, 1L);

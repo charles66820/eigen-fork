@@ -36,7 +36,7 @@ void pscatterTests() {
 
 #ifdef __SSE__
   /* float = Packet4f (half) */
-  beginTest("half float tests");
+  beginTest("4 float tests");
 
   doTest(float, Packet4f, 4, 1, 6.0f, -3.2f, 28.9f, -64.89f);
   doTest(float, Packet4f, 4, 2, 6.0f, 28.9f, 36.0f, 32.02f);
@@ -47,7 +47,7 @@ void pscatterTests() {
   endTest();
 
   /* double =  Packet2d (half) */
-  beginTest("half double tests");
+  beginTest("2 double tests");
 
   doTest(double, Packet2d, 2, 1, 6.0d, -3.2d);
   doTest(double, Packet2d, 2, 2, 6.0d, 36.0d);
@@ -56,7 +56,7 @@ void pscatterTests() {
   endTest();
 
   /* int = Packet4i (half) */
-  beginTest("half int tests");
+  beginTest("4 int tests");
 
   doTest(int, Packet4i, 4, 1, 6, -3, 28, -64);
   doTest(int, Packet4i, 4, 2, 6, 28, 36, 32);
@@ -67,7 +67,7 @@ void pscatterTests() {
   endTest();
 
   /* bool = Packet16b */
-  beginTest("bool tests");
+  beginTest("16 bool tests");
 
   doTest(bool, Packet16b, 16, 1, true, true, false, false, false, true, false, true, false, true, true, false, false,
          true, false, false);
@@ -110,7 +110,7 @@ void pscatterTests() {
 
 #ifdef __AVX__
   /* float = Packet8f (full) */
-  beginTest("full float tests");
+  beginTest("8 float tests");
 
   doTest(float, Packet8f, 8, 1, 6.0f, -3.2f, 28.9f, -64.89f, 56.3f, 62.6f, -27.02f, 8.07f);
   doTest(float, Packet8f, 8, 2, 6.0f, 28.9f, 56.3f, -27.02f, 36.0f, 32.02f, 89.7f, 56.23f);
@@ -125,7 +125,7 @@ void pscatterTests() {
   endTest();
 
   /* double = Packet4d (full) */
-  beginTest("full double tests");
+  beginTest("4 double tests");
 
   doTest(double, Packet4d, 4, 1, 6.0d, -3.2d, 28.9d, -64.89d);
   doTest(double, Packet4d, 4, 2, 6.0d, 28.9d, 36.0d, 32.02d);
@@ -136,7 +136,7 @@ void pscatterTests() {
   endTest();
 
   /* int = Packet8i (full) */
-  beginTest("full int tests");
+  beginTest("8 int tests");
 
   doTest(int, Packet8i, 8, 1, 6, -3, 28, -64, 56, 62, -27, 8);
   doTest(int, Packet8i, 8, 2, 6, 28, 56, -27, 36, 32, 89, 56);
@@ -151,7 +151,7 @@ void pscatterTests() {
   endTest();
 
   /* Eigen::half = Packet8h */
-  beginTest("Eigen::half tests");
+  beginTest("8 Eigen::half tests");
 
   doTest(Eigen::half, Packet8h, 8, 1, half(6.0f), half(-3.2f), half(28.9f), half(-64.89f), half(56.3f), half(62.6f),
          half(-27.02f), half(8.07f));
@@ -175,7 +175,7 @@ void pscatterTests() {
   endTest();
 
   /* bfloat16 = Packet8bf */
-  beginTest("bfloat16 tests");
+  beginTest("8 bfloat16 tests");
 
   doTest(bfloat16, Packet8bf, 8, 1, bfloat16(6.0f), bfloat16(-3.2f), bfloat16(28.9f), bfloat16(-64.89f),
          bfloat16(56.3f), bfloat16(62.6f), bfloat16(-27.02f), bfloat16(8.07f));
@@ -202,7 +202,7 @@ void pscatterTests() {
 
 #ifdef __AVX2__
   /* long = Packet4l */
-  beginTest("long tests");
+  beginTest("4 long tests");
 
   doTest(long, Packet4l, 4, 1, 6L, -3L, 28L, -64L);
   doTest(long, Packet4l, 4, 2, 6L, 28L, 36L, 32L);

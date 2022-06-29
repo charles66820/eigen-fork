@@ -12,7 +12,7 @@ void pzeroTests() {
 
 #ifdef __SSE__
   /* float = Packet4f (half) */
-  beginTest("half float tests");
+  beginTest("4 float tests");
 
   Packet4f bh;
   vectorHalfFloatTest(FUN2TEST, bh);
@@ -20,7 +20,7 @@ void pzeroTests() {
   endTest();
 
   /* double = Packet2d (half) */
-  beginTest("half double tests");
+  beginTest("2 double tests");
 
   Packet2d ch;
   vectorHalfDoubleTest(FUN2TEST, ch);
@@ -28,7 +28,7 @@ void pzeroTests() {
   endTest();
 
   /* int = Packet4i (half) */
-  beginTest("half int tests");
+  beginTest("4 int tests");
 
   Packet4i dh;
   vectorHalfIntTest(FUN2TEST, dh);
@@ -39,7 +39,7 @@ void pzeroTests() {
 
 #ifdef __AVX__
   /* float = Packet8f (full) */
-  beginTest("full float tests");
+  beginTest("8 float tests");
 
   Packet8f b;
   vectorFullFloatTest(FUN2TEST, b);
@@ -47,7 +47,7 @@ void pzeroTests() {
   endTest();
 
   /* double = Packet4d (full) */
-  beginTest("full double tests");
+  beginTest("4 double tests");
 
   Packet4d c;
   vectorFullDoubleTest(FUN2TEST, c);
@@ -55,7 +55,7 @@ void pzeroTests() {
   endTest();
 
   /* int = Packet8i (full) */
-  beginTest("full int tests");
+  beginTest("8 int tests");
 
   Packet8i d;
   vectorFullIntTest(FUN2TEST, d);
@@ -66,7 +66,7 @@ void pzeroTests() {
 
 #ifdef __AVX2__
   /* long = Packet4l */
-  beginTest("long tests");
+  beginTest("4 long tests");
 
   Packet4l a;
   vectorFullLongTest(FUN2TEST, a);
@@ -77,7 +77,7 @@ void pzeroTests() {
 
 #ifdef __AVX512F__
   // /* float = Packet16f (full) */
-  // beginTest("full float tests");
+  // beginTest("16 float tests");
 
   // Packet8f b;
   // vectorFullFloatTest(FUN2TEST, b);
@@ -85,7 +85,7 @@ void pzeroTests() {
   // endTest();
 
   // /* double = Packet8d (full) */
-  // beginTest("full double tests");
+  // beginTest("8 double tests");
 
   // Packet4d c;
   // vectorFullDoubleTest(FUN2TEST, c);
@@ -93,7 +93,7 @@ void pzeroTests() {
   // endTest();
 
   // /* int = Packet16i (full) */
-  // beginTest("full int tests");
+  // beginTest("16 int tests");
 
   // Packet8i d;
   // vectorFullIntTest(FUN2TEST, d);

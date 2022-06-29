@@ -14,7 +14,7 @@ void plogical_shift_leftTests() {
 #ifdef __SSE__
 
   /* int = Packet4i (half) */
-  beginTest("half int tests");
+  beginTest("4 int tests");
 
   MIN2MAX_HALF_INT_VECTOR
 
@@ -31,7 +31,7 @@ void plogical_shift_leftTests() {
 #ifdef __AVX__
 
   /* int = Packet8i (full) */
-  beginTest("full int tests");
+  beginTest("8 int tests");
 
   MIN2MAX_FULL_INT_VECTOR
 
@@ -47,7 +47,7 @@ void plogical_shift_leftTests() {
 
 #ifdef __AVX2__
   /* long = Packet4l */
-  beginTest("long tests");
+  beginTest("4 long tests");
 
   MIN2MAX_FULL_LONG_VECTOR
 

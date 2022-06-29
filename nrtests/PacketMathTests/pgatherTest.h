@@ -25,7 +25,7 @@ void pgatherTests() {
 
 #ifdef __SSE__
   /* float = Packet4f (half) */
-  beginTest("half float tests");
+  beginTest("4 float tests");
 
   float fv4x4[4 * 4] = {
       // 4f matrix
@@ -42,7 +42,7 @@ void pgatherTests() {
   endTest();
 
   /* double =  Packet2d (half) */
-  beginTest("half double tests");
+  beginTest("2 double tests");
 
   double dv2x2[2 * 2] = {
       // 2d matrix
@@ -57,7 +57,7 @@ void pgatherTests() {
   endTest();
 
   /* int = Packet4i (half) */
-  beginTest("half int tests");
+  beginTest("4 int tests");
 
   int iv4x4[4 * 4] = {
       // 4i matrix
@@ -74,7 +74,7 @@ void pgatherTests() {
   endTest();
 
   /* bool = Packet16b */
-  beginTest("bool tests");
+  beginTest("16 bool tests");
 
   bool bv16x16[16 * 16] = {
       // 16b matrix
@@ -122,7 +122,7 @@ void pgatherTests() {
 
 #ifdef __AVX__
   /* float = Packet8f (full) */
-  beginTest("full float tests");
+  beginTest("8 float tests");
 
   float fv8x8[8 * 8] = {
       // 8f matrix
@@ -143,7 +143,7 @@ void pgatherTests() {
   endTest();
 
   /* double = Packet4d (full) */
-  beginTest("full double tests");
+  beginTest("4 double tests");
 
   double dv4x4[4 * 4] = {
       // 4d matrix
@@ -160,7 +160,7 @@ void pgatherTests() {
   endTest();
 
   /* int = Packet8i (full) */
-  beginTest("full int tests");
+  beginTest("8 int tests");
 
   int iv8x8[8 * 8] = {
       // 8i matrix
@@ -181,7 +181,7 @@ void pgatherTests() {
   endTest();
 
   /* Eigen::half = Packet8h */
-  beginTest("Eigen::half tests");
+  beginTest("8 Eigen::half tests");
 
   Eigen::half hv8x8[8 * 8] = {
       // 8h matrix
@@ -210,7 +210,7 @@ void pgatherTests() {
   endTest();
 
   /* bfloat16 = Packet8bf */
-  beginTest("bfloat16 tests");
+  beginTest("8 bfloat16 tests");
 
   bfloat16 bfv8x8[8 * 8] = {
       // 8bf matrix
@@ -242,7 +242,7 @@ void pgatherTests() {
 
 #ifdef __AVX2__
   /* long = Packet4l */
-  beginTest("long tests");
+  beginTest("4 long tests");
 
   long lv4x4[4 * 4] = {
       // 4i matrix

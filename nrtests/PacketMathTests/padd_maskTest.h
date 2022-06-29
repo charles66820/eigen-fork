@@ -23,7 +23,7 @@ void padd2Tests() {
 
 #ifdef __AVX512F__
   /* float = Packet8f (full) */
-  beginTest("full float tests");
+  beginTest("8 float tests");
 
   MIN2MAX_FULL_FLOAT_VECTOR
 

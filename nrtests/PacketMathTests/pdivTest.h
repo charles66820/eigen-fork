@@ -14,7 +14,7 @@ void pdivTests() {
 
 #ifdef __SSE__
   /* float = Packet4f (half) */
-  beginTest("half float tests");
+  beginTest("4 float tests");
 
   MIN2MAX_HALF_FLOAT_VECTOR
 
@@ -23,7 +23,7 @@ void pdivTests() {
   endTest();
 
   /* double =  Packet2d (half) */
-  beginTest("half double tests");
+  beginTest("2 double tests");
 
   MIN2MAX_HALF_DOUBLE_VECTOR
 
@@ -36,7 +36,7 @@ void pdivTests() {
 
 #ifdef __AVX__
   /* float = Packet8f (full) */
-  beginTest("full float tests");
+  beginTest("8 float tests");
 
   MIN2MAX_FULL_FLOAT_VECTOR
 
@@ -45,7 +45,7 @@ void pdivTests() {
   endTest();
 
   /* double = Packet4d (full) */
-  beginTest("full double tests");
+  beginTest("4 double tests");
 
   MIN2MAX_FULL_DOUBLE_VECTOR
 
@@ -55,7 +55,7 @@ void pdivTests() {
   endTest();
 
   /* Eigen::half = Packet8h */
-  beginTest("Eigen::half tests");
+  beginTest("8 Eigen::half tests");
 
   MIN2MAX_HALF_HALF_VECTOR
 
@@ -65,7 +65,7 @@ void pdivTests() {
   endTest();
 
   /* bfloat16 = Packet8bf */
-  beginTest("bfloat16 tests");
+  beginTest("8 bfloat16 tests");
 
   MIN2MAX_HALF_BFLOAT16_VECTOR
 

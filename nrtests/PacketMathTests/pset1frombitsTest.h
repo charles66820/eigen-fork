@@ -12,7 +12,7 @@ void pset1frombitsTests() {
 
 #ifdef __SSE__
   /* float = Packet4f (half) */
-  beginTest("half float tests");
+  beginTest("4 float tests");
 
   vectorHalfFloatTest(FUN2TEST, (uint32_t)INT_MAX);
   vectorHalfFloatTest(FUN2TEST, (uint32_t)0x4212cccd);
@@ -23,7 +23,7 @@ void pset1frombitsTests() {
   endTest();
 
   /* double =  Packet2d (half) */
-  beginTest("half double tests");
+  beginTest("2 double tests");
 
   vectorHalfDoubleTest(FUN2TEST, (uint64_t)LONG_MAX);
   vectorHalfDoubleTest(FUN2TEST, (uint64_t)0x404259999999999a);
@@ -37,7 +37,7 @@ void pset1frombitsTests() {
 
 #ifdef __AVX__
   /* float = Packet8f (full) */
-  beginTest("full float tests");
+  beginTest("8 float tests");
 
   vectorFullFloatTest(FUN2TEST, (uint32_t)INT_MAX);
   vectorFullFloatTest(FUN2TEST, (uint32_t)0x4212cccd);
@@ -48,7 +48,7 @@ void pset1frombitsTests() {
   endTest();
 
   /* double = Packet4d (full) */
-  beginTest("full double tests");
+  beginTest("4 double tests");
 
   vectorFullDoubleTest(FUN2TEST, (uint64_t)LONG_MAX);
   vectorFullDoubleTest(FUN2TEST, (uint64_t)0x404259999999999a);

@@ -13,7 +13,7 @@ void pfrexp_generic_get_biased_exponentTests() {
 
 #ifdef __SSE__
   /* double =  Packet2d (half) */
-  beginTest("half double tests");
+  beginTest("2 double tests");
 
   MIN2MAX_HALF_DOUBLE_VECTOR
 
@@ -29,7 +29,7 @@ void pfrexp_generic_get_biased_exponentTests() {
 
 #ifdef __AVX__
   /* double = Packet4d (full) */
-  beginTest("full double tests");
+  beginTest("4 double tests");
 
   MIN2MAX_FULL_DOUBLE_VECTOR
   vectorFullDoubleTest(FUN2TEST, (Packet4d)dvmax.r);

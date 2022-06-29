@@ -14,7 +14,7 @@ void paddsubTests() {
 
 #ifdef __SSE__
   /* float = Packet4f (half) */
-  beginTest("half float tests");
+  beginTest("4 float tests");
 
   MIN2MAX_HALF_FLOAT_VECTOR
 
@@ -23,7 +23,7 @@ void paddsubTests() {
   endTest();
 
   /* double =  Packet2d (half) */
-  beginTest("half double tests");
+  beginTest("2 double tests");
 
   MIN2MAX_HALF_DOUBLE_VECTOR
 

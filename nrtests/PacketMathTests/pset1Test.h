@@ -12,7 +12,7 @@ void pset1Tests() {
 
 #ifdef __SSE__
   /* float = Packet4f (half) */
-  beginTest("half float tests");
+  beginTest("4 float tests");
 
   vectorHalfFloatTest(FUN2TEST, FLT_MAX);
   vectorHalfFloatTest(FUN2TEST, 36.7f);
@@ -23,7 +23,7 @@ void pset1Tests() {
   endTest();
 
   /* double =  Packet2d (half) */
-  beginTest("half double tests");
+  beginTest("2 double tests");
 
   vectorHalfDoubleTest(FUN2TEST, DBL_MAX);
   vectorHalfDoubleTest(FUN2TEST, 36.7d);
@@ -34,7 +34,7 @@ void pset1Tests() {
   endTest();
 
   /* int = Packet4i (half) */
-  beginTest("half int tests");
+  beginTest("4 int tests");
 
   vectorHalfIntTest(FUN2TEST, INT_MAX);
   vectorHalfIntTest(FUN2TEST, 36);
@@ -45,7 +45,7 @@ void pset1Tests() {
   endTest();
 
   /* bool = Packet16b */
-  beginTest("bool tests");
+  beginTest("16 bool tests");
 
   vectorHalfBoolTest(FUN2TEST, true);
   vectorHalfBoolTest(FUN2TEST, false);
@@ -58,7 +58,7 @@ void pset1Tests() {
 
 #ifdef __AVX__
   /* float = Packet8f (full) */
-  beginTest("full float tests");
+  beginTest("8 float tests");
 
   vectorFullFloatTest(FUN2TEST, FLT_MAX);
   vectorFullFloatTest(FUN2TEST, 36.7f);
@@ -69,7 +69,7 @@ void pset1Tests() {
   endTest();
 
   /* double = Packet4d (full) */
-  beginTest("full double tests");
+  beginTest("4 double tests");
 
   vectorFullDoubleTest(FUN2TEST, DBL_MAX);
   vectorFullDoubleTest(FUN2TEST, 36.7d);
@@ -80,7 +80,7 @@ void pset1Tests() {
   endTest();
 
   /* int = Packet8i (full) */
-  beginTest("full int tests");
+  beginTest("8 int tests");
 
   vectorFullIntTest(FUN2TEST, INT_MAX);
   vectorFullIntTest(FUN2TEST, 36);
@@ -91,7 +91,7 @@ void pset1Tests() {
   endTest();
 
   /* Eigen::half = Packet8h */
-  beginTest("Eigen::half tests");
+  beginTest("8 Eigen::half tests");
 
   vectorHalfEigenHalfTest(FUN2TEST, half(FLT_MAX));
   vectorHalfEigenHalfTest(FUN2TEST, half(36.7f));
@@ -102,7 +102,7 @@ void pset1Tests() {
   endTest();
 
   /* bfloat16 = Packet8bf */
-  beginTest("bfloat16 tests");
+  beginTest("8 bfloat16 tests");
 
   vectorHalfBfloat16Test(FUN2TEST, bfloat16(FLT_MAX));
   vectorHalfBfloat16Test(FUN2TEST, bfloat16(36.7f));
@@ -116,7 +116,7 @@ void pset1Tests() {
 
 #ifdef __AVX2__
   /* long = Packet4l */
-  beginTest("long tests");
+  beginTest("4 long tests");
 
   vectorFullLongTest(FUN2TEST, LONG_MAX);
   vectorFullLongTest(FUN2TEST, 36L);
