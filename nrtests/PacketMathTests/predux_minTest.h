@@ -17,11 +17,11 @@ void predux_minTests() {
 
   MIN2MAX_HALF_FLOAT_VECTOR
 
-  scalarSingleTypeTest(float, FUN2TEST, Packet4f, fhvmax.r);
-  scalarSingleTypeTest(float, FUN2TEST, Packet4f, fhv36.r);
-  scalarSingleTypeTest(float, FUN2TEST, Packet4f, fhv0.r);
-  scalarSingleTypeTest(float, FUN2TEST, Packet4f, fhv_240.r);
-  scalarSingleTypeTest(float, FUN2TEST, Packet4f, fhvmin.r);
+  scalarSingleTypeTest(float, FUN2TEST, Packet4f, fhvmax);
+  scalarSingleTypeTest(float, FUN2TEST, Packet4f, fhv36);
+  scalarSingleTypeTest(float, FUN2TEST, Packet4f, fhv0);
+  scalarSingleTypeTest(float, FUN2TEST, Packet4f, fhv_240);
+  scalarSingleTypeTest(float, FUN2TEST, Packet4f, fhvmin);
 
   endTest();
 
@@ -30,11 +30,11 @@ void predux_minTests() {
 
   MIN2MAX_HALF_DOUBLE_VECTOR
 
-  scalarSingleTypeTest(double, FUN2TEST, Packet2d, (Packet2d)dhvmax.r);
-  scalarSingleTypeTest(double, FUN2TEST, Packet2d, (Packet2d)dhv36.r);
-  scalarSingleTypeTest(double, FUN2TEST, Packet2d, (Packet2d)dhv0.r);
-  scalarSingleTypeTest(double, FUN2TEST, Packet2d, (Packet2d)dhv_240.r);
-  scalarSingleTypeTest(double, FUN2TEST, Packet2d, (Packet2d)dhvmin.r);
+  scalarSingleTypeTest(double, FUN2TEST, Packet2d, dhvmax);
+  scalarSingleTypeTest(double, FUN2TEST, Packet2d, dhv36);
+  scalarSingleTypeTest(double, FUN2TEST, Packet2d, dhv0);
+  scalarSingleTypeTest(double, FUN2TEST, Packet2d, dhv_240);
+  scalarSingleTypeTest(double, FUN2TEST, Packet2d, dhvmin);
 
   endTest();
 
@@ -43,11 +43,11 @@ void predux_minTests() {
 
   MIN2MAX_HALF_INT_VECTOR
 
-  scalarSingleTypeTest(int, FUN2TEST, Packet4i, (__m128i)ihvmax.r);
-  scalarSingleTypeTest(int, FUN2TEST, Packet4i, (__m128i)ihv36.r);
-  scalarSingleTypeTest(int, FUN2TEST, Packet4i, (__m128i)ihv0.r);
-  scalarSingleTypeTest(int, FUN2TEST, Packet4i, (__m128i)ihv_240.r);
-  scalarSingleTypeTest(int, FUN2TEST, Packet4i, (__m128i)ihvmin.r);
+  scalarSingleTypeTest(int, FUN2TEST, Packet4i, ihvmax);
+  scalarSingleTypeTest(int, FUN2TEST, Packet4i, ihv36);
+  scalarSingleTypeTest(int, FUN2TEST, Packet4i, ihv0);
+  scalarSingleTypeTest(int, FUN2TEST, Packet4i, ihv_240);
+  scalarSingleTypeTest(int, FUN2TEST, Packet4i, ihvmin);
 
   endTest();
 
@@ -56,8 +56,8 @@ void predux_minTests() {
 
   MIN2MAX_HALF_BOOL_VECTOR
 
-  scalarSingleTypeTest(bool, FUN2TEST, Packet16b, (__m128i)bvtrue.r);
-  scalarSingleTypeTest(bool, FUN2TEST, Packet16b, (__m128i)bvfalse.r);
+  scalarSingleTypeTest(bool, FUN2TEST, Packet16b, bvtrue);
+  scalarSingleTypeTest(bool, FUN2TEST, Packet16b, bvfalse);
 
   endTest();
 
@@ -69,11 +69,11 @@ void predux_minTests() {
 
   MIN2MAX_FULL_FLOAT_VECTOR
 
-  scalarSingleTypeTest(float, FUN2TEST, Packet8f, fvmax.r);
-  scalarSingleTypeTest(float, FUN2TEST, Packet8f, fv36.r);
-  scalarSingleTypeTest(float, FUN2TEST, Packet8f, fv0.r);
-  scalarSingleTypeTest(float, FUN2TEST, Packet8f, fv_240.r);
-  scalarSingleTypeTest(float, FUN2TEST, Packet8f, fvmin.r);
+  scalarSingleTypeTest(float, FUN2TEST, Packet8f, fvmax);
+  scalarSingleTypeTest(float, FUN2TEST, Packet8f, fv36);
+  scalarSingleTypeTest(float, FUN2TEST, Packet8f, fv0);
+  scalarSingleTypeTest(float, FUN2TEST, Packet8f, fv_240);
+  scalarSingleTypeTest(float, FUN2TEST, Packet8f, fvmin);
 
   endTest();
 
@@ -82,11 +82,11 @@ void predux_minTests() {
 
   MIN2MAX_FULL_DOUBLE_VECTOR
 
-  scalarSingleTypeTest(double, FUN2TEST, Packet4d, (Packet4d)dvmax.r);
-  scalarSingleTypeTest(double, FUN2TEST, Packet4d, (Packet4d)dv36.r);
-  scalarSingleTypeTest(double, FUN2TEST, Packet4d, (Packet4d)dv0.r);
-  scalarSingleTypeTest(double, FUN2TEST, Packet4d, (Packet4d)dv_240.r);
-  scalarSingleTypeTest(double, FUN2TEST, Packet4d, (Packet4d)dvmin.r);
+  scalarSingleTypeTest(double, FUN2TEST, Packet4d, dvmax);
+  scalarSingleTypeTest(double, FUN2TEST, Packet4d, dv36);
+  scalarSingleTypeTest(double, FUN2TEST, Packet4d, dv0);
+  scalarSingleTypeTest(double, FUN2TEST, Packet4d, dv_240);
+  scalarSingleTypeTest(double, FUN2TEST, Packet4d, dvmin);
 
   endTest();
 
@@ -95,11 +95,11 @@ void predux_minTests() {
 
   MIN2MAX_FULL_INT_VECTOR
 
-  scalarSingleTypeTest(int, FUN2TEST, Packet8i, (__m256i)ivmax.r);
-  scalarSingleTypeTest(int, FUN2TEST, Packet8i, (__m256i)iv36.r);
-  scalarSingleTypeTest(int, FUN2TEST, Packet8i, (__m256i)iv0.r);
-  scalarSingleTypeTest(int, FUN2TEST, Packet8i, (__m256i)iv_240.r);
-  scalarSingleTypeTest(int, FUN2TEST, Packet8i, (__m256i)ivmin.r);
+  scalarSingleTypeTest(int, FUN2TEST, Packet8i, ivmax);
+  scalarSingleTypeTest(int, FUN2TEST, Packet8i, iv36);
+  scalarSingleTypeTest(int, FUN2TEST, Packet8i, iv0);
+  scalarSingleTypeTest(int, FUN2TEST, Packet8i, iv_240);
+  scalarSingleTypeTest(int, FUN2TEST, Packet8i, ivmin);
 
   endTest();
 
@@ -108,10 +108,10 @@ void predux_minTests() {
 
   MIN2MAX_HALF_HALF_VECTOR
 
-  scalarSingleTypeTest(Eigen::half, FUN2TEST, Packet8h, (__m128i)hvmax.r);
-  scalarSingleTypeTest(Eigen::half, FUN2TEST, Packet8h, (__m128i)hv36.r);
-  scalarSingleTypeTest(Eigen::half, FUN2TEST, Packet8h, (__m128i)hv0.r);
-  scalarSingleTypeTest(Eigen::half, FUN2TEST, Packet8h, (__m128i)hvmin.r);
+  scalarSingleTypeTest(Eigen::half, FUN2TEST, Packet8h, hvmax);
+  scalarSingleTypeTest(Eigen::half, FUN2TEST, Packet8h, hv36);
+  scalarSingleTypeTest(Eigen::half, FUN2TEST, Packet8h, hv0);
+  scalarSingleTypeTest(Eigen::half, FUN2TEST, Packet8h, hvmin);
 
   endTest();
 
@@ -120,11 +120,11 @@ void predux_minTests() {
 
   MIN2MAX_HALF_BFLOAT16_VECTOR
 
-  scalarSingleTypeTest(bfloat16, FUN2TEST, Packet8bf, (__m128i)bfvmax.r);
-  scalarSingleTypeTest(bfloat16, FUN2TEST, Packet8bf, (__m128i)bfv36.r);
-  scalarSingleTypeTest(bfloat16, FUN2TEST, Packet8bf, (__m128i)bfv0.r);
-  scalarSingleTypeTest(bfloat16, FUN2TEST, Packet8bf, (__m128i)bfv_240.r);
-  scalarSingleTypeTest(bfloat16, FUN2TEST, Packet8bf, (__m128i)bfvmin.r);
+  scalarSingleTypeTest(bfloat16, FUN2TEST, Packet8bf, bfvmax);
+  scalarSingleTypeTest(bfloat16, FUN2TEST, Packet8bf, bfv36);
+  scalarSingleTypeTest(bfloat16, FUN2TEST, Packet8bf, bfv0);
+  scalarSingleTypeTest(bfloat16, FUN2TEST, Packet8bf, bfv_240);
+  scalarSingleTypeTest(bfloat16, FUN2TEST, Packet8bf, bfvmin);
 
   endTest();
 
@@ -136,11 +136,11 @@ void predux_minTests() {
 
   MIN2MAX_FULL_LONG_VECTOR
 
-  scalarSingleTypeTest(long, FUN2TEST, Packet4l, (__m256i)lvmax.r);
-  scalarSingleTypeTest(long, FUN2TEST, Packet4l, (__m256i)lv36.r);
-  scalarSingleTypeTest(long, FUN2TEST, Packet4l, (__m256i)lv0.r);
-  scalarSingleTypeTest(long, FUN2TEST, Packet4l, (__m256i)lv_240.r);
-  scalarSingleTypeTest(long, FUN2TEST, Packet4l, (__m256i)lvmin.r);
+  scalarSingleTypeTest(long, FUN2TEST, Packet4l, lvmax);
+  scalarSingleTypeTest(long, FUN2TEST, Packet4l, lv36);
+  scalarSingleTypeTest(long, FUN2TEST, Packet4l, lv0);
+  scalarSingleTypeTest(long, FUN2TEST, Packet4l, lv_240);
+  scalarSingleTypeTest(long, FUN2TEST, Packet4l, lvmin);
 
   endTest();
 

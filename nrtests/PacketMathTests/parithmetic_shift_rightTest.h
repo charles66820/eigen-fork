@@ -18,11 +18,11 @@ void parithmetic_shift_rightTests() {
 
   MIN2MAX_HALF_INT_VECTOR
 
-  vectorHalfIntTemplateTest(3, FUN2TEST, (__m128i)ihvmax.r);
-  vectorHalfIntTemplateTest(3, FUN2TEST, (__m128i)ihv36.r);
-  vectorHalfIntTemplateTest(3, FUN2TEST, (__m128i)ihv0.r);
-  vectorHalfIntTemplateTest(3, FUN2TEST, (__m128i)ihv_240.r);
-  vectorHalfIntTemplateTest(3, FUN2TEST, (__m128i)ihvmin.r);
+  vectorHalfIntTemplateTest(3, FUN2TEST, ihvmax);
+  vectorHalfIntTemplateTest(3, FUN2TEST, ihv36);
+  vectorHalfIntTemplateTest(3, FUN2TEST, ihv0);
+  vectorHalfIntTemplateTest(3, FUN2TEST, ihv_240);
+  vectorHalfIntTemplateTest(3, FUN2TEST, ihvmin);
 
   endTest();
 
@@ -35,30 +35,17 @@ void parithmetic_shift_rightTests() {
 
   MIN2MAX_FULL_INT_VECTOR
 
-  vectorFullIntTemplateTest(3, FUN2TEST, (__m256i)ivmax.r);
-  vectorFullIntTemplateTest(3, FUN2TEST, (__m256i)iv36.r);
-  vectorFullIntTemplateTest(3, FUN2TEST, (__m256i)iv0.r);
-  vectorFullIntTemplateTest(3, FUN2TEST, (__m256i)iv_240.r);
-  vectorFullIntTemplateTest(3, FUN2TEST, (__m256i)ivmin.r);
+  vectorFullIntTemplateTest(3, FUN2TEST, ivmax);
+  vectorFullIntTemplateTest(3, FUN2TEST, iv36);
+  vectorFullIntTemplateTest(3, FUN2TEST, iv0);
+  vectorFullIntTemplateTest(3, FUN2TEST, iv_240);
+  vectorFullIntTemplateTest(3, FUN2TEST, ivmin);
 
   endTest();
 
 #endif
 
 #ifdef __AVX2__
-  /* long = Packet4l */
-  beginTest("4 long tests");
-
-  MIN2MAX_FULL_LONG_VECTOR
-
-  vectorFullLongTemplateTest(3, FUN2TEST, (__m256i)lvmax.r);
-  vectorFullLongTemplateTest(3, FUN2TEST, (__m256i)lv36.r);
-  vectorFullLongTemplateTest(3, FUN2TEST, (__m256i)lv0.r);
-  vectorFullLongTemplateTest(3, FUN2TEST, (__m256i)lv_240.r);
-  vectorFullLongTemplateTest(3, FUN2TEST, (__m256i)lvmin.r);
-
-  endTest();
-
 #endif
 
 #ifdef __AVX512F__

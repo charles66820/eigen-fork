@@ -18,11 +18,11 @@ void plogical_shift_leftTests() {
 
   MIN2MAX_HALF_INT_VECTOR
 
-  vectorHalfIntTemplateTest(3, FUN2TEST, (Packet4i)(__m128i)ihvmax.r);
-  vectorHalfIntTemplateTest(3, FUN2TEST, (Packet4i)(__m128i)ihv36.r);
-  vectorHalfIntTemplateTest(3, FUN2TEST, (Packet4i)(__m128i)ihv0.r);
-  vectorHalfIntTemplateTest(3, FUN2TEST, (Packet4i)(__m128i)ihv_240.r);
-  vectorHalfIntTemplateTest(3, FUN2TEST, (Packet4i)(__m128i)ihvmin.r);
+  vectorHalfIntTemplateTest(3, FUN2TEST, (Packet4i)ihvmax);
+  vectorHalfIntTemplateTest(3, FUN2TEST, (Packet4i)ihv36);
+  vectorHalfIntTemplateTest(3, FUN2TEST, (Packet4i)ihv0);
+  vectorHalfIntTemplateTest(3, FUN2TEST, (Packet4i)ihv_240);
+  vectorHalfIntTemplateTest(3, FUN2TEST, (Packet4i)ihvmin);
 
   endTest();
 
@@ -35,11 +35,11 @@ void plogical_shift_leftTests() {
 
   MIN2MAX_FULL_INT_VECTOR
 
-  vectorFullIntTemplateTest(3, FUN2TEST, (Packet8i)(__m256i)ivmax.r);
-  vectorFullIntTemplateTest(3, FUN2TEST, (Packet8i)(__m256i)iv36.r);
-  vectorFullIntTemplateTest(3, FUN2TEST, (Packet8i)(__m256i)iv0.r);
-  vectorFullIntTemplateTest(3, FUN2TEST, (Packet8i)(__m256i)iv_240.r);
-  vectorFullIntTemplateTest(3, FUN2TEST, (Packet8i)(__m256i)ivmin.r);
+  vectorFullIntTemplateTest(3, FUN2TEST, (Packet8i)ivmax);
+  vectorFullIntTemplateTest(3, FUN2TEST, (Packet8i)iv36);
+  vectorFullIntTemplateTest(3, FUN2TEST, (Packet8i)iv0);
+  vectorFullIntTemplateTest(3, FUN2TEST, (Packet8i)iv_240);
+  vectorFullIntTemplateTest(3, FUN2TEST, (Packet8i)ivmin);
 
   endTest();
 
@@ -51,11 +51,11 @@ void plogical_shift_leftTests() {
 
   MIN2MAX_FULL_LONG_VECTOR
 
-  vectorFullLongTemplateTest(3, FUN2TEST, (Packet4l)(__m256i)lvmax.r);
-  vectorFullLongTemplateTest(3, FUN2TEST, (Packet4l)(__m256i)lv36.r);
-  vectorFullLongTemplateTest(3, FUN2TEST, (Packet4l)(__m256i)lv0.r);
-  vectorFullLongTemplateTest(3, FUN2TEST, (Packet4l)(__m256i)lv_240.r);
-  vectorFullLongTemplateTest(3, FUN2TEST, (Packet4l)(__m256i)lvmin.r);
+  vectorFullLongTemplateTest(3, FUN2TEST, (Packet4l)lvmax);
+  vectorFullLongTemplateTest(3, FUN2TEST, (Packet4l)lv36);
+  vectorFullLongTemplateTest(3, FUN2TEST, (Packet4l)lv0);
+  vectorFullLongTemplateTest(3, FUN2TEST, (Packet4l)lv_240);
+  vectorFullLongTemplateTest(3, FUN2TEST, (Packet4l)lvmin);
 
   endTest();
 

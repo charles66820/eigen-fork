@@ -20,11 +20,11 @@ void predux_half_dowto4Tests() {
 
   MIN2MAX_FULL_FLOAT_VECTOR
 
-  vectorHalfFloatTemplateTest(Packet8f, FUN2TEST, fvmax.r);
-  vectorHalfFloatTemplateTest(Packet8f, FUN2TEST, fv36.r);
-  vectorHalfFloatTemplateTest(Packet8f, FUN2TEST, fv0.r);
-  vectorHalfFloatTemplateTest(Packet8f, FUN2TEST, fv_240.r);
-  vectorHalfFloatTemplateTest(Packet8f, FUN2TEST, fvmin.r);
+  vectorHalfFloatTemplateTest(Packet8f, FUN2TEST, fvmax);
+  vectorHalfFloatTemplateTest(Packet8f, FUN2TEST, fv36);
+  vectorHalfFloatTemplateTest(Packet8f, FUN2TEST, fv0);
+  vectorHalfFloatTemplateTest(Packet8f, FUN2TEST, fv_240);
+  vectorHalfFloatTemplateTest(Packet8f, FUN2TEST, fvmin);
 
   endTest();
 
@@ -33,11 +33,11 @@ void predux_half_dowto4Tests() {
 
   MIN2MAX_FULL_INT_VECTOR
 
-  vectorHalfIntTemplateTest(Packet8i, FUN2TEST, (__m256i)ivmax.r);
-  vectorHalfIntTemplateTest(Packet8i, FUN2TEST, (__m256i)iv36.r);
-  vectorHalfIntTemplateTest(Packet8i, FUN2TEST, (__m256i)iv0.r);
-  vectorHalfIntTemplateTest(Packet8i, FUN2TEST, (__m256i)iv_240.r);
-  vectorHalfIntTemplateTest(Packet8i, FUN2TEST, (__m256i)ivmin.r);
+  vectorHalfIntTemplateTest(Packet8i, FUN2TEST, ivmax);
+  vectorHalfIntTemplateTest(Packet8i, FUN2TEST, iv36);
+  vectorHalfIntTemplateTest(Packet8i, FUN2TEST, iv0);
+  vectorHalfIntTemplateTest(Packet8i, FUN2TEST, iv_240);
+  vectorHalfIntTemplateTest(Packet8i, FUN2TEST, ivmin);
 
   endTest();
 

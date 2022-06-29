@@ -17,11 +17,11 @@ void pstoreuTests() {
 
   MIN2MAX_HALF_FLOAT_VECTOR
 
-  uRefSingleType(FUN2TEST, float, 4, (Packet4f)fhvmax.r);
-  uRefSingleType(FUN2TEST, float, 4, (Packet4f)fhv36.r);
-  uRefSingleType(FUN2TEST, float, 4, (Packet4f)fhv0.r);
-  uRefSingleType(FUN2TEST, float, 4, (Packet4f)fhv_240.r);
-  uRefSingleType(FUN2TEST, float, 4, (Packet4f)fhvmin.r);
+  uRefSingleType(FUN2TEST, float, 4, (Packet4f)fhvmax);
+  uRefSingleType(FUN2TEST, float, 4, (Packet4f)fhv36);
+  uRefSingleType(FUN2TEST, float, 4, (Packet4f)fhv0);
+  uRefSingleType(FUN2TEST, float, 4, (Packet4f)fhv_240);
+  uRefSingleType(FUN2TEST, float, 4, (Packet4f)fhvmin);
 
   endTest();
 
@@ -30,11 +30,11 @@ void pstoreuTests() {
 
   MIN2MAX_HALF_DOUBLE_VECTOR
 
-  uRefSingleType(FUN2TEST, double, 2, (Packet2d)dhvmax.r);
-  uRefSingleType(FUN2TEST, double, 2, (Packet2d)dhv36.r);
-  uRefSingleType(FUN2TEST, double, 2, (Packet2d)dhv0.r);
-  uRefSingleType(FUN2TEST, double, 2, (Packet2d)dhv_240.r);
-  uRefSingleType(FUN2TEST, double, 2, (Packet2d)dhvmin.r);
+  uRefSingleType(FUN2TEST, double, 2, dhvmax);
+  uRefSingleType(FUN2TEST, double, 2, dhv36);
+  uRefSingleType(FUN2TEST, double, 2, dhv0);
+  uRefSingleType(FUN2TEST, double, 2, dhv_240);
+  uRefSingleType(FUN2TEST, double, 2, dhvmin);
 
   endTest();
 
@@ -43,11 +43,11 @@ void pstoreuTests() {
 
   MIN2MAX_HALF_INT_VECTOR
 
-  uRefSingleType(FUN2TEST, int, 4, (Packet4i)(__m128i)ihvmax.r);
-  uRefSingleType(FUN2TEST, int, 4, (Packet4i)(__m128i)ihv36.r);
-  uRefSingleType(FUN2TEST, int, 4, (Packet4i)(__m128i)ihv0.r);
-  uRefSingleType(FUN2TEST, int, 4, (Packet4i)(__m128i)ihv_240.r);
-  uRefSingleType(FUN2TEST, int, 4, (Packet4i)(__m128i)ihvmin.r);
+  uRefSingleType(FUN2TEST, int, 4, (Packet4i)ihvmax);
+  uRefSingleType(FUN2TEST, int, 4, (Packet4i)ihv36);
+  uRefSingleType(FUN2TEST, int, 4, (Packet4i)ihv0);
+  uRefSingleType(FUN2TEST, int, 4, (Packet4i)ihv_240);
+  uRefSingleType(FUN2TEST, int, 4, (Packet4i)ihvmin);
 
   endTest();
 
@@ -56,8 +56,8 @@ void pstoreuTests() {
 
   MIN2MAX_HALF_BOOL_VECTOR
 
-  uRefSingleType(FUN2TEST, bool, 16, (Packet16b)(__m128i)bvtrue.r);
-  uRefSingleType(FUN2TEST, bool, 16, (Packet16b)(__m128i)bvfalse.r);
+  uRefSingleType(FUN2TEST, bool, 16, (Packet16b)bvtrue);
+  uRefSingleType(FUN2TEST, bool, 16, (Packet16b)bvfalse);
 
   endTest();
 
@@ -69,11 +69,11 @@ void pstoreuTests() {
 
   MIN2MAX_FULL_FLOAT_VECTOR
 
-  uRefSingleType(FUN2TEST, float, 8, (Packet8f)fvmax.r);
-  uRefSingleType(FUN2TEST, float, 8, (Packet8f)fv36.r);
-  uRefSingleType(FUN2TEST, float, 8, (Packet8f)fv0.r);
-  uRefSingleType(FUN2TEST, float, 8, (Packet8f)fv_240.r);
-  uRefSingleType(FUN2TEST, float, 8, (Packet8f)fvmin.r);
+  uRefSingleType(FUN2TEST, float, 8, (Packet8f)fvmax);
+  uRefSingleType(FUN2TEST, float, 8, (Packet8f)fv36);
+  uRefSingleType(FUN2TEST, float, 8, (Packet8f)fv0);
+  uRefSingleType(FUN2TEST, float, 8, (Packet8f)fv_240);
+  uRefSingleType(FUN2TEST, float, 8, (Packet8f)fvmin);
 
   endTest();
 
@@ -82,11 +82,11 @@ void pstoreuTests() {
 
   MIN2MAX_FULL_DOUBLE_VECTOR
 
-  uRefSingleType(FUN2TEST, double, 4, (Packet4d)dvmax.r);
-  uRefSingleType(FUN2TEST, double, 4, (Packet4d)dv36.r);
-  uRefSingleType(FUN2TEST, double, 4, (Packet4d)dv0.r);
-  uRefSingleType(FUN2TEST, double, 4, (Packet4d)dv_240.r);
-  uRefSingleType(FUN2TEST, double, 4, (Packet4d)dvmin.r);
+  uRefSingleType(FUN2TEST, double, 4, dvmax);
+  uRefSingleType(FUN2TEST, double, 4, dv36);
+  uRefSingleType(FUN2TEST, double, 4, dv0);
+  uRefSingleType(FUN2TEST, double, 4, dv_240);
+  uRefSingleType(FUN2TEST, double, 4, dvmin);
 
   endTest();
 
@@ -95,11 +95,11 @@ void pstoreuTests() {
 
   MIN2MAX_FULL_INT_VECTOR
 
-  uRefSingleType(FUN2TEST, int, 8, (Packet8i)(__m256i)ivmax.r);
-  uRefSingleType(FUN2TEST, int, 8, (Packet8i)(__m256i)iv36.r);
-  uRefSingleType(FUN2TEST, int, 8, (Packet8i)(__m256i)iv0.r);
-  uRefSingleType(FUN2TEST, int, 8, (Packet8i)(__m256i)iv_240.r);
-  uRefSingleType(FUN2TEST, int, 8, (Packet8i)(__m256i)ivmin.r);
+  uRefSingleType(FUN2TEST, int, 8, (Packet8i)ivmax);
+  uRefSingleType(FUN2TEST, int, 8, (Packet8i)iv36);
+  uRefSingleType(FUN2TEST, int, 8, (Packet8i)iv0);
+  uRefSingleType(FUN2TEST, int, 8, (Packet8i)iv_240);
+  uRefSingleType(FUN2TEST, int, 8, (Packet8i)ivmin);
 
   endTest();
 
@@ -108,11 +108,11 @@ void pstoreuTests() {
 
   MIN2MAX_HALF_HALF_VECTOR
 
-  uRefSingleType(FUN2TEST, Eigen::half, 8, (Packet8h)(__m128i)hvmax.r);
-  uRefSingleType(FUN2TEST, Eigen::half, 8, (Packet8h)(__m128i)hv36.r);
-  uRefSingleType(FUN2TEST, Eigen::half, 8, (Packet8h)(__m128i)hv0.r);
-  uRefSingleType(FUN2TEST, Eigen::half, 8, (Packet8h)(__m128i)hv_240.r);
-  uRefSingleType(FUN2TEST, Eigen::half, 8, (Packet8h)(__m128i)hvmin.r);
+  uRefSingleType(FUN2TEST, Eigen::half, 8, (Packet8h)hvmax);
+  uRefSingleType(FUN2TEST, Eigen::half, 8, (Packet8h)hv36);
+  uRefSingleType(FUN2TEST, Eigen::half, 8, (Packet8h)hv0);
+  uRefSingleType(FUN2TEST, Eigen::half, 8, (Packet8h)hv_240);
+  uRefSingleType(FUN2TEST, Eigen::half, 8, (Packet8h)hvmin);
 
   endTest();
 
@@ -121,11 +121,11 @@ void pstoreuTests() {
 
   MIN2MAX_HALF_BFLOAT16_VECTOR
 
-  uRefSingleType(FUN2TEST, bfloat16, 8, (Packet8bf)(__m128i)bfvmax.r);
-  uRefSingleType(FUN2TEST, bfloat16, 8, (Packet8bf)(__m128i)bfv36.r);
-  uRefSingleType(FUN2TEST, bfloat16, 8, (Packet8bf)(__m128i)bfv0.r);
-  uRefSingleType(FUN2TEST, bfloat16, 8, (Packet8bf)(__m128i)bfv_240.r);
-  uRefSingleType(FUN2TEST, bfloat16, 8, (Packet8bf)(__m128i)bfvmin.r);
+  uRefSingleType(FUN2TEST, bfloat16, 8, (Packet8bf)bfvmax);
+  uRefSingleType(FUN2TEST, bfloat16, 8, (Packet8bf)bfv36);
+  uRefSingleType(FUN2TEST, bfloat16, 8, (Packet8bf)bfv0);
+  uRefSingleType(FUN2TEST, bfloat16, 8, (Packet8bf)bfv_240);
+  uRefSingleType(FUN2TEST, bfloat16, 8, (Packet8bf)bfvmin);
 
   endTest();
 
@@ -137,11 +137,11 @@ void pstoreuTests() {
 
   MIN2MAX_FULL_LONG_VECTOR
 
-  uRefSingleType(FUN2TEST, long, 4, (Packet4l)(__m256i)lvmax.r);
-  uRefSingleType(FUN2TEST, long, 4, (Packet4l)(__m256i)lv36.r);
-  uRefSingleType(FUN2TEST, long, 4, (Packet4l)(__m256i)lv0.r);
-  uRefSingleType(FUN2TEST, long, 4, (Packet4l)(__m256i)lv_240.r);
-  uRefSingleType(FUN2TEST, long, 4, (Packet4l)(__m256i)lvmin.r);
+  uRefSingleType(FUN2TEST, long, 4, (Packet4l)lvmax);
+  uRefSingleType(FUN2TEST, long, 4, (Packet4l)lv36);
+  uRefSingleType(FUN2TEST, long, 4, (Packet4l)lv0);
+  uRefSingleType(FUN2TEST, long, 4, (Packet4l)lv_240);
+  uRefSingleType(FUN2TEST, long, 4, (Packet4l)lvmin);
 
   endTest();
 
