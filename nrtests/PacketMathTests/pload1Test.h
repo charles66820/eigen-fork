@@ -1,18 +1,11 @@
 #include <float.h>
 #include <limits.h>
 
-
 #ifndef EIGEN_MIPP_PLOAD1_TEST_H
 #define EIGEN_MIPP_PLOAD1_TEST_H
 
 #undef FUN2TEST
 #define FUN2TEST pload1
-
-#define runTest(vec, type, test, value, delta) \
-  {                                            \
-    vec(type, v, value, delta);                \
-    test(FUN2TEST, v);                         \
-  }
 
 void pload1Tests() {
   printTestTitle(FUN2TEST);
@@ -23,11 +16,9 @@ void pload1Tests() {
   /* float = Packet4f (half) */
   beginTest("4 float tests");
 
-  runTest(vector4, float, vectorHalfFloatTest, FLT_MAX, -0.1f);
-  runTest(vector4, float, vectorHalfFloatTest, 36.7f, 0.1f);
-  runTest(vector4, float, vectorHalfFloatTest, 0.0f, 0.1f);
-  runTest(vector4, float, vectorHalfFloatTest, -240.98f, 0.1f);
-  runTest(vector4, float, vectorHalfFloatTest, FLT_MIN, 0.1f);
+  MIN2MAX_4_FLOAT_VECTOR
+
+  min2MaxTests(vectorHalfFloatTest, FUN2TEST, fhvmax, fhv36, fhv0, fhv_240, fhvmin);
 
   endTest();
 
@@ -39,22 +30,18 @@ void pload1Tests() {
   /* float = Packet8f (full) */
   beginTest("8 float tests");
 
-  runTest(vector8, float, vectorFullFloatTest, FLT_MAX, -0.1f);
-  runTest(vector8, float, vectorFullFloatTest, 36.7f, 0.1f);
-  runTest(vector8, float, vectorFullFloatTest, 0.0f, 0.1f);
-  runTest(vector8, float, vectorFullFloatTest, -240.98f, 0.1f);
-  runTest(vector8, float, vectorFullFloatTest, FLT_MIN, 0.1f);
+  MIN2MAX_8_FLOAT_VECTOR
+
+  min2MaxTests(vectorFullFloatTest, FUN2TEST, fvmax, fv36, fv0, fv_240, fvmin);
 
   endTest();
 
   /* double = Packet4d (full) */
   beginTest("4 double tests");
 
-  runTest(vector4, double, vectorFullDoubleTest, DBL_MAX, -0.1d);
-  runTest(vector4, double, vectorFullDoubleTest, 36.7d, 0.1d);
-  runTest(vector4, double, vectorFullDoubleTest, 0.0d, 0.1d);
-  runTest(vector4, double, vectorFullDoubleTest, -240.98d, 0.1d);
-  runTest(vector4, double, vectorFullDoubleTest, DBL_MIN, 0.1d);
+  MIN2MAX_4_DOUBLE_VECTOR
+
+  min2MaxTests(vectorFullDoubleTest, FUN2TEST, dvmax, dv36, dv0, dv_240, dvmin);
 
   endTest();
 
@@ -64,11 +51,9 @@ void pload1Tests() {
   /* long = Packet4l */
   beginTest("4 long tests");
 
-  runTest(vector4, long, vectorFullLongTest, LONG_MAX, -1L);
-  runTest(vector4, long, vectorFullLongTest, 36L, 1L);
-  runTest(vector4, long, vectorFullLongTest, 0L, 1L);
-  runTest(vector4, long, vectorFullLongTest, -240L, 1L);
-  runTest(vector4, long, vectorFullLongTest, LONG_MIN, 1L);
+  MIN2MAX_4_LONG_VECTOR
+
+  min2MaxTests(vectorFullLongTest, FUN2TEST, lvmax, lv36, lv0, lv_240, lvmin);
 
   endTest();
 

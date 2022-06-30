@@ -41,52 +41,40 @@
 #define vectorHalfBfloat16Test(name, args...) vectorHalfBfloat16TemplateTest(Packet8bf, name, args)
 
 /* Packet4f with one arg */
-#define tests4FloatMin2MaxOneArg(str, funName) \
-  beginTest(str);                              \
-                                               \
-  MIN2MAX_4_FLOAT_VECTOR                       \
-                                               \
-  vectorHalfFloatTest(funName, fhvmax);        \
-  vectorHalfFloatTest(funName, fhv36);         \
-  vectorHalfFloatTest(funName, fhv0);          \
-  vectorHalfFloatTest(funName, fhv_240);       \
-  vectorHalfFloatTest(funName, fhvmin);        \
-                                               \
+#define tests4FloatMin2MaxOneArg(str, funName)                                      \
+  beginTest(str);                                                                   \
+                                                                                    \
+  MIN2MAX_4_FLOAT_VECTOR_LOADED                                                     \
+                                                                                    \
+  min2MaxTests(vectorHalfFloatTest, funName, fhvmax, fhv36, fhv0, fhv_240, fhvmin); \
+                                                                                    \
   endTest();
 
 /* Packet2d with one arg */
-#define tests2DoubleMin2MaxOneArg(str, funName) \
-  beginTest(str);                               \
-                                                \
-  MIN2MAX_2_DOUBLE_VECTOR                       \
-                                                \
-  vectorHalfDoubleTest(funName, dhvmax);        \
-  vectorHalfDoubleTest(funName, dhv36);         \
-  vectorHalfDoubleTest(funName, dhv0);          \
-  vectorHalfDoubleTest(funName, dhv_240);       \
-  vectorHalfDoubleTest(funName, dhvmin);        \
-                                                \
+#define tests2DoubleMin2MaxOneArg(str, funName)                                      \
+  beginTest(str);                                                                    \
+                                                                                     \
+  MIN2MAX_2_DOUBLE_VECTOR_LOADED                                                     \
+                                                                                     \
+  min2MaxTests(vectorHalfDoubleTest, funName, dhvmax, dhv36, dhv0, dhv_240, dhvmin); \
+                                                                                     \
   endTest();
 
 /* Packet4i with one arg */
-#define tests4IntMin2MaxOneArg(str, funName) \
-  beginTest(str);                            \
-                                             \
-  MIN2MAX_4_INT_VECTOR                       \
-                                             \
-  vectorHalfIntTest(funName, ihvmax);        \
-  vectorHalfIntTest(funName, ihv36);         \
-  vectorHalfIntTest(funName, ihv0);          \
-  vectorHalfIntTest(funName, ihv_240);       \
-  vectorHalfIntTest(funName, ihvmin);        \
-                                             \
+#define tests4IntMin2MaxOneArg(str, funName)                                      \
+  beginTest(str);                                                                 \
+                                                                                  \
+  MIN2MAX_4_INT_VECTOR_LOADED                                                     \
+                                                                                  \
+  min2MaxTests(vectorHalfIntTest, funName, ihvmax, ihv36, ihv0, ihv_240, ihvmin); \
+                                                                                  \
   endTest();
 
 /* Packet16b with one arg */
 #define tests16BoolMin2MaxOneArg(str, funName) \
   beginTest(str);                              \
                                                \
-  MIN2MAX_16_BOOL_VECTOR                       \
+  MIN2MAX_16_BOOL_VECTOR_LOADED                \
                                                \
   vectorHalfBoolTest(funName, bvtrue);         \
   vectorHalfBoolTest(funName, bvfalse);        \
@@ -94,93 +82,70 @@
   endTest();
 
 /* Packet8f with one arg */
-#define tests8FloatMin2MaxOneArg(str, funName) \
-  beginTest(str);                              \
-                                               \
-  MIN2MAX_8_FLOAT_VECTOR                       \
-                                               \
-  vectorFullFloatTest(funName, fvmax);         \
-  vectorFullFloatTest(funName, fv36);          \
-  vectorFullFloatTest(funName, fv0);           \
-  vectorFullFloatTest(funName, fv_240);        \
-  vectorFullFloatTest(funName, fvmin);         \
-                                               \
+#define tests8FloatMin2MaxOneArg(str, funName)                                 \
+  beginTest(str);                                                              \
+                                                                               \
+  MIN2MAX_8_FLOAT_VECTOR_LOADED                                                \
+                                                                               \
+  min2MaxTests(vectorFullFloatTest, funName, fvmax, fv36, fv0, fv_240, fvmin); \
+                                                                               \
   endTest();
 
 /* Packet4d with one arg */
-#define tests4DoubleMin2MaxOneArg(str, funName) \
-  beginTest(str);                               \
-                                                \
-  MIN2MAX_4_DOUBLE_VECTOR                       \
-                                                \
-  vectorFullDoubleTest(funName, dvmax);         \
-  vectorFullDoubleTest(funName, dv36);          \
-  vectorFullDoubleTest(funName, dv0);           \
-  vectorFullDoubleTest(funName, dv_240);        \
-  vectorFullDoubleTest(funName, dvmin);         \
-                                                \
+#define tests4DoubleMin2MaxOneArg(str, funName)                                 \
+  beginTest(str);                                                               \
+                                                                                \
+  MIN2MAX_4_DOUBLE_VECTOR_LOADED                                                \
+                                                                                \
+  min2MaxTests(vectorFullDoubleTest, funName, dvmax, dv36, dv0, dv_240, dvmin); \
+                                                                                \
   endTest();
 
 /* Packet8i with one arg */
-#define tests8IntMin2MaxOneArg(str, funName) \
-  beginTest(str);                            \
-                                             \
-  MIN2MAX_8_INT_VECTOR                       \
-                                             \
-  vectorFullIntTest(funName, ivmax);         \
-  vectorFullIntTest(funName, iv36);          \
-  vectorFullIntTest(funName, iv0);           \
-  vectorFullIntTest(funName, iv_240);        \
-  vectorFullIntTest(funName, ivmin);         \
-                                             \
+#define tests8IntMin2MaxOneArg(str, funName)                                 \
+  beginTest(str);                                                            \
+                                                                             \
+  MIN2MAX_8_INT_VECTOR_LOADED                                                \
+                                                                             \
+  min2MaxTests(vectorFullIntTest, funName, ivmax, iv36, iv0, iv_240, ivmin); \
+                                                                             \
   endTest();
 
 /* Packet8h with one arg */
-#define tests8HalfMin2MaxOneArg(str, funName) \
-  beginTest(str);                             \
-                                              \
-  MIN2MAX_8_HALF_VECTOR                       \
-                                              \
-  vectorHalfEigenHalfTest(funName, hvmax);    \
-  vectorHalfEigenHalfTest(funName, hv36);     \
-  vectorHalfEigenHalfTest(funName, hv0);      \
-  vectorHalfEigenHalfTest(funName, hvmin);    \
-                                              \
+#define tests8HalfMin2MaxOneArg(str, funName)                                      \
+  beginTest(str);                                                                  \
+                                                                                   \
+  MIN2MAX_8_HALF_VECTOR_LOADED                                                     \
+                                                                                   \
+  min2MaxTests(vectorHalfEigenHalfTest, funName, hvmax, hv36, hv0, hv_240, hvmin); \
+                                                                                   \
   endTest();
 
 /* Packet8bf with one arg */
-#define tests8Bfloat16Min2MaxOneArg(str, funName) \
-  beginTest(str);                                 \
-                                                  \
-  MIN2MAX_8_BFLOAT16_VECTOR                       \
-                                                  \
-  vectorHalfBfloat16Test(funName, bfvmax);        \
-  vectorHalfBfloat16Test(funName, bfv36);         \
-  vectorHalfBfloat16Test(funName, bfv0);          \
-  vectorHalfBfloat16Test(funName, bfv_240);       \
-  vectorHalfBfloat16Test(funName, bfvmin);        \
-                                                  \
+#define tests8Bfloat16Min2MaxOneArg(str, funName)                                      \
+  beginTest(str);                                                                      \
+                                                                                       \
+  MIN2MAX_8_BFLOAT16_VECTOR_LOADED                                                     \
+                                                                                       \
+  min2MaxTests(vectorHalfBfloat16Test, funName, bfvmax, bfv36, bfv0, bfv_240, bfvmin); \
+                                                                                       \
   endTest();
 
 /* Packet4l with one arg */
-#define tests4LongMin2MaxOneArg(str, funName) \
-  beginTest(str);                             \
-                                              \
-  MIN2MAX_4_LONG_VECTOR                       \
-                                              \
-  vectorFullLongTest(funName, lvmax);         \
-  vectorFullLongTest(funName, lv36);          \
-  vectorFullLongTest(funName, lv0);           \
-  vectorFullLongTest(funName, lv_240);        \
-  vectorFullLongTest(funName, lvmin);         \
-                                              \
+#define tests4LongMin2MaxOneArg(str, funName)                                 \
+  beginTest(str);                                                             \
+                                                                              \
+  MIN2MAX_4_LONG_VECTOR_LOADED                                                \
+                                                                              \
+  min2MaxTests(vectorFullLongTest, funName, lvmax, lv36, lv0, lv_240, lvmin); \
+                                                                              \
   endTest();
 
 /* Packet4f with two args and permutations with repetition */
 #define tests4FloatMin2MaxTwoArgsPermRep(str, funName)                               \
   beginTest(str);                                                                    \
                                                                                      \
-  MIN2MAX_4_FLOAT_VECTOR                                                             \
+  MIN2MAX_4_FLOAT_VECTOR_LOADED                                                      \
                                                                                      \
   allTwoPermRep(vectorHalfFloatTest, funName, fhvmax, fhv36, fhv0, fhv_240, fhvmin); \
                                                                                      \
@@ -190,7 +155,7 @@
 #define tests2DoubleMin2MaxTwoArgsPermRep(str, funName)                               \
   beginTest(str);                                                                     \
                                                                                       \
-  MIN2MAX_2_DOUBLE_VECTOR                                                             \
+  MIN2MAX_2_DOUBLE_VECTOR_LOADED                                                      \
                                                                                       \
   allTwoPermRep(vectorHalfDoubleTest, funName, dhvmax, dhv36, dhv0, dhv_240, dhvmin); \
                                                                                       \
@@ -200,7 +165,7 @@
 #define tests4IntMin2MaxTwoArgsPermRep(str, funName)                               \
   beginTest(str);                                                                  \
                                                                                    \
-  MIN2MAX_4_INT_VECTOR                                                             \
+  MIN2MAX_4_INT_VECTOR_LOADED                                                      \
                                                                                    \
   allTwoPermRep(vectorHalfIntTest, funName, ihvmax, ihv36, ihv0, ihv_240, ihvmin); \
                                                                                    \
@@ -210,7 +175,7 @@
 #define tests16BoolMin2MaxTwoArgsPermRep(str, funName)                                  \
   beginTest(str);                                                                       \
                                                                                         \
-  MIN2MAX_8_BFLOAT16_VECTOR                                                             \
+  MIN2MAX_8_BFLOAT16_VECTOR_LOADED                                                      \
                                                                                         \
   allTwoPermRep(vectorHalfBfloat16Test, funName, bfvmax, bfv36, bfv0, bfv_240, bfvmin); \
                                                                                         \
@@ -220,7 +185,7 @@
 #define tests8FloatMin2MaxTwoArgsPermRep(str, funName)                          \
   beginTest(str);                                                               \
                                                                                 \
-  MIN2MAX_8_FLOAT_VECTOR                                                        \
+  MIN2MAX_8_FLOAT_VECTOR_LOADED                                                 \
                                                                                 \
   allTwoPermRep(vectorFullFloatTest, funName, fvmax, fv36, fv0, fv_240, fvmin); \
                                                                                 \
@@ -230,7 +195,7 @@
 #define tests4DoubleMin2MaxTwoArgsPermRep(str, funName)                          \
   beginTest(str);                                                                \
                                                                                  \
-  MIN2MAX_4_DOUBLE_VECTOR                                                        \
+  MIN2MAX_4_DOUBLE_VECTOR_LOADED                                                 \
                                                                                  \
   allTwoPermRep(vectorFullDoubleTest, funName, dvmax, dv36, dv0, dv_240, dvmin); \
                                                                                  \
@@ -240,7 +205,7 @@
 #define tests8IntMin2MaxTwoArgsPermRep(str, funName)                          \
   beginTest(str);                                                             \
                                                                               \
-  MIN2MAX_8_INT_VECTOR                                                        \
+  MIN2MAX_8_INT_VECTOR_LOADED                                                 \
                                                                               \
   allTwoPermRep(vectorFullIntTest, funName, ivmax, iv36, iv0, iv_240, ivmin); \
                                                                               \
@@ -250,7 +215,7 @@
 #define tests8HalfMin2MaxTwoArgsPermRep(str, funName)                               \
   beginTest(str);                                                                   \
                                                                                     \
-  MIN2MAX_8_HALF_VECTOR                                                             \
+  MIN2MAX_8_HALF_VECTOR_LOADED                                                      \
                                                                                     \
   allTwoPermRep(vectorHalfEigenHalfTest, funName, hvmax, hv36, hv0, hv_240, hvmin); \
                                                                                     \
@@ -260,7 +225,7 @@
 #define tests8Bfloat16Min2MaxTwoArgsPermRep(str, funName)                               \
   beginTest(str);                                                                       \
                                                                                         \
-  MIN2MAX_8_BFLOAT16_VECTOR                                                             \
+  MIN2MAX_8_BFLOAT16_VECTOR_LOADED                                                      \
                                                                                         \
   allTwoPermRep(vectorHalfBfloat16Test, funName, bfvmax, bfv36, bfv0, bfv_240, bfvmin); \
                                                                                         \
@@ -270,7 +235,7 @@
 #define tests4LongMin2MaxTwoArgsPermRep(str, funName)                          \
   beginTest(str);                                                              \
                                                                                \
-  MIN2MAX_4_LONG_VECTOR                                                        \
+  MIN2MAX_4_LONG_VECTOR_LOADED                                                 \
                                                                                \
   allTwoPermRep(vectorFullLongTest, funName, lvmax, lv36, lv0, lv_240, lvmin); \
                                                                                \
@@ -280,7 +245,7 @@
 #define tests4FloatMin2MaxTwoArgsCombRep(str, funName)                               \
   beginTest(str);                                                                    \
                                                                                      \
-  MIN2MAX_4_FLOAT_VECTOR                                                             \
+  MIN2MAX_4_FLOAT_VECTOR_LOADED                                                      \
                                                                                      \
   allTwoCombRep(vectorHalfFloatTest, funName, fhvmax, fhv36, fhv0, fhv_240, fhvmin); \
                                                                                      \
@@ -290,7 +255,7 @@
 #define tests2DoubleMin2MaxTwoArgsCombRep(str, funName)                               \
   beginTest(str);                                                                     \
                                                                                       \
-  MIN2MAX_2_DOUBLE_VECTOR                                                             \
+  MIN2MAX_2_DOUBLE_VECTOR_LOADED                                                      \
                                                                                       \
   allTwoCombRep(vectorHalfDoubleTest, funName, dhvmax, dhv36, dhv0, dhv_240, dhvmin); \
                                                                                       \
@@ -300,7 +265,7 @@
 #define tests4IntMin2MaxTwoArgsCombRep(str, funName)                               \
   beginTest(str);                                                                  \
                                                                                    \
-  MIN2MAX_4_INT_VECTOR                                                             \
+  MIN2MAX_4_INT_VECTOR_LOADED                                                      \
                                                                                    \
   allTwoCombRep(vectorHalfIntTest, funName, ihvmax, ihv36, ihv0, ihv_240, ihvmin); \
                                                                                    \
@@ -310,7 +275,7 @@
 #define tests16BoolMin2MaxTwoArgsCombRep(str, funName) \
   beginTest(str);                                      \
                                                        \
-  MIN2MAX_16_BOOL_VECTOR                               \
+  MIN2MAX_16_BOOL_VECTOR_LOADED                        \
                                                        \
   vectorHalfBoolTest(funName, bvtrue, bvtrue);         \
   vectorHalfBoolTest(funName, bvtrue, bvfalse);        \
@@ -323,7 +288,7 @@
 #define tests8FloatMin2MaxTwoArgsCombRep(str, funName)                          \
   beginTest(str);                                                               \
                                                                                 \
-  MIN2MAX_8_FLOAT_VECTOR                                                        \
+  MIN2MAX_8_FLOAT_VECTOR_LOADED                                                 \
                                                                                 \
   allTwoCombRep(vectorFullFloatTest, funName, fvmax, fv36, fv0, fv_240, fvmin); \
                                                                                 \
@@ -333,7 +298,7 @@
 #define tests4DoubleMin2MaxTwoArgsCombRep(str, funName)                          \
   beginTest(str);                                                                \
                                                                                  \
-  MIN2MAX_4_DOUBLE_VECTOR                                                        \
+  MIN2MAX_4_DOUBLE_VECTOR_LOADED                                                 \
                                                                                  \
   allTwoCombRep(vectorFullDoubleTest, funName, dvmax, dv36, dv0, dv_240, dvmin); \
                                                                                  \
@@ -343,7 +308,7 @@
 #define tests8IntMin2MaxTwoArgsCombRep(str, funName)                          \
   beginTest(str);                                                             \
                                                                               \
-  MIN2MAX_8_INT_VECTOR                                                        \
+  MIN2MAX_8_INT_VECTOR_LOADED                                                 \
                                                                               \
   allTwoCombRep(vectorFullIntTest, funName, ivmax, iv36, iv0, iv_240, ivmin); \
                                                                               \
@@ -353,7 +318,7 @@
 #define tests8HalfMin2MaxTwoArgsCombRep(str, funName)                               \
   beginTest(str);                                                                   \
                                                                                     \
-  MIN2MAX_8_HALF_VECTOR                                                             \
+  MIN2MAX_8_HALF_VECTOR_LOADED                                                      \
                                                                                     \
   allTwoCombRep(vectorHalfEigenHalfTest, funName, hvmax, hv36, hv0, hv_240, hvmin); \
                                                                                     \
@@ -363,7 +328,7 @@
 #define tests8Bfloat16Min2MaxTwoArgsCombRep(str, funName)                               \
   beginTest(str);                                                                       \
                                                                                         \
-  MIN2MAX_8_BFLOAT16_VECTOR                                                             \
+  MIN2MAX_8_BFLOAT16_VECTOR_LOADED                                                      \
                                                                                         \
   allTwoCombRep(vectorHalfBfloat16Test, funName, bfvmax, bfv36, bfv0, bfv_240, bfvmin); \
                                                                                         \
@@ -373,7 +338,7 @@
 #define tests4LongMin2MaxTwoArgsCombRep(str, funName)                          \
   beginTest(str);                                                              \
                                                                                \
-  MIN2MAX_4_LONG_VECTOR                                                        \
+  MIN2MAX_4_LONG_VECTOR_LOADED                                                 \
                                                                                \
   allTwoCombRep(vectorFullLongTest, funName, lvmax, lv36, lv0, lv_240, lvmin); \
                                                                                \
@@ -383,7 +348,7 @@
 #define tests4FloatMin2MaxThreeArgsPermRep(str, funName)                               \
   beginTest(str);                                                                      \
                                                                                        \
-  MIN2MAX_4_FLOAT_VECTOR                                                               \
+  MIN2MAX_4_FLOAT_VECTOR_LOADED                                                        \
                                                                                        \
   allThreePermRep(vectorHalfFloatTest, funName, fhvmax, fhv36, fhv0, fhv_240, fhvmin); \
                                                                                        \
@@ -393,7 +358,7 @@
 #define tests2DoubleMin2MaxThreeArgsPermRep(str, funName)                               \
   beginTest(str);                                                                       \
                                                                                         \
-  MIN2MAX_2_DOUBLE_VECTOR                                                               \
+  MIN2MAX_2_DOUBLE_VECTOR_LOADED                                                        \
                                                                                         \
   allThreePermRep(vectorHalfDoubleTest, funName, dhvmax, dhv36, dhv0, dhv_240, dhvmin); \
                                                                                         \
@@ -403,7 +368,7 @@
 #define tests4IntMin2MaxThreeArgsPermRep(str, funName)                               \
   beginTest(str);                                                                    \
                                                                                      \
-  MIN2MAX_4_INT_VECTOR                                                               \
+  MIN2MAX_4_INT_VECTOR_LOADED                                                        \
                                                                                      \
   allThreePermRep(vectorHalfIntTest, funName, ihvmax, ihv36, ihv0, ihv_240, ihvmin); \
                                                                                      \
@@ -413,7 +378,7 @@
 #define tests16BoolMin2MaxThreeArgsPermRep(str, funName)  \
   beginTest(str);                                         \
                                                           \
-  MIN2MAX_16_BOOL_VECTOR                                  \
+  MIN2MAX_16_BOOL_VECTOR_LOADED                           \
                                                           \
   vectorHalfBoolTest(funName, bvtrue, bvtrue, bvtrue);    \
   vectorHalfBoolTest(funName, bvtrue, bvtrue, bvfalse);   \
@@ -430,7 +395,7 @@
 #define tests8FloatMin2MaxThreeArgsPermRep(str, funName)                          \
   beginTest(str);                                                                 \
                                                                                   \
-  MIN2MAX_8_FLOAT_VECTOR                                                          \
+  MIN2MAX_8_FLOAT_VECTOR_LOADED                                                   \
                                                                                   \
   allThreePermRep(vectorFullFloatTest, funName, fvmax, fv36, fv0, fv_240, fvmin); \
                                                                                   \
@@ -440,7 +405,7 @@
 #define tests4DoubleMin2MaxThreeArgsPermRep(str, funName)                          \
   beginTest(str);                                                                  \
                                                                                    \
-  MIN2MAX_4_DOUBLE_VECTOR                                                          \
+  MIN2MAX_4_DOUBLE_VECTOR_LOADED                                                   \
                                                                                    \
   allThreePermRep(vectorFullDoubleTest, funName, dvmax, dv36, dv0, dv_240, dvmin); \
                                                                                    \
@@ -450,7 +415,7 @@
 #define tests8IntMin2MaxThreeArgsPermRep(str, funName)                          \
   beginTest(str);                                                               \
                                                                                 \
-  MIN2MAX_8_INT_VECTOR                                                          \
+  MIN2MAX_8_INT_VECTOR_LOADED                                                   \
                                                                                 \
   allThreePermRep(vectorFullIntTest, funName, ivmax, iv36, iv0, iv_240, ivmin); \
                                                                                 \
@@ -460,7 +425,7 @@
 #define tests8HalfMin2MaxThreeArgsPermRep(str, funName)                               \
   beginTest(str);                                                                     \
                                                                                       \
-  MIN2MAX_8_HALF_VECTOR                                                               \
+  MIN2MAX_8_HALF_VECTOR_LOADED                                                        \
                                                                                       \
   allThreePermRep(vectorHalfEigenHalfTest, funName, hvmax, hv36, hv0, hv_240, hvmin); \
                                                                                       \
@@ -470,7 +435,7 @@
 #define tests8Bfloat16Min2MaxThreeArgsPermRep(str, funName)                               \
   beginTest(str);                                                                         \
                                                                                           \
-  MIN2MAX_8_BFLOAT16_VECTOR                                                               \
+  MIN2MAX_8_BFLOAT16_VECTOR_LOADED                                                        \
                                                                                           \
   allThreePermRep(vectorHalfBfloat16Test, funName, bfvmax, bfv36, bfv0, bfv_240, bfvmin); \
                                                                                           \
@@ -480,7 +445,7 @@
 #define tests4LongMin2MaxThreeArgsPermRep(str, funName)                          \
   beginTest(str);                                                                \
                                                                                  \
-  MIN2MAX_4_LONG_VECTOR                                                          \
+  MIN2MAX_4_LONG_VECTOR_LOADED                                                   \
                                                                                  \
   allThreePermRep(vectorFullLongTest, funName, lvmax, lv36, lv0, lv_240, lvmin); \
                                                                                  \

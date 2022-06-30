@@ -1,18 +1,11 @@
 #include <float.h>
 #include <limits.h>
 
-
 #ifndef EIGEN_MIPP_PLOADQUAD_TEST_H
 #define EIGEN_MIPP_PLOADQUAD_TEST_H
 
 #undef FUN2TEST
 #define FUN2TEST ploadquad
-
-#define runTest(vec, type, test, value, delta) \
-  {                                            \
-    vec(type, v, value, delta);                \
-    test(FUN2TEST, v);                         \
-  }
 
 void ploadquadTests() {
   printTestTitle(FUN2TEST);
@@ -21,41 +14,37 @@ void ploadquadTests() {
   /* float = Packet4f (half) */
   beginTest("4 float tests");
 
-  runTest(vector4u, float, vectorHalfFloatTest, FLT_MAX, -0.1f);
-  runTest(vector4u, float, vectorHalfFloatTest, 36.7f, 0.1f);
-  runTest(vector4u, float, vectorHalfFloatTest, 0.0f, 0.1f);
-  runTest(vector4u, float, vectorHalfFloatTest, -240.98f, 0.1f);
-  runTest(vector4u, float, vectorHalfFloatTest, FLT_MIN, 0.1f);
+  MIN2MAX_4_FLOAT_VECTOR_U
+
+  min2MaxTests(vectorHalfFloatTest, FUN2TEST, fhvmax, fhv36, fhv0, fhv_240, fhvmin);
 
   endTest();
 
   /* double =  Packet2d (half) */
   beginTest("2 double tests");
 
-  runTest(vector2u, double, vectorHalfDoubleTest, DBL_MAX, -0.1d);
-  runTest(vector2u, double, vectorHalfDoubleTest, 36.7d, 0.1d);
-  runTest(vector2u, double, vectorHalfDoubleTest, 0.0d, 0.1d);
-  runTest(vector2u, double, vectorHalfDoubleTest, -240.98d, 0.1d);
-  runTest(vector2u, double, vectorHalfDoubleTest, DBL_MIN, 0.1d);
+  MIN2MAX_2_DOUBLE_VECTOR_U
+
+  min2MaxTests(vectorHalfDoubleTest, FUN2TEST, dhvmax, dhv36, dhv0, dhvmin, dhv_240);
 
   endTest();
 
   /* int = Packet4i (half) */
   beginTest("4 int tests");
 
-  runTest(vector4u, int, vectorHalfIntTest, INT_MAX, -1);
-  runTest(vector4u, int, vectorHalfIntTest, 36, 1);
-  runTest(vector4u, int, vectorHalfIntTest, 0, 1);
-  runTest(vector4u, int, vectorHalfIntTest, -240, 1);
-  runTest(vector4u, int, vectorHalfIntTest, INT_MIN, 1);
+  MIN2MAX_4_INT_VECTOR_U
+
+  min2MaxTests(vectorHalfIntTest, FUN2TEST, ihvmax, ihv36, ihv0, ihv_240, ihvmin);
 
   endTest();
 
   /* bool = Packet16b */
   beginTest("16 bool tests");
 
-  runTest(vector16u, bool, vectorHalfBoolTest, true, 0);
-  runTest(vector16u, bool, vectorHalfBoolTest, false, 0);
+  MIN2MAX_16_BOOL_VECTOR_U
+
+  vectorHalfBoolTest(FUN2TEST, bvtrue);
+  vectorHalfBoolTest(FUN2TEST, bvfalse);
 
   endTest();
 
@@ -65,55 +54,45 @@ void ploadquadTests() {
   /* float = Packet8f (full) */
   beginTest("8 float tests");
 
-  runTest(vector8u, float, vectorFullFloatTest, FLT_MAX, -0.1f);
-  runTest(vector8u, float, vectorFullFloatTest, 36.7f, 0.1f);
-  runTest(vector8u, float, vectorFullFloatTest, 0.0f, 0.1f);
-  runTest(vector8u, float, vectorFullFloatTest, -240.98f, 0.1f);
-  runTest(vector8u, float, vectorFullFloatTest, FLT_MIN, 0.1f);
+  MIN2MAX_8_FLOAT_VECTOR_U
+
+  min2MaxTests(vectorFullFloatTest, FUN2TEST, fvmax, fv36, fv0, fv_240, fvmin);
 
   endTest();
 
   /* double = Packet4d (full) */
   beginTest("4 double tests");
 
-  runTest(vector4u, double, vectorFullDoubleTest, DBL_MAX, -0.1d);
-  runTest(vector4u, double, vectorFullDoubleTest, 36.7d, 0.1d);
-  runTest(vector4u, double, vectorFullDoubleTest, 0.0d, 0.1d);
-  runTest(vector4u, double, vectorFullDoubleTest, -240.98d, 0.1d);
-  runTest(vector4u, double, vectorFullDoubleTest, DBL_MIN, 0.1d);
+  MIN2MAX_4_DOUBLE_VECTOR_U
+
+  min2MaxTests(vectorFullDoubleTest, FUN2TEST, dvmax, dv36, dv0, dv_240, dvmin);
 
   endTest();
 
   /* int = Packet8i (full) */
   beginTest("8 int tests");
 
-  runTest(vector8u, int, vectorFullIntTest, INT_MAX, -1);
-  runTest(vector8u, int, vectorFullIntTest, 36, 1);
-  runTest(vector8u, int, vectorFullIntTest, 0, 1);
-  runTest(vector8u, int, vectorFullIntTest, -240, 1);
-  runTest(vector8u, int, vectorFullIntTest, INT_MIN, 1);
+  MIN2MAX_8_INT_VECTOR_U
+
+  min2MaxTests(vectorFullIntTest, FUN2TEST, ivmax, iv36, iv0, iv_240, ivmin);
 
   endTest();
 
   /* Eigen::half = Packet8h */
   beginTest("8 Eigen::half tests");
 
-  runTest(vector8u, Eigen::half, vectorHalfEigenHalfTest, half(FLT_MAX), half(-0.1f));
-  runTest(vector8u, Eigen::half, vectorHalfEigenHalfTest, half(36.7f), half(0.1f));
-  runTest(vector8u, Eigen::half, vectorHalfEigenHalfTest, half(0.0f), half(0.1f));
-  runTest(vector8u, Eigen::half, vectorHalfEigenHalfTest, half(-240.98f), half(0.1f));
-  runTest(vector8u, Eigen::half, vectorHalfEigenHalfTest, half(FLT_MIN), half(0.1f));
+  MIN2MAX_8_HALF_VECTOR_U
+
+  min2MaxTests(vectorHalfEigenHalfTest, FUN2TEST, hvmax, hv36, hv0, hv_240, hvmin);
 
   endTest();
 
   /* bfloat16 = Packet8bf */
   beginTest("8 bfloat16 tests");
 
-  runTest(vector8u, bfloat16, vectorHalfBfloat16Test, bfloat16(FLT_MAX), bfloat16(-0.1f));
-  runTest(vector8u, bfloat16, vectorHalfBfloat16Test, bfloat16(36.7f), bfloat16(0.1f));
-  runTest(vector8u, bfloat16, vectorHalfBfloat16Test, bfloat16(0.0f), bfloat16(0.1f));
-  runTest(vector8u, bfloat16, vectorHalfBfloat16Test, bfloat16(-240.98f), bfloat16(0.1f));
-  runTest(vector8u, bfloat16, vectorHalfBfloat16Test, bfloat16(FLT_MIN), bfloat16(0.1f));
+  MIN2MAX_8_BFLOAT16_VECTOR_U
+
+  min2MaxTests(vectorHalfBfloat16Test, FUN2TEST, bfvmax, bfv36, bfv0, bfv_240, bfvmin);
 
   endTest();
 
@@ -123,11 +102,9 @@ void ploadquadTests() {
   /* long = Packet4l */
   beginTest("4 long tests");
 
-  runTest(vector4u, long, vectorFullLongTest, LONG_MAX, -1L);
-  runTest(vector4u, long, vectorFullLongTest, 36L, 1L);
-  runTest(vector4u, long, vectorFullLongTest, 0L, 1L);
-  runTest(vector4u, long, vectorFullLongTest, -240L, 1L);
-  runTest(vector4u, long, vectorFullLongTest, LONG_MIN, 1L);
+  MIN2MAX_4_LONG_VECTOR_U
+
+  min2MaxTests(vectorFullLongTest, FUN2TEST, lvmax, lv36, lv0, lv_240, lvmin);
 
   endTest();
 

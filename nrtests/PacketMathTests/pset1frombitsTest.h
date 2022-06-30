@@ -14,22 +14,14 @@ void pset1frombitsTests() {
   /* float = Packet4f (half) */
   beginTest("4 float tests");
 
-  vectorHalfFloatTest(FUN2TEST, (uint32_t)INT_MAX);
-  vectorHalfFloatTest(FUN2TEST, (uint32_t)0x4212cccd);
-  vectorHalfFloatTest(FUN2TEST, (uint32_t)0x00000000);
-  vectorHalfFloatTest(FUN2TEST, (uint32_t)0xc370fae1);
-  vectorHalfFloatTest(FUN2TEST, (uint32_t)INT_MIN);
+  min2MaxTests(vectorHalfFloatTest, FUN2TEST, (uint32_t)INT_MAX, (uint32_t)0x4212cccd, (uint32_t)0x00000000, (uint32_t)0xc370fae1, (uint32_t)INT_MIN);
 
   endTest();
 
   /* double =  Packet2d (half) */
   beginTest("2 double tests");
 
-  vectorHalfDoubleTest(FUN2TEST, (uint64_t)LONG_MAX);
-  vectorHalfDoubleTest(FUN2TEST, (uint64_t)0x404259999999999a);
-  vectorHalfDoubleTest(FUN2TEST, (uint64_t)0x0000000000000000);
-  vectorHalfDoubleTest(FUN2TEST, (uint64_t)0xc06e1f5c28f5c28f);
-  vectorHalfDoubleTest(FUN2TEST, (uint64_t)LONG_MIN);
+  min2MaxTests(vectorHalfDoubleTest, FUN2TEST, (uint64_t)LONG_MAX, (uint64_t)0x404259999999999a, (uint64_t)0x0000000000000000, (uint64_t)0xc06e1f5c28f5c28f, (uint64_t)LONG_MIN);
 
   endTest();
 
@@ -39,22 +31,14 @@ void pset1frombitsTests() {
   /* float = Packet8f (full) */
   beginTest("8 float tests");
 
-  vectorFullFloatTest(FUN2TEST, (uint32_t)INT_MAX);
-  vectorFullFloatTest(FUN2TEST, (uint32_t)0x4212cccd);
-  vectorFullFloatTest(FUN2TEST, (uint32_t)0x00000000);
-  vectorFullFloatTest(FUN2TEST, (uint32_t)0xc370fae1);
-  vectorFullFloatTest(FUN2TEST, (uint32_t)INT_MIN);
+  min2MaxTests(vectorFullFloatTest, FUN2TEST, (uint32_t)INT_MAX, (uint32_t)0x4212cccd, (uint32_t)0x00000000, (uint32_t)0xc370fae1, (uint32_t)INT_MIN);
 
   endTest();
 
   /* double = Packet4d (full) */
   beginTest("4 double tests");
 
-  vectorFullDoubleTest(FUN2TEST, (uint64_t)LONG_MAX);
-  vectorFullDoubleTest(FUN2TEST, (uint64_t)0x404259999999999a);
-  vectorFullDoubleTest(FUN2TEST, (uint64_t)0x0000000000000000);
-  vectorFullDoubleTest(FUN2TEST, (uint64_t)0xc06e1f5c28f5c28f);
-  vectorFullDoubleTest(FUN2TEST, (uint64_t)LONG_MIN);
+  min2MaxTests(vectorFullDoubleTest, FUN2TEST, (uint64_t)LONG_MAX, (uint64_t)0x404259999999999a, (uint64_t)0x0000000000000000, (uint64_t)0xc06e1f5c28f5c28f, (uint64_t)LONG_MIN);
 
   endTest();
 

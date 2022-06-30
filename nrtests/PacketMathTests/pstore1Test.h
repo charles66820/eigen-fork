@@ -1,7 +1,6 @@
 #include <float.h>
 #include <limits.h>
 
-
 #ifndef EIGEN_MIPP_PSTORE1_TEST_H
 #define EIGEN_MIPP_PSTORE1_TEST_H
 

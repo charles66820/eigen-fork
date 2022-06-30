@@ -1,7 +1,6 @@
 #include <float.h>
 #include <limits.h>
 
-
 #ifndef EIGEN_MIPP_PREDUX_HALF_DOWTO4_TEST_H
 #define EIGEN_MIPP_PREDUX_HALF_DOWTO4_TEST_H
 
@@ -18,7 +17,7 @@ void predux_half_dowto4Tests() {
   /* float = Packet8f (full) -> Packet4f (half)*/
   beginTest("full2half float tests");
 
-  MIN2MAX_8_FLOAT_VECTOR
+  MIN2MAX_8_FLOAT_VECTOR_LOADED
 
   vectorHalfFloatTemplateTest(Packet8f, FUN2TEST, fvmax);
   vectorHalfFloatTemplateTest(Packet8f, FUN2TEST, fv36);
@@ -31,7 +30,7 @@ void predux_half_dowto4Tests() {
   /* int = Packet8i (full) -> Packet4i (half) */
   beginTest("full2half int tests");
 
-  MIN2MAX_8_INT_VECTOR
+  MIN2MAX_8_INT_VECTOR_LOADED
 
   vectorHalfIntTemplateTest(Packet8i, FUN2TEST, ivmax);
   vectorHalfIntTemplateTest(Packet8i, FUN2TEST, iv36);

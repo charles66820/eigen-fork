@@ -54,7 +54,7 @@ void pblendTests() {
   /* float = Packet4f (half) */
   beginTest("4 float tests");
 
-  MIN2MAX_4_FLOAT_VECTOR
+  MIN2MAX_4_FLOAT_VECTOR_LOADED
 
   allTwoPermRep(vectorHalfFloatTest, FUN2TEST COMMA selector4, fhvmax, fhv36, fhv0, fhv_240, fhvmin);
   allTwoPermRep(vectorHalfFloatTest, FUN2TEST COMMA selector4_max, fhvmax, fhv36, fhv0, fhv_240, fhvmin);
@@ -68,7 +68,7 @@ void pblendTests() {
   /* double =  Packet2d (half) */
   beginTest("2 double tests");
 
-  MIN2MAX_2_DOUBLE_VECTOR
+  MIN2MAX_2_DOUBLE_VECTOR_LOADED
 
   allTwoPermRep(vectorHalfDoubleTest, FUN2TEST COMMA selector2, dhvmax, dhv36, dhv0,
                 dhv_240, dhvmin);
@@ -88,7 +88,7 @@ void pblendTests() {
   /* int = Packet4i (half) */
   beginTest("4 int tests");
 
-  MIN2MAX_4_INT_VECTOR
+  MIN2MAX_4_INT_VECTOR_LOADED
 
   allTwoPermRep(vectorHalfIntTest, FUN2TEST COMMA selector4, ihvmax, ihv36, ihv0,
                 ihv_240, ihvmin);
@@ -108,7 +108,7 @@ void pblendTests() {
   /* bool = Packet16b */
   beginTest("16 bool tests");
 
-  MIN2MAX_16_BOOL_VECTOR
+  MIN2MAX_16_BOOL_VECTOR_LOADED
 
   vectorHalfBoolTest(FUN2TEST COMMA selector16, bvtrue, bvtrue);
   vectorHalfBoolTest(FUN2TEST COMMA selector16, bvtrue, bvfalse);
@@ -148,7 +148,7 @@ void pblendTests() {
   /* float = Packet8f (full) */
   beginTest("8 float tests");
 
-  MIN2MAX_8_FLOAT_VECTOR
+  MIN2MAX_8_FLOAT_VECTOR_LOADED
 
   allTwoPermRep(vectorFullFloatTest, FUN2TEST COMMA selector8, fvmax, fv36, fv0, fv_240, fvmin);
   allTwoPermRep(vectorFullFloatTest, FUN2TEST COMMA selector8_max, fvmax, fv36, fv0, fv_240, fvmin);
@@ -162,7 +162,7 @@ void pblendTests() {
   /* double = Packet4d (full) */
   beginTest("4 double tests");
 
-  MIN2MAX_4_DOUBLE_VECTOR
+  MIN2MAX_4_DOUBLE_VECTOR_LOADED
 
   allTwoPermRep(vectorFullDoubleTest, FUN2TEST COMMA selector4, dvmax, dv36, dv0,
                 dv_240, dvmin);
@@ -182,7 +182,7 @@ void pblendTests() {
   /* int = Packet8i (full) */
   beginTest("8 int tests");
 
-  MIN2MAX_8_INT_VECTOR
+  MIN2MAX_8_INT_VECTOR_LOADED
 
   allTwoPermRep(vectorFullIntTest, FUN2TEST COMMA selector8, ivmax, iv36, iv0,
                 iv_240, ivmin);
@@ -202,7 +202,7 @@ void pblendTests() {
   /* Eigen::half = Packet8h */
   beginTest("8 Eigen::half tests");
 
-  MIN2MAX_8_HALF_VECTOR
+  MIN2MAX_8_HALF_VECTOR_LOADED
 
   allTwoPermRep(vectorHalfEigenHalfTest, FUN2TEST COMMA selector8, hvmax, hv36, hv0,
                 hv_240, hvmin);
@@ -222,7 +222,7 @@ void pblendTests() {
   /* bfloat16 = Packet8bf */
   beginTest("8 bfloat16 tests");
 
-  MIN2MAX_8_BFLOAT16_VECTOR
+  MIN2MAX_8_BFLOAT16_VECTOR_LOADED
 
   allTwoPermRep(vectorHalfBfloat16Test, FUN2TEST COMMA selector8, bfvmax, bfv36, bfv0,
                 bfv_240, bfvmin);
@@ -245,7 +245,7 @@ void pblendTests() {
   /* long = Packet4l */
   beginTest("4 long tests");
 
-  MIN2MAX_4_LONG_VECTOR
+  MIN2MAX_4_LONG_VECTOR_LOADED
 
   allTwoPermRep(vectorFullLongTest, FUN2TEST COMMA selector4, lvmax, lv36, lv0,
                 lv_240, lvmin);

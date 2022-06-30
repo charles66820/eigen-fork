@@ -1,7 +1,6 @@
 #include <float.h>
 #include <limits.h>
 
-
 #ifndef EIGEN_MIPP_PARITHMETIC_SHIFT_RIGHT_TEST_H
 #define EIGEN_MIPP_PARITHMETIC_SHIFT_RIGHT_TEST_H
 
@@ -16,7 +15,7 @@ void parithmetic_shift_rightTests() {
   /* int = Packet4i (half) */
   beginTest("4 int tests");
 
-  MIN2MAX_4_INT_VECTOR
+  MIN2MAX_4_INT_VECTOR_LOADED
 
   vectorHalfIntTemplateTest(3, FUN2TEST, ihvmax);
   vectorHalfIntTemplateTest(3, FUN2TEST, ihv36);
@@ -33,7 +32,7 @@ void parithmetic_shift_rightTests() {
   /* int = Packet8i (full) */
   beginTest("8 int tests");
 
-  MIN2MAX_8_INT_VECTOR
+  MIN2MAX_8_INT_VECTOR_LOADED
 
   vectorFullIntTemplateTest(3, FUN2TEST, ivmax);
   vectorFullIntTemplateTest(3, FUN2TEST, iv36);

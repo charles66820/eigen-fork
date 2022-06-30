@@ -1,7 +1,6 @@
 #include <float.h>
 #include <limits.h>
 
-
 #ifndef EIGEN_MIPP_PFLOOR_TEST_H
 #define EIGEN_MIPP_PFLOOR_TEST_H
 
@@ -13,7 +12,7 @@ void pfloorTests() {
 
 #ifdef __SSE__
   /* float = Packet4f (half) */
-tests4FloatMin2MaxOneArg("4 float tests", FUN2TEST);
+  tests4FloatMin2MaxOneArg("4 float tests", FUN2TEST);
 
   /* double =  Packet2d (half) */
   tests2DoubleMin2MaxOneArg("2 double tests", FUN2TEST);
