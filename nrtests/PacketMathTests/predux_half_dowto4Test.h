@@ -17,7 +17,7 @@ void predux_half_dowto4Tests() {
   /* float = Packet8f (full) -> Packet4f (half)*/
   beginTest("full2half float tests");
   {
-    MIN2MAX_8_FLOAT_VECTOR_LOADED
+    MIN2MAX_FLOAT_VECTOR_LOADED(8);
 
     vectorHalfFloatTemplateTest(FUN2TEST, Packet8f, vmax);
     vectorHalfFloatTemplateTest(FUN2TEST, Packet8f, v36);
@@ -30,7 +30,7 @@ void predux_half_dowto4Tests() {
   /* int = Packet8i (full) -> Packet4i (half) */
   beginTest("full2half int tests");
   {
-    MIN2MAX_8_INT_VECTOR_LOADED
+    MIN2MAX_INT_VECTOR_LOADED(8);
 
     vectorHalfIntTemplateTest(FUN2TEST, Packet8i, vmax);
     vectorHalfIntTemplateTest(FUN2TEST, Packet8i, v36);

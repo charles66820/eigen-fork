@@ -23,7 +23,7 @@ void padd2Tests() {
   /* float = Packet8f (full) */
   beginTest("8 float tests");
   {
-    MIN2MAX_8_FLOAT_VECTOR_LOADED
+    MIN2MAX_FLOAT_VECTOR_LOADED(8);
 
     allTwoCombRepArgs(vectorFullFloatTemplateTest, FUN2TEST, Packet8f, vmax, v36, v0, v_240, vmin, (uint8_t)0x00);
     allTwoCombRepArgs(vectorFullFloatTemplateTest, FUN2TEST, Packet8f, vmax, v36, v0, v_240, vmin, (uint8_t)0xFF);

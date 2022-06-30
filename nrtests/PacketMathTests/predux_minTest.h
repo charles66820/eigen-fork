@@ -14,7 +14,7 @@ void predux_minTests() {
   /* float = Packet4f (half) */
   beginTest("4 float tests");
   {
-    MIN2MAX_4_FLOAT_VECTOR_LOADED
+    MIN2MAX_FLOAT_VECTOR_LOADED(4);
 
     scalarSingleTypeTest(float, FUN2TEST, Packet4f, vmax);
     scalarSingleTypeTest(float, FUN2TEST, Packet4f, v36);
@@ -27,7 +27,7 @@ void predux_minTests() {
   /* double =  Packet2d (half) */
   beginTest("2 double tests");
   {
-    MIN2MAX_2_DOUBLE_VECTOR_LOADED
+    MIN2MAX_DOUBLE_VECTOR_LOADED(2);
 
     scalarSingleTypeTest(double, FUN2TEST, Packet2d, vmax);
     scalarSingleTypeTest(double, FUN2TEST, Packet2d, v36);
@@ -40,7 +40,7 @@ void predux_minTests() {
   /* int = Packet4i (half) */
   beginTest("4 int tests");
   {
-    MIN2MAX_4_INT_VECTOR_LOADED
+    MIN2MAX_INT_VECTOR_LOADED(4);
 
     scalarSingleTypeTest(int, FUN2TEST, Packet4i, vmax);
     scalarSingleTypeTest(int, FUN2TEST, Packet4i, v36);
@@ -53,7 +53,7 @@ void predux_minTests() {
   /* bool = Packet16b */
   beginTest("16 bool tests");
   {
-    MIN2MAX_16_BOOL_VECTOR_LOADED
+    MIN2MAX_BOOL_VECTOR_LOADED(16);
 
     scalarSingleTypeTest(bool, FUN2TEST, Packet16b, bvtrue);
     scalarSingleTypeTest(bool, FUN2TEST, Packet16b, bvfalse);
@@ -66,7 +66,7 @@ void predux_minTests() {
   /* float = Packet8f (full) */
   beginTest("8 float tests");
   {
-    MIN2MAX_8_FLOAT_VECTOR_LOADED
+    MIN2MAX_FLOAT_VECTOR_LOADED(8);
 
     scalarSingleTypeTest(float, FUN2TEST, Packet8f, vmax);
     scalarSingleTypeTest(float, FUN2TEST, Packet8f, v36);
@@ -79,7 +79,7 @@ void predux_minTests() {
   /* double = Packet4d (full) */
   beginTest("4 double tests");
   {
-    MIN2MAX_4_DOUBLE_VECTOR_LOADED
+    MIN2MAX_DOUBLE_VECTOR_LOADED(4);
 
     scalarSingleTypeTest(double, FUN2TEST, Packet4d, vmax);
     scalarSingleTypeTest(double, FUN2TEST, Packet4d, v36);
@@ -92,7 +92,7 @@ void predux_minTests() {
   /* int = Packet8i (full) */
   beginTest("8 int tests");
   {
-    MIN2MAX_8_INT_VECTOR_LOADED
+    MIN2MAX_INT_VECTOR_LOADED(8);
 
     scalarSingleTypeTest(int, FUN2TEST, Packet8i, vmax);
     scalarSingleTypeTest(int, FUN2TEST, Packet8i, v36);
@@ -105,7 +105,7 @@ void predux_minTests() {
   /* Eigen::half = Packet8h */
   beginTest("8 Eigen::half tests");
   {
-    MIN2MAX_8_HALF_VECTOR_LOADED
+    MIN2MAX_HALF_VECTOR_LOADED(8);
 
     scalarSingleTypeTest(Eigen::half, FUN2TEST, Packet8h, vmax);
     scalarSingleTypeTest(Eigen::half, FUN2TEST, Packet8h, v36);
@@ -117,7 +117,7 @@ void predux_minTests() {
   /* bfloat16 = Packet8bf */
   beginTest("8 bfloat16 tests");
   {
-    MIN2MAX_8_BFLOAT16_VECTOR_LOADED
+    MIN2MAX_BFLOAT16_VECTOR_LOADED(8);
 
     scalarSingleTypeTest(bfloat16, FUN2TEST, Packet8bf, vmax);
     scalarSingleTypeTest(bfloat16, FUN2TEST, Packet8bf, v36);
@@ -133,7 +133,7 @@ void predux_minTests() {
   /* long = Packet4l */
   beginTest("4 long tests");
   {
-    MIN2MAX_4_LONG_VECTOR_LOADED
+    MIN2MAX_LONG_VECTOR_LOADED(4);
 
     scalarSingleTypeTest(long, FUN2TEST, Packet4l, vmax);
     scalarSingleTypeTest(long, FUN2TEST, Packet4l, v36);

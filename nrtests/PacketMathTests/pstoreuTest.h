@@ -14,7 +14,7 @@ void pstoreuTests() {
   /* float = Packet4f (half) */
   beginTest("4 float tests");
   {
-    MIN2MAX_4_FLOAT_VECTOR_LOADED
+    MIN2MAX_FLOAT_VECTOR_LOADED(4);
 
     uRefSingleType(FUN2TEST, float, 4, vmax);
     uRefSingleType(FUN2TEST, float, 4, v36);
@@ -27,7 +27,7 @@ void pstoreuTests() {
   /* double =  Packet2d (half) */
   beginTest("2 double tests");
   {
-    MIN2MAX_2_DOUBLE_VECTOR_LOADED
+    MIN2MAX_DOUBLE_VECTOR_LOADED(2);
 
     uRefSingleType(FUN2TEST, double, 2, vmax);
     uRefSingleType(FUN2TEST, double, 2, v36);
@@ -40,7 +40,7 @@ void pstoreuTests() {
   /* int = Packet4i (half) */
   beginTest("4 int tests");
   {
-    MIN2MAX_4_INT_VECTOR_LOADED
+    MIN2MAX_INT_VECTOR_LOADED(4);
 
     uRefSingleType(FUN2TEST, int, 4, vmax);
     uRefSingleType(FUN2TEST, int, 4, v36);
@@ -53,7 +53,7 @@ void pstoreuTests() {
   /* bool = Packet16b */
   beginTest("16 bool tests");
   {
-    MIN2MAX_16_BOOL_VECTOR_LOADED
+    MIN2MAX_BOOL_VECTOR_LOADED(16);
 
     uRefSingleType(FUN2TEST, bool, 16, bvtrue);
     uRefSingleType(FUN2TEST, bool, 16, bvfalse);
@@ -66,7 +66,7 @@ void pstoreuTests() {
   /* float = Packet8f (full) */
   beginTest("8 float tests");
   {
-    MIN2MAX_8_FLOAT_VECTOR_LOADED
+    MIN2MAX_FLOAT_VECTOR_LOADED(8);
 
     uRefSingleType(FUN2TEST, float, 8, vmax);
     uRefSingleType(FUN2TEST, float, 8, v36);
@@ -79,7 +79,7 @@ void pstoreuTests() {
   /* double = Packet4d (full) */
   beginTest("4 double tests");
   {
-    MIN2MAX_4_DOUBLE_VECTOR_LOADED
+    MIN2MAX_DOUBLE_VECTOR_LOADED(4);
 
     uRefSingleType(FUN2TEST, double, 4, vmax);
     uRefSingleType(FUN2TEST, double, 4, v36);
@@ -92,7 +92,7 @@ void pstoreuTests() {
   /* int = Packet8i (full) */
   beginTest("8 int tests");
   {
-    MIN2MAX_8_INT_VECTOR_LOADED
+    MIN2MAX_INT_VECTOR_LOADED(8);
 
     uRefSingleType(FUN2TEST, int, 8, vmax);
     uRefSingleType(FUN2TEST, int, 8, v36);
@@ -105,7 +105,7 @@ void pstoreuTests() {
   /* Eigen::half = Packet8h */
   beginTest("8 Eigen::half tests");
   {
-    MIN2MAX_8_HALF_VECTOR_LOADED
+    MIN2MAX_HALF_VECTOR_LOADED(8);
 
     uRefSingleType(FUN2TEST, Eigen::half, 8, vmax);
     uRefSingleType(FUN2TEST, Eigen::half, 8, v36);
@@ -118,7 +118,7 @@ void pstoreuTests() {
   /* bfloat16 = Packet8bf */
   beginTest("8 bfloat16 tests");
   {
-    MIN2MAX_8_BFLOAT16_VECTOR_LOADED
+    MIN2MAX_BFLOAT16_VECTOR_LOADED(8);
 
     uRefSingleType(FUN2TEST, bfloat16, 8, vmax);
     uRefSingleType(FUN2TEST, bfloat16, 8, v36);
@@ -134,7 +134,7 @@ void pstoreuTests() {
   /* long = Packet4l */
   beginTest("4 long tests");
   {
-    MIN2MAX_4_LONG_VECTOR_LOADED
+    MIN2MAX_LONG_VECTOR_LOADED(4);
 
     uRefSingleType(FUN2TEST, long, 4, vmax);
     uRefSingleType(FUN2TEST, long, 4, v36);
