@@ -16,28 +16,28 @@ void predux_half_dowto4Tests() {
 #ifdef __AVX__
   /* float = Packet8f (full) -> Packet4f (half)*/
   beginTest("full2half float tests");
+  {
+    MIN2MAX_8_FLOAT_VECTOR_LOADED
 
-  MIN2MAX_8_FLOAT_VECTOR_LOADED
-
-  vectorHalfFloatTemplateTest(FUN2TEST, Packet8f, fvmax);
-  vectorHalfFloatTemplateTest(FUN2TEST, Packet8f, fv36);
-  vectorHalfFloatTemplateTest(FUN2TEST, Packet8f, fv0);
-  vectorHalfFloatTemplateTest(FUN2TEST, Packet8f, fv_240);
-  vectorHalfFloatTemplateTest(FUN2TEST, Packet8f, fvmin);
-
+    vectorHalfFloatTemplateTest(FUN2TEST, Packet8f, vmax);
+    vectorHalfFloatTemplateTest(FUN2TEST, Packet8f, v36);
+    vectorHalfFloatTemplateTest(FUN2TEST, Packet8f, v0);
+    vectorHalfFloatTemplateTest(FUN2TEST, Packet8f, v_240);
+    vectorHalfFloatTemplateTest(FUN2TEST, Packet8f, vmin);
+  }
   endTest();
 
   /* int = Packet8i (full) -> Packet4i (half) */
   beginTest("full2half int tests");
+  {
+    MIN2MAX_8_INT_VECTOR_LOADED
 
-  MIN2MAX_8_INT_VECTOR_LOADED
-
-  vectorHalfIntTemplateTest(FUN2TEST, Packet8i, ivmax);
-  vectorHalfIntTemplateTest(FUN2TEST, Packet8i, iv36);
-  vectorHalfIntTemplateTest(FUN2TEST, Packet8i, iv0);
-  vectorHalfIntTemplateTest(FUN2TEST, Packet8i, iv_240);
-  vectorHalfIntTemplateTest(FUN2TEST, Packet8i, ivmin);
-
+    vectorHalfIntTemplateTest(FUN2TEST, Packet8i, vmax);
+    vectorHalfIntTemplateTest(FUN2TEST, Packet8i, v36);
+    vectorHalfIntTemplateTest(FUN2TEST, Packet8i, v0);
+    vectorHalfIntTemplateTest(FUN2TEST, Packet8i, v_240);
+    vectorHalfIntTemplateTest(FUN2TEST, Packet8i, vmin);
+  }
   endTest();
 
 #endif

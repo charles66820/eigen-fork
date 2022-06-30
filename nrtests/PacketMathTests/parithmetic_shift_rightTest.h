@@ -14,15 +14,11 @@ void parithmetic_shift_rightTests() {
 
   /* int = Packet4i (half) */
   beginTest("4 int tests");
+  {
+    MIN2MAX_4_INT_VECTOR_LOADED
 
-  MIN2MAX_4_INT_VECTOR_LOADED
-
-  vectorHalfIntTemplateTest(FUN2TEST, 3, ihvmax);
-  vectorHalfIntTemplateTest(FUN2TEST, 3, ihv36);
-  vectorHalfIntTemplateTest(FUN2TEST, 3, ihv0);
-  vectorHalfIntTemplateTest(FUN2TEST, 3, ihv_240);
-  vectorHalfIntTemplateTest(FUN2TEST, 3, ihvmin);
-
+    min2MaxTests(vectorHalfIntTemplateTest, FUN2TEST, 3, vmax, v36, v0, v_240, vmin);
+  }
   endTest();
 
 #endif
@@ -31,15 +27,11 @@ void parithmetic_shift_rightTests() {
 
   /* int = Packet8i (full) */
   beginTest("8 int tests");
+  {
+    MIN2MAX_8_INT_VECTOR_LOADED
 
-  MIN2MAX_8_INT_VECTOR_LOADED
-
-  vectorFullIntTemplateTest(FUN2TEST, 3, ivmax);
-  vectorFullIntTemplateTest(FUN2TEST, 3, iv36);
-  vectorFullIntTemplateTest(FUN2TEST, 3, iv0);
-  vectorFullIntTemplateTest(FUN2TEST, 3, iv_240);
-  vectorFullIntTemplateTest(FUN2TEST, 3, ivmin);
-
+    min2MaxTests(vectorFullIntTemplateTest, FUN2TEST, 3, vmax, v36, v0, v_240, vmin);
+  }
   endTest();
 
 #endif

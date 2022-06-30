@@ -14,15 +14,11 @@ void plogical_shift_rightTests() {
 
   /* int = Packet4i (half) */
   beginTest("4 int tests");
+  {
+    MIN2MAX_4_INT_VECTOR_LOADED
 
-  MIN2MAX_4_INT_VECTOR_LOADED
-
-  vectorHalfIntTemplateTest(FUN2TEST, 3, (Packet4i)ihvmax);
-  vectorHalfIntTemplateTest(FUN2TEST, 3, (Packet4i)ihv36);
-  vectorHalfIntTemplateTest(FUN2TEST, 3, (Packet4i)ihv0);
-  vectorHalfIntTemplateTest(FUN2TEST, 3, (Packet4i)ihv_240);
-  vectorHalfIntTemplateTest(FUN2TEST, 3, (Packet4i)ihvmin);
-
+    min2MaxTests(vectorHalfIntTemplateTest, FUN2TEST, 3, vmax, v36, v0, v_240, vmin);
+  }
   endTest();
 
 #endif
@@ -31,15 +27,11 @@ void plogical_shift_rightTests() {
 
   /* int = Packet8i (full) */
   beginTest("8 int tests");
+  {
+    MIN2MAX_8_INT_VECTOR_LOADED
 
-  MIN2MAX_8_INT_VECTOR_LOADED
-
-  vectorFullIntTemplateTest(FUN2TEST, 3, (Packet8i)ivmax);
-  vectorFullIntTemplateTest(FUN2TEST, 3, (Packet8i)iv36);
-  vectorFullIntTemplateTest(FUN2TEST, 3, (Packet8i)iv0);
-  vectorFullIntTemplateTest(FUN2TEST, 3, (Packet8i)iv_240);
-  vectorFullIntTemplateTest(FUN2TEST, 3, (Packet8i)ivmin);
-
+    min2MaxTests(vectorFullIntTemplateTest, FUN2TEST, 3, vmax, v36, v0, v_240, vmin);
+  }
   endTest();
 
 #endif
@@ -47,15 +39,11 @@ void plogical_shift_rightTests() {
 #ifdef __AVX2__
   /* long = Packet4l */
   beginTest("4 long tests");
+  {
+    MIN2MAX_4_LONG_VECTOR_LOADED
 
-  MIN2MAX_4_LONG_VECTOR_LOADED
-
-  vectorFullLongTemplateTest(FUN2TEST, 3, (Packet4l)lvmax);
-  vectorFullLongTemplateTest(FUN2TEST, 3, (Packet4l)lv36);
-  vectorFullLongTemplateTest(FUN2TEST, 3, (Packet4l)lv0);
-  vectorFullLongTemplateTest(FUN2TEST, 3, (Packet4l)lv_240);
-  vectorFullLongTemplateTest(FUN2TEST, 3, (Packet4l)lvmin);
-
+    min2MaxTests(vectorFullLongTemplateTest, FUN2TEST, 3, vmax, v36, v0, v_240, vmin);
+  }
   endTest();
 
 #endif

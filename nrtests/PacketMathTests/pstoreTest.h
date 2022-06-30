@@ -13,51 +13,51 @@ void pstoreTests() {
 #ifdef __SSE__
   /* float = Packet4f (half) */
   beginTest("4 float tests");
+  {
+    MIN2MAX_4_FLOAT_VECTOR_LOADED
 
-  MIN2MAX_4_FLOAT_VECTOR_LOADED
-
-  refSingleType(FUN2TEST, float, 4, (Packet4f)fhvmax);
-  refSingleType(FUN2TEST, float, 4, (Packet4f)fhv36);
-  refSingleType(FUN2TEST, float, 4, (Packet4f)fhv0);
-  refSingleType(FUN2TEST, float, 4, (Packet4f)fhv_240);
-  refSingleType(FUN2TEST, float, 4, (Packet4f)fhvmin);
-
+    refSingleType(FUN2TEST, float, 4, vmax);
+    refSingleType(FUN2TEST, float, 4, v36);
+    refSingleType(FUN2TEST, float, 4, v0);
+    refSingleType(FUN2TEST, float, 4, v_240);
+    refSingleType(FUN2TEST, float, 4, vmin);
+  }
   endTest();
 
   /* double =  Packet2d (half) */
   beginTest("2 double tests");
+  {
+    MIN2MAX_2_DOUBLE_VECTOR_LOADED
 
-  MIN2MAX_2_DOUBLE_VECTOR_LOADED
-
-  refSingleType(FUN2TEST, double, 2, dhvmax);
-  refSingleType(FUN2TEST, double, 2, dhv36);
-  refSingleType(FUN2TEST, double, 2, dhv0);
-  refSingleType(FUN2TEST, double, 2, dhv_240);
-  refSingleType(FUN2TEST, double, 2, dhvmin);
-
+    refSingleType(FUN2TEST, double, 2, vmax);
+    refSingleType(FUN2TEST, double, 2, v36);
+    refSingleType(FUN2TEST, double, 2, v0);
+    refSingleType(FUN2TEST, double, 2, v_240);
+    refSingleType(FUN2TEST, double, 2, vmin);
+  }
   endTest();
 
   /* int = Packet4i (half) */
   beginTest("4 int tests");
+  {
+    MIN2MAX_4_INT_VECTOR_LOADED
 
-  MIN2MAX_4_INT_VECTOR_LOADED
-
-  refSingleType(FUN2TEST, int, 4, (Packet4i)ihvmax);
-  refSingleType(FUN2TEST, int, 4, (Packet4i)ihv36);
-  refSingleType(FUN2TEST, int, 4, (Packet4i)ihv0);
-  refSingleType(FUN2TEST, int, 4, (Packet4i)ihv_240);
-  refSingleType(FUN2TEST, int, 4, (Packet4i)ihvmin);
-
+    refSingleType(FUN2TEST, int, 4, vmax);
+    refSingleType(FUN2TEST, int, 4, v36);
+    refSingleType(FUN2TEST, int, 4, v0);
+    refSingleType(FUN2TEST, int, 4, v_240);
+    refSingleType(FUN2TEST, int, 4, vmin);
+  }
   endTest();
 
   /* bool = Packet16b */
   beginTest("16 bool tests");
+  {
+    MIN2MAX_16_BOOL_VECTOR_LOADED
 
-  MIN2MAX_16_BOOL_VECTOR_LOADED
-
-  refSingleType(FUN2TEST, bool, 16, (Packet16b)bvtrue);
-  refSingleType(FUN2TEST, bool, 16, (Packet16b)bvfalse);
-
+    refSingleType(FUN2TEST, bool, 16, bvtrue);
+    refSingleType(FUN2TEST, bool, 16, bvfalse);
+  }
   endTest();
 
 #endif
@@ -65,67 +65,67 @@ void pstoreTests() {
 #ifdef __AVX__
   /* float = Packet8f (full) */
   beginTest("8 float tests");
+  {
+    MIN2MAX_8_FLOAT_VECTOR_LOADED
 
-  MIN2MAX_8_FLOAT_VECTOR_LOADED
-
-  refSingleType(FUN2TEST, float, 8, (Packet8f)fvmax);
-  refSingleType(FUN2TEST, float, 8, (Packet8f)fv36);
-  refSingleType(FUN2TEST, float, 8, (Packet8f)fv0);
-  refSingleType(FUN2TEST, float, 8, (Packet8f)fv_240);
-  refSingleType(FUN2TEST, float, 8, (Packet8f)fvmin);
-
+    refSingleType(FUN2TEST, float, 8, vmax);
+    refSingleType(FUN2TEST, float, 8, v36);
+    refSingleType(FUN2TEST, float, 8, v0);
+    refSingleType(FUN2TEST, float, 8, v_240);
+    refSingleType(FUN2TEST, float, 8, vmin);
+  }
   endTest();
 
   /* double = Packet4d (full) */
   beginTest("4 double tests");
+  {
+    MIN2MAX_4_DOUBLE_VECTOR_LOADED
 
-  MIN2MAX_4_DOUBLE_VECTOR_LOADED
-
-  refSingleType(FUN2TEST, double, 4, dvmax);
-  refSingleType(FUN2TEST, double, 4, dv36);
-  refSingleType(FUN2TEST, double, 4, dv0);
-  refSingleType(FUN2TEST, double, 4, dv_240);
-  refSingleType(FUN2TEST, double, 4, dvmin);
-
+    refSingleType(FUN2TEST, double, 4, vmax);
+    refSingleType(FUN2TEST, double, 4, v36);
+    refSingleType(FUN2TEST, double, 4, v0);
+    refSingleType(FUN2TEST, double, 4, v_240);
+    refSingleType(FUN2TEST, double, 4, vmin);
+  }
   endTest();
 
   /* int = Packet8i (full) */
   beginTest("8 int tests");
+  {
+    MIN2MAX_8_INT_VECTOR_LOADED
 
-  MIN2MAX_8_INT_VECTOR_LOADED
-
-  refSingleType(FUN2TEST, int, 8, (Packet8i)ivmax);
-  refSingleType(FUN2TEST, int, 8, (Packet8i)iv36);
-  refSingleType(FUN2TEST, int, 8, (Packet8i)iv0);
-  refSingleType(FUN2TEST, int, 8, (Packet8i)iv_240);
-  refSingleType(FUN2TEST, int, 8, (Packet8i)ivmin);
-
+    refSingleType(FUN2TEST, int, 8, vmax);
+    refSingleType(FUN2TEST, int, 8, v36);
+    refSingleType(FUN2TEST, int, 8, v0);
+    refSingleType(FUN2TEST, int, 8, v_240);
+    refSingleType(FUN2TEST, int, 8, vmin);
+  }
   endTest();
 
   /* Eigen::half = Packet8h */
   beginTest("8 Eigen::half tests");
+  {
+    MIN2MAX_8_HALF_VECTOR_LOADED
 
-  MIN2MAX_8_HALF_VECTOR_LOADED
-
-  refSingleType(FUN2TEST, Eigen::half, 8, (Packet8h)hvmax);
-  refSingleType(FUN2TEST, Eigen::half, 8, (Packet8h)hv36);
-  refSingleType(FUN2TEST, Eigen::half, 8, (Packet8h)hv0);
-  refSingleType(FUN2TEST, Eigen::half, 8, (Packet8h)hv_240);
-  refSingleType(FUN2TEST, Eigen::half, 8, (Packet8h)hvmin);
-
+    refSingleType(FUN2TEST, Eigen::half, 8, vmax);
+    refSingleType(FUN2TEST, Eigen::half, 8, v36);
+    refSingleType(FUN2TEST, Eigen::half, 8, v0);
+    refSingleType(FUN2TEST, Eigen::half, 8, v_240);
+    refSingleType(FUN2TEST, Eigen::half, 8, vmin);
+  }
   endTest();
 
   /* bfloat16 = Packet8bf */
   beginTest("8 bfloat16 tests");
+  {
+    MIN2MAX_8_BFLOAT16_VECTOR_LOADED
 
-  MIN2MAX_8_BFLOAT16_VECTOR_LOADED
-
-  refSingleType(FUN2TEST, bfloat16, 8, (Packet8bf)bfvmax);
-  refSingleType(FUN2TEST, bfloat16, 8, (Packet8bf)bfv36);
-  refSingleType(FUN2TEST, bfloat16, 8, (Packet8bf)bfv0);
-  refSingleType(FUN2TEST, bfloat16, 8, (Packet8bf)bfv_240);
-  refSingleType(FUN2TEST, bfloat16, 8, (Packet8bf)bfvmin);
-
+    refSingleType(FUN2TEST, bfloat16, 8, vmax);
+    refSingleType(FUN2TEST, bfloat16, 8, v36);
+    refSingleType(FUN2TEST, bfloat16, 8, v0);
+    refSingleType(FUN2TEST, bfloat16, 8, v_240);
+    refSingleType(FUN2TEST, bfloat16, 8, vmin);
+  }
   endTest();
 
 #endif
@@ -133,15 +133,15 @@ void pstoreTests() {
 #ifdef __AVX2__
   /* long = Packet4l */
   beginTest("4 long tests");
+  {
+    MIN2MAX_4_LONG_VECTOR_LOADED
 
-  MIN2MAX_4_LONG_VECTOR_LOADED
-
-  refSingleType(FUN2TEST, long, 4, (Packet4l)lvmax);
-  refSingleType(FUN2TEST, long, 4, (Packet4l)lv36);
-  refSingleType(FUN2TEST, long, 4, (Packet4l)lv0);
-  refSingleType(FUN2TEST, long, 4, (Packet4l)lv_240);
-  refSingleType(FUN2TEST, long, 4, (Packet4l)lvmin);
-
+    refSingleType(FUN2TEST, long, 4, vmax);
+    refSingleType(FUN2TEST, long, 4, v36);
+    refSingleType(FUN2TEST, long, 4, v0);
+    refSingleType(FUN2TEST, long, 4, v_240);
+    refSingleType(FUN2TEST, long, 4, vmin);
+  }
   endTest();
 
 #endif

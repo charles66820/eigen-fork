@@ -16,7 +16,7 @@
 #define selectorFixVal(PacketSize, val, name)                   \
   internal::Selector<PacketSize> selector##PacketSize##_##name; \
   for (int i = 0; i < PacketSize; ++i) selector##PacketSize##_##name.select[i] = val;
-
+}
 void pblendTests() {
   printTestTitle(FUN2TEST);
 
@@ -53,96 +53,98 @@ void pblendTests() {
 #ifdef __SSE__
   /* float = Packet4f (half) */
   beginTest("4 float tests");
+  {
+    MIN2MAX_4_FLOAT_VECTOR_LOADED
 
-  MIN2MAX_4_FLOAT_VECTOR_LOADED
-
-  allTwoPermRep(vectorHalfFloatTemplateTest, FUN2TEST COMMA selector4, Packet4f, fhvmax, fhv36, fhv0, fhv_240, fhvmin);
-  allTwoPermRep(vectorHalfFloatTemplateTest, FUN2TEST COMMA selector4_max, Packet4f, fhvmax, fhv36, fhv0, fhv_240,
-                fhvmin);
-  allTwoPermRep(vectorHalfFloatTemplateTest, FUN2TEST COMMA selector4_pos, Packet4f, fhvmax, fhv36, fhv0, fhv_240,
-                fhvmin);
-  allTwoPermRep(vectorHalfFloatTemplateTest, FUN2TEST COMMA selector4_zero, Packet4f, fhvmax, fhv36, fhv0, fhv_240,
-                fhvmin);
-  allTwoPermRep(vectorHalfFloatTemplateTest, FUN2TEST COMMA selector4_neg, Packet4f, fhvmax, fhv36, fhv0, fhv_240,
-                fhvmin);
-  allTwoPermRep(vectorHalfFloatTemplateTest, FUN2TEST COMMA selector4_min, Packet4f, fhvmax, fhv36, fhv0, fhv_240,
-                fhvmin);
-
+    allTwoPermRep(vectorHalfFloatTemplateTest, FUN2TEST COMMA selector4, Packet4f, vmax, v36, v0, v_240,
+                  vmin);
+    allTwoPermRep(vectorHalfFloatTemplateTest, FUN2TEST COMMA selector4_max, Packet4f, vmax, v36, v0, v_240,
+                  vmin);
+    allTwoPermRep(vectorHalfFloatTemplateTest, FUN2TEST COMMA selector4_pos, Packet4f, vmax, v36, v0, v_240,
+                  vmin);
+    allTwoPermRep(vectorHalfFloatTemplateTest, FUN2TEST COMMA selector4_zero, Packet4f, vmax, v36, v0, v_240,
+                  vmin);
+    allTwoPermRep(vectorHalfFloatTemplateTest, FUN2TEST COMMA selector4_neg, Packet4f, vmax, v36, v0, v_240,
+                  vmin);
+    allTwoPermRep(vectorHalfFloatTemplateTest, FUN2TEST COMMA selector4_min, Packet4f, vmax, v36, v0, v_240,
+                  vmin);
+  }
   endTest();
 
   /* double =  Packet2d (half) */
   beginTest("2 double tests");
+  {
+    MIN2MAX_2_DOUBLE_VECTOR_LOADED
 
-  MIN2MAX_2_DOUBLE_VECTOR_LOADED
-
-  allTwoPermRep(vectorHalfDoubleTemplateTest, FUN2TEST COMMA selector2, Packet2d, dhvmax, dhv36, dhv0, dhv_240, dhvmin);
-  allTwoPermRep(vectorHalfDoubleTemplateTest, FUN2TEST COMMA selector2_max, Packet2d, dhvmax, dhv36, dhv0, dhv_240,
-                dhvmin);
-  allTwoPermRep(vectorHalfDoubleTemplateTest, FUN2TEST COMMA selector2_pos, Packet2d, dhvmax, dhv36, dhv0, dhv_240,
-                dhvmin);
-  allTwoPermRep(vectorHalfDoubleTemplateTest, FUN2TEST COMMA selector2_zero, Packet2d, dhvmax, dhv36, dhv0, dhv_240,
-                dhvmin);
-  allTwoPermRep(vectorHalfDoubleTemplateTest, FUN2TEST COMMA selector2_neg, Packet2d, dhvmax, dhv36, dhv0, dhv_240,
-                dhvmin);
-  allTwoPermRep(vectorHalfDoubleTemplateTest, FUN2TEST COMMA selector2_min, Packet2d, dhvmax, dhv36, dhv0, dhv_240,
-                dhvmin);
-
+    allTwoPermRep(vectorHalfDoubleTemplateTest, FUN2TEST COMMA selector2, Packet2d, vmax, v36, v0, v_240,
+                  vmin);
+    allTwoPermRep(vectorHalfDoubleTemplateTest, FUN2TEST COMMA selector2_max, Packet2d, vmax, v36, v0, v_240,
+                  vmin);
+    allTwoPermRep(vectorHalfDoubleTemplateTest, FUN2TEST COMMA selector2_pos, Packet2d, vmax, v36, v0, v_240,
+                  vmin);
+    allTwoPermRep(vectorHalfDoubleTemplateTest, FUN2TEST COMMA selector2_zero, Packet2d, vmax, v36, v0, v_240,
+                  vmin);
+    allTwoPermRep(vectorHalfDoubleTemplateTest, FUN2TEST COMMA selector2_neg, Packet2d, vmax, v36, v0, v_240,
+                  vmin);
+    allTwoPermRep(vectorHalfDoubleTemplateTest, FUN2TEST COMMA selector2_min, Packet2d, vmax, v36, v0, v_240,
+                  vmin);
+  }
   endTest();
 
   /* int = Packet4i (half) */
   beginTest("4 int tests");
+  {
+    MIN2MAX_4_INT_VECTOR_LOADED
 
-  MIN2MAX_4_INT_VECTOR_LOADED
-
-  allTwoPermRep(vectorHalfIntTemplateTest, FUN2TEST COMMA selector4, Packet4i, ihvmax, ihv36, ihv0, ihv_240, ihvmin);
-  allTwoPermRep(vectorHalfIntTemplateTest, FUN2TEST COMMA selector4_max, Packet4i, ihvmax, ihv36, ihv0, ihv_240,
-                ihvmin);
-  allTwoPermRep(vectorHalfIntTemplateTest, FUN2TEST COMMA selector4_pos, Packet4i, ihvmax, ihv36, ihv0, ihv_240,
-                ihvmin);
-  allTwoPermRep(vectorHalfIntTemplateTest, FUN2TEST COMMA selector4_zero, Packet4i, ihvmax, ihv36, ihv0, ihv_240,
-                ihvmin);
-  allTwoPermRep(vectorHalfIntTemplateTest, FUN2TEST COMMA selector4_neg, Packet4i, ihvmax, ihv36, ihv0, ihv_240,
-                ihvmin);
-  allTwoPermRep(vectorHalfIntTemplateTest, FUN2TEST COMMA selector4_min, Packet4i, ihvmax, ihv36, ihv0, ihv_240,
-                ihvmin);
-
+    allTwoPermRep(vectorHalfIntTemplateTest, FUN2TEST COMMA selector4, Packet4i, vmax, v36, v0, v_240, vmin);
+    allTwoPermRep(vectorHalfIntTemplateTest, FUN2TEST COMMA selector4_max, Packet4i, vmax, v36, v0, v_240,
+                  vmin);
+    allTwoPermRep(vectorHalfIntTemplateTest, FUN2TEST COMMA selector4_pos, Packet4i, vmax, v36, v0, v_240,
+                  vmin);
+    allTwoPermRep(vectorHalfIntTemplateTest, FUN2TEST COMMA selector4_zero, Packet4i, vmax, v36, v0, v_240,
+                  vmin);
+    allTwoPermRep(vectorHalfIntTemplateTest, FUN2TEST COMMA selector4_neg, Packet4i, vmax, v36, v0, v_240,
+                  vmin);
+    allTwoPermRep(vectorHalfIntTemplateTest, FUN2TEST COMMA selector4_min, Packet4i, vmax, v36, v0, v_240,
+                  vmin);
+  }
   endTest();
 
   /* bool = Packet16b */
   beginTest("16 bool tests");
+  {
+    MIN2MAX_16_BOOL_VECTOR_LOADED
 
-  MIN2MAX_16_BOOL_VECTOR_LOADED
+    vectorHalfBoolTemplateTest(FUN2TEST COMMA selector16, Packet16b, bvtrue, bvtrue);
+    vectorHalfBoolTemplateTest(FUN2TEST COMMA selector16, Packet16b, bvtrue, bvfalse);
+    vectorHalfBoolTemplateTest(FUN2TEST COMMA selector16, Packet16b, bvfalse, bvtrue);
+    vectorHalfBoolTemplateTest(FUN2TEST COMMA selector16, Packet16b, bvfalse, bvfalse);
 
-  vectorHalfBoolTemplateTest(FUN2TEST COMMA selector16, Packet16b, bvtrue, bvtrue);
-  vectorHalfBoolTemplateTest(FUN2TEST COMMA selector16, Packet16b, bvtrue, bvfalse);
-  vectorHalfBoolTemplateTest(FUN2TEST COMMA selector16, Packet16b, bvfalse, bvtrue);
-  vectorHalfBoolTemplateTest(FUN2TEST COMMA selector16, Packet16b, bvfalse, bvfalse);
+    vectorHalfBoolTemplateTest(FUN2TEST COMMA selector16_max, Packet16b, bvtrue, bvtrue);
+    vectorHalfBoolTemplateTest(FUN2TEST COMMA selector16_max, Packet16b, bvtrue, bvfalse);
+    vectorHalfBoolTemplateTest(FUN2TEST COMMA selector16_max, Packet16b, bvfalse, bvtrue);
+    vectorHalfBoolTemplateTest(FUN2TEST COMMA selector16_max, Packet16b, bvfalse, bvfalse);
 
-  vectorHalfBoolTemplateTest(FUN2TEST COMMA selector16_max, Packet16b, bvtrue, bvtrue);
-  vectorHalfBoolTemplateTest(FUN2TEST COMMA selector16_max, Packet16b, bvtrue, bvfalse);
-  vectorHalfBoolTemplateTest(FUN2TEST COMMA selector16_max, Packet16b, bvfalse, bvtrue);
-  vectorHalfBoolTemplateTest(FUN2TEST COMMA selector16_max, Packet16b, bvfalse, bvfalse);
+    vectorHalfBoolTemplateTest(FUN2TEST COMMA selector16_pos, Packet16b, bvtrue, bvtrue);
+    vectorHalfBoolTemplateTest(FUN2TEST COMMA selector16_pos, Packet16b, bvtrue, bvfalse);
+    vectorHalfBoolTemplateTest(FUN2TEST COMMA selector16_pos, Packet16b, bvfalse, bvtrue);
+    vectorHalfBoolTemplateTest(FUN2TEST COMMA selector16_pos, Packet16b, bvfalse, bvfalse);
 
-  vectorHalfBoolTemplateTest(FUN2TEST COMMA selector16_pos, Packet16b, bvtrue, bvtrue);
-  vectorHalfBoolTemplateTest(FUN2TEST COMMA selector16_pos, Packet16b, bvtrue, bvfalse);
-  vectorHalfBoolTemplateTest(FUN2TEST COMMA selector16_pos, Packet16b, bvfalse, bvtrue);
-  vectorHalfBoolTemplateTest(FUN2TEST COMMA selector16_pos, Packet16b, bvfalse, bvfalse);
+    vectorHalfBoolTemplateTest(FUN2TEST COMMA selector16_zero, Packet16b, bvtrue, bvtrue);
+    vectorHalfBoolTemplateTest(FUN2TEST COMMA selector16_zero, Packet16b, bvtrue, bvfalse);
+    vectorHalfBoolTemplateTest(FUN2TEST COMMA selector16_zero, Packet16b, bvfalse, bvtrue);
+    vectorHalfBoolTemplateTest(FUN2TEST COMMA selector16_zero, Packet16b, bvfalse, bvfalse);
 
-  vectorHalfBoolTemplateTest(FUN2TEST COMMA selector16_zero, Packet16b, bvtrue, bvtrue);
-  vectorHalfBoolTemplateTest(FUN2TEST COMMA selector16_zero, Packet16b, bvtrue, bvfalse);
-  vectorHalfBoolTemplateTest(FUN2TEST COMMA selector16_zero, Packet16b, bvfalse, bvtrue);
-  vectorHalfBoolTemplateTest(FUN2TEST COMMA selector16_zero, Packet16b, bvfalse, bvfalse);
+    vectorHalfBoolTemplateTest(FUN2TEST COMMA selector16_neg, Packet16b, bvtrue, bvtrue);
+    vectorHalfBoolTemplateTest(FUN2TEST COMMA selector16_neg, Packet16b, bvtrue, bvfalse);
+    vectorHalfBoolTemplateTest(FUN2TEST COMMA selector16_neg, Packet16b, bvfalse, bvtrue);
+    vectorHalfBoolTemplateTest(FUN2TEST COMMA selector16_neg, Packet16b, bvfalse, bvfalse);
 
-  vectorHalfBoolTemplateTest(FUN2TEST COMMA selector16_neg, Packet16b, bvtrue, bvtrue);
-  vectorHalfBoolTemplateTest(FUN2TEST COMMA selector16_neg, Packet16b, bvtrue, bvfalse);
-  vectorHalfBoolTemplateTest(FUN2TEST COMMA selector16_neg, Packet16b, bvfalse, bvtrue);
-  vectorHalfBoolTemplateTest(FUN2TEST COMMA selector16_neg, Packet16b, bvfalse, bvfalse);
-
-  vectorHalfBoolTemplateTest(FUN2TEST COMMA selector16_min, Packet16b, bvtrue, bvtrue);
-  vectorHalfBoolTemplateTest(FUN2TEST COMMA selector16_min, Packet16b, bvtrue, bvfalse);
-  vectorHalfBoolTemplateTest(FUN2TEST COMMA selector16_min, Packet16b, bvfalse, bvtrue);
-  vectorHalfBoolTemplateTest(FUN2TEST COMMA selector16_min, Packet16b, bvfalse, bvfalse);
-
+    vectorHalfBoolTemplateTest(FUN2TEST COMMA selector16_min, Packet16b, bvtrue, bvtrue);
+    vectorHalfBoolTemplateTest(FUN2TEST COMMA selector16_min, Packet16b, bvtrue, bvfalse);
+    vectorHalfBoolTemplateTest(FUN2TEST COMMA selector16_min, Packet16b, bvfalse, bvtrue);
+    vectorHalfBoolTemplateTest(FUN2TEST COMMA selector16_min, Packet16b, bvfalse, bvfalse);
+  }
   endTest();
 
 #endif
@@ -150,83 +152,89 @@ void pblendTests() {
 #ifdef __AVX__
   /* float = Packet8f (full) */
   beginTest("8 float tests");
+  {
+    MIN2MAX_8_FLOAT_VECTOR_LOADED
 
-  MIN2MAX_8_FLOAT_VECTOR_LOADED
-
-  allTwoPermRep(vectorFullFloatTemplateTest, FUN2TEST COMMA selector8, Packet8f, fvmax, fv36, fv0, fv_240, fvmin);
-  allTwoPermRep(vectorFullFloatTemplateTest, FUN2TEST COMMA selector8_max, Packet8f, fvmax, fv36, fv0, fv_240, fvmin);
-  allTwoPermRep(vectorFullFloatTemplateTest, FUN2TEST COMMA selector8_pos, Packet8f, fvmax, fv36, fv0, fv_240, fvmin);
-  allTwoPermRep(vectorFullFloatTemplateTest, FUN2TEST COMMA selector8_zero, Packet8f, fvmax, fv36, fv0, fv_240, fvmin);
-  allTwoPermRep(vectorFullFloatTemplateTest, FUN2TEST COMMA selector8_neg, Packet8f, fvmax, fv36, fv0, fv_240, fvmin);
-  allTwoPermRep(vectorFullFloatTemplateTest, FUN2TEST COMMA selector8_min, Packet8f, fvmax, fv36, fv0, fv_240, fvmin);
-
+    allTwoPermRep(vectorFullFloatTemplateTest, FUN2TEST COMMA selector8, Packet8f, vmax, v36, v0, v_240, vmin);
+    allTwoPermRep(vectorFullFloatTemplateTest, FUN2TEST COMMA selector8_max, Packet8f, vmax, v36, v0, v_240, vmin);
+    allTwoPermRep(vectorFullFloatTemplateTest, FUN2TEST COMMA selector8_pos, Packet8f, vmax, v36, v0, v_240, vmin);
+    allTwoPermRep(vectorFullFloatTemplateTest, FUN2TEST COMMA selector8_zero, Packet8f, vmax, v36, v0, v_240,
+                  vmin);
+    allTwoPermRep(vectorFullFloatTemplateTest, FUN2TEST COMMA selector8_neg, Packet8f, vmax, v36, v0, v_240, vmin);
+    allTwoPermRep(vectorFullFloatTemplateTest, FUN2TEST COMMA selector8_min, Packet8f, vmax, v36, v0, v_240, vmin);
+  }
   endTest();
 
   /* double = Packet4d (full) */
   beginTest("4 double tests");
+  {
+    MIN2MAX_4_DOUBLE_VECTOR_LOADED
 
-  MIN2MAX_4_DOUBLE_VECTOR_LOADED
-
-  allTwoPermRep(vectorFullDoubleTemplateTest, FUN2TEST COMMA selector4, Packet4d, dvmax, dv36, dv0, dv_240, dvmin);
-  allTwoPermRep(vectorFullDoubleTemplateTest, FUN2TEST COMMA selector4_max, Packet4d, dvmax, dv36, dv0, dv_240, dvmin);
-  allTwoPermRep(vectorFullDoubleTemplateTest, FUN2TEST COMMA selector4_pos, Packet4d, dvmax, dv36, dv0, dv_240, dvmin);
-  allTwoPermRep(vectorFullDoubleTemplateTest, FUN2TEST COMMA selector4_zero, Packet4d, dvmax, dv36, dv0, dv_240, dvmin);
-  allTwoPermRep(vectorFullDoubleTemplateTest, FUN2TEST COMMA selector4_neg, Packet4d, dvmax, dv36, dv0, dv_240, dvmin);
-  allTwoPermRep(vectorFullDoubleTemplateTest, FUN2TEST COMMA selector4_min, Packet4d, dvmax, dv36, dv0, dv_240, dvmin);
-
+    allTwoPermRep(vectorFullDoubleTemplateTest, FUN2TEST COMMA selector4, Packet4d, vmax, v36, v0, v_240, vmin);
+    allTwoPermRep(vectorFullDoubleTemplateTest, FUN2TEST COMMA selector4_max, Packet4d, vmax, v36, v0, v_240,
+                  vmin);
+    allTwoPermRep(vectorFullDoubleTemplateTest, FUN2TEST COMMA selector4_pos, Packet4d, vmax, v36, v0, v_240,
+                  vmin);
+    allTwoPermRep(vectorFullDoubleTemplateTest, FUN2TEST COMMA selector4_zero, Packet4d, vmax, v36, v0, v_240,
+                  vmin);
+    allTwoPermRep(vectorFullDoubleTemplateTest, FUN2TEST COMMA selector4_neg, Packet4d, vmax, v36, v0, v_240,
+                  vmin);
+    allTwoPermRep(vectorFullDoubleTemplateTest, FUN2TEST COMMA selector4_min, Packet4d, vmax, v36, v0, v_240,
+                  vmin);
+  }
   endTest();
 
   /* int = Packet8i (full) */
   beginTest("8 int tests");
+  {
+    MIN2MAX_8_INT_VECTOR_LOADED
 
-  MIN2MAX_8_INT_VECTOR_LOADED
-
-  allTwoPermRep(vectorFullIntTemplateTest, FUN2TEST COMMA selector8, Packet8i, ivmax, iv36, iv0, iv_240, ivmin);
-  allTwoPermRep(vectorFullIntTemplateTest, FUN2TEST COMMA selector8_max, Packet8i, ivmax, iv36, iv0, iv_240, ivmin);
-  allTwoPermRep(vectorFullIntTemplateTest, FUN2TEST COMMA selector8_pos, Packet8i, ivmax, iv36, iv0, iv_240, ivmin);
-  allTwoPermRep(vectorFullIntTemplateTest, FUN2TEST COMMA selector8_zero, Packet8i, ivmax, iv36, iv0, iv_240, ivmin);
-  allTwoPermRep(vectorFullIntTemplateTest, FUN2TEST COMMA selector8_neg, Packet8i, ivmax, iv36, iv0, iv_240, ivmin);
-  allTwoPermRep(vectorFullIntTemplateTest, FUN2TEST COMMA selector8_min, Packet8i, ivmax, iv36, iv0, iv_240, ivmin);
-
+    allTwoPermRep(vectorFullIntTemplateTest, FUN2TEST COMMA selector8, Packet8i, vmax, v36, v0, v_240, vmin);
+    allTwoPermRep(vectorFullIntTemplateTest, FUN2TEST COMMA selector8_max, Packet8i, vmax, v36, v0, v_240, vmin);
+    allTwoPermRep(vectorFullIntTemplateTest, FUN2TEST COMMA selector8_pos, Packet8i, vmax, v36, v0, v_240, vmin);
+    allTwoPermRep(vectorFullIntTemplateTest, FUN2TEST COMMA selector8_zero, Packet8i, vmax, v36, v0, v_240, vmin);
+    allTwoPermRep(vectorFullIntTemplateTest, FUN2TEST COMMA selector8_neg, Packet8i, vmax, v36, v0, v_240, vmin);
+    allTwoPermRep(vectorFullIntTemplateTest, FUN2TEST COMMA selector8_min, Packet8i, vmax, v36, v0, v_240, vmin);
+  }
   endTest();
 
   /* Eigen::half = Packet8h */
   beginTest("8 Eigen::half tests");
+  {
+    MIN2MAX_8_HALF_VECTOR_LOADED
 
-  MIN2MAX_8_HALF_VECTOR_LOADED
-
-  allTwoPermRep(vectorHalfEigenHalfTemplateTest, FUN2TEST COMMA selector8, Packet8h, hvmax, hv36, hv0, hv_240, hvmin);
-  allTwoPermRep(vectorHalfEigenHalfTemplateTest, FUN2TEST COMMA selector8_max, Packet8h, hvmax, hv36, hv0, hv_240,
-                hvmin);
-  allTwoPermRep(vectorHalfEigenHalfTemplateTest, FUN2TEST COMMA selector8_pos, Packet8h, hvmax, hv36, hv0, hv_240,
-                hvmin);
-  allTwoPermRep(vectorHalfEigenHalfTemplateTest, FUN2TEST COMMA selector8_zero, Packet8h, hvmax, hv36, hv0, hv_240,
-                hvmin);
-  allTwoPermRep(vectorHalfEigenHalfTemplateTest, FUN2TEST COMMA selector8_neg, Packet8h, hvmax, hv36, hv0, hv_240,
-                hvmin);
-  allTwoPermRep(vectorHalfEigenHalfTemplateTest, FUN2TEST COMMA selector8_min, Packet8h, hvmax, hv36, hv0, hv_240,
-                hvmin);
-
+    allTwoPermRep(vectorHalfEigenHalfTemplateTest, FUN2TEST COMMA selector8, Packet8h, vmax, v36, v0, v_240, vmin);
+    allTwoPermRep(vectorHalfEigenHalfTemplateTest, FUN2TEST COMMA selector8_max, Packet8h, vmax, v36, v0, v_240,
+                  vmin);
+    allTwoPermRep(vectorHalfEigenHalfTemplateTest, FUN2TEST COMMA selector8_pos, Packet8h, vmax, v36, v0, v_240,
+                  vmin);
+    allTwoPermRep(vectorHalfEigenHalfTemplateTest, FUN2TEST COMMA selector8_zero, Packet8h, vmax, v36, v0, v_240,
+                  vmin);
+    allTwoPermRep(vectorHalfEigenHalfTemplateTest, FUN2TEST COMMA selector8_neg, Packet8h, vmax, v36, v0, v_240,
+                  vmin);
+    allTwoPermRep(vectorHalfEigenHalfTemplateTest, FUN2TEST COMMA selector8_min, Packet8h, vmax, v36, v0, v_240,
+                  vmin);
+  }
   endTest();
 
   /* bfloat16 = Packet8bf */
   beginTest("8 bfloat16 tests");
+  {
+    MIN2MAX_8_BFLOAT16_VECTOR_LOADED
 
-  MIN2MAX_8_BFLOAT16_VECTOR_LOADED
-
-  allTwoPermRep(vectorHalfBfloat16TemplateTest, FUN2TEST COMMA selector8, Packet8bf, bfvmax, bfv36, bfv0, bfv_240,
-                bfvmin);
-  allTwoPermRep(vectorHalfBfloat16TemplateTest, FUN2TEST COMMA selector8_max, Packet8bf, bfvmax, bfv36, bfv0, bfv_240,
-                bfvmin);
-  allTwoPermRep(vectorHalfBfloat16TemplateTest, FUN2TEST COMMA selector8_pos, Packet8bf, bfvmax, bfv36, bfv0, bfv_240,
-                bfvmin);
-  allTwoPermRep(vectorHalfBfloat16TemplateTest, FUN2TEST COMMA selector8_zero, Packet8bf, bfvmax, bfv36, bfv0, bfv_240,
-                bfvmin);
-  allTwoPermRep(vectorHalfBfloat16TemplateTest, FUN2TEST COMMA selector8_neg, Packet8bf, bfvmax, bfv36, bfv0, bfv_240,
-                bfvmin);
-  allTwoPermRep(vectorHalfBfloat16TemplateTest, FUN2TEST COMMA selector8_min, Packet8bf, bfvmax, bfv36, bfv0, bfv_240,
-                bfvmin);
-
+    allTwoPermRep(vectorHalfBfloat16TemplateTest, FUN2TEST COMMA selector8, Packet8bf, vmax, v36, v0, v_240,
+                  vmin);
+    allTwoPermRep(vectorHalfBfloat16TemplateTest, FUN2TEST COMMA selector8_max, Packet8bf, vmax, v36, v0, v_240,
+                  vmin);
+    allTwoPermRep(vectorHalfBfloat16TemplateTest, FUN2TEST COMMA selector8_pos, Packet8bf, vmax, v36, v0, v_240,
+                  vmin);
+    allTwoPermRep(vectorHalfBfloat16TemplateTest, FUN2TEST COMMA selector8_zero, Packet8bf, vmax, v36, v0,
+                  v_240, vmin);
+    allTwoPermRep(vectorHalfBfloat16TemplateTest, FUN2TEST COMMA selector8_neg, Packet8bf, vmax, v36, v0, v_240,
+                  vmin);
+    allTwoPermRep(vectorHalfBfloat16TemplateTest, FUN2TEST COMMA selector8_min, Packet8bf, vmax, v36, v0, v_240,
+                  vmin);
+  }
   endTest();
 
 #endif
@@ -234,16 +242,16 @@ void pblendTests() {
 #ifdef __AVX2__
   /* long = Packet4l */
   beginTest("4 long tests");
+  {
+    MIN2MAX_4_LONG_VECTOR_LOADED
 
-  MIN2MAX_4_LONG_VECTOR_LOADED
-
-  allTwoPermRep(vectorFullLongTemplateTest, FUN2TEST COMMA selector4, Packet4l, lvmax, lv36, lv0, lv_240, lvmin);
-  allTwoPermRep(vectorFullLongTemplateTest, FUN2TEST COMMA selector4_max, Packet4l, lvmax, lv36, lv0, lv_240, lvmin);
-  allTwoPermRep(vectorFullLongTemplateTest, FUN2TEST COMMA selector4_pos, Packet4l, lvmax, lv36, lv0, lv_240, lvmin);
-  allTwoPermRep(vectorFullLongTemplateTest, FUN2TEST COMMA selector4_zero, Packet4l, lvmax, lv36, lv0, lv_240, lvmin);
-  allTwoPermRep(vectorFullLongTemplateTest, FUN2TEST COMMA selector4_neg, Packet4l, lvmax, lv36, lv0, lv_240, lvmin);
-  allTwoPermRep(vectorFullLongTemplateTest, FUN2TEST COMMA selector4_min, Packet4l, lvmax, lv36, lv0, lv_240, lvmin);
-
+    allTwoPermRep(vectorFullLongTemplateTest, FUN2TEST COMMA selector4, Packet4l, vmax, v36, v0, v_240, vmin);
+    allTwoPermRep(vectorFullLongTemplateTest, FUN2TEST COMMA selector4_max, Packet4l, vmax, v36, v0, v_240, vmin);
+    allTwoPermRep(vectorFullLongTemplateTest, FUN2TEST COMMA selector4_pos, Packet4l, vmax, v36, v0, v_240, vmin);
+    allTwoPermRep(vectorFullLongTemplateTest, FUN2TEST COMMA selector4_zero, Packet4l, vmax, v36, v0, v_240, vmin);
+    allTwoPermRep(vectorFullLongTemplateTest, FUN2TEST COMMA selector4_neg, Packet4l, vmax, v36, v0, v_240, vmin);
+    allTwoPermRep(vectorFullLongTemplateTest, FUN2TEST COMMA selector4_min, Packet4l, vmax, v36, v0, v_240, vmin);
+  }
   endTest();
 
 #endif
