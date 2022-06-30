@@ -12,25 +12,25 @@ void pfloorTests() {
 
 #ifdef __SSE__
   /* float = Packet4f (half) */
-  tests4FloatMin2MaxOneArg("4 float tests", FUN2TEST);
+  tests4FloatMin2MaxOneArgLoaded("4 float tests", FUN2TEST);
 
   /* double =  Packet2d (half) */
-  tests2DoubleMin2MaxOneArg("2 double tests", FUN2TEST);
+  tests2DoubleMin2MaxOneArgLoaded("2 double tests", FUN2TEST);
 
 #endif
 
 #ifdef __AVX__
   /* float = Packet8f (full) */
-  tests8FloatMin2MaxOneArg("8 float tests", FUN2TEST);
+  tests8FloatMin2MaxOneArgLoaded("8 float tests", FUN2TEST);
 
   /* double = Packet4d (full) */
-  tests4DoubleMin2MaxOneArg("4 double tests", FUN2TEST);
+  tests4DoubleMin2MaxOneArgLoaded("4 double tests", FUN2TEST);
 
   /* Eigen::half = Packet8h */
-  tests8HalfMin2MaxOneArg("8 Eigen::half tests", FUN2TEST);
+  tests8HalfMin2MaxOneArgLoaded("8 Eigen::half tests", FUN2TEST);
 
   /* bfloat16 = Packet8bf */
-  tests8Bfloat16Min2MaxOneArg("8 bfloat16 tests", FUN2TEST);
+  tests8Bfloat16Min2MaxOneArgLoaded("8 bfloat16 tests", FUN2TEST);
 
 #endif
 

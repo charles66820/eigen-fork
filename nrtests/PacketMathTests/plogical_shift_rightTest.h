@@ -17,11 +17,11 @@ void plogical_shift_rightTests() {
 
   MIN2MAX_4_INT_VECTOR_LOADED
 
-  vectorHalfIntTemplateTest(3, FUN2TEST, (Packet4i)ihvmax);
-  vectorHalfIntTemplateTest(3, FUN2TEST, (Packet4i)ihv36);
-  vectorHalfIntTemplateTest(3, FUN2TEST, (Packet4i)ihv0);
-  vectorHalfIntTemplateTest(3, FUN2TEST, (Packet4i)ihv_240);
-  vectorHalfIntTemplateTest(3, FUN2TEST, (Packet4i)ihvmin);
+  vectorHalfIntTemplateTest(FUN2TEST, 3, (Packet4i)ihvmax);
+  vectorHalfIntTemplateTest(FUN2TEST, 3, (Packet4i)ihv36);
+  vectorHalfIntTemplateTest(FUN2TEST, 3, (Packet4i)ihv0);
+  vectorHalfIntTemplateTest(FUN2TEST, 3, (Packet4i)ihv_240);
+  vectorHalfIntTemplateTest(FUN2TEST, 3, (Packet4i)ihvmin);
 
   endTest();
 
@@ -34,11 +34,11 @@ void plogical_shift_rightTests() {
 
   MIN2MAX_8_INT_VECTOR_LOADED
 
-  vectorFullIntTemplateTest(3, FUN2TEST, (Packet8i)ivmax);
-  vectorFullIntTemplateTest(3, FUN2TEST, (Packet8i)iv36);
-  vectorFullIntTemplateTest(3, FUN2TEST, (Packet8i)iv0);
-  vectorFullIntTemplateTest(3, FUN2TEST, (Packet8i)iv_240);
-  vectorFullIntTemplateTest(3, FUN2TEST, (Packet8i)ivmin);
+  vectorFullIntTemplateTest(FUN2TEST, 3, (Packet8i)ivmax);
+  vectorFullIntTemplateTest(FUN2TEST, 3, (Packet8i)iv36);
+  vectorFullIntTemplateTest(FUN2TEST, 3, (Packet8i)iv0);
+  vectorFullIntTemplateTest(FUN2TEST, 3, (Packet8i)iv_240);
+  vectorFullIntTemplateTest(FUN2TEST, 3, (Packet8i)ivmin);
 
   endTest();
 
@@ -50,11 +50,11 @@ void plogical_shift_rightTests() {
 
   MIN2MAX_4_LONG_VECTOR_LOADED
 
-  vectorFullLongTemplateTest(3, FUN2TEST, (Packet4l)lvmax);
-  vectorFullLongTemplateTest(3, FUN2TEST, (Packet4l)lv36);
-  vectorFullLongTemplateTest(3, FUN2TEST, (Packet4l)lv0);
-  vectorFullLongTemplateTest(3, FUN2TEST, (Packet4l)lv_240);
-  vectorFullLongTemplateTest(3, FUN2TEST, (Packet4l)lvmin);
+  vectorFullLongTemplateTest(FUN2TEST, 3, (Packet4l)lvmax);
+  vectorFullLongTemplateTest(FUN2TEST, 3, (Packet4l)lv36);
+  vectorFullLongTemplateTest(FUN2TEST, 3, (Packet4l)lv0);
+  vectorFullLongTemplateTest(FUN2TEST, 3, (Packet4l)lv_240);
+  vectorFullLongTemplateTest(FUN2TEST, 3, (Packet4l)lvmin);
 
   endTest();
 

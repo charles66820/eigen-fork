@@ -36,7 +36,7 @@ void pminTests() {
   tests8HalfMin2MaxTwoArgsPermRep("8 Eigen::half tests", FUN2TEST);
 
   /* bfloat16 = Packet8bf */
-  tests16BoolMin2MaxTwoArgsPermRep("8 bfloat16 tests", FUN2TEST);
+  tests8Bfloat16Min2MaxTwoArgsPermRep("8 bfloat16 tests", FUN2TEST);
 
 #endif
 

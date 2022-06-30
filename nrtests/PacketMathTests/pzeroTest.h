@@ -15,7 +15,7 @@ void pzeroTests() {
   beginTest("4 float tests");
 
   Packet4f bh;
-  vectorHalfFloatTest(FUN2TEST, bh);
+  vectorHalfFloatTemplateTest(FUN2TEST, Packet4f, bh);
 
   endTest();
 
@@ -23,7 +23,7 @@ void pzeroTests() {
   beginTest("2 double tests");
 
   Packet2d ch;
-  vectorHalfDoubleTest(FUN2TEST, ch);
+  vectorHalfDoubleTemplateTest(FUN2TEST, Packet2d, ch);
 
   endTest();
 
@@ -31,7 +31,7 @@ void pzeroTests() {
   beginTest("4 int tests");
 
   Packet4i dh;
-  vectorHalfIntTest(FUN2TEST, dh);
+  vectorHalfIntTemplateTest(FUN2TEST, Packet4i, dh);
 
   endTest();
 
@@ -42,7 +42,7 @@ void pzeroTests() {
   beginTest("8 float tests");
 
   Packet8f b;
-  vectorFullFloatTest(FUN2TEST, b);
+  vectorFullFloatTemplateTest(FUN2TEST, Packet8f, b);
 
   endTest();
 
@@ -50,7 +50,7 @@ void pzeroTests() {
   beginTest("4 double tests");
 
   Packet4d c;
-  vectorFullDoubleTest(FUN2TEST, c);
+  vectorFullDoubleTemplateTest(FUN2TEST, Packet4d, c);
 
   endTest();
 
@@ -58,7 +58,7 @@ void pzeroTests() {
   beginTest("8 int tests");
 
   Packet8i d;
-  vectorFullIntTest(FUN2TEST, d);
+  vectorFullIntTemplateTest(FUN2TEST, Packet8i, d);
 
   endTest();
 
@@ -69,7 +69,7 @@ void pzeroTests() {
   beginTest("4 long tests");
 
   Packet4l a;
-  vectorFullLongTest(FUN2TEST, a);
+  vectorFullLongTemplateTest(FUN2TEST, Packet4l, a);
 
   endTest();
 
@@ -80,7 +80,7 @@ void pzeroTests() {
   // beginTest("16 float tests");
 
   // Packet8f b;
-  // vectorFullFloatTest(FUN2TEST, b);
+  // vectorFullFloatTemplateTest(FUN2TEST, Packet8f, b);
 
   // endTest();
 
@@ -88,7 +88,7 @@ void pzeroTests() {
   // beginTest("8 double tests");
 
   // Packet4d c;
-  // vectorFullDoubleTest(FUN2TEST, c);
+  // vectorFullDoubleTemplateTest(FUN2TEST, Packet4d, c);
 
   // endTest();
 
@@ -96,7 +96,7 @@ void pzeroTests() {
   // beginTest("16 int tests");
 
   // Packet8i d;
-  // vectorFullIntTest(FUN2TEST, d);
+  // vectorFullIntTemplateTest(FUN2TEST, Packet8i, d);
 
   // endTest();
 

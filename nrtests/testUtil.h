@@ -114,11 +114,11 @@ bool printWhenScalarDiff(std::string msg, T scal, T scal_old) {
     hasFailed |= printWhenRegDiff(#name "<" #eigenType ">(" + to_sting(args) + ")", rVar, rVar_old); \
   }
 
-#define vectorSingleTypeFullTest(type, full, fullCast, name, args...) \
-  vectorSingleTypeTest(Reg, type, fullCast, full, name, args)
+#define vectorSingleTypeFullTest(type, template, fullCast, name, args...) \
+  vectorSingleTypeTest(Reg, type, fullCast, template, name, args)
 
-#define vectorSingleTypeHalfTest(type, half, halfCast, name, args...) \
-  vectorSingleTypeTest(Reg_2, type, halfCast, half, name, args)
+#define vectorSingleTypeHalfTest(type, template, halfCast, name, args...) \
+  vectorSingleTypeTest(Reg_2, type, halfCast, template, name, args)
 
 // Macros for test that return vector
 #define refSingleTypeGenericTest(name, type, size, attr, args...)                                 \

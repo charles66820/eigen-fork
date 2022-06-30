@@ -1,247 +1,247 @@
 #ifndef EIGEN_MIPP_TEST_COMBINATIONS_H
 #define EIGEN_MIPP_TEST_COMBINATIONS_H
 
-#define min2MaxTests(test, name, max, pos, zero, neg, min) \
-  test(name, max);                                         \
-  test(name, pos);                                         \
-  test(name, zero);                                        \
-  test(name, neg);                                         \
-  test(name, min);
+#define min2MaxTests(test, name, template, max, pos, zero, neg, min) \
+  test(name, template, max);                                         \
+  test(name, template, pos);                                         \
+  test(name, template, zero);                                        \
+  test(name, template, neg);                                         \
+  test(name, template, min);
 
-#define min2MaxArgsTests(test, name, max, pos, zero, neg, min, args...) \
-  test(name, max, args);                                                \
-  test(name, pos, args);                                                \
-  test(name, zero, args);                                               \
-  test(name, neg, args);                                                \
-  test(name, min, args);
+#define min2MaxArgsTests(test, name, template, max, pos, zero, neg, min, args...) \
+  test(name, template, max, args);                                                          \
+  test(name, template, pos, args);                                                          \
+  test(name, template, zero, args);                                                         \
+  test(name, template, neg, args);                                                          \
+  test(name, template, min, args);
 
 // All two combinations with repetition
-#define allTwoCombRep(test, name, max, pos, zero, neg, min) \
-  test(name, max, max);                                     \
-  test(name, max, pos);                                     \
-  test(name, max, zero);                                    \
-  test(name, max, neg);                                     \
-  test(name, max, min);                                     \
-  test(name, pos, pos);                                     \
-  test(name, pos, zero);                                    \
-  test(name, neg, pos);                                     \
-  test(name, min, pos);                                     \
-  test(name, zero, zero);                                   \
-  test(name, neg, zero);                                    \
-  test(name, min, zero);                                    \
-  test(name, neg, neg);                                     \
-  test(name, min, neg);                                     \
-  test(name, min, min);
+#define allTwoCombRep(test, name, template, max, pos, zero, neg, min) \
+  test(name, template, max, max);                                               \
+  test(name, template, max, pos);                                               \
+  test(name, template, max, zero);                                              \
+  test(name, template, max, neg);                                               \
+  test(name, template, max, min);                                               \
+  test(name, template, pos, pos);                                               \
+  test(name, template, pos, zero);                                              \
+  test(name, template, neg, pos);                                               \
+  test(name, template, min, pos);                                               \
+  test(name, template, zero, zero);                                             \
+  test(name, template, neg, zero);                                              \
+  test(name, template, min, zero);                                              \
+  test(name, template, neg, neg);                                               \
+  test(name, template, min, neg);                                               \
+  test(name, template, min, min);
 
-#define allTwoCombRepArgs(test, name, max, pos, zero, neg, min, args...) \
-  test(name, max, max, args);                                            \
-  test(name, max, pos, args);                                            \
-  test(name, max, zero, args);                                           \
-  test(name, max, neg, args);                                            \
-  test(name, max, min, args);                                            \
-  test(name, pos, pos, args);                                            \
-  test(name, pos, zero, args);                                           \
-  test(name, neg, pos, args);                                            \
-  test(name, min, pos, args);                                            \
-  test(name, zero, zero, args);                                          \
-  test(name, neg, zero, args);                                           \
-  test(name, min, zero, args);                                           \
-  test(name, neg, neg, args);                                            \
-  test(name, min, neg, args);                                            \
-  test(name, min, min, args);
+#define allTwoCombRepArgs(test, name, template, max, pos, zero, neg, min, args...) \
+  test(name, template, max, max, args);                                                      \
+  test(name, template, max, pos, args);                                                      \
+  test(name, template, max, zero, args);                                                     \
+  test(name, template, max, neg, args);                                                      \
+  test(name, template, max, min, args);                                                      \
+  test(name, template, pos, pos, args);                                                      \
+  test(name, template, pos, zero, args);                                                     \
+  test(name, template, neg, pos, args);                                                      \
+  test(name, template, min, pos, args);                                                      \
+  test(name, template, zero, zero, args);                                                    \
+  test(name, template, neg, zero, args);                                                     \
+  test(name, template, min, zero, args);                                                     \
+  test(name, template, neg, neg, args);                                                      \
+  test(name, template, min, neg, args);                                                      \
+  test(name, template, min, min, args);
 
 // All three combinations with repetition
-#define allThreeCombRep(test, name, max, pos, zero, neg, min) \
-  test(name, max, max, max);                                  \
-  test(name, max, max, pos);                                  \
-  test(name, max, max, zero);                                 \
-  test(name, max, max, neg);                                  \
-  test(name, max, max, min);                                  \
-  test(name, max, pos, pos);                                  \
-  test(name, max, pos, zero);                                 \
-  test(name, max, neg, pos);                                  \
-  test(name, max, min, pos);                                  \
-  test(name, max, zero, zero);                                \
-  test(name, max, neg, zero);                                 \
-  test(name, max, min, zero);                                 \
-  test(name, max, neg, neg);                                  \
-  test(name, max, min, neg);                                  \
-  test(name, max, min, min);                                  \
-  test(name, pos, pos, pos);                                  \
-  test(name, pos, pos, zero);                                 \
-  test(name, neg, pos, pos);                                  \
-  test(name, min, pos, pos);                                  \
-  test(name, pos, zero, zero);                                \
-  test(name, neg, pos, zero);                                 \
-  test(name, min, pos, zero);                                 \
-  test(name, neg, neg, pos);                                  \
-  test(name, min, neg, pos);                                  \
-  test(name, min, min, pos);                                  \
-  test(name, zero, zero, zero);                               \
-  test(name, neg, zero, zero);                                \
-  test(name, min, zero, zero);                                \
-  test(name, neg, neg, zero);                                 \
-  test(name, min, neg, zero);                                 \
-  test(name, min, min, zero);                                 \
-  test(name, neg, neg, neg);                                  \
-  test(name, min, neg, neg);                                  \
-  test(name, min, min, neg);                                  \
-  test(name, min, min, min);
+#define allThreeCombRep(test, name, template, max, pos, zero, neg, min) \
+  test(name, template, max, max, max);                                            \
+  test(name, template, max, max, pos);                                            \
+  test(name, template, max, max, zero);                                           \
+  test(name, template, max, max, neg);                                            \
+  test(name, template, max, max, min);                                            \
+  test(name, template, max, pos, pos);                                            \
+  test(name, template, max, pos, zero);                                           \
+  test(name, template, max, neg, pos);                                            \
+  test(name, template, max, min, pos);                                            \
+  test(name, template, max, zero, zero);                                          \
+  test(name, template, max, neg, zero);                                           \
+  test(name, template, max, min, zero);                                           \
+  test(name, template, max, neg, neg);                                            \
+  test(name, template, max, min, neg);                                            \
+  test(name, template, max, min, min);                                            \
+  test(name, template, pos, pos, pos);                                            \
+  test(name, template, pos, pos, zero);                                           \
+  test(name, template, neg, pos, pos);                                            \
+  test(name, template, min, pos, pos);                                            \
+  test(name, template, pos, zero, zero);                                          \
+  test(name, template, neg, pos, zero);                                           \
+  test(name, template, min, pos, zero);                                           \
+  test(name, template, neg, neg, pos);                                            \
+  test(name, template, min, neg, pos);                                            \
+  test(name, template, min, min, pos);                                            \
+  test(name, template, zero, zero, zero);                                         \
+  test(name, template, neg, zero, zero);                                          \
+  test(name, template, min, zero, zero);                                          \
+  test(name, template, neg, neg, zero);                                           \
+  test(name, template, min, neg, zero);                                           \
+  test(name, template, min, min, zero);                                           \
+  test(name, template, neg, neg, neg);                                            \
+  test(name, template, min, neg, neg);                                            \
+  test(name, template, min, min, neg);                                            \
+  test(name, template, min, min, min);
 
 // All two permutations with repetition
-#define allTwoPermRep(test, name, max, pos, zero, neg, min) \
-  test(name, max, max);                                     \
-  test(name, max, pos);                                     \
-  test(name, max, zero);                                    \
-  test(name, max, neg);                                     \
-  test(name, max, min);                                     \
-  test(name, pos, max);                                     \
-  test(name, pos, pos);                                     \
-  test(name, pos, zero);                                    \
-  test(name, pos, neg);                                     \
-  test(name, pos, min);                                     \
-  test(name, zero, max);                                    \
-  test(name, zero, pos);                                    \
-  test(name, zero, zero);                                   \
-  test(name, zero, neg);                                    \
-  test(name, zero, min);                                    \
-  test(name, neg, max);                                     \
-  test(name, neg, pos);                                     \
-  test(name, neg, zero);                                    \
-  test(name, neg, neg);                                     \
-  test(name, neg, min);                                     \
-  test(name, min, max);                                     \
-  test(name, min, pos);                                     \
-  test(name, min, zero);                                    \
-  test(name, min, neg);                                     \
-  test(name, min, min);
+#define allTwoPermRep(test, name, template, max, pos, zero, neg, min) \
+  test(name, template, max, max);                                               \
+  test(name, template, max, pos);                                               \
+  test(name, template, max, zero);                                              \
+  test(name, template, max, neg);                                               \
+  test(name, template, max, min);                                               \
+  test(name, template, pos, max);                                               \
+  test(name, template, pos, pos);                                               \
+  test(name, template, pos, zero);                                              \
+  test(name, template, pos, neg);                                               \
+  test(name, template, pos, min);                                               \
+  test(name, template, zero, max);                                              \
+  test(name, template, zero, pos);                                              \
+  test(name, template, zero, zero);                                             \
+  test(name, template, zero, neg);                                              \
+  test(name, template, zero, min);                                              \
+  test(name, template, neg, max);                                               \
+  test(name, template, neg, pos);                                               \
+  test(name, template, neg, zero);                                              \
+  test(name, template, neg, neg);                                               \
+  test(name, template, neg, min);                                               \
+  test(name, template, min, max);                                               \
+  test(name, template, min, pos);                                               \
+  test(name, template, min, zero);                                              \
+  test(name, template, min, neg);                                               \
+  test(name, template, min, min);
 
 // All three permutations with repetition
-#define allThreePermRep(test, name, max, pos, zero, neg, min) \
-  test(name, max, max, max);                                  \
-  test(name, max, max, pos);                                  \
-  test(name, max, max, zero);                                 \
-  test(name, max, max, neg);                                  \
-  test(name, max, max, min);                                  \
-  test(name, max, pos, max);                                  \
-  test(name, max, pos, pos);                                  \
-  test(name, max, pos, zero);                                 \
-  test(name, max, pos, neg);                                  \
-  test(name, max, pos, min);                                  \
-  test(name, max, zero, max);                                 \
-  test(name, max, zero, pos);                                 \
-  test(name, max, zero, zero);                                \
-  test(name, max, zero, neg);                                 \
-  test(name, max, zero, min);                                 \
-  test(name, max, neg, max);                                  \
-  test(name, max, neg, pos);                                  \
-  test(name, max, neg, zero);                                 \
-  test(name, max, neg, neg);                                  \
-  test(name, max, neg, min);                                  \
-  test(name, max, min, max);                                  \
-  test(name, max, min, pos);                                  \
-  test(name, max, min, zero);                                 \
-  test(name, max, min, neg);                                  \
-  test(name, max, min, min);                                  \
-  test(name, pos, max, max);                                  \
-  test(name, pos, max, pos);                                  \
-  test(name, pos, max, zero);                                 \
-  test(name, pos, max, neg);                                  \
-  test(name, pos, max, min);                                  \
-  test(name, pos, pos, max);                                  \
-  test(name, pos, pos, pos);                                  \
-  test(name, pos, pos, zero);                                 \
-  test(name, pos, pos, neg);                                  \
-  test(name, pos, pos, min);                                  \
-  test(name, pos, zero, max);                                 \
-  test(name, pos, zero, pos);                                 \
-  test(name, pos, zero, zero);                                \
-  test(name, pos, zero, neg);                                 \
-  test(name, pos, zero, min);                                 \
-  test(name, pos, neg, max);                                  \
-  test(name, pos, neg, pos);                                  \
-  test(name, pos, neg, zero);                                 \
-  test(name, pos, neg, neg);                                  \
-  test(name, pos, neg, min);                                  \
-  test(name, pos, min, max);                                  \
-  test(name, pos, min, pos);                                  \
-  test(name, pos, min, zero);                                 \
-  test(name, pos, min, neg);                                  \
-  test(name, pos, min, min);                                  \
-  test(name, zero, max, max);                                 \
-  test(name, zero, max, pos);                                 \
-  test(name, zero, max, zero);                                \
-  test(name, zero, max, neg);                                 \
-  test(name, zero, max, min);                                 \
-  test(name, zero, pos, max);                                 \
-  test(name, zero, pos, pos);                                 \
-  test(name, zero, pos, zero);                                \
-  test(name, zero, pos, neg);                                 \
-  test(name, zero, pos, min);                                 \
-  test(name, zero, zero, max);                                \
-  test(name, zero, zero, pos);                                \
-  test(name, zero, zero, zero);                               \
-  test(name, zero, zero, neg);                                \
-  test(name, zero, zero, min);                                \
-  test(name, zero, neg, max);                                 \
-  test(name, zero, neg, pos);                                 \
-  test(name, zero, neg, zero);                                \
-  test(name, zero, neg, neg);                                 \
-  test(name, zero, neg, min);                                 \
-  test(name, zero, min, max);                                 \
-  test(name, zero, min, pos);                                 \
-  test(name, zero, min, zero);                                \
-  test(name, zero, min, neg);                                 \
-  test(name, zero, min, min);                                 \
-  test(name, neg, max, max);                                  \
-  test(name, neg, max, pos);                                  \
-  test(name, neg, max, zero);                                 \
-  test(name, neg, max, neg);                                  \
-  test(name, neg, max, min);                                  \
-  test(name, neg, pos, max);                                  \
-  test(name, neg, pos, pos);                                  \
-  test(name, neg, pos, zero);                                 \
-  test(name, neg, pos, neg);                                  \
-  test(name, neg, pos, min);                                  \
-  test(name, neg, zero, max);                                 \
-  test(name, neg, zero, pos);                                 \
-  test(name, neg, zero, zero);                                \
-  test(name, neg, zero, neg);                                 \
-  test(name, neg, zero, min);                                 \
-  test(name, neg, neg, max);                                  \
-  test(name, neg, neg, pos);                                  \
-  test(name, neg, neg, zero);                                 \
-  test(name, neg, neg, neg);                                  \
-  test(name, neg, neg, min);                                  \
-  test(name, neg, min, max);                                  \
-  test(name, neg, min, pos);                                  \
-  test(name, neg, min, zero);                                 \
-  test(name, neg, min, neg);                                  \
-  test(name, neg, min, min);                                  \
-  test(name, min, max, max);                                  \
-  test(name, min, max, pos);                                  \
-  test(name, min, max, zero);                                 \
-  test(name, min, max, neg);                                  \
-  test(name, min, max, min);                                  \
-  test(name, min, pos, max);                                  \
-  test(name, min, pos, pos);                                  \
-  test(name, min, pos, zero);                                 \
-  test(name, min, pos, neg);                                  \
-  test(name, min, pos, min);                                  \
-  test(name, min, zero, max);                                 \
-  test(name, min, zero, pos);                                 \
-  test(name, min, zero, zero);                                \
-  test(name, min, zero, neg);                                 \
-  test(name, min, zero, min);                                 \
-  test(name, min, neg, max);                                  \
-  test(name, min, neg, pos);                                  \
-  test(name, min, neg, zero);                                 \
-  test(name, min, neg, neg);                                  \
-  test(name, min, neg, min);                                  \
-  test(name, min, min, max);                                  \
-  test(name, min, min, pos);                                  \
-  test(name, min, min, zero);                                 \
-  test(name, min, min, neg);                                  \
-  test(name, min, min, min);
+#define allThreePermRep(test, name, template, max, pos, zero, neg, min) \
+  test(name, template, max, max, max);                                            \
+  test(name, template, max, max, pos);                                            \
+  test(name, template, max, max, zero);                                           \
+  test(name, template, max, max, neg);                                            \
+  test(name, template, max, max, min);                                            \
+  test(name, template, max, pos, max);                                            \
+  test(name, template, max, pos, pos);                                            \
+  test(name, template, max, pos, zero);                                           \
+  test(name, template, max, pos, neg);                                            \
+  test(name, template, max, pos, min);                                            \
+  test(name, template, max, zero, max);                                           \
+  test(name, template, max, zero, pos);                                           \
+  test(name, template, max, zero, zero);                                          \
+  test(name, template, max, zero, neg);                                           \
+  test(name, template, max, zero, min);                                           \
+  test(name, template, max, neg, max);                                            \
+  test(name, template, max, neg, pos);                                            \
+  test(name, template, max, neg, zero);                                           \
+  test(name, template, max, neg, neg);                                            \
+  test(name, template, max, neg, min);                                            \
+  test(name, template, max, min, max);                                            \
+  test(name, template, max, min, pos);                                            \
+  test(name, template, max, min, zero);                                           \
+  test(name, template, max, min, neg);                                            \
+  test(name, template, max, min, min);                                            \
+  test(name, template, pos, max, max);                                            \
+  test(name, template, pos, max, pos);                                            \
+  test(name, template, pos, max, zero);                                           \
+  test(name, template, pos, max, neg);                                            \
+  test(name, template, pos, max, min);                                            \
+  test(name, template, pos, pos, max);                                            \
+  test(name, template, pos, pos, pos);                                            \
+  test(name, template, pos, pos, zero);                                           \
+  test(name, template, pos, pos, neg);                                            \
+  test(name, template, pos, pos, min);                                            \
+  test(name, template, pos, zero, max);                                           \
+  test(name, template, pos, zero, pos);                                           \
+  test(name, template, pos, zero, zero);                                          \
+  test(name, template, pos, zero, neg);                                           \
+  test(name, template, pos, zero, min);                                           \
+  test(name, template, pos, neg, max);                                            \
+  test(name, template, pos, neg, pos);                                            \
+  test(name, template, pos, neg, zero);                                           \
+  test(name, template, pos, neg, neg);                                            \
+  test(name, template, pos, neg, min);                                            \
+  test(name, template, pos, min, max);                                            \
+  test(name, template, pos, min, pos);                                            \
+  test(name, template, pos, min, zero);                                           \
+  test(name, template, pos, min, neg);                                            \
+  test(name, template, pos, min, min);                                            \
+  test(name, template, zero, max, max);                                           \
+  test(name, template, zero, max, pos);                                           \
+  test(name, template, zero, max, zero);                                          \
+  test(name, template, zero, max, neg);                                           \
+  test(name, template, zero, max, min);                                           \
+  test(name, template, zero, pos, max);                                           \
+  test(name, template, zero, pos, pos);                                           \
+  test(name, template, zero, pos, zero);                                          \
+  test(name, template, zero, pos, neg);                                           \
+  test(name, template, zero, pos, min);                                           \
+  test(name, template, zero, zero, max);                                          \
+  test(name, template, zero, zero, pos);                                          \
+  test(name, template, zero, zero, zero);                                         \
+  test(name, template, zero, zero, neg);                                          \
+  test(name, template, zero, zero, min);                                          \
+  test(name, template, zero, neg, max);                                           \
+  test(name, template, zero, neg, pos);                                           \
+  test(name, template, zero, neg, zero);                                          \
+  test(name, template, zero, neg, neg);                                           \
+  test(name, template, zero, neg, min);                                           \
+  test(name, template, zero, min, max);                                           \
+  test(name, template, zero, min, pos);                                           \
+  test(name, template, zero, min, zero);                                          \
+  test(name, template, zero, min, neg);                                           \
+  test(name, template, zero, min, min);                                           \
+  test(name, template, neg, max, max);                                            \
+  test(name, template, neg, max, pos);                                            \
+  test(name, template, neg, max, zero);                                           \
+  test(name, template, neg, max, neg);                                            \
+  test(name, template, neg, max, min);                                            \
+  test(name, template, neg, pos, max);                                            \
+  test(name, template, neg, pos, pos);                                            \
+  test(name, template, neg, pos, zero);                                           \
+  test(name, template, neg, pos, neg);                                            \
+  test(name, template, neg, pos, min);                                            \
+  test(name, template, neg, zero, max);                                           \
+  test(name, template, neg, zero, pos);                                           \
+  test(name, template, neg, zero, zero);                                          \
+  test(name, template, neg, zero, neg);                                           \
+  test(name, template, neg, zero, min);                                           \
+  test(name, template, neg, neg, max);                                            \
+  test(name, template, neg, neg, pos);                                            \
+  test(name, template, neg, neg, zero);                                           \
+  test(name, template, neg, neg, neg);                                            \
+  test(name, template, neg, neg, min);                                            \
+  test(name, template, neg, min, max);                                            \
+  test(name, template, neg, min, pos);                                            \
+  test(name, template, neg, min, zero);                                           \
+  test(name, template, neg, min, neg);                                            \
+  test(name, template, neg, min, min);                                            \
+  test(name, template, min, max, max);                                            \
+  test(name, template, min, max, pos);                                            \
+  test(name, template, min, max, zero);                                           \
+  test(name, template, min, max, neg);                                            \
+  test(name, template, min, max, min);                                            \
+  test(name, template, min, pos, max);                                            \
+  test(name, template, min, pos, pos);                                            \
+  test(name, template, min, pos, zero);                                           \
+  test(name, template, min, pos, neg);                                            \
+  test(name, template, min, pos, min);                                            \
+  test(name, template, min, zero, max);                                           \
+  test(name, template, min, zero, pos);                                           \
+  test(name, template, min, zero, zero);                                          \
+  test(name, template, min, zero, neg);                                           \
+  test(name, template, min, zero, min);                                           \
+  test(name, template, min, neg, max);                                            \
+  test(name, template, min, neg, pos);                                            \
+  test(name, template, min, neg, zero);                                           \
+  test(name, template, min, neg, neg);                                            \
+  test(name, template, min, neg, min);                                            \
+  test(name, template, min, min, max);                                            \
+  test(name, template, min, min, pos);                                            \
+  test(name, template, min, min, zero);                                           \
+  test(name, template, min, min, neg);                                            \
+  test(name, template, min, min, min);
 
 #endif  // EIGEN_MIPP_TEST_COMBINATIONS_H

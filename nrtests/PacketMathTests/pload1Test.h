@@ -14,13 +14,7 @@ void pload1Tests() {
 
 #if EIGEN_COMP_GNUC_STRICT && (!defined __AVX__)
   /* float = Packet4f (half) */
-  beginTest("4 float tests");
-
-  MIN2MAX_4_FLOAT_VECTOR
-
-  min2MaxTests(vectorHalfFloatTest, FUN2TEST, fhvmax, fhv36, fhv0, fhv_240, fhvmin);
-
-  endTest();
+  tests4FloatMin2MaxOneArg("4 float tests", FUN2TEST);
 
 #endif
 
@@ -28,34 +22,16 @@ void pload1Tests() {
 
 #ifdef __AVX__
   /* float = Packet8f (full) */
-  beginTest("8 float tests");
-
-  MIN2MAX_8_FLOAT_VECTOR
-
-  min2MaxTests(vectorFullFloatTest, FUN2TEST, fvmax, fv36, fv0, fv_240, fvmin);
-
-  endTest();
+  tests8FloatMin2MaxOneArg("8 float tests", FUN2TEST);
 
   /* double = Packet4d (full) */
-  beginTest("4 double tests");
-
-  MIN2MAX_4_DOUBLE_VECTOR
-
-  min2MaxTests(vectorFullDoubleTest, FUN2TEST, dvmax, dv36, dv0, dv_240, dvmin);
-
-  endTest();
+  tests4DoubleMin2MaxOneArg("4 double tests", FUN2TEST);
 
 #endif
 
 #ifdef __AVX2__
   /* long = Packet4l */
-  beginTest("4 long tests");
-
-  MIN2MAX_4_LONG_VECTOR
-
-  min2MaxTests(vectorFullLongTest, FUN2TEST, lvmax, lv36, lv0, lv_240, lvmin);
-
-  endTest();
+  tests4LongMin2MaxOneArg("4 long tests", FUN2TEST);
 
 #endif
 

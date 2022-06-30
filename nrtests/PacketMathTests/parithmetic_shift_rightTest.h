@@ -17,11 +17,11 @@ void parithmetic_shift_rightTests() {
 
   MIN2MAX_4_INT_VECTOR_LOADED
 
-  vectorHalfIntTemplateTest(3, FUN2TEST, ihvmax);
-  vectorHalfIntTemplateTest(3, FUN2TEST, ihv36);
-  vectorHalfIntTemplateTest(3, FUN2TEST, ihv0);
-  vectorHalfIntTemplateTest(3, FUN2TEST, ihv_240);
-  vectorHalfIntTemplateTest(3, FUN2TEST, ihvmin);
+  vectorHalfIntTemplateTest(FUN2TEST, 3, ihvmax);
+  vectorHalfIntTemplateTest(FUN2TEST, 3, ihv36);
+  vectorHalfIntTemplateTest(FUN2TEST, 3, ihv0);
+  vectorHalfIntTemplateTest(FUN2TEST, 3, ihv_240);
+  vectorHalfIntTemplateTest(FUN2TEST, 3, ihvmin);
 
   endTest();
 
@@ -34,11 +34,11 @@ void parithmetic_shift_rightTests() {
 
   MIN2MAX_8_INT_VECTOR_LOADED
 
-  vectorFullIntTemplateTest(3, FUN2TEST, ivmax);
-  vectorFullIntTemplateTest(3, FUN2TEST, iv36);
-  vectorFullIntTemplateTest(3, FUN2TEST, iv0);
-  vectorFullIntTemplateTest(3, FUN2TEST, iv_240);
-  vectorFullIntTemplateTest(3, FUN2TEST, ivmin);
+  vectorFullIntTemplateTest(FUN2TEST, 3, ivmax);
+  vectorFullIntTemplateTest(FUN2TEST, 3, iv36);
+  vectorFullIntTemplateTest(FUN2TEST, 3, iv0);
+  vectorFullIntTemplateTest(FUN2TEST, 3, iv_240);
+  vectorFullIntTemplateTest(FUN2TEST, 3, ivmin);
 
   endTest();
 
