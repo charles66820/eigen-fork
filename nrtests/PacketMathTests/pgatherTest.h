@@ -9,8 +9,8 @@
 
 #define mvTest(MIPP_Reg, typeMipp, cast, type, eigenType, name, args...)                             \
   {                                                                                                  \
-    mipp::MIPP_Reg<typeMipp> rVar = cast(name<type, eigenType>(args));                                \
-    mipp::MIPP_Reg<typeMipp> rVar_old = cast(name##_old<type, eigenType>(args));                      \
+    mipp::MIPP_Reg<typeMipp> rVar = cast(name<type, eigenType>(args));                               \
+    mipp::MIPP_Reg<typeMipp> rVar_old = cast(name##_old<type, eigenType>(args));                     \
     hasFailed |= printWhenRegDiff(#name "<" #eigenType ">(" + to_sting(args) + ")", rVar, rVar_old); \
   }
 

@@ -59,14 +59,16 @@ void plsetTests() {
   /* Eigen::half = Packet8h */
   beginTest("8 Eigen::half tests");
 
-  min2MaxTests(vectorHalfEigenHalfTemplateTest, FUN2TEST, Packet8h, half(FLT_MAX), half(36.7f), half(0.0f), half(-240.98f), half(FLT_MIN));
+  min2MaxTests(vectorHalfEigenHalfTemplateTest, FUN2TEST, Packet8h, half(FLT_MAX), half(36.7f), half(0.0f),
+               half(-240.98f), half(FLT_MIN));
 
   endTest();
 
   /* bfloat16 = Packet8bf */
   beginTest("8 bfloat16 tests");
 
-  min2MaxTests(vectorHalfBfloat16TemplateTest, FUN2TEST, Packet8bf, bfloat16(FLT_MAX), bfloat16(36.7f), bfloat16(0.0f), bfloat16(-240.98f), bfloat16(FLT_MIN));
+  min2MaxTests(vectorHalfBfloat16TemplateTest, FUN2TEST, Packet8bf, bfloat16(FLT_MAX), bfloat16(36.7f), bfloat16(0.0f),
+               bfloat16(-240.98f), bfloat16(FLT_MIN));
 
   endTest();
 
