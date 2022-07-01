@@ -17,7 +17,7 @@ void plogical_shift_leftTests() {
   {
     MIN2MAX_INT_VECTOR_LOADED(4);
 
-    min2MaxTests(vectorHalfIntTemplateTest, FUN2TEST, 3, vmax, v36, v0, v_240, vmin);
+    min2MaxTests(vectorHalfIntTest, FUN2TEST, 3, vmax, v36, v0, v_240, vmin);
   }
   endTest();
 
@@ -30,7 +30,7 @@ void plogical_shift_leftTests() {
   {
     MIN2MAX_INT_VECTOR_LOADED(8);
 
-    min2MaxTests(vectorFullIntTemplateTest, FUN2TEST, 3, vmax, v36, v0, v_240, vmin);
+    min2MaxTests(vectorFullIntTest, FUN2TEST, 3, vmax, v36, v0, v_240, vmin);
   }
   endTest();
 
@@ -42,7 +42,7 @@ void plogical_shift_leftTests() {
   {
     MIN2MAX_LONG_VECTOR_LOADED(4);
 
-    min2MaxTests(vectorFullLongTemplateTest, FUN2TEST, 3, vmax, v36, v0, v_240, vmin);
+    min2MaxTests(vectorFullLongTest, FUN2TEST, 3, vmax, v36, v0, v_240, vmin);
   }
   endTest();
 

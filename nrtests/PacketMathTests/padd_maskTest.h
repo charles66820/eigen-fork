@@ -25,12 +25,12 @@ void padd2Tests() {
   {
     MIN2MAX_FLOAT_VECTOR_LOADED(8);
 
-    allTwoCombRepArgs(vectorFullFloatTemplateTest, FUN2TEST, Packet8f, vmax, v36, v0, v_240, vmin, (uint8_t)0x00);
-    allTwoCombRepArgs(vectorFullFloatTemplateTest, FUN2TEST, Packet8f, vmax, v36, v0, v_240, vmin, (uint8_t)0xFF);
-    allTwoCombRepArgs(vectorFullFloatTemplateTest, FUN2TEST, Packet8f, vmax, v36, v0, v_240, vmin, (uint8_t)0x0F);
-    allTwoCombRepArgs(vectorFullFloatTemplateTest, FUN2TEST, Packet8f, vmax, v36, v0, v_240, vmin, (uint8_t)0xF0);
-    allTwoCombRepArgs(vectorFullFloatTemplateTest, FUN2TEST, Packet8f, vmax, v36, v0, v_240, vmin, (uint8_t)0xaa);
-    allTwoCombRepArgs(vectorFullFloatTemplateTest, FUN2TEST, Packet8f, vmax, v36, v0, v_240, vmin, (uint8_t)0x55);
+    allTwoCombRepArgs(vectorFullFloatTest, FUN2TEST, Packet8f, vmax, v36, v0, v_240, vmin, (uint8_t)0x00);
+    allTwoCombRepArgs(vectorFullFloatTest, FUN2TEST, Packet8f, vmax, v36, v0, v_240, vmin, (uint8_t)0xFF);
+    allTwoCombRepArgs(vectorFullFloatTest, FUN2TEST, Packet8f, vmax, v36, v0, v_240, vmin, (uint8_t)0x0F);
+    allTwoCombRepArgs(vectorFullFloatTest, FUN2TEST, Packet8f, vmax, v36, v0, v_240, vmin, (uint8_t)0xF0);
+    allTwoCombRepArgs(vectorFullFloatTest, FUN2TEST, Packet8f, vmax, v36, v0, v_240, vmin, (uint8_t)0xaa);
+    allTwoCombRepArgs(vectorFullFloatTest, FUN2TEST, Packet8f, vmax, v36, v0, v_240, vmin, (uint8_t)0x55);
   }
   endTest();
 
