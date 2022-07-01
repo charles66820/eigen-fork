@@ -11,12 +11,14 @@ void proundTests() {
   printTestTitle(FUN2TEST);
 
 #ifdef __SSE__
+#if defined(__SSE4_1__)
   // Packet4f (128)
   tests4FloatMin2MaxOneArgLoaded("4 float tests", FUN2TEST);
 
   // Packet2d (128)
   tests2DoubleMin2MaxOneArgLoaded("2 double tests", FUN2TEST);
 
+#endif
 #endif
 
 #ifdef __AVX__

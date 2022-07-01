@@ -4,8 +4,11 @@ CFLAGS = -I .. -Wno-ignored-attributes -D__MIPP__ -g
 all:
 	$(CC) $(CFLAGS) -march=native testEigen.cpp -o testEigen
 
-sse:
+sse3:
 	$(CC) $(CFLAGS) -march=opteron-sse3 testEigen.cpp -o testEigen
+
+sse4:
+	$(CC) $(CFLAGS) -march=goldmont testEigen.cpp -o testEigen
 
 avx:
 	$(CC) $(CFLAGS) -march=core-avx-i testEigen.cpp -o testEigen

@@ -39,11 +39,8 @@ using namespace Eigen;
 #elif defined(__SSE__)
 
 #define INT_CAST_128_TO_MIPP_REG_T MIPP_CAST(__m128i)
-#define INT_CAST_256_TO_MIPP_REG_T MIPP_CAST(__m128i)
 #define FLOAT_CAST_128_TO_MIPP_REG_T MIPP_CAST
-#define FLOAT_CAST_256_TO_MIPP_REG_T MIPP_CAST
 #define DOUBLE_CAST_128_TO_MIPP_REG_T MIPP_CAST(__m128d)
-#define DOUBLE_CAST_256_TO_MIPP_REG_T MIPP_CAST(__m128d)
 
 #endif
 
