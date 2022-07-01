@@ -764,19 +764,6 @@ struct unpacket_traits<Packet16b> {
   };
 };
 
-template <>
-struct unpacket_traits<Packet8h> {
-  typedef Eigen::half type;
-  typedef Packet8h half;
-  enum {
-    size = 8,
-    alignment = Aligned16,
-    vectorizable = true,
-    masked_load_available = false,
-    masked_store_available = false
-  };
-};
-
 #endif
 
 #ifdef EIGEN_VECTORIZE_AVX
@@ -841,6 +828,19 @@ template <>
 struct unpacket_traits<Packet8bf> {
   typedef bfloat16 type;
   typedef Packet8bf half;
+  enum {
+    size = 8,
+    alignment = Aligned16,
+    vectorizable = true,
+    masked_load_available = false,
+    masked_store_available = false
+  };
+};
+
+template <>
+struct unpacket_traits<Packet8h> {
+  typedef Eigen::half type;
+  typedef Packet8h half;
   enum {
     size = 8,
     alignment = Aligned16,
