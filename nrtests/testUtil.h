@@ -13,37 +13,38 @@ using namespace Eigen;
 #endif  // VERBOSE
 
 // Cast
-#define HALF_CAST (mipp::reg_2)
 #define FULL_CAST (mipp::reg)
 
 #ifdef __AVX512F__
 
-#define INT_CAST_TO_MIPP_HALF HALF_CAST(__m256i) _mm256_castsi128_si256
+#define INT_CAST_TO_MIPP_HALF FULL_CAST(__m512i) _mm512_castsi128_si512
 #define INT_CAST_TO_MIPP_FULL FULL_CAST(__m512i) _mm512_castsi256_si512
-#define FLOAT_CAST_TO_MIPP_HALF HALF_CAST _mm256_castps128_ps256
+#define FLOAT_CAST_TO_MIPP_HALF FULL_CAST _mm512_castps128_ps512
 #define FLOAT_CAST_TO_MIPP_FULL FULL_CAST _mm512_castps256_ps512
-#define DOUBLE_CAST_TO_MIPP_HALF HALF_CAST(__m256d) _mm256_castpd128_pd256
+#define DOUBLE_CAST_TO_MIPP_HALF FULL_CAST(__m512d) _mm512_castpd128_pd512
 #define DOUBLE_CAST_TO_MIPP_FULL FULL_CAST(__m512d) _mm512_castpd256_pd512
 
 #elif defined(__AVX__)
 
-#define INT_CAST_TO_MIPP_HALF HALF_CAST(__m128i)
+#define INT_CAST_TO_MIPP_HALF FULL_CAST(__m256i) _mm256_castsi128_si256
 #define INT_CAST_TO_MIPP_FULL FULL_CAST(__m256i)
-#define FLOAT_CAST_TO_MIPP_HALF HALF_CAST
+#define FLOAT_CAST_TO_MIPP_HALF FULL_CAST _mm256_castps128_ps256
 #define FLOAT_CAST_TO_MIPP_FULL FULL_CAST
-#define DOUBLE_CAST_TO_MIPP_HALF HALF_CAST(__m128d)
+#define DOUBLE_CAST_TO_MIPP_HALF FULL_CAST(__m256d) _mm256_castpd128_pd256
 #define DOUBLE_CAST_TO_MIPP_FULL FULL_CAST(__m256d)
 
 #elif defined(__SSE__)
 
-#define INT_CAST_TO_MIPP_HALF HALF_CAST(__m128i)
-#define INT_CAST_TO_MIPP_FULL FULL_CAST(__m256i)
-#define FLOAT_CAST_TO_MIPP_HALF HALF_CAST
+#define INT_CAST_TO_MIPP_HALF FULL_CAST(__m128i)
+#define INT_CAST_TO_MIPP_FULL FULL_CAST(__m128i)
+#define FLOAT_CAST_TO_MIPP_HALF FULL_CAST
 #define FLOAT_CAST_TO_MIPP_FULL FULL_CAST
-#define DOUBLE_CAST_TO_MIPP_HALF HALF_CAST(__m128d)
-#define DOUBLE_CAST_TO_MIPP_FULL FULL_CAST(__m256d)
+#define DOUBLE_CAST_TO_MIPP_HALF FULL_CAST(__m128d)
+#define DOUBLE_CAST_TO_MIPP_FULL FULL_CAST(__m128d)
 
 #endif
+
+#define COMMA ,
 
 #define TO_STRING(s) #s
 #define printTestTitle(t) std::cout << "================ " TO_STRING(t) " ================" << std::endl;
@@ -83,67 +84,41 @@ bool printWhenDiff(bool isDiffer, std::string msg, std::string newVal, std::stri
   return isDiffer;
 }
 
-template <typename T>
-bool printWhenRegDiff(std::string msg, mipp::Reg<T> reg, mipp::Reg<T> reg_old) {
-  return printWhenDiff(!mipp::testz(reg != reg_old), msg, to_sting(reg), to_sting(reg_old));
-}
-
-template <typename T>
-bool printWhenRegDiff(std::string msg, mipp::Reg_2<T> reg, mipp::Reg_2<T> reg_old) {
-  mipp::Reg<T> rf0 = 0.0;
-  mipp::Reg_2<T> rf0_h = rf0.low();
-
-  return printWhenRegDiff(msg, mipp::combine(reg, rf0_h), mipp::combine(reg_old, rf0_h));
-}
-
-template <typename T>
-bool printWhenTabDiff(std::string msg, T tab[], T tab_old[], size_t size) {
-  return printWhenDiff(!std::equal(tab, tab + size, tab_old), msg, toStringTab(tab, size), toStringTab(tab_old, size));
-}
-
-template <typename T>
-bool printWhenScalarDiff(std::string msg, T scal, T scal_old) {
-  return printWhenDiff(scal != scal_old, msg, to_sting(scal), to_sting(scal_old));
-}
-
 // Macros for test that return vector
-#define vectorSingleTypeTest(MIPP_Reg, type, cast, eigenType, name, args...)                         \
-  {                                                                                                  \
-    mipp::MIPP_Reg<type> rVar = cast(name<eigenType>(args));                                         \
-    mipp::MIPP_Reg<type> rVar_old = cast(name##_old<eigenType>(args));                               \
-    hasFailed |= printWhenRegDiff(#name "<" #eigenType ">(" + to_sting(args) + ")", rVar, rVar_old); \
+#define vectorSingleTypeTest(type, cast, name, eigenType, args...)                                             \
+  {                                                                                                            \
+    mipp::Reg<type> rVar = cast(name<eigenType>(args));                                                        \
+    mipp::Reg<type> rVar_old = cast(name##_old<eigenType>(args));                                              \
+    hasFailed |= printWhenDiff(!mipp::testz(rVar != rVar_old), #name "<" #eigenType ">(" + to_sting(args) + ")", \
+                               to_sting(rVar), to_sting(rVar_old));                                            \
   }
 
-#define vectorSingleTypeFullTest(type, template, fullCast, name, args...) \
-  vectorSingleTypeTest(Reg, type, fullCast, template, name, args)
-
-#define vectorSingleTypeHalfTest(type, template, halfCast, name, args...) \
-  vectorSingleTypeTest(Reg_2, type, halfCast, template, name, args)
-
 // Macros for test that return vector
-#define refSingleTypeGenericTest(name, type, size, attr, args...)                                 \
-  {                                                                                               \
-    type to[size] attr;                                                                           \
-    memset(to, 0, sizeof to);                                                                     \
-    type to_old[size] attr;                                                                       \
-    memset(to_old, 0, sizeof to_old);                                                             \
-                                                                                                  \
-    name<type>(to, args);                                                                         \
-    name##_old<type>(to_old, args);                                                               \
-    hasFailed |= printWhenTabDiff(#name "<" #type ">(" + to_sting(args) + ")", to, to_old, size); \
+#define refSingleTypeGenericTest(type, name, eigenType, size, attr, args...)                                    \
+  {                                                                                                             \
+    type to[size] attr;                                                                                         \
+    memset(to, 0, sizeof to);                                                                                   \
+    type to_old[size] attr;                                                                                     \
+    memset(to_old, 0, sizeof to_old);                                                                           \
+                                                                                                                \
+    name<eigenType>(to, args);                                                                                  \
+    name##_old<eigenType>(to_old, args);                                                                        \
+    hasFailed |= printWhenDiff(!std::equal(to, to + size, to_old), #name "<" #type ">(" + to_sting(args) + ")", \
+                               toStringTab(to, size), toStringTab(to_old, size));                               \
   }
 
 #define refSingleType(name, type, size, args...) \
-  refSingleTypeGenericTest(name, type, size, __attribute__((aligned(32))), args)
+  refSingleTypeGenericTest(type, name, type, size, __attribute__((aligned(32))), args)
 
-#define uRefSingleType(name, type, size, args...) refSingleTypeGenericTest(name, type, size, , args)
+#define uRefSingleType(name, type, size, args...) refSingleTypeGenericTest(type, name, type, size, , args)
 
 // Macros for test that return scalar
-#define scalarSingleTypeGenericTest(type, name, eigenType, args...)                                   \
-  {                                                                                                   \
-    type val = name<eigenType>(args);                                                                 \
-    type val_old = name##_old<eigenType>(args);                                                       \
-    hasFailed |= printWhenScalarDiff(#name "<" #eigenType ">(" + to_sting(args) + ")", val, val_old); \
+#define scalarSingleTypeGenericTest(type, name, eigenType, args...)                                             \
+  {                                                                                                             \
+    type val = name<eigenType>(args);                                                                           \
+    type val_old = name##_old<eigenType>(args);                                                                 \
+    hasFailed |= printWhenDiff(val != val_old, #name "<" #eigenType ">(" + to_sting(args) + ")", to_sting(val), \
+                               to_sting(val_old));                                                              \
   }
 
 #define scalarSingleTypeTest(type, name, eigenType, args...) scalarSingleTypeGenericTest(type, name, eigenType, args)

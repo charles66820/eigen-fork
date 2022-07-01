@@ -3,28 +3,28 @@
 
 // Tests macro definition
 #define vectorFullLongTemplateTest(name, template, args...) \
-  vectorSingleTypeFullTest(long, template, INT_CAST_TO_MIPP_FULL, name, args)
+  vectorSingleTypeTest(long, INT_CAST_TO_MIPP_FULL, name, template, args)
 
 #define vectorHalfFloatTemplateTest(name, template, args...) \
-  vectorSingleTypeHalfTest(float, template, FLOAT_CAST_TO_MIPP_HALF, name, args)
+  vectorSingleTypeTest(float, FLOAT_CAST_TO_MIPP_HALF, name, template, args)
 #define vectorHalfDoubleTemplateTest(name, template, args...) \
-  vectorSingleTypeHalfTest(double, template, DOUBLE_CAST_TO_MIPP_HALF, name, args)
+  vectorSingleTypeTest(double, DOUBLE_CAST_TO_MIPP_HALF, name, template, args)
 #define vectorHalfIntTemplateTest(name, template, args...) \
-  vectorSingleTypeHalfTest(int, template, INT_CAST_TO_MIPP_HALF, name, args)
+  vectorSingleTypeTest(int, INT_CAST_TO_MIPP_HALF, name, template, args)
 
 #define vectorFullFloatTemplateTest(name, template, args...) \
-  vectorSingleTypeFullTest(float, template, FLOAT_CAST_TO_MIPP_FULL, name, args)
+  vectorSingleTypeTest(float, FLOAT_CAST_TO_MIPP_FULL, name, template, args)
 #define vectorFullDoubleTemplateTest(name, template, args...) \
-  vectorSingleTypeFullTest(double, template, DOUBLE_CAST_TO_MIPP_FULL, name, args)
+  vectorSingleTypeTest(double, DOUBLE_CAST_TO_MIPP_FULL, name, template, args)
 #define vectorFullIntTemplateTest(name, template, args...) \
-  vectorSingleTypeFullTest(int, template, INT_CAST_TO_MIPP_FULL, name, args)
+  vectorSingleTypeTest(int, INT_CAST_TO_MIPP_FULL, name, template, args)
 
 #define vectorHalfBoolTemplateTest(name, template, args...) \
-  vectorSingleTypeHalfTest(int8_t, template, INT_CAST_TO_MIPP_HALF, name, args)
+  vectorSingleTypeTest(int8_t, INT_CAST_TO_MIPP_HALF, name, template, args)
 #define vectorHalfEigenHalfTemplateTest(name, template, args...) \
-  vectorSingleTypeHalfTest(short, template, INT_CAST_TO_MIPP_HALF, name, args)
+  vectorSingleTypeTest(short, INT_CAST_TO_MIPP_HALF, name, template, args)
 #define vectorHalfBfloat16TemplateTest(name, template, args...) \
-  vectorSingleTypeHalfTest(short, template, INT_CAST_TO_MIPP_HALF, name, args)
+  vectorSingleTypeTest(short, INT_CAST_TO_MIPP_HALF, name, template, args)
 
 /* Packet4f with one arg of loaded vector */
 #define tests4FloatMin2MaxOneArgLoaded(str, funName)                                          \

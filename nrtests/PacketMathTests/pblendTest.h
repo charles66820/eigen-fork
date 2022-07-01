@@ -7,8 +7,6 @@
 #undef FUN2TEST
 #define FUN2TEST pblend
 
-#define COMMA ,
-
 #define selectorNum(PacketSize)                        \
   internal::Selector<PacketSize> selector##PacketSize; \
   for (int i = 0; i < PacketSize; ++i) selector##PacketSize.select[i] = i;
