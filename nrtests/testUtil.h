@@ -13,34 +13,37 @@ using namespace Eigen;
 #endif  // VERBOSE
 
 // Cast
-#define FULL_CAST (mipp::reg)
+#define MIPP_CAST (mipp::reg)
 
 #ifdef __AVX512F__
 
-#define INT_CAST_TO_MIPP_HALF FULL_CAST(__m512i) _mm512_castsi128_si512
-#define INT_CAST_TO_MIPP_FULL FULL_CAST(__m512i) _mm512_castsi256_si512
-#define FLOAT_CAST_TO_MIPP_HALF FULL_CAST _mm512_castps128_ps512
-#define FLOAT_CAST_TO_MIPP_FULL FULL_CAST _mm512_castps256_ps512
-#define DOUBLE_CAST_TO_MIPP_HALF FULL_CAST(__m512d) _mm512_castpd128_pd512
-#define DOUBLE_CAST_TO_MIPP_FULL FULL_CAST(__m512d) _mm512_castpd256_pd512
+#define INT_CAST_128_TO_MIPP_REG_T MIPP_CAST(__m512i) _mm512_castsi128_si512
+#define INT_CAST_256_TO_MIPP_REG_T MIPP_CAST(__m512i) _mm512_castsi256_si512
+#define INT_CAST_512_TO_MIPP_REG_T MIPP_CAST(__m512i)
+#define FLOAT_CAST_128_TO_MIPP_REG_T MIPP_CAST _mm512_castps128_ps512
+#define FLOAT_CAST_256_TO_MIPP_REG_T MIPP_CAST _mm512_castps256_ps512
+#define FLOAT_CAST_512_TO_MIPP_REG_T MIPP_CAST
+#define DOUBLE_CAST_128_TO_MIPP_REG_T MIPP_CAST(__m512d) _mm512_castpd128_pd512
+#define DOUBLE_CAST_256_TO_MIPP_REG_T MIPP_CAST(__m512d) _mm512_castpd256_pd512
+#define DOUBLE_CAST_512_TO_MIPP_REG_T MIPP_CAST(__m512d)
 
 #elif defined(__AVX__)
 
-#define INT_CAST_TO_MIPP_HALF FULL_CAST(__m256i) _mm256_castsi128_si256
-#define INT_CAST_TO_MIPP_FULL FULL_CAST(__m256i)
-#define FLOAT_CAST_TO_MIPP_HALF FULL_CAST _mm256_castps128_ps256
-#define FLOAT_CAST_TO_MIPP_FULL FULL_CAST
-#define DOUBLE_CAST_TO_MIPP_HALF FULL_CAST(__m256d) _mm256_castpd128_pd256
-#define DOUBLE_CAST_TO_MIPP_FULL FULL_CAST(__m256d)
+#define INT_CAST_128_TO_MIPP_REG_T MIPP_CAST(__m256i) _mm256_castsi128_si256
+#define INT_CAST_256_TO_MIPP_REG_T MIPP_CAST(__m256i)
+#define FLOAT_CAST_128_TO_MIPP_REG_T MIPP_CAST _mm256_castps128_ps256
+#define FLOAT_CAST_256_TO_MIPP_REG_T MIPP_CAST
+#define DOUBLE_CAST_128_TO_MIPP_REG_T MIPP_CAST(__m256d) _mm256_castpd128_pd256
+#define DOUBLE_CAST_256_TO_MIPP_REG_T MIPP_CAST(__m256d)
 
 #elif defined(__SSE__)
 
-#define INT_CAST_TO_MIPP_HALF FULL_CAST(__m128i)
-#define INT_CAST_TO_MIPP_FULL FULL_CAST(__m128i)
-#define FLOAT_CAST_TO_MIPP_HALF FULL_CAST
-#define FLOAT_CAST_TO_MIPP_FULL FULL_CAST
-#define DOUBLE_CAST_TO_MIPP_HALF FULL_CAST(__m128d)
-#define DOUBLE_CAST_TO_MIPP_FULL FULL_CAST(__m128d)
+#define INT_CAST_128_TO_MIPP_REG_T MIPP_CAST(__m128i)
+#define INT_CAST_256_TO_MIPP_REG_T MIPP_CAST(__m128i)
+#define FLOAT_CAST_128_TO_MIPP_REG_T MIPP_CAST
+#define FLOAT_CAST_256_TO_MIPP_REG_T MIPP_CAST
+#define DOUBLE_CAST_128_TO_MIPP_REG_T MIPP_CAST(__m128d)
+#define DOUBLE_CAST_256_TO_MIPP_REG_T MIPP_CAST(__m128d)
 
 #endif
 
@@ -85,12 +88,12 @@ bool printWhenDiff(bool isDiffer, std::string msg, std::string newVal, std::stri
 }
 
 // Macros for test that return vector
-#define vectorSingleTypeTest(type, cast, name, eigenType, args...)                                             \
-  {                                                                                                            \
-    mipp::Reg<type> rVar = cast(name<eigenType>(args));                                                        \
-    mipp::Reg<type> rVar_old = cast(name##_old<eigenType>(args));                                              \
+#define vectorSingleTypeTest(type, cast, name, eigenType, args...)                                               \
+  {                                                                                                              \
+    mipp::Reg<type> rVar = cast(name<eigenType>(args));                                                          \
+    mipp::Reg<type> rVar_old = cast(name##_old<eigenType>(args));                                                \
     hasFailed |= printWhenDiff(!mipp::testz(rVar != rVar_old), #name "<" #eigenType ">(" + to_sting(args) + ")", \
-                               to_sting(rVar), to_sting(rVar_old));                                            \
+                               to_sting(rVar), to_sting(rVar_old));                                              \
   }
 
 // Macros for test that return vector

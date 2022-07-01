@@ -11,13 +11,13 @@ void pfrexp_generic_get_biased_exponentTests() {
   printTestTitle(FUN2TEST);
 
 #ifdef __SSE__
-  /* double =  Packet2d (half) */
+  // Packet2d (128)
   tests2DoubleMin2MaxOneArgLoaded("2 double tests", FUN2TEST);
 
 #endif
 
 #ifdef __AVX__
-  /* double = Packet4d (full) */
+  // Packet4d (256)
   tests4DoubleMin2MaxOneArgLoaded("4 double tests", FUN2TEST);
 
 #endif

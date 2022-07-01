@@ -13,7 +13,7 @@ void pload1Tests() {
 #ifdef __SSE__
 
 #if EIGEN_COMP_GNUC_STRICT && (!defined __AVX__)
-  /* float = Packet4f (half) */
+  // Packet4f (128)
   tests4FloatMin2MaxOneArg("4 float tests", FUN2TEST);
 
 #endif
@@ -21,16 +21,16 @@ void pload1Tests() {
 #endif
 
 #ifdef __AVX__
-  /* float = Packet8f (full) */
+  // Packet8f (256)
   tests8FloatMin2MaxOneArg("8 float tests", FUN2TEST);
 
-  /* double = Packet4d (full) */
+  // Packet4d (256)
   tests4DoubleMin2MaxOneArg("4 double tests", FUN2TEST);
 
 #endif
 
 #ifdef __AVX2__
-  /* long = Packet4l */
+  // Packet4l (256)
   tests4LongMin2MaxOneArg("4 long tests", FUN2TEST);
 
 #endif

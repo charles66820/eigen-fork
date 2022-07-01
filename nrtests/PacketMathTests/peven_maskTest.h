@@ -11,11 +11,11 @@ void peven_maskTests() {
   printTestTitle(FUN2TEST);
 
 #ifdef __SSE__
-  /* float = Packet4f (half) */
+  // Packet4f (128)
   beginTest("4 float tests");
 
   Packet4f bh;
-  vectorHalfFloatTest(FUN2TEST, Packet4f, bh);
+  vector128FloatTest(FUN2TEST, Packet4f, bh);
 
   endTest();
 
@@ -23,53 +23,53 @@ void peven_maskTests() {
   beginTest("2 double tests");
 
   Packet2d ch;
-  vectorHalfDoubleTest(FUN2TEST, Packet2d, ch);
+  vector128DoubleTest(FUN2TEST, Packet2d, ch);
 
   endTest();
 
-  /* int = Packet4i (half) */
+  // Packet4i (128)
   beginTest("4 int tests");
 
   Packet4i dh;
-  vectorHalfIntTest(FUN2TEST, Packet4i, dh);
+  vector128IntTest(FUN2TEST, Packet4i, dh);
 
   endTest();
 
 #endif
 
 #ifdef __AVX__
-  /* float = Packet8f (full) */
+  // Packet8f (256)
   beginTest("8 float tests");
 
   Packet8f b;
-  vectorFullFloatTest(FUN2TEST, Packet8f, b);
+  vector256FloatTest(FUN2TEST, Packet8f, b);
 
   endTest();
 
-  /* double = Packet4d (full) */
+  // Packet4d (256)
   beginTest("4 double tests");
 
   Packet4d c;
-  vectorFullDoubleTest(FUN2TEST, Packet4d, c);
+  vector256DoubleTest(FUN2TEST, Packet4d, c);
 
   endTest();
 
-  /* int = Packet8i (full) */
+  // Packet8i (256)
   beginTest("8 int tests");
 
   Packet8i d;
-  vectorFullIntTest(FUN2TEST, Packet8i, d);
+  vector256IntTest(FUN2TEST, Packet8i, d);
 
   endTest();
 
 #endif
 
 #ifdef __AVX2__
-  /* long = Packet4l */
+  // Packet4l (256)
   beginTest("4 long tests");
 
   Packet4l a;
-  vectorFullLongTest(FUN2TEST, Packet4l, a);
+  vector256LongTest(FUN2TEST, Packet4l, a);
 
   endTest();
 

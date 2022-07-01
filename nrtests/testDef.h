@@ -2,29 +2,29 @@
 #define EIGEN_MIPP_TEST_DEF_H
 
 // Tests macro definition
-#define vectorFullLongTest(name, template, args...) \
-  vectorSingleTypeTest(long, INT_CAST_TO_MIPP_FULL, name, template, args)
+#define vector256LongTest(name, template, args...) \
+  vectorSingleTypeTest(long, INT_CAST_256_TO_MIPP_REG_T, name, template, args)
 
-#define vectorHalfFloatTest(name, template, args...) \
-  vectorSingleTypeTest(float, FLOAT_CAST_TO_MIPP_HALF, name, template, args)
-#define vectorHalfDoubleTest(name, template, args...) \
-  vectorSingleTypeTest(double, DOUBLE_CAST_TO_MIPP_HALF, name, template, args)
-#define vectorHalfIntTest(name, template, args...) \
-  vectorSingleTypeTest(int, INT_CAST_TO_MIPP_HALF, name, template, args)
+#define vector128FloatTest(name, template, args...) \
+  vectorSingleTypeTest(float, FLOAT_CAST_128_TO_MIPP_REG_T, name, template, args)
+#define vector128DoubleTest(name, template, args...) \
+  vectorSingleTypeTest(double, DOUBLE_CAST_128_TO_MIPP_REG_T, name, template, args)
+#define vector128IntTest(name, template, args...) \
+  vectorSingleTypeTest(int, INT_CAST_128_TO_MIPP_REG_T, name, template, args)
 
-#define vectorFullFloatTest(name, template, args...) \
-  vectorSingleTypeTest(float, FLOAT_CAST_TO_MIPP_FULL, name, template, args)
-#define vectorFullDoubleTest(name, template, args...) \
-  vectorSingleTypeTest(double, DOUBLE_CAST_TO_MIPP_FULL, name, template, args)
-#define vectorFullIntTest(name, template, args...) \
-  vectorSingleTypeTest(int, INT_CAST_TO_MIPP_FULL, name, template, args)
+#define vector256FloatTest(name, template, args...) \
+  vectorSingleTypeTest(float, FLOAT_CAST_256_TO_MIPP_REG_T, name, template, args)
+#define vector256DoubleTest(name, template, args...) \
+  vectorSingleTypeTest(double, DOUBLE_CAST_256_TO_MIPP_REG_T, name, template, args)
+#define vector256IntTest(name, template, args...) \
+  vectorSingleTypeTest(int, INT_CAST_256_TO_MIPP_REG_T, name, template, args)
 
-#define vectorHalfBoolTest(name, template, args...) \
-  vectorSingleTypeTest(int8_t, INT_CAST_TO_MIPP_HALF, name, template, args)
-#define vectorHalfEigenHalfTest(name, template, args...) \
-  vectorSingleTypeTest(short, INT_CAST_TO_MIPP_HALF, name, template, args)
-#define vectorHalfBfloat16Test(name, template, args...) \
-  vectorSingleTypeTest(short, INT_CAST_TO_MIPP_HALF, name, template, args)
+#define vector128BoolTest(name, template, args...) \
+  vectorSingleTypeTest(int8_t, INT_CAST_128_TO_MIPP_REG_T, name, template, args)
+#define vector128EigenHalfTest(name, template, args...) \
+  vectorSingleTypeTest(short, INT_CAST_128_TO_MIPP_REG_T, name, template, args)
+#define vector128Bfloat16Test(name, template, args...) \
+  vectorSingleTypeTest(short, INT_CAST_128_TO_MIPP_REG_T, name, template, args)
 
 /* Packet4f with one arg of loaded vector */
 #define tests4FloatMin2MaxOneArgLoaded(str, funName)                                  \
@@ -32,7 +32,7 @@
   {                                                                                   \
     MIN2MAX_FLOAT_VECTOR_LOADED(4);                                                   \
                                                                                       \
-    min2MaxTests(vectorHalfFloatTest, funName, Packet4f, vmax, v36, v0, v_240, vmin); \
+    min2MaxTests(vector128FloatTest, funName, Packet4f, vmax, v36, v0, v_240, vmin); \
   }                                                                                   \
   endTest();
 
@@ -42,7 +42,7 @@
   {                                                                                    \
     MIN2MAX_DOUBLE_VECTOR_LOADED(2);                                                   \
                                                                                        \
-    min2MaxTests(vectorHalfDoubleTest, funName, Packet2d, vmax, v36, v0, v_240, vmin); \
+    min2MaxTests(vector128DoubleTest, funName, Packet2d, vmax, v36, v0, v_240, vmin); \
   }                                                                                    \
   endTest();
 
@@ -52,7 +52,7 @@
   {                                                                                 \
     MIN2MAX_INT_VECTOR_LOADED(4);                                                   \
                                                                                     \
-    min2MaxTests(vectorHalfIntTest, funName, Packet4i, vmax, v36, v0, v_240, vmin); \
+    min2MaxTests(vector128IntTest, funName, Packet4i, vmax, v36, v0, v_240, vmin); \
   }                                                                                 \
   endTest();
 
@@ -62,8 +62,8 @@
   {                                                  \
     MIN2MAX_BOOL_VECTOR_LOADED(16);                  \
                                                      \
-    vectorHalfBoolTest(funName, Packet16b, bvtrue);  \
-    vectorHalfBoolTest(funName, Packet16b, bvfalse); \
+    vector128BoolTest(funName, Packet16b, bvtrue);  \
+    vector128BoolTest(funName, Packet16b, bvfalse); \
   }                                                  \
   endTest();
 
@@ -73,7 +73,7 @@
   {                                                                                   \
     MIN2MAX_FLOAT_VECTOR_LOADED(8);                                                   \
                                                                                       \
-    min2MaxTests(vectorFullFloatTest, funName, Packet8f, vmax, v36, v0, v_240, vmin); \
+    min2MaxTests(vector256FloatTest, funName, Packet8f, vmax, v36, v0, v_240, vmin); \
   }                                                                                   \
   endTest();
 
@@ -83,7 +83,7 @@
   {                                                                                    \
     MIN2MAX_DOUBLE_VECTOR_LOADED(4);                                                   \
                                                                                        \
-    min2MaxTests(vectorFullDoubleTest, funName, Packet4d, vmax, v36, v0, v_240, vmin); \
+    min2MaxTests(vector256DoubleTest, funName, Packet4d, vmax, v36, v0, v_240, vmin); \
   }                                                                                    \
   endTest();
 
@@ -93,7 +93,7 @@
   {                                                                                 \
     MIN2MAX_INT_VECTOR_LOADED(8);                                                   \
                                                                                     \
-    min2MaxTests(vectorFullIntTest, funName, Packet8i, vmax, v36, v0, v_240, vmin); \
+    min2MaxTests(vector256IntTest, funName, Packet8i, vmax, v36, v0, v_240, vmin); \
   }                                                                                 \
   endTest();
 
@@ -103,7 +103,7 @@
   {                                                                                       \
     MIN2MAX_HALF_VECTOR_LOADED(8);                                                        \
                                                                                           \
-    min2MaxTests(vectorHalfEigenHalfTest, funName, Packet8h, vmax, v36, v0, v_240, vmin); \
+    min2MaxTests(vector128EigenHalfTest, funName, Packet8h, vmax, v36, v0, v_240, vmin); \
   }                                                                                       \
   endTest();
 
@@ -113,7 +113,7 @@
   {                                                                                       \
     MIN2MAX_BFLOAT16_VECTOR_LOADED(8);                                                    \
                                                                                           \
-    min2MaxTests(vectorHalfBfloat16Test, funName, Packet8bf, vmax, v36, v0, v_240, vmin); \
+    min2MaxTests(vector128Bfloat16Test, funName, Packet8bf, vmax, v36, v0, v_240, vmin); \
   }                                                                                       \
   endTest();
 
@@ -123,7 +123,7 @@
   {                                                                                  \
     MIN2MAX_LONG_VECTOR_LOADED(4);                                                   \
                                                                                      \
-    min2MaxTests(vectorFullLongTest, funName, Packet4l, vmax, v36, v0, v_240, vmin); \
+    min2MaxTests(vector256LongTest, funName, Packet4l, vmax, v36, v0, v_240, vmin); \
   }                                                                                  \
   endTest();
 
@@ -133,7 +133,7 @@
   {                                                                                    \
     MIN2MAX_FLOAT_VECTOR_LOADED(4);                                                    \
                                                                                        \
-    allTwoPermRep(vectorHalfFloatTest, funName, Packet4f, vmax, v36, v0, v_240, vmin); \
+    allTwoPermRep(vector128FloatTest, funName, Packet4f, vmax, v36, v0, v_240, vmin); \
   }                                                                                    \
   endTest();
 
@@ -143,7 +143,7 @@
   {                                                                                     \
     MIN2MAX_DOUBLE_VECTOR_LOADED(2);                                                    \
                                                                                         \
-    allTwoPermRep(vectorHalfDoubleTest, funName, Packet2d, vmax, v36, v0, v_240, vmin); \
+    allTwoPermRep(vector128DoubleTest, funName, Packet2d, vmax, v36, v0, v_240, vmin); \
   }                                                                                     \
   endTest();
 
@@ -153,7 +153,7 @@
   {                                                                                  \
     MIN2MAX_INT_VECTOR_LOADED(4);                                                    \
                                                                                      \
-    allTwoPermRep(vectorHalfIntTest, funName, Packet4i, vmax, v36, v0, v_240, vmin); \
+    allTwoPermRep(vector128IntTest, funName, Packet4i, vmax, v36, v0, v_240, vmin); \
   }                                                                                  \
   endTest();
 
@@ -163,10 +163,10 @@
   {                                                            \
     MIN2MAX_BOOL_VECTOR_LOADED(16);                            \
                                                                \
-    vectorHalfBoolTest(FUN2TEST, Packet16b, bvtrue, bvtrue);   \
-    vectorHalfBoolTest(FUN2TEST, Packet16b, bvtrue, bvfalse);  \
-    vectorHalfBoolTest(FUN2TEST, Packet16b, bvfalse, bvtrue);  \
-    vectorHalfBoolTest(FUN2TEST, Packet16b, bvfalse, bvfalse); \
+    vector128BoolTest(FUN2TEST, Packet16b, bvtrue, bvtrue);   \
+    vector128BoolTest(FUN2TEST, Packet16b, bvtrue, bvfalse);  \
+    vector128BoolTest(FUN2TEST, Packet16b, bvfalse, bvtrue);  \
+    vector128BoolTest(FUN2TEST, Packet16b, bvfalse, bvfalse); \
   }                                                            \
   endTest();
 
@@ -176,7 +176,7 @@
   {                                                                                    \
     MIN2MAX_FLOAT_VECTOR_LOADED(8);                                                    \
                                                                                        \
-    allTwoPermRep(vectorFullFloatTest, funName, Packet8f, vmax, v36, v0, v_240, vmin); \
+    allTwoPermRep(vector256FloatTest, funName, Packet8f, vmax, v36, v0, v_240, vmin); \
   }                                                                                    \
   endTest();
 
@@ -186,7 +186,7 @@
   {                                                                                     \
     MIN2MAX_DOUBLE_VECTOR_LOADED(4);                                                    \
                                                                                         \
-    allTwoPermRep(vectorFullDoubleTest, funName, Packet4d, vmax, v36, v0, v_240, vmin); \
+    allTwoPermRep(vector256DoubleTest, funName, Packet4d, vmax, v36, v0, v_240, vmin); \
   }                                                                                     \
   endTest();
 
@@ -196,7 +196,7 @@
   {                                                                                  \
     MIN2MAX_INT_VECTOR_LOADED(8);                                                    \
                                                                                      \
-    allTwoPermRep(vectorFullIntTest, funName, Packet8i, vmax, v36, v0, v_240, vmin); \
+    allTwoPermRep(vector256IntTest, funName, Packet8i, vmax, v36, v0, v_240, vmin); \
   }                                                                                  \
   endTest();
 
@@ -206,7 +206,7 @@
   {                                                                                        \
     MIN2MAX_HALF_VECTOR_LOADED(8);                                                         \
                                                                                            \
-    allTwoPermRep(vectorHalfEigenHalfTest, funName, Packet8h, vmax, v36, v0, v_240, vmin); \
+    allTwoPermRep(vector128EigenHalfTest, funName, Packet8h, vmax, v36, v0, v_240, vmin); \
   }                                                                                        \
   endTest();
 
@@ -216,7 +216,7 @@
   {                                                                                        \
     MIN2MAX_BFLOAT16_VECTOR_LOADED(8);                                                     \
                                                                                            \
-    allTwoPermRep(vectorHalfBfloat16Test, funName, Packet8bf, vmax, v36, v0, v_240, vmin); \
+    allTwoPermRep(vector128Bfloat16Test, funName, Packet8bf, vmax, v36, v0, v_240, vmin); \
   }                                                                                        \
   endTest();
 
@@ -226,7 +226,7 @@
   {                                                                                   \
     MIN2MAX_LONG_VECTOR_LOADED(4);                                                    \
                                                                                       \
-    allTwoPermRep(vectorFullLongTest, funName, Packet4l, vmax, v36, v0, v_240, vmin); \
+    allTwoPermRep(vector256LongTest, funName, Packet4l, vmax, v36, v0, v_240, vmin); \
   }                                                                                   \
   endTest();
 
@@ -236,7 +236,7 @@
   {                                                                                    \
     MIN2MAX_FLOAT_VECTOR_LOADED(4);                                                    \
                                                                                        \
-    allTwoCombRep(vectorHalfFloatTest, funName, Packet4f, vmax, v36, v0, v_240, vmin); \
+    allTwoCombRep(vector128FloatTest, funName, Packet4f, vmax, v36, v0, v_240, vmin); \
   }                                                                                    \
   endTest();
 
@@ -246,7 +246,7 @@
   {                                                                                     \
     MIN2MAX_DOUBLE_VECTOR_LOADED(2);                                                    \
                                                                                         \
-    allTwoCombRep(vectorHalfDoubleTest, funName, Packet2d, vmax, v36, v0, v_240, vmin); \
+    allTwoCombRep(vector128DoubleTest, funName, Packet2d, vmax, v36, v0, v_240, vmin); \
   }                                                                                     \
   endTest();
 
@@ -256,7 +256,7 @@
   {                                                                                  \
     MIN2MAX_INT_VECTOR_LOADED(4);                                                    \
                                                                                      \
-    allTwoCombRep(vectorHalfIntTest, funName, Packet4i, vmax, v36, v0, v_240, vmin); \
+    allTwoCombRep(vector128IntTest, funName, Packet4i, vmax, v36, v0, v_240, vmin); \
   }                                                                                  \
   endTest();
 
@@ -266,10 +266,10 @@
   {                                                           \
     MIN2MAX_BOOL_VECTOR_LOADED(16);                           \
                                                               \
-    vectorHalfBoolTest(funName, Packet16b, bvtrue, bvtrue);   \
-    vectorHalfBoolTest(funName, Packet16b, bvtrue, bvfalse);  \
-    vectorHalfBoolTest(funName, Packet16b, bvfalse, bvtrue);  \
-    vectorHalfBoolTest(funName, Packet16b, bvfalse, bvfalse); \
+    vector128BoolTest(funName, Packet16b, bvtrue, bvtrue);   \
+    vector128BoolTest(funName, Packet16b, bvtrue, bvfalse);  \
+    vector128BoolTest(funName, Packet16b, bvfalse, bvtrue);  \
+    vector128BoolTest(funName, Packet16b, bvfalse, bvfalse); \
   }                                                           \
   endTest();
 
@@ -279,7 +279,7 @@
   {                                                                                    \
     MIN2MAX_FLOAT_VECTOR_LOADED(8);                                                    \
                                                                                        \
-    allTwoCombRep(vectorFullFloatTest, funName, Packet8f, vmax, v36, v0, v_240, vmin); \
+    allTwoCombRep(vector256FloatTest, funName, Packet8f, vmax, v36, v0, v_240, vmin); \
   }                                                                                    \
   endTest();
 
@@ -289,7 +289,7 @@
   {                                                                                     \
     MIN2MAX_DOUBLE_VECTOR_LOADED(4);                                                    \
                                                                                         \
-    allTwoCombRep(vectorFullDoubleTest, funName, Packet4d, vmax, v36, v0, v_240, vmin); \
+    allTwoCombRep(vector256DoubleTest, funName, Packet4d, vmax, v36, v0, v_240, vmin); \
   }                                                                                     \
   endTest();
 
@@ -299,7 +299,7 @@
   {                                                                                  \
     MIN2MAX_INT_VECTOR_LOADED(8);                                                    \
                                                                                      \
-    allTwoCombRep(vectorFullIntTest, funName, Packet8i, vmax, v36, v0, v_240, vmin); \
+    allTwoCombRep(vector256IntTest, funName, Packet8i, vmax, v36, v0, v_240, vmin); \
   }                                                                                  \
   endTest();
 
@@ -309,7 +309,7 @@
   {                                                                                        \
     MIN2MAX_HALF_VECTOR_LOADED(8);                                                         \
                                                                                            \
-    allTwoCombRep(vectorHalfEigenHalfTest, funName, Packet8h, vmax, v36, v0, v_240, vmin); \
+    allTwoCombRep(vector128EigenHalfTest, funName, Packet8h, vmax, v36, v0, v_240, vmin); \
   }                                                                                        \
   endTest();
 
@@ -319,7 +319,7 @@
   {                                                                                        \
     MIN2MAX_BFLOAT16_VECTOR_LOADED(8);                                                     \
                                                                                            \
-    allTwoCombRep(vectorHalfBfloat16Test, funName, Packet8bf, vmax, v36, v0, v_240, vmin); \
+    allTwoCombRep(vector128Bfloat16Test, funName, Packet8bf, vmax, v36, v0, v_240, vmin); \
   }                                                                                        \
   endTest();
 
@@ -329,7 +329,7 @@
   {                                                                                   \
     MIN2MAX_LONG_VECTOR_LOADED(4);                                                    \
                                                                                       \
-    allTwoCombRep(vectorFullLongTest, funName, Packet4l, vmax, v36, v0, v_240, vmin); \
+    allTwoCombRep(vector256LongTest, funName, Packet4l, vmax, v36, v0, v_240, vmin); \
   }                                                                                   \
   endTest();
 
@@ -339,7 +339,7 @@
   {                                                                                      \
     MIN2MAX_FLOAT_VECTOR_LOADED(4);                                                      \
                                                                                          \
-    allThreePermRep(vectorHalfFloatTest, funName, Packet4f, vmax, v36, v0, v_240, vmin); \
+    allThreePermRep(vector128FloatTest, funName, Packet4f, vmax, v36, v0, v_240, vmin); \
   }                                                                                      \
   endTest();
 
@@ -349,7 +349,7 @@
   {                                                                                       \
     MIN2MAX_DOUBLE_VECTOR_LOADED(2);                                                      \
                                                                                           \
-    allThreePermRep(vectorHalfDoubleTest, funName, Packet2d, vmax, v36, v0, v_240, vmin); \
+    allThreePermRep(vector128DoubleTest, funName, Packet2d, vmax, v36, v0, v_240, vmin); \
   }                                                                                       \
   endTest();
 
@@ -359,7 +359,7 @@
   {                                                                                    \
     MIN2MAX_INT_VECTOR_LOADED(4);                                                      \
                                                                                        \
-    allThreePermRep(vectorHalfIntTest, funName, Packet4i, vmax, v36, v0, v_240, vmin); \
+    allThreePermRep(vector128IntTest, funName, Packet4i, vmax, v36, v0, v_240, vmin); \
   }                                                                                    \
   endTest();
 
@@ -369,14 +369,14 @@
   {                                                                    \
     MIN2MAX_BOOL_VECTOR_LOADED(16);                                    \
                                                                        \
-    vectorHalfBoolTest(funName, Packet16b, bvtrue, bvtrue, bvtrue);    \
-    vectorHalfBoolTest(funName, Packet16b, bvtrue, bvtrue, bvfalse);   \
-    vectorHalfBoolTest(funName, Packet16b, bvtrue, bvfalse, bvtrue);   \
-    vectorHalfBoolTest(funName, Packet16b, bvtrue, bvfalse, bvfalse);  \
-    vectorHalfBoolTest(funName, Packet16b, bvfalse, bvtrue, bvtrue);   \
-    vectorHalfBoolTest(funName, Packet16b, bvfalse, bvtrue, bvfalse);  \
-    vectorHalfBoolTest(funName, Packet16b, bvfalse, bvfalse, bvtrue);  \
-    vectorHalfBoolTest(funName, Packet16b, bvfalse, bvfalse, bvfalse); \
+    vector128BoolTest(funName, Packet16b, bvtrue, bvtrue, bvtrue);    \
+    vector128BoolTest(funName, Packet16b, bvtrue, bvtrue, bvfalse);   \
+    vector128BoolTest(funName, Packet16b, bvtrue, bvfalse, bvtrue);   \
+    vector128BoolTest(funName, Packet16b, bvtrue, bvfalse, bvfalse);  \
+    vector128BoolTest(funName, Packet16b, bvfalse, bvtrue, bvtrue);   \
+    vector128BoolTest(funName, Packet16b, bvfalse, bvtrue, bvfalse);  \
+    vector128BoolTest(funName, Packet16b, bvfalse, bvfalse, bvtrue);  \
+    vector128BoolTest(funName, Packet16b, bvfalse, bvfalse, bvfalse); \
   }                                                                    \
   endTest();
 
@@ -386,7 +386,7 @@
   {                                                                                      \
     MIN2MAX_FLOAT_VECTOR_LOADED(8);                                                      \
                                                                                          \
-    allThreePermRep(vectorFullFloatTest, funName, Packet8f, vmax, v36, v0, v_240, vmin); \
+    allThreePermRep(vector256FloatTest, funName, Packet8f, vmax, v36, v0, v_240, vmin); \
   }                                                                                      \
   endTest();
 
@@ -396,7 +396,7 @@
   {                                                                                       \
     MIN2MAX_DOUBLE_VECTOR_LOADED(4);                                                      \
                                                                                           \
-    allThreePermRep(vectorFullDoubleTest, funName, Packet4d, vmax, v36, v0, v_240, vmin); \
+    allThreePermRep(vector256DoubleTest, funName, Packet4d, vmax, v36, v0, v_240, vmin); \
   }                                                                                       \
   endTest();
 
@@ -406,7 +406,7 @@
   {                                                                                    \
     MIN2MAX_INT_VECTOR_LOADED(8);                                                      \
                                                                                        \
-    allThreePermRep(vectorFullIntTest, funName, Packet8i, vmax, v36, v0, v_240, vmin); \
+    allThreePermRep(vector256IntTest, funName, Packet8i, vmax, v36, v0, v_240, vmin); \
   }                                                                                    \
   endTest();
 
@@ -416,7 +416,7 @@
   {                                                                                          \
     MIN2MAX_HALF_VECTOR_LOADED(8);                                                           \
                                                                                              \
-    allThreePermRep(vectorHalfEigenHalfTest, funName, Packet8h, vmax, v36, v0, v_240, vmin); \
+    allThreePermRep(vector128EigenHalfTest, funName, Packet8h, vmax, v36, v0, v_240, vmin); \
   }                                                                                          \
   endTest();
 
@@ -426,7 +426,7 @@
   {                                                                                          \
     MIN2MAX_BFLOAT16_VECTOR_LOADED(8);                                                       \
                                                                                              \
-    allThreePermRep(vectorHalfBfloat16Test, funName, Packet8bf, vmax, v36, v0, v_240, vmin); \
+    allThreePermRep(vector128Bfloat16Test, funName, Packet8bf, vmax, v36, v0, v_240, vmin); \
   }                                                                                          \
   endTest();
 
@@ -436,7 +436,7 @@
   {                                                                                     \
     MIN2MAX_LONG_VECTOR_LOADED(4);                                                      \
                                                                                         \
-    allThreePermRep(vectorFullLongTest, funName, Packet4l, vmax, v36, v0, v_240, vmin); \
+    allThreePermRep(vector256LongTest, funName, Packet4l, vmax, v36, v0, v_240, vmin); \
   }                                                                                     \
   endTest();
 
@@ -446,7 +446,7 @@
   {                                                                                   \
     MIN2MAX_FLOAT_VECTOR(vector4);                                                    \
                                                                                       \
-    min2MaxTests(vectorHalfFloatTest, funName, Packet4f, vmax, v36, v0, v_240, vmin); \
+    min2MaxTests(vector128FloatTest, funName, Packet4f, vmax, v36, v0, v_240, vmin); \
   }                                                                                   \
   endTest();
 
@@ -456,7 +456,7 @@
   {                                                                                    \
     MIN2MAX_DOUBLE_VECTOR(vector2);                                                    \
                                                                                        \
-    min2MaxTests(vectorHalfDoubleTest, funName, Packet2d, vmax, v36, v0, vmin, v_240); \
+    min2MaxTests(vector128DoubleTest, funName, Packet2d, vmax, v36, v0, vmin, v_240); \
   }                                                                                    \
   endTest();
 
@@ -466,7 +466,7 @@
   {                                                                                 \
     MIN2MAX_INT_VECTOR(vector4);                                                    \
                                                                                     \
-    min2MaxTests(vectorHalfIntTest, funName, Packet4i, vmax, v36, v0, v_240, vmin); \
+    min2MaxTests(vector128IntTest, funName, Packet4i, vmax, v36, v0, v_240, vmin); \
   }                                                                                 \
   endTest();
 
@@ -476,8 +476,8 @@
   {                                                  \
     MIN2MAX_BOOL_VECTOR(vector16);                   \
                                                      \
-    vectorHalfBoolTest(funName, Packet16b, bvtrue);  \
-    vectorHalfBoolTest(funName, Packet16b, bvfalse); \
+    vector128BoolTest(funName, Packet16b, bvtrue);  \
+    vector128BoolTest(funName, Packet16b, bvfalse); \
   }                                                  \
   endTest();
 
@@ -487,7 +487,7 @@
   {                                                                                   \
     MIN2MAX_FLOAT_VECTOR(vector8);                                                    \
                                                                                       \
-    min2MaxTests(vectorFullFloatTest, funName, Packet8f, vmax, v36, v0, v_240, vmin); \
+    min2MaxTests(vector256FloatTest, funName, Packet8f, vmax, v36, v0, v_240, vmin); \
   }                                                                                   \
   endTest();
 
@@ -497,7 +497,7 @@
   {                                                                                    \
     MIN2MAX_DOUBLE_VECTOR(vector4);                                                    \
                                                                                        \
-    min2MaxTests(vectorFullDoubleTest, funName, Packet4d, vmax, v36, v0, v_240, vmin); \
+    min2MaxTests(vector256DoubleTest, funName, Packet4d, vmax, v36, v0, v_240, vmin); \
   }                                                                                    \
   endTest();
 
@@ -507,7 +507,7 @@
   {                                                                                 \
     MIN2MAX_INT_VECTOR(vector8);                                                    \
                                                                                     \
-    min2MaxTests(vectorFullIntTest, funName, Packet8i, vmax, v36, v0, v_240, vmin); \
+    min2MaxTests(vector256IntTest, funName, Packet8i, vmax, v36, v0, v_240, vmin); \
   }                                                                                 \
   endTest();
 
@@ -517,7 +517,7 @@
   {                                                                                       \
     MIN2MAX_HALF_VECTOR(vector8);                                                         \
                                                                                           \
-    min2MaxTests(vectorHalfEigenHalfTest, funName, Packet8h, vmax, v36, v0, v_240, vmin); \
+    min2MaxTests(vector128EigenHalfTest, funName, Packet8h, vmax, v36, v0, v_240, vmin); \
   }                                                                                       \
   endTest();
 
@@ -527,7 +527,7 @@
   {                                                                                       \
     MIN2MAX_BFLOAT16_VECTOR(vector8);                                                     \
                                                                                           \
-    min2MaxTests(vectorHalfBfloat16Test, funName, Packet8bf, vmax, v36, v0, v_240, vmin); \
+    min2MaxTests(vector128Bfloat16Test, funName, Packet8bf, vmax, v36, v0, v_240, vmin); \
   }                                                                                       \
   endTest();
 
@@ -537,7 +537,7 @@
   {                                                                                  \
     MIN2MAX_LONG_VECTOR(vector4);                                                    \
                                                                                      \
-    min2MaxTests(vectorFullLongTest, funName, Packet4l, vmax, v36, v0, v_240, vmin); \
+    min2MaxTests(vector256LongTest, funName, Packet4l, vmax, v36, v0, v_240, vmin); \
   }                                                                                  \
   endTest();
 
@@ -547,7 +547,7 @@
   {                                                                                   \
     MIN2MAX_FLOAT_VECTOR(vector4u);                                                   \
                                                                                       \
-    min2MaxTests(vectorHalfFloatTest, funName, Packet4f, vmax, v36, v0, v_240, vmin); \
+    min2MaxTests(vector128FloatTest, funName, Packet4f, vmax, v36, v0, v_240, vmin); \
   }                                                                                   \
   endTest();
 
@@ -557,7 +557,7 @@
   {                                                                                    \
     MIN2MAX_DOUBLE_VECTOR(vector2u);                                                   \
                                                                                        \
-    min2MaxTests(vectorHalfDoubleTest, funName, Packet2d, vmax, v36, v0, vmin, v_240); \
+    min2MaxTests(vector128DoubleTest, funName, Packet2d, vmax, v36, v0, vmin, v_240); \
   }                                                                                    \
   endTest();
 
@@ -567,7 +567,7 @@
   {                                                                                 \
     MIN2MAX_INT_VECTOR(vector4u);                                                   \
                                                                                     \
-    min2MaxTests(vectorHalfIntTest, funName, Packet4i, vmax, v36, v0, v_240, vmin); \
+    min2MaxTests(vector128IntTest, funName, Packet4i, vmax, v36, v0, v_240, vmin); \
   }                                                                                 \
   endTest();
 
@@ -577,8 +577,8 @@
   {                                                     \
     MIN2MAX_BOOL_VECTOR(vector16u);                     \
                                                         \
-    vectorHalfBoolTest(funName, Packet16b, bvtrue);     \
-    vectorHalfBoolTest(funName, Packet16b, bvfalse);    \
+    vector128BoolTest(funName, Packet16b, bvtrue);     \
+    vector128BoolTest(funName, Packet16b, bvfalse);    \
   }                                                     \
   endTest();
 
@@ -588,7 +588,7 @@
   {                                                                                   \
     MIN2MAX_FLOAT_VECTOR(vector8u);                                                   \
                                                                                       \
-    min2MaxTests(vectorFullFloatTest, funName, Packet8f, vmax, v36, v0, v_240, vmin); \
+    min2MaxTests(vector256FloatTest, funName, Packet8f, vmax, v36, v0, v_240, vmin); \
   }                                                                                   \
   endTest();
 
@@ -598,7 +598,7 @@
   {                                                                                    \
     MIN2MAX_DOUBLE_VECTOR(vector4u);                                                   \
                                                                                        \
-    min2MaxTests(vectorFullDoubleTest, funName, Packet4d, vmax, v36, v0, v_240, vmin); \
+    min2MaxTests(vector256DoubleTest, funName, Packet4d, vmax, v36, v0, v_240, vmin); \
   }                                                                                    \
   endTest();
 
@@ -608,7 +608,7 @@
   {                                                                                 \
     MIN2MAX_INT_VECTOR(vector8u);                                                   \
                                                                                     \
-    min2MaxTests(vectorFullIntTest, funName, Packet8i, vmax, v36, v0, v_240, vmin); \
+    min2MaxTests(vector256IntTest, funName, Packet8i, vmax, v36, v0, v_240, vmin); \
   }                                                                                 \
   endTest();
 
@@ -618,7 +618,7 @@
   {                                                                                       \
     MIN2MAX_HALF_VECTOR(vector8u);                                                        \
                                                                                           \
-    min2MaxTests(vectorHalfEigenHalfTest, funName, Packet8h, vmax, v36, v0, v_240, vmin); \
+    min2MaxTests(vector128EigenHalfTest, funName, Packet8h, vmax, v36, v0, v_240, vmin); \
   }                                                                                       \
   endTest();
 
@@ -628,7 +628,7 @@
   {                                                                                       \
     MIN2MAX_BFLOAT16_VECTOR(vector8u);                                                    \
                                                                                           \
-    min2MaxTests(vectorHalfBfloat16Test, funName, Packet8bf, vmax, v36, v0, v_240, vmin); \
+    min2MaxTests(vector128Bfloat16Test, funName, Packet8bf, vmax, v36, v0, v_240, vmin); \
   }                                                                                       \
   endTest();
 
@@ -638,7 +638,7 @@
   {                                                                                  \
     MIN2MAX_LONG_VECTOR(vector4u);                                                   \
                                                                                      \
-    min2MaxTests(vectorFullLongTest, funName, Packet4l, vmax, v36, v0, v_240, vmin); \
+    min2MaxTests(vector256LongTest, funName, Packet4l, vmax, v36, v0, v_240, vmin); \
   }                                                                                  \
   endTest();
 

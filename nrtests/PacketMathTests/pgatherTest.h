@@ -8,7 +8,7 @@
 #define FUN2TEST pgather
 
 #define doTest(size, typeMipp, cast, name, type, eigenType, args...)        \
-  for (size_t i = 1; i <= 4 + 1; i++) {                                               \
+  for (size_t i = 1; i <= 4 + 1; i++) {                                     \
     vectorSingleTypeTest(typeMipp, cast, name, type COMMA eigenType, args); \
   }
 
@@ -16,7 +16,7 @@ void pgatherTests() {
   printTestTitle(FUN2TEST);
 
 #ifdef __SSE__
-  /* float = Packet4f (half) */
+  // Packet4f (128)
   beginTest("4 float tests");
 
   float fv4x4[4 * 4] = {
@@ -27,11 +27,11 @@ void pgatherTests() {
       9.32f,   -3.2f,  8.6f,   36.37f    // row4
   };
 
-  doTest(4, float, FLOAT_CAST_TO_MIPP_HALF, FUN2TEST, float, Packet4f, (const float*)&fv4x4, i);
+  doTest(4, float, FLOAT_CAST_128_TO_MIPP_REG_T, FUN2TEST, float, Packet4f, (const float*)&fv4x4, i);
 
   endTest();
 
-  /* double =  Packet2d (half) */
+  // Packet2d (128)
   beginTest("2 double tests");
 
   double dv2x2[2 * 2] = {
@@ -40,11 +40,11 @@ void pgatherTests() {
       36.0d, -8.0d  // row2
   };
 
-  doTest(2, double, DOUBLE_CAST_TO_MIPP_HALF, FUN2TEST, double, Packet2d, (const double*)&dv2x2, i);
+  doTest(2, double, DOUBLE_CAST_128_TO_MIPP_REG_T, FUN2TEST, double, Packet2d, (const double*)&dv2x2, i);
 
   endTest();
 
-  /* int = Packet4i (half) */
+  // Packet4i (128)
   beginTest("4 int tests");
 
   int iv4x4[4 * 4] = {
@@ -55,11 +55,11 @@ void pgatherTests() {
       9,   -3, 8,  36    // row4
   };
 
-  doTest(4, int, INT_CAST_TO_MIPP_HALF, FUN2TEST, int, Packet4i, (const int*)&iv4x4, i);
+  doTest(4, int, INT_CAST_128_TO_MIPP_REG_T, FUN2TEST, int, Packet4i, (const int*)&iv4x4, i);
 
   endTest();
 
-  /* bool = Packet16b */
+  // Packet16b (128)
   beginTest("16 bool tests");
 
   bool bv16x16[16 * 16] = {
@@ -98,14 +98,14 @@ void pgatherTests() {
       true  // row16
   };
 
-  doTest(16, int8_t, INT_CAST_TO_MIPP_HALF, FUN2TEST, bool, Packet16b, (const bool*)&bv16x16, i);
+  doTest(16, int8_t, INT_CAST_128_TO_MIPP_REG_T, FUN2TEST, bool, Packet16b, (const bool*)&bv16x16, i);
 
   endTest();
 
 #endif
 
 #ifdef __AVX__
-  /* float = Packet8f (full) */
+  // Packet8f (256)
   beginTest("8 float tests");
 
   float fv8x8[8 * 8] = {
@@ -120,11 +120,11 @@ void pgatherTests() {
       69.56f,  8.97f,  -65.72f, 554.1f,   25.4f,   32.13f,   -55.64f, 1.12f      // row8
   };
 
-  doTest(8, float, FLOAT_CAST_TO_MIPP_FULL, FUN2TEST, float, Packet8f, (const float*)&fv8x8, i);
+  doTest(8, float, FLOAT_CAST_256_TO_MIPP_REG_T, FUN2TEST, float, Packet8f, (const float*)&fv8x8, i);
 
   endTest();
 
-  /* double = Packet4d (full) */
+  // Packet4d (256)
   beginTest("4 double tests");
 
   double dv4x4[4 * 4] = {
@@ -135,11 +135,11 @@ void pgatherTests() {
       9.32d,   -3.2d,  8.6d,   36.37d    // row4
   };
 
-  doTest(4, double, DOUBLE_CAST_TO_MIPP_FULL, FUN2TEST, double, Packet4d, (const double*)&dv4x4, i);
+  doTest(4, double, DOUBLE_CAST_256_TO_MIPP_REG_T, FUN2TEST, double, Packet4d, (const double*)&dv4x4, i);
 
   endTest();
 
-  /* int = Packet8i (full) */
+  // Packet8i (256)
   beginTest("8 int tests");
 
   int iv8x8[8 * 8] = {
@@ -154,11 +154,11 @@ void pgatherTests() {
       69,  8,   -65, 554, 25,  32,   -55, 1     // row8
   };
 
-  doTest(8, int, INT_CAST_TO_MIPP_FULL, FUN2TEST, int, Packet8i, (const int*)&iv8x8, i);
+  doTest(8, int, INT_CAST_256_TO_MIPP_REG_T, FUN2TEST, int, Packet8i, (const int*)&iv8x8, i);
 
   endTest();
 
-  /* Eigen::half = Packet8h */
+  // Packet8h (128)
   beginTest("8 Eigen::half tests");
 
   Eigen::half hv8x8[8 * 8] = {
@@ -181,11 +181,11 @@ void pgatherTests() {
       half(25.4f),   half(32.13f),   half(-55.64f), half(1.12f)  // row8
   };
 
-  doTest(8, short, INT_CAST_TO_MIPP_HALF, FUN2TEST, Eigen::half, Packet8h, (const Eigen::half*)&hv8x8, i);
+  doTest(8, short, INT_CAST_128_TO_MIPP_REG_T, FUN2TEST, Eigen::half, Packet8h, (const Eigen::half*)&hv8x8, i);
 
   endTest();
 
-  /* bfloat16 = Packet8bf */
+  // Packet8bf (128) bfloat16
   beginTest("8 bfloat16 tests");
 
   bfloat16 bfv8x8[8 * 8] = {
@@ -208,14 +208,14 @@ void pgatherTests() {
       bfloat16(25.4f),   bfloat16(32.13f),   bfloat16(-55.64f), bfloat16(1.12f)  // row8
   };
 
-  doTest(8, short, INT_CAST_TO_MIPP_HALF, FUN2TEST, bfloat16, Packet8bf, (const bfloat16*)&bfv8x8, i);
+  doTest(8, short, INT_CAST_128_TO_MIPP_REG_T, FUN2TEST, bfloat16, Packet8bf, (const bfloat16*)&bfv8x8, i);
 
   endTest();
 
 #endif
 
 #ifdef __AVX2__
-  /* long = Packet4l */
+  // Packet4l (256)
   beginTest("4 long tests");
 
   long lv4x4[4 * 4] = {
@@ -226,7 +226,7 @@ void pgatherTests() {
       9L,   -3L, 8L,  36L    // row4
   };
 
-  doTest(4, long, INT_CAST_TO_MIPP_FULL, FUN2TEST, long, Packet4l, (const long*)&lv4x4, i);
+  doTest(4, long, INT_CAST_256_TO_MIPP_REG_T, FUN2TEST, long, Packet4l, (const long*)&lv4x4, i);
 
   endTest();
 

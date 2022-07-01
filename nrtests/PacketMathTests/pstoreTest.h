@@ -11,7 +11,7 @@ void pstoreTests() {
   printTestTitle(FUN2TEST);
 
 #ifdef __SSE__
-  /* float = Packet4f (half) */
+  // Packet4f (128)
   beginTest("4 float tests");
   {
     MIN2MAX_FLOAT_VECTOR_LOADED(4);
@@ -24,7 +24,7 @@ void pstoreTests() {
   }
   endTest();
 
-  /* double =  Packet2d (half) */
+  // Packet2d (128)
   beginTest("2 double tests");
   {
     MIN2MAX_DOUBLE_VECTOR_LOADED(2);
@@ -37,7 +37,7 @@ void pstoreTests() {
   }
   endTest();
 
-  /* int = Packet4i (half) */
+  // Packet4i (128)
   beginTest("4 int tests");
   {
     MIN2MAX_INT_VECTOR_LOADED(4);
@@ -50,7 +50,7 @@ void pstoreTests() {
   }
   endTest();
 
-  /* bool = Packet16b */
+  // Packet16b (128)
   beginTest("16 bool tests");
   {
     MIN2MAX_BOOL_VECTOR_LOADED(16);
@@ -63,7 +63,7 @@ void pstoreTests() {
 #endif
 
 #ifdef __AVX__
-  /* float = Packet8f (full) */
+  // Packet8f (256)
   beginTest("8 float tests");
   {
     MIN2MAX_FLOAT_VECTOR_LOADED(8);
@@ -76,7 +76,7 @@ void pstoreTests() {
   }
   endTest();
 
-  /* double = Packet4d (full) */
+  // Packet4d (256)
   beginTest("4 double tests");
   {
     MIN2MAX_DOUBLE_VECTOR_LOADED(4);
@@ -89,7 +89,7 @@ void pstoreTests() {
   }
   endTest();
 
-  /* int = Packet8i (full) */
+  // Packet8i (256)
   beginTest("8 int tests");
   {
     MIN2MAX_INT_VECTOR_LOADED(8);
@@ -102,7 +102,7 @@ void pstoreTests() {
   }
   endTest();
 
-  /* Eigen::half = Packet8h */
+  // Packet8h (128)
   beginTest("8 Eigen::half tests");
   {
     MIN2MAX_HALF_VECTOR_LOADED(8);
@@ -115,7 +115,7 @@ void pstoreTests() {
   }
   endTest();
 
-  /* bfloat16 = Packet8bf */
+  // Packet8bf (128) bfloat16
   beginTest("8 bfloat16 tests");
   {
     MIN2MAX_BFLOAT16_VECTOR_LOADED(8);
@@ -131,7 +131,7 @@ void pstoreTests() {
 #endif
 
 #ifdef __AVX2__
-  /* long = Packet4l */
+  // Packet4l (256)
   beginTest("4 long tests");
   {
     MIN2MAX_LONG_VECTOR_LOADED(4);

@@ -11,19 +11,19 @@ void pldexpTests() {
   printTestTitle(FUN2TEST);
 
 #ifdef __SSE__
-  /* float = Packet4f (half) */
+  // Packet4f (128)
   tests4FloatMin2MaxTwoArgsPermRep("4 float tests", FUN2TEST);
 
-  /* double =  Packet2d (half) */
+  // Packet2d (128)
   tests2DoubleMin2MaxTwoArgsPermRep("2 double tests", FUN2TEST);
 
 #endif
 
 #ifdef __AVX__
-  /* float = Packet8f (full) */
+  // Packet8f (256)
   tests8FloatMin2MaxTwoArgsPermRep("8 float tests", FUN2TEST);
 
-  /* double = Packet4d (full) */
+  // Packet4d (256)
   tests4DoubleMin2MaxTwoArgsPermRep("4 double tests", FUN2TEST);
 
 #endif

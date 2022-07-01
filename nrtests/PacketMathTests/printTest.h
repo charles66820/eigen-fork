@@ -11,25 +11,25 @@ void printTests() {
   printTestTitle(FUN2TEST);
 
 #ifdef __SSE__
-  /* float = Packet4f (half) */
+  // Packet4f (128)
   tests4FloatMin2MaxOneArgLoaded("4 float tests", FUN2TEST);
 
-  /* double =  Packet2d (half) */
+  // Packet2d (128)
   tests2DoubleMin2MaxOneArgLoaded("2 double tests", FUN2TEST);
 
 #endif
 
 #ifdef __AVX__
-  /* float = Packet8f (full) */
+  // Packet8f (256)
   tests8FloatMin2MaxOneArgLoaded("8 float tests", FUN2TEST);
 
-  /* double = Packet4d (full) */
+  // Packet4d (256)
   tests4DoubleMin2MaxOneArgLoaded("4 double tests", FUN2TEST);
 
-  /* Eigen::half = Packet8h */
+  // Packet8h (128)
   tests8HalfMin2MaxOneArgLoaded("8 Eigen::half tests", FUN2TEST);
 
-  /* bfloat16 = Packet8bf */
+  // Packet8bf (128) bfloat16
   tests8Bfloat16Min2MaxOneArgLoaded("8 bfloat16 tests", FUN2TEST);
 
 #endif

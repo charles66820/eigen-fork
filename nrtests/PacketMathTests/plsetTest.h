@@ -11,63 +11,63 @@ void plsetTests() {
   printTestTitle(FUN2TEST);
 
 #ifdef __SSE__
-  /* float = Packet4f (half) */
+  // Packet4f (128)
   beginTest("4 float tests");
 
-  min2MaxTests(vectorHalfFloatTest, FUN2TEST, Packet4f, FLT_MAX, 36.7f, 0.0f, -240.98f, FLT_MIN);
+  min2MaxTests(vector128FloatTest, FUN2TEST, Packet4f, FLT_MAX, 36.7f, 0.0f, -240.98f, FLT_MIN);
 
   endTest();
 
-  /* double =  Packet2d (half) */
+  // Packet2d (128)
   beginTest("2 double tests");
 
-  min2MaxTests(vectorHalfDoubleTest, FUN2TEST, Packet2d, DBL_MAX, 36.7d, 0.0d, -240.98d, DBL_MIN);
+  min2MaxTests(vector128DoubleTest, FUN2TEST, Packet2d, DBL_MAX, 36.7d, 0.0d, -240.98d, DBL_MIN);
 
   endTest();
 
-  /* int = Packet4i (half) */
+  // Packet4i (128)
   beginTest("4 int tests");
 
-  min2MaxTests(vectorHalfIntTest, FUN2TEST, Packet4i, INT_MAX, 36, 0, -240, INT_MIN);
+  min2MaxTests(vector128IntTest, FUN2TEST, Packet4i, INT_MAX, 36, 0, -240, INT_MIN);
 
   endTest();
 
 #endif
 
 #ifdef __AVX__
-  /* float = Packet8f (full) */
+  // Packet8f (256)
   beginTest("8 float tests");
 
-  min2MaxTests(vectorFullFloatTest, FUN2TEST, Packet8f, FLT_MAX, 36.7f, 0.0f, -240.98f, FLT_MIN);
+  min2MaxTests(vector256FloatTest, FUN2TEST, Packet8f, FLT_MAX, 36.7f, 0.0f, -240.98f, FLT_MIN);
 
   endTest();
 
-  /* double = Packet4d (full) */
+  // Packet4d (256)
   beginTest("4 double tests");
 
-  min2MaxTests(vectorFullDoubleTest, FUN2TEST, Packet4d, DBL_MAX, 36.7d, 0.0d, -240.98d, DBL_MIN);
+  min2MaxTests(vector256DoubleTest, FUN2TEST, Packet4d, DBL_MAX, 36.7d, 0.0d, -240.98d, DBL_MIN);
 
   endTest();
 
-  /* int = Packet8i (full) */
+  // Packet8i (256)
   beginTest("8 int tests");
 
-  min2MaxTests(vectorFullIntTest, FUN2TEST, Packet8i, INT_MAX, 36, 0, -240, INT_MIN);
+  min2MaxTests(vector256IntTest, FUN2TEST, Packet8i, INT_MAX, 36, 0, -240, INT_MIN);
 
   endTest();
 
-  /* Eigen::half = Packet8h */
+  // Packet8h (128)
   beginTest("8 Eigen::half tests");
 
-  min2MaxTests(vectorHalfEigenHalfTest, FUN2TEST, Packet8h, half(FLT_MAX), half(36.7f), half(0.0f),
+  min2MaxTests(vector128EigenHalfTest, FUN2TEST, Packet8h, half(FLT_MAX), half(36.7f), half(0.0f),
                half(-240.98f), half(FLT_MIN));
 
   endTest();
 
-  /* bfloat16 = Packet8bf */
+  // Packet8bf (128) bfloat16
   beginTest("8 bfloat16 tests");
 
-  min2MaxTests(vectorHalfBfloat16Test, FUN2TEST, Packet8bf, bfloat16(FLT_MAX), bfloat16(36.7f), bfloat16(0.0f),
+  min2MaxTests(vector128Bfloat16Test, FUN2TEST, Packet8bf, bfloat16(FLT_MAX), bfloat16(36.7f), bfloat16(0.0f),
                bfloat16(-240.98f), bfloat16(FLT_MIN));
 
   endTest();
@@ -75,10 +75,10 @@ void plsetTests() {
 #endif
 
 #ifdef __AVX2__
-  /* long = Packet4l */
+  // Packet4l (256)
   beginTest("4 long tests");
 
-  min2MaxTests(vectorFullLongTest, FUN2TEST, Packet4l, LONG_MAX, 36L, 0L, -240L, LONG_MIN);
+  min2MaxTests(vector256LongTest, FUN2TEST, Packet4l, LONG_MAX, 36L, 0L, -240L, LONG_MIN);
 
   endTest();
 

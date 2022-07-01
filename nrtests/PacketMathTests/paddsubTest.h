@@ -11,10 +11,10 @@ void paddsubTests() {
   printTestTitle(FUN2TEST);
 
 #ifdef __SSE__
-  /* float = Packet4f (half) */
+  // Packet4f (128)
   tests4FloatMin2MaxTwoArgsPermRep("4 float tests", FUN2TEST);
 
-  /* double =  Packet2d (half) */
+  // Packet2d (128)
   tests2DoubleMin2MaxTwoArgsPermRep("2 double tests", FUN2TEST);
 
 #endif

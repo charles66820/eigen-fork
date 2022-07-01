@@ -11,7 +11,7 @@ void pstore1Tests() {
   printTestTitle(FUN2TEST);
 
 #ifdef __SSE__
-  /* float = Packet4f (half) */
+  // Packet4f (128)
   beginTest("4 float tests");
 
   refSingleType(FUN2TEST, float, 4, FLT_MAX);
@@ -22,7 +22,7 @@ void pstore1Tests() {
 
   endTest();
 
-  /* double =  Packet2d (half) */
+  // Packet2d (128)
   beginTest("2 double tests");
 
   refSingleType(FUN2TEST, double, 2, DBL_MAX);
@@ -33,7 +33,7 @@ void pstore1Tests() {
 
   endTest();
 
-  /* int = Packet4i (half) */
+  // Packet4i (128)
   beginTest("4 int tests");
 
   refSingleType(FUN2TEST, int, 4, INT_MAX);
@@ -44,7 +44,7 @@ void pstore1Tests() {
 
   endTest();
 
-  /* bool = Packet16b */
+  // Packet16b (128)
   beginTest("16 bool tests");
 
   refSingleType(FUN2TEST, bool, 16, true);
@@ -55,7 +55,7 @@ void pstore1Tests() {
 #endif
 
 #ifdef __AVX__
-  /* float = Packet8f (full) */
+  // Packet8f (256)
   beginTest("8 float tests");
 
   refSingleType(FUN2TEST, float, 8, FLT_MAX);
@@ -66,7 +66,7 @@ void pstore1Tests() {
 
   endTest();
 
-  /* double = Packet4d (full) */
+  // Packet4d (256)
   beginTest("4 double tests");
 
   refSingleType(FUN2TEST, double, 4, DBL_MAX);
@@ -77,7 +77,7 @@ void pstore1Tests() {
 
   endTest();
 
-  /* int = Packet8i (full) */
+  // Packet8i (256)
   beginTest("8 int tests");
 
   refSingleType(FUN2TEST, int, 8, INT_MAX);
@@ -88,7 +88,7 @@ void pstore1Tests() {
 
   endTest();
 
-  /* Eigen::half = Packet8h */
+  // Packet8h (128)
   beginTest("8 Eigen::half tests");
 
   refSingleType(FUN2TEST, Eigen::half, 8, half(FLT_MAX));
@@ -99,7 +99,7 @@ void pstore1Tests() {
 
   endTest();
 
-  /* bfloat16 = Packet8bf */
+  // Packet8bf (128) bfloat16
   beginTest("8 bfloat16 tests");
 
   refSingleType(FUN2TEST, bfloat16, 8, bfloat16(FLT_MAX));
@@ -113,7 +113,7 @@ void pstore1Tests() {
 #endif
 
 #ifdef __AVX2__
-  /* long = Packet4l */
+  // Packet4l (256)
   beginTest("4 long tests");
 
   refSingleType(FUN2TEST, long, 4, LONG_MAX);
