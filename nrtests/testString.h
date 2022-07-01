@@ -18,6 +18,7 @@ std::string toString(Arg1 arg1) {
   return "?";
 }
 
+printableToString(int8_t);
 printableToString(bool);
 printableToString(short);
 printableToString(int);
@@ -26,6 +27,12 @@ printableToString(float);
 printableToString(double);
 printableToString(Eigen::half);
 printableToString(Eigen::bfloat16);
+printableToString(mipp::Reg<bool>);
+printableToString(mipp::Reg<int8_t>);
+printableToString(mipp::Reg<int>);
+printableToString(mipp::Reg<long>);
+printableToString(mipp::Reg<float>);
+printableToString(mipp::Reg<double>);
 
 template <typename Arg1, typename... Args>
 std::string toString(Arg1 arg1, Args... args) {
