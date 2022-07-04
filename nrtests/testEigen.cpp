@@ -63,6 +63,7 @@
 #include "PacketMathTests/pselectTest.h"
 #include "PacketMathTests/pblendTest.h"
 #include "PacketMathTests/padd_maskTest.h"
+#include "PacketMathTests/ploadu_maskTest.h"
 
 int main() {
   executeTest();

@@ -1974,7 +1974,7 @@ EIGEN_STRONG_INLINE Packet2d pldexp<Packet2d>(const Packet2d& a, const Packet2d&
 }
 
 // with AVX, the default implementations based on pload1 are faster
-#ifndef __AVX__
+#ifndef EIGEN_VECTORIZE_AVX
 template <>
 EIGEN_STRONG_INLINE void pbroadcast4<Packet4f>(const float* a, Packet4f& a0, Packet4f& a1, Packet4f& a2, Packet4f& a3) {
   a3 = pload<Packet4f>(a);
