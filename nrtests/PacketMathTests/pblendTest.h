@@ -94,37 +94,37 @@ void pblendTests() {
   // Packet16b (128)
   beginTest("16 bool tests");
   {
-    MIN2MAX_BOOL_VECTOR_LOADED(16);
+    BOOL_VECTOR_LOADED(16);
 
-    vector128BoolTest(FUN2TEST, Packet16b, selector16, bvtrue, bvtrue);
-    vector128BoolTest(FUN2TEST, Packet16b, selector16, bvtrue, bvfalse);
-    vector128BoolTest(FUN2TEST, Packet16b, selector16, bvfalse, bvtrue);
-    vector128BoolTest(FUN2TEST, Packet16b, selector16, bvfalse, bvfalse);
+    vector128BoolTest(FUN2TEST, Packet16b, selector16, vtrue, vtrue);
+    vector128BoolTest(FUN2TEST, Packet16b, selector16, vtrue, vfalse);
+    vector128BoolTest(FUN2TEST, Packet16b, selector16, vfalse, vtrue);
+    vector128BoolTest(FUN2TEST, Packet16b, selector16, vfalse, vfalse);
 
-    vector128BoolTest(FUN2TEST, Packet16b, selector16_max, bvtrue, bvtrue);
-    vector128BoolTest(FUN2TEST, Packet16b, selector16_max, bvtrue, bvfalse);
-    vector128BoolTest(FUN2TEST, Packet16b, selector16_max, bvfalse, bvtrue);
-    vector128BoolTest(FUN2TEST, Packet16b, selector16_max, bvfalse, bvfalse);
+    vector128BoolTest(FUN2TEST, Packet16b, selector16_max, vtrue, vtrue);
+    vector128BoolTest(FUN2TEST, Packet16b, selector16_max, vtrue, vfalse);
+    vector128BoolTest(FUN2TEST, Packet16b, selector16_max, vfalse, vtrue);
+    vector128BoolTest(FUN2TEST, Packet16b, selector16_max, vfalse, vfalse);
 
-    vector128BoolTest(FUN2TEST, Packet16b, selector16_pos, bvtrue, bvtrue);
-    vector128BoolTest(FUN2TEST, Packet16b, selector16_pos, bvtrue, bvfalse);
-    vector128BoolTest(FUN2TEST, Packet16b, selector16_pos, bvfalse, bvtrue);
-    vector128BoolTest(FUN2TEST, Packet16b, selector16_pos, bvfalse, bvfalse);
+    vector128BoolTest(FUN2TEST, Packet16b, selector16_pos, vtrue, vtrue);
+    vector128BoolTest(FUN2TEST, Packet16b, selector16_pos, vtrue, vfalse);
+    vector128BoolTest(FUN2TEST, Packet16b, selector16_pos, vfalse, vtrue);
+    vector128BoolTest(FUN2TEST, Packet16b, selector16_pos, vfalse, vfalse);
 
-    vector128BoolTest(FUN2TEST, Packet16b, selector16_zero, bvtrue, bvtrue);
-    vector128BoolTest(FUN2TEST, Packet16b, selector16_zero, bvtrue, bvfalse);
-    vector128BoolTest(FUN2TEST, Packet16b, selector16_zero, bvfalse, bvtrue);
-    vector128BoolTest(FUN2TEST, Packet16b, selector16_zero, bvfalse, bvfalse);
+    vector128BoolTest(FUN2TEST, Packet16b, selector16_zero, vtrue, vtrue);
+    vector128BoolTest(FUN2TEST, Packet16b, selector16_zero, vtrue, vfalse);
+    vector128BoolTest(FUN2TEST, Packet16b, selector16_zero, vfalse, vtrue);
+    vector128BoolTest(FUN2TEST, Packet16b, selector16_zero, vfalse, vfalse);
 
-    vector128BoolTest(FUN2TEST, Packet16b, selector16_neg, bvtrue, bvtrue);
-    vector128BoolTest(FUN2TEST, Packet16b, selector16_neg, bvtrue, bvfalse);
-    vector128BoolTest(FUN2TEST, Packet16b, selector16_neg, bvfalse, bvtrue);
-    vector128BoolTest(FUN2TEST, Packet16b, selector16_neg, bvfalse, bvfalse);
+    vector128BoolTest(FUN2TEST, Packet16b, selector16_neg, vtrue, vtrue);
+    vector128BoolTest(FUN2TEST, Packet16b, selector16_neg, vtrue, vfalse);
+    vector128BoolTest(FUN2TEST, Packet16b, selector16_neg, vfalse, vtrue);
+    vector128BoolTest(FUN2TEST, Packet16b, selector16_neg, vfalse, vfalse);
 
-    vector128BoolTest(FUN2TEST, Packet16b, selector16_min, bvtrue, bvtrue);
-    vector128BoolTest(FUN2TEST, Packet16b, selector16_min, bvtrue, bvfalse);
-    vector128BoolTest(FUN2TEST, Packet16b, selector16_min, bvfalse, bvtrue);
-    vector128BoolTest(FUN2TEST, Packet16b, selector16_min, bvfalse, bvfalse);
+    vector128BoolTest(FUN2TEST, Packet16b, selector16_min, vtrue, vtrue);
+    vector128BoolTest(FUN2TEST, Packet16b, selector16_min, vtrue, vfalse);
+    vector128BoolTest(FUN2TEST, Packet16b, selector16_min, vfalse, vtrue);
+    vector128BoolTest(FUN2TEST, Packet16b, selector16_min, vfalse, vfalse);
   }
   endTest();
 

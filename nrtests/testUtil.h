@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <Eigen/Core>
+#include "testCombinations.h"
 #include "testString.h"
 
 using namespace Eigen::internal;

@@ -2,7 +2,6 @@
 
 #include "testUtil.h"
 #include "testVector.h"
-#include "testCombinations.h"
 
 #include "PacketMathOldFun.h"
 
@@ -65,6 +64,4 @@
 #include "PacketMathTests/padd_maskTest.h"
 #include "PacketMathTests/ploadu_maskTest.h"
 
-int main() {
-  executeTest();
-}
+int main() { executeTest(); }

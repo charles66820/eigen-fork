@@ -12,27 +12,14 @@ void parithmetic_shift_rightTests() {
 
 #ifdef __SSE__
 
-  // Packet4i (128)
-  beginTest("4 int tests");
-  {
-    MIN2MAX_INT_VECTOR_LOADED(4);
-
-    min2MaxTests(vector128IntTest, FUN2TEST, 3, vmax, v36, v0, v_240, vmin);
-  }
-  endTest();
+  min2maxGenericTest("4 int tests", FUN2TEST, vector128IntTest, 3, min2MaxTests, MIN2MAX_INT_VECTOR_LOADED, 4);
 
 #endif
 
 #ifdef __AVX__
 
   // Packet8i (256)
-  beginTest("8 int tests");
-  {
-    MIN2MAX_INT_VECTOR_LOADED(8);
-
-    min2MaxTests(vector256IntTest, FUN2TEST, 3, vmax, v36, v0, v_240, vmin);
-  }
-  endTest();
+  min2maxGenericTest("8 int tests", FUN2TEST, vector256IntTest, 3, min2MaxTests, MIN2MAX_INT_VECTOR_LOADED, 8);
 
 #endif
 

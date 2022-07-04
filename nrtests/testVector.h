@@ -97,9 +97,9 @@
   loadVector(vector##size, int, v_240, Packet##size##i, -240, 0);   \
   loadVector(vector##size, int, vmin, Packet##size##i, INT_MIN, 0);
 
-#define MIN2MAX_BOOL_VECTOR_LOADED(size)                            \
-  loadVector(vector##size, bool, bvtrue, Packet##size##b, true, 0); \
-  loadVector(vector##size, bool, bvfalse, Packet##size##b, false, 0);
+#define BOOL_VECTOR_LOADED(size)                                   \
+  loadVector(vector##size, bool, vtrue, Packet##size##b, true, 0); \
+  loadVector(vector##size, bool, vfalse, Packet##size##b, false, 0);
 
 #define MIN2MAX_HALF_VECTOR_LOADED(size)                                                     \
   loadVector(vector##size, Eigen::half, vmax, Packet##size##h, half(FLT_MAX), half(0.0f));   \
@@ -145,9 +145,9 @@
   vec(int, v_240, -240, 1);     \
   vec(int, vmin, INT_MIN, 1);
 
-#define MIN2MAX_BOOL_VECTOR(vec) \
-  vec(bool, bvtrue, true, 0);    \
-  vec(bool, bvfalse, false, 0);
+#define BOOL_VECTOR(vec)     \
+  vec(bool, vtrue, true, 0); \
+  vec(bool, vfalse, false, 0);
 
 #define MIN2MAX_FLOAT_VECTOR(vec)    \
   vec(float, vmax, FLT_MAX, -0.1f);  \

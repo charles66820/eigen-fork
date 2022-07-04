@@ -53,10 +53,10 @@ void predux_minTests() {
   // Packet16b (128)
   beginTest("16 bool tests");
   {
-    MIN2MAX_BOOL_VECTOR_LOADED(16);
+    BOOL_VECTOR_LOADED(16);
 
-    scalarSingleTypeTest(bool, FUN2TEST, Packet16b, bvtrue);
-    scalarSingleTypeTest(bool, FUN2TEST, Packet16b, bvfalse);
+    scalarSingleTypeTest(bool, FUN2TEST, Packet16b, vtrue);
+    scalarSingleTypeTest(bool, FUN2TEST, Packet16b, vfalse);
   }
   endTest();
 

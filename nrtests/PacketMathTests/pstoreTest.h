@@ -16,11 +16,7 @@ void pstoreTests() {
   {
     MIN2MAX_FLOAT_VECTOR_LOADED(4);
 
-    refSingleType(FUN2TEST, float, 4, vmax);
-    refSingleType(FUN2TEST, float, 4, v36);
-    refSingleType(FUN2TEST, float, 4, v0);
-    refSingleType(FUN2TEST, float, 4, v_240);
-    refSingleType(FUN2TEST, float, 4, vmin);
+    min2MaxTests(refSingleType, FUN2TEST, float COMMA 4, vmax, v36, v0, v_240, vmin);
   }
   endTest();
 
@@ -29,11 +25,7 @@ void pstoreTests() {
   {
     MIN2MAX_DOUBLE_VECTOR_LOADED(2);
 
-    refSingleType(FUN2TEST, double, 2, vmax);
-    refSingleType(FUN2TEST, double, 2, v36);
-    refSingleType(FUN2TEST, double, 2, v0);
-    refSingleType(FUN2TEST, double, 2, v_240);
-    refSingleType(FUN2TEST, double, 2, vmin);
+    min2MaxTests(refSingleType, FUN2TEST, double COMMA 2, vmax, v36, v0, v_240, vmin);
   }
   endTest();
 
@@ -42,21 +34,16 @@ void pstoreTests() {
   {
     MIN2MAX_INT_VECTOR_LOADED(4);
 
-    refSingleType(FUN2TEST, int, 4, vmax);
-    refSingleType(FUN2TEST, int, 4, v36);
-    refSingleType(FUN2TEST, int, 4, v0);
-    refSingleType(FUN2TEST, int, 4, v_240);
-    refSingleType(FUN2TEST, int, 4, vmin);
+    min2MaxTests(refSingleType, FUN2TEST, int COMMA 4, vmax, v36, v0, v_240, vmin);
   }
   endTest();
 
   // Packet16b (128)
   beginTest("16 bool tests");
   {
-    MIN2MAX_BOOL_VECTOR_LOADED(16);
+    BOOL_VECTOR_LOADED(16);
 
-    refSingleType(FUN2TEST, bool, 16, bvtrue);
-    refSingleType(FUN2TEST, bool, 16, bvfalse);
+    boolTests(refSingleType, FUN2TEST, bool COMMA 16, vtrue, vfalse);
   }
   endTest();
 
@@ -68,11 +55,7 @@ void pstoreTests() {
   {
     MIN2MAX_FLOAT_VECTOR_LOADED(8);
 
-    refSingleType(FUN2TEST, float, 8, vmax);
-    refSingleType(FUN2TEST, float, 8, v36);
-    refSingleType(FUN2TEST, float, 8, v0);
-    refSingleType(FUN2TEST, float, 8, v_240);
-    refSingleType(FUN2TEST, float, 8, vmin);
+    min2MaxTests(refSingleType, FUN2TEST, float COMMA 8, vmax, v36, v0, v_240, vmin);
   }
   endTest();
 
@@ -81,11 +64,7 @@ void pstoreTests() {
   {
     MIN2MAX_DOUBLE_VECTOR_LOADED(4);
 
-    refSingleType(FUN2TEST, double, 4, vmax);
-    refSingleType(FUN2TEST, double, 4, v36);
-    refSingleType(FUN2TEST, double, 4, v0);
-    refSingleType(FUN2TEST, double, 4, v_240);
-    refSingleType(FUN2TEST, double, 4, vmin);
+    min2MaxTests(refSingleType, FUN2TEST, double COMMA 4, vmax, v36, v0, v_240, vmin);
   }
   endTest();
 
@@ -94,11 +73,7 @@ void pstoreTests() {
   {
     MIN2MAX_INT_VECTOR_LOADED(8);
 
-    refSingleType(FUN2TEST, int, 8, vmax);
-    refSingleType(FUN2TEST, int, 8, v36);
-    refSingleType(FUN2TEST, int, 8, v0);
-    refSingleType(FUN2TEST, int, 8, v_240);
-    refSingleType(FUN2TEST, int, 8, vmin);
+    min2MaxTests(refSingleType, FUN2TEST, int COMMA 8, vmax, v36, v0, v_240, vmin);
   }
   endTest();
 
@@ -107,11 +82,7 @@ void pstoreTests() {
   {
     MIN2MAX_HALF_VECTOR_LOADED(8);
 
-    refSingleType(FUN2TEST, Eigen::half, 8, vmax);
-    refSingleType(FUN2TEST, Eigen::half, 8, v36);
-    refSingleType(FUN2TEST, Eigen::half, 8, v0);
-    refSingleType(FUN2TEST, Eigen::half, 8, v_240);
-    refSingleType(FUN2TEST, Eigen::half, 8, vmin);
+    min2MaxTests(refSingleType, FUN2TEST, Eigen::half COMMA 8, vmax, v36, v0, v_240, vmin);
   }
   endTest();
 
@@ -120,11 +91,7 @@ void pstoreTests() {
   {
     MIN2MAX_BFLOAT16_VECTOR_LOADED(8);
 
-    refSingleType(FUN2TEST, bfloat16, 8, vmax);
-    refSingleType(FUN2TEST, bfloat16, 8, v36);
-    refSingleType(FUN2TEST, bfloat16, 8, v0);
-    refSingleType(FUN2TEST, bfloat16, 8, v_240);
-    refSingleType(FUN2TEST, bfloat16, 8, vmin);
+    min2MaxTests(refSingleType, FUN2TEST, bfloat16 COMMA 8, vmax, v36, v0, v_240, vmin);
   }
   endTest();
 
@@ -136,11 +103,7 @@ void pstoreTests() {
   {
     MIN2MAX_LONG_VECTOR_LOADED(4);
 
-    refSingleType(FUN2TEST, long, 4, vmax);
-    refSingleType(FUN2TEST, long, 4, v36);
-    refSingleType(FUN2TEST, long, 4, v0);
-    refSingleType(FUN2TEST, long, 4, v_240);
-    refSingleType(FUN2TEST, long, 4, vmin);
+    min2MaxTests(refSingleType, FUN2TEST, long COMMA 4, vmax, v36, v0, v_240, vmin);
   }
   endTest();
 

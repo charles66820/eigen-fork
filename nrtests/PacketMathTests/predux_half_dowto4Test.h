@@ -15,30 +15,10 @@ void predux_half_dowto4Tests() {
 
 #ifdef __AVX__
   // Packet8f (256) -> Packet4f (128)
-  beginTest("full2half float tests");
-  {
-    MIN2MAX_FLOAT_VECTOR_LOADED(8);
-
-    vector128FloatTest(FUN2TEST, Packet8f, vmax);
-    vector128FloatTest(FUN2TEST, Packet8f, v36);
-    vector128FloatTest(FUN2TEST, Packet8f, v0);
-    vector128FloatTest(FUN2TEST, Packet8f, v_240);
-    vector128FloatTest(FUN2TEST, Packet8f, vmin);
-  }
-  endTest();
+  min2maxGenericTest("full2half float tests", FUN2TEST, vector128FloatTest, Packet8f, min2MaxTests, MIN2MAX_FLOAT_VECTOR_LOADED, 8)
 
   // Packet8i (256) -> Packet4i (128)
-  beginTest("full2half int tests");
-  {
-    MIN2MAX_INT_VECTOR_LOADED(8);
-
-    vector128IntTest(FUN2TEST, Packet8i, vmax);
-    vector128IntTest(FUN2TEST, Packet8i, v36);
-    vector128IntTest(FUN2TEST, Packet8i, v0);
-    vector128IntTest(FUN2TEST, Packet8i, v_240);
-    vector128IntTest(FUN2TEST, Packet8i, vmin);
-  }
-  endTest();
+  min2maxGenericTest("full2half int tests", FUN2TEST, vector128IntTest, Packet8i, min2MaxTests, MIN2MAX_INT_VECTOR_LOADED, 8)
 
 #endif
 

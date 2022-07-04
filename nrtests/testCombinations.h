@@ -1,6 +1,26 @@
 #ifndef EIGEN_MIPP_TEST_COMBINATIONS_H
 #define EIGEN_MIPP_TEST_COMBINATIONS_H
 
+#define boolTests(test, name, template, vtrue, vfalse) \
+  test(name, template, vtrue);                         \
+  test(name, template, vfalse);
+
+#define allTwoBoolTests(test, name, template, vtrue, vfalse) \
+  test(name, template, vtrue, vtrue);                        \
+  test(name, template, vtrue, vfalse);                       \
+  test(name, template, vfalse, vtrue);                       \
+  test(name, template, vfalse, vfalse);
+
+#define allThreeBoolTests(test, name, template, vtrue, vfalse) \
+  test(name, template, vtrue, vtrue, vtrue);                   \
+  test(name, template, vtrue, vtrue, vfalse);                  \
+  test(name, template, vtrue, vfalse, vtrue);                  \
+  test(name, template, vtrue, vfalse, vfalse);                 \
+  test(name, template, vfalse, vtrue, vtrue);                  \
+  test(name, template, vfalse, vtrue, vfalse);                 \
+  test(name, template, vfalse, vfalse, vtrue);                 \
+  test(name, template, vfalse, vfalse, vfalse);
+
 #define min2MaxTests(test, name, template, max, pos, zero, neg, min) \
   test(name, template, max);                                         \
   test(name, template, pos);                                         \
