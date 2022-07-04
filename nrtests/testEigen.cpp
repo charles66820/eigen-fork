@@ -64,5 +64,7 @@
 #include "PacketMathTests/padd_maskTest.h"
 #include "PacketMathTests/ploadu_maskTest.h"
 #include "PacketMathTests/pstoreu_maskTest.h"
+#include "PacketMathTests/pbroadcast4Test.h"
+#include "PacketMathTests/punpackpTest.h"
 
 int main() { executeTest(); }

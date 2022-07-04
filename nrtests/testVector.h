@@ -81,7 +81,7 @@
   loadVector(vector##size, float, v36, Packet##size##f, 36.7f, 0.0f);      \
   loadVector(vector##size, float, v0, Packet##size##f, 0.0f, 0.0f);        \
   loadVector(vector##size, float, v_240, Packet##size##f, -240.98f, 0.0f); \
-  loadVector(vector##size, float, vmin, Packet##size##f, FLT_MAX, 0.0f);
+  loadVector(vector##size, float, vmin, Packet##size##f, FLT_MIN, 0.0f);
 
 #define MIN2MAX_DOUBLE_VECTOR_LOADED(size)                                  \
   loadVector(vector##size, double, vmax, Packet##size##d, DBL_MAX, 0.0d);   \
@@ -106,14 +106,14 @@
   loadVector(vector##size, Eigen::half, v36, Packet##size##h, half(36.7f), half(0.0f));      \
   loadVector(vector##size, Eigen::half, v0, Packet##size##h, half(0.0f), half(0.0f));        \
   loadVector(vector##size, Eigen::half, v_240, Packet##size##h, half(-240.98f), half(0.0f)); \
-  loadVector(vector##size, Eigen::half, vmin, Packet##size##h, half(FLT_MAX), half(0.0f));
+  loadVector(vector##size, Eigen::half, vmin, Packet##size##h, half(FLT_MIN), half(0.0f));
 
 #define MIN2MAX_BFLOAT16_VECTOR_LOADED(size)                                                       \
   loadVector(vector##size, bfloat16, vmax, Packet##size##bf, bfloat16(FLT_MAX), bfloat16(0.0f));   \
   loadVector(vector##size, bfloat16, v36, Packet##size##bf, bfloat16(36.7f), bfloat16(0.0f));      \
   loadVector(vector##size, bfloat16, v0, Packet##size##bf, bfloat16(0.0f), bfloat16(0.0f));        \
   loadVector(vector##size, bfloat16, v_240, Packet##size##bf, bfloat16(-240.98f), bfloat16(0.0f)); \
-  loadVector(vector##size, bfloat16, vmin, Packet##size##bf, bfloat16(FLT_MAX), bfloat16(0.0f));
+  loadVector(vector##size, bfloat16, vmin, Packet##size##bf, bfloat16(FLT_MIN), bfloat16(0.0f));
 
 #define MIN2MAX_LONG_VECTOR_LOADED(size)                               \
   loadVector(vector##size, long, vmax, Packet##size##l, LONG_MAX, 0L); \

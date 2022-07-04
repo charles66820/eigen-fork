@@ -35,8 +35,7 @@ void pset1Tests() {
   // Packet16b (128)
   beginTest("16 bool tests");
 
-  vector128BoolTest(FUN2TEST, Packet16b, true);
-  vector128BoolTest(FUN2TEST, Packet16b, false);
+  boolTests(vector128BoolTest, FUN2TEST, Packet16b, true, false);
   vector128BoolTest(FUN2TEST, Packet16b, CHAR_MAX);
   vector128BoolTest(FUN2TEST, Packet16b, CHAR_MIN);
 

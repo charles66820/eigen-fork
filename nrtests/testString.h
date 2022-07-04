@@ -7,14 +7,14 @@
 
 #define printableToString(type)           \
   template <>                             \
-  std::string toString<type>(type arg1) { \
+  std::string toString<type>(const type arg1) { \
     std::stringstream stream;             \
     stream << arg1;                       \
     return stream.str();                  \
   }
 
 template <typename Arg1>
-std::string toString(Arg1 arg1) {
+std::string toString(const Arg1 arg1) {
   return "?";
 }
 
@@ -35,7 +35,7 @@ printableToString(mipp::Reg<float>);
 printableToString(mipp::Reg<double>);
 
 template <typename Arg1, typename... Args>
-std::string toString(Arg1 arg1, Args... args) {
+std::string toString(const Arg1 arg1, const Args... args) {
   return toString(arg1) + ", " + toString(args...);
 }
 
