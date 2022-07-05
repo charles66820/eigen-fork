@@ -101,7 +101,6 @@ void ptransposeTests() {
   }
   endTest();
 
-  // Packet16b (128)
   beginTest("16 bool 16⨉16 mat tests");
   {
     bool tab1[16 * 16] = {true,  true,  false, true,  false, false, false, false,
