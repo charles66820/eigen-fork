@@ -66,5 +66,6 @@
 #include "PacketMathTests/pstoreu_maskTest.h"
 #include "PacketMathTests/pbroadcast4Test.h"
 #include "PacketMathTests/punpackpTest.h"
+#include "PacketMathTests/ptransposeTest.h"
 
 int main() { executeTest(); }
