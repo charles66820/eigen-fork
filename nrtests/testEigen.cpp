@@ -1,4 +1,5 @@
 #define VERBOSE false
+#define DISABLE_VECTOR_PRINTING true
 
 #include "testUtil.h"
 #include "testVector.h"

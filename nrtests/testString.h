@@ -1,16 +1,21 @@
 #ifndef EIGEN_MIPP_TEST_STRING_H
 #define EIGEN_MIPP_TEST_STRING_H
 
+#if defined(DISABLE_VECTOR_PRINTING) && DISABLE_VECTOR_PRINTING == 1
+#define to_string(...) toString()
+#define to_stringTab(...) toString()
+std::string toString() { return "?"; }
+#else
 // code inspered by
 // https://stackoverflow.com/questions/22964799/how-to-print-a-variable-number-of-parameters-with-a-macro
-#define to_sting(...) toString(__VA_ARGS__)
+#define to_string(...) toString(__VA_ARGS__)
 
-#define printableToString(type)           \
-  template <>                             \
+#define printableToString(type)                 \
+  template <>                                   \
   std::string toString<type>(const type arg1) { \
-    std::stringstream stream;             \
-    stream << arg1;                       \
-    return stream.str();                  \
+    std::stringstream stream;                   \
+    stream << arg1;                             \
+    return stream.str();                        \
   }
 
 template <typename Arg1>
@@ -39,6 +44,8 @@ std::string toString(const Arg1 arg1, const Args... args) {
   return toString(arg1) + ", " + toString(args...);
 }
 
+#define to_stringTab(tab, size) toStringTab(tab, size)
+
 template <typename T>
 std::string toStringTab(T *tab, size_t size) {
   std::stringstream stream;
@@ -52,5 +59,6 @@ std::string toStringTab(T *tab, size_t size) {
   stream << "]";
   return stream.str();
 }
+#endif
 
 #endif  // EIGEN_MIPP_TEST_STRING_H

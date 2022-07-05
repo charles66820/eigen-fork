@@ -15,8 +15,7 @@
     std::stringstream matStr;                                                                               \
     matStr << std::endl;                                                                                    \
     for (size_t i = 0; i < N; i++) {                                                                        \
-      mipp::Reg<type> rMat = cast(matC.packet[i]);                                                          \
-      matStr << rMat << std::endl;                                                                          \
+      matStr << mipp::Reg<type>(cast(matC.packet[i])) << std::endl;                                         \
     }                                                                                                       \
                                                                                                             \
     name(matC);                                                                                             \
