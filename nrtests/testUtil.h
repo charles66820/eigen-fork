@@ -4,7 +4,6 @@
 #include <iostream>
 #include <Eigen/Core>
 #include "testCombinations.h"
-#include "testString.h"
 
 using namespace Eigen::internal;
 using namespace Eigen;
@@ -47,21 +46,38 @@ using namespace Eigen;
 
 #define COMMA ,
 
+#include "testString.h"
+
 #define TO_STRING(s) #s
+#if defined(DISABLE_PRINTING) && DISABLE_PRINTING == 1
+#define printTestTitle(t)
+#else
 #define printTestTitle(t) std::cout << "================ " TO_STRING(t) " ================" << std::endl;
+#endif
 
 // Return test state
 bool hasFailed = false;
+bool hasFailedGlobal = false;
 typedef void (*test_fun)();
 static std::vector<test_fun> testFunctions;
 
+#if defined(DISABLE_PRINTING) && DISABLE_PRINTING == 1
+#define beginTest(str) \
+  hasFailed = false
+
+#define endTest() \
+  hasFailedGlobal |= hasFailed;
+#else
 #define beginTest(str) \
   std::cout << str;    \
   hasFailed = false
 
 #define endTest() \
-  if (!hasFailed) std::cout << " done" << std::endl;
+  if (!hasFailed) std::cout << " done" << std::endl; \
+  hasFailedGlobal |= hasFailed;
+#endif
 
+// auto run tests
 int addTest2list(test_fun fun) {
   testFunctions.push_back(fun);
   return 0;
@@ -75,6 +91,7 @@ int addTest2list(test_fun fun) {
 
 // prints
 bool printWhenDiff(bool isDiffer, std::string msg, std::string newVal, std::string oldVal) {
+#if !defined(DISABLE_PRINTING) || DISABLE_PRINTING == 0
   if (!hasFailed && isDiffer) std::cout << " failed" << std::endl;
 
   if (isDiffer || VERBOSE)
@@ -82,6 +99,7 @@ bool printWhenDiff(bool isDiffer, std::string msg, std::string newVal, std::stri
               << "old " << oldVal << std::endl
               << "new " << newVal << std::endl
               << std::endl;
+#endif
   return isDiffer;
 }
 

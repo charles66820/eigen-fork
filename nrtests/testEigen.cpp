@@ -1,5 +1,6 @@
 #define VERBOSE false
-#define DISABLE_VECTOR_PRINTING true
+#define DISABLE_VECTOR_PRINTING false
+#define DISABLE_PRINTING false
 
 #include "testUtil.h"
 #include "testVector.h"
@@ -69,4 +70,8 @@
 #include "PacketMathTests/punpackpTest.h"
 #include "PacketMathTests/ptransposeTest.h"
 
-int main() { executeTest(); }
+int main() {
+  executeTest();
+
+  return hasFailedGlobal ? EXIT_FAILURE : EXIT_SUCCESS;
+}
