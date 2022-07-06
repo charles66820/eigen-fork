@@ -101,13 +101,14 @@ bool printWhenDiff(bool isDiffer, std::string msg, std::string newVal, std::stri
   return isDiffer;
 }
 
+#define bitwiseEq(vA, vB) !mipp::testz(vA != vB)
 // Macros for test that return vector
-#define vectorSingleTypeTest(type, cast, name, eigenType, args...)                                                \
-  {                                                                                                               \
-    mipp::Reg<type> rVar = cast(name<eigenType>(args));                                                           \
-    mipp::Reg<type> rVar_old = cast(name##_old<eigenType>(args));                                                 \
-    hasFailed |= printWhenDiff(!mipp::testz(rVar != rVar_old), #name "<" #eigenType ">(" + to_string(args) + ")", \
-                               to_string(rVar), to_string(rVar_old));                                             \
+#define vectorSingleTypeTest(type, cast, name, eigenType, args...)                                           \
+  {                                                                                                          \
+    mipp::Reg<type> rVar = cast(name<eigenType>(args));                                                      \
+    mipp::Reg<type> rVar_old = cast(name##_old<eigenType>(args));                                            \
+    hasFailed |= printWhenDiff(bitwiseEq(rVar, rVar_old), #name "<" #eigenType ">(" + to_string(args) + ")", \
+                               to_string(rVar), to_string(rVar_old));                                        \
   }
 
 // Macros for test that return vector

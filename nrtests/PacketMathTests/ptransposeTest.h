@@ -34,7 +34,7 @@
       matRStr << rMatR << std::endl;                                                                        \
       matRStr_old << rMatR_old << std::endl;                                                                \
                                                                                                             \
-      isEqual |= mipp::testz(rMatR != rMatR_old);                                                           \
+      isEqual |= !bitwiseEq(rMatR, rMatR_old);                                                           \
     }                                                                                                       \
                                                                                                             \
     hasFailed |= printWhenDiff(!isEqual, #name "(" + matStr.str() + ")", matRStr.str(), matRStr_old.str()); \

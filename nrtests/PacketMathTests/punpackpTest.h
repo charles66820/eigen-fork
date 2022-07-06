@@ -37,8 +37,8 @@
     mipp::Reg<type> res3_old = cast(p4_old[2]);                                                                        \
     mipp::Reg<type> res4_old = cast(p4_old[3]);                                                                        \
                                                                                                                        \
-    hasFailed |= printWhenDiff((!mipp::testz(res1 != res1_old) || !mipp::testz(res2 != res2_old) ||                    \
-                                !mipp::testz(res3 != res3_old) || !mipp::testz(res4 != res4_old)),                     \
+    hasFailed |= printWhenDiff((bitwiseEq(res1, res1_old) || bitwiseEq(res2, res2_old) || bitwiseEq(res3, res3_old) || \
+                                bitwiseEq(res4, res4_old)),                                                            \
                                #name "(" + to_string(tab) + ")",                                                       \
                                to_string(res1) + to_string(res2) + to_string(res3) + to_string(res4),                  \
                                to_string(res1_old) + to_string(res2_old) + to_string(res3_old) + to_string(res4_old)); \

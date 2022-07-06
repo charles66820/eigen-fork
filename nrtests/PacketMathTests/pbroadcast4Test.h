@@ -7,35 +7,35 @@
 #undef FUN2TEST
 #define FUN2TEST pbroadcast4
 
-#define vector4Test_imp(type, cast, name, eigenType, tab)                                                         \
-  {                                                                                                               \
-    eigenType res1;                                                                                               \
-    eigenType res2;                                                                                               \
-    eigenType res3;                                                                                               \
-    eigenType res4;                                                                                               \
-    name<eigenType>(tab, res1, res2, res3, res4);                                                                 \
-                                                                                                                  \
-    eigenType res1_old;                                                                                           \
-    eigenType res2_old;                                                                                           \
-    eigenType res3_old;                                                                                           \
-    eigenType res4_old;                                                                                           \
-    name##_old<eigenType>(tab, res1_old, res2_old, res3_old, res4_old);                                           \
-                                                                                                                  \
-    mipp::Reg<type> res1M = cast(res1);                                                                           \
-    mipp::Reg<type> res2M = cast(res2);                                                                           \
-    mipp::Reg<type> res3M = cast(res3);                                                                           \
-    mipp::Reg<type> res4M = cast(res4);                                                                           \
-    mipp::Reg<type> res1M_old = cast(res1_old);                                                                   \
-    mipp::Reg<type> res2M_old = cast(res2_old);                                                                   \
-    mipp::Reg<type> res3M_old = cast(res3_old);                                                                   \
-    mipp::Reg<type> res4M_old = cast(res4_old);                                                                   \
-                                                                                                                  \
-    hasFailed |=                                                                                                  \
-        printWhenDiff((!mipp::testz(res1M != res1M_old) || !mipp::testz(res2M != res2M_old) ||                    \
-                       !mipp::testz(res3M != res3M_old) || !mipp::testz(res4M != res4M_old)),                     \
-                      #name "<" #eigenType ">(" + to_string(tab) + ", P*, P*, P*, P*)",                           \
-                      to_string(res1M) + to_string(res2M) + to_string(res3M) + to_string(res4M),                  \
-                      to_string(res1M_old) + to_string(res2M_old) + to_string(res3M_old) + to_string(res4M_old)); \
+#define vector4Test_imp(type, cast, name, eigenType, tab)                                                           \
+  {                                                                                                                 \
+    eigenType res1;                                                                                                 \
+    eigenType res2;                                                                                                 \
+    eigenType res3;                                                                                                 \
+    eigenType res4;                                                                                                 \
+    name<eigenType>(tab, res1, res2, res3, res4);                                                                   \
+                                                                                                                    \
+    eigenType res1_old;                                                                                             \
+    eigenType res2_old;                                                                                             \
+    eigenType res3_old;                                                                                             \
+    eigenType res4_old;                                                                                             \
+    name##_old<eigenType>(tab, res1_old, res2_old, res3_old, res4_old);                                             \
+                                                                                                                    \
+    mipp::Reg<type> res1M = cast(res1);                                                                             \
+    mipp::Reg<type> res2M = cast(res2);                                                                             \
+    mipp::Reg<type> res3M = cast(res3);                                                                             \
+    mipp::Reg<type> res4M = cast(res4);                                                                             \
+    mipp::Reg<type> res1M_old = cast(res1_old);                                                                     \
+    mipp::Reg<type> res2M_old = cast(res2_old);                                                                     \
+    mipp::Reg<type> res3M_old = cast(res3_old);                                                                     \
+    mipp::Reg<type> res4M_old = cast(res4_old);                                                                     \
+                                                                                                                    \
+    hasFailed |=                                                                                                    \
+        printWhenDiff((bitwiseEq(res1M, res1M_old) || bitwiseEq(res2M, res2M_old) || bitwiseEq(res3M, res3M_old) || \
+                       bitwiseEq(res4M, res4M_old)),                                                                \
+                      #name "<" #eigenType ">(" + to_string(tab) + ", P*, P*, P*, P*)",                             \
+                      to_string(res1M) + to_string(res2M) + to_string(res3M) + to_string(res4M),                    \
+                      to_string(res1M_old) + to_string(res2M_old) + to_string(res3M_old) + to_string(res4M_old));   \
   }
 
 #define vector4Test(type, cast, name, eigenType, tab) vector4Test_imp(type, cast, name, eigenType, tab)
