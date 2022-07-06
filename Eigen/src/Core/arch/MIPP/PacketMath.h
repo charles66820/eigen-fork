@@ -758,6 +758,7 @@ struct scalar_div_cost<double, true> {
 
 template <>
 struct unpacket_traits<Packet4f> {
+  typedef float mippType;
   typedef float type;
   typedef Packet4f half;
   typedef Packet4i integer_packet;
@@ -771,6 +772,7 @@ struct unpacket_traits<Packet4f> {
 };
 template <>
 struct unpacket_traits<Packet2d> {
+  typedef double mippType;
   typedef double type;
   typedef Packet2d half;
   enum {
@@ -783,6 +785,7 @@ struct unpacket_traits<Packet2d> {
 };
 template <>
 struct unpacket_traits<Packet4i> {
+  typedef int32_t mippType;
   typedef int type;
   typedef Packet4i half;
   enum {
@@ -795,6 +798,7 @@ struct unpacket_traits<Packet4i> {
 };
 template <>
 struct unpacket_traits<Packet16b> {
+  typedef int8_t mippType;
   typedef bool type;
   typedef Packet16b half;
   enum {
@@ -812,6 +816,7 @@ struct unpacket_traits<Packet16b> {
 
 template <>
 struct unpacket_traits<Packet8f> {
+  typedef float mippType;
   typedef float type;
   typedef Packet4f half;
   typedef Packet8i integer_packet;
@@ -830,6 +835,7 @@ struct unpacket_traits<Packet8f> {
 };
 template <>
 struct unpacket_traits<Packet4d> {
+  typedef double mippType;
   typedef double type;
   typedef Packet2d half;
   enum {
@@ -842,6 +848,7 @@ struct unpacket_traits<Packet4d> {
 };
 template <>
 struct unpacket_traits<Packet8i> {
+  typedef int32_t mippType;
   typedef int type;
   typedef Packet4i half;
   enum {
@@ -855,6 +862,7 @@ struct unpacket_traits<Packet8i> {
 #ifdef EIGEN_VECTORIZE_AVX2
 template <>
 struct unpacket_traits<Packet4l> {
+  typedef int64_t mippType;
   typedef int64_t type;
   typedef Packet4l half;
   enum {
@@ -868,6 +876,7 @@ struct unpacket_traits<Packet4l> {
 #endif
 template <>
 struct unpacket_traits<Packet8bf> {
+  typedef int16_t mippType;
   typedef bfloat16 type;
   typedef Packet8bf half;
   enum {
@@ -881,6 +890,7 @@ struct unpacket_traits<Packet8bf> {
 
 template <>
 struct unpacket_traits<Packet8h> {
+  typedef int16_t mippType;
   typedef Eigen::half type;
   typedef Packet8h half;
   enum {
@@ -898,6 +908,7 @@ struct unpacket_traits<Packet8h> {
 
 template <>
 struct unpacket_traits<Packet16f> {
+  typedef float mippType;
   typedef float type;
   typedef Packet8f half;
   typedef Packet16i integer_packet;
@@ -913,6 +924,7 @@ struct unpacket_traits<Packet16f> {
 };
 template <>
 struct unpacket_traits<Packet8d> {
+  typedef double mippType;
   typedef double type;
   typedef Packet4d half;
   typedef uint8_t mask_t;
@@ -927,6 +939,7 @@ struct unpacket_traits<Packet8d> {
 };
 template <>
 struct unpacket_traits<Packet16i> {
+  typedef int32_t mippType;
   typedef int type;
   typedef Packet8i half;
   enum {
@@ -940,6 +953,7 @@ struct unpacket_traits<Packet16i> {
 
 template <>
 struct unpacket_traits<Packet16h> {
+  typedef int16_t mippType;
   typedef Eigen::half type;
   typedef Packet8h half;
   enum {
@@ -953,6 +967,7 @@ struct unpacket_traits<Packet16h> {
 
 template <>
 struct unpacket_traits<Packet16bf> {
+  typedef int16_t mippType;
   typedef bfloat16 type;
   typedef Packet8bf half;
   enum {
@@ -966,23 +981,77 @@ struct unpacket_traits<Packet16bf> {
 
 #endif
 
+template<typename Packet>
+struct rawValue
+{
+  typedef typename unpacket_traits<Packet>::mippType mippType;
+  typedef typename unpacket_traits<Packet>::type type;
+  EIGEN_ALWAYS_INLINE operator mippType() { return value; }
+  EIGEN_ALWAYS_INLINE rawValue(const type v) : value(v) {}
+  type value;
+};
+
+#ifdef EIGEN_VECTORIZE_AVX
+template<>
+struct rawValue<Packet8h>
+{
+  typedef typename unpacket_traits<Packet8h>::mippType mippType;
+  typedef typename unpacket_traits<Packet8h>::type type;
+  EIGEN_ALWAYS_INLINE operator mippType() { return value.x; }
+  EIGEN_ALWAYS_INLINE rawValue(const type& v) : value(v) {}
+  type value;
+};
+
+template<>
+struct rawValue<Packet8bf>
+{
+  typedef typename unpacket_traits<Packet8bf>::mippType mippType;
+  typedef typename unpacket_traits<Packet8bf>::type type;
+  EIGEN_ALWAYS_INLINE operator mippType() { return value.value; }
+  EIGEN_ALWAYS_INLINE rawValue(const type& v) : value(v) {}
+  type value;
+};
+#endif
+
+#ifdef EIGEN_VECTORIZE_AVX512
+template<>
+struct rawValue<Packet16h>
+{
+  typedef typename unpacket_traits<Packet16h>::mippType mippType;
+  typedef typename unpacket_traits<Packet16h>::type type;
+  EIGEN_ALWAYS_INLINE operator mippType() { return value.x; }
+  EIGEN_ALWAYS_INLINE rawValue(const type& v) : value(v) {}
+  type value;
+};
+
+template<>
+struct rawValue<Packet16bf>
+{
+  typedef typename unpacket_traits<Packet16bf>::mippType mippType;
+  typedef typename unpacket_traits<Packet16bf>::type type;
+  EIGEN_ALWAYS_INLINE operator mippType() { return value.value; }
+  EIGEN_ALWAYS_INLINE rawValue(const type& v) : value(v) {}
+  type value;
+};
+#endif
+
 #ifdef EIGEN_VECTORIZE_SSE
 
 template <>
-EIGEN_STRONG_INLINE Packet4f pset1<Packet4f>(const float& from) {
-  return mippCast(mipp::set1<float>(from));
+EIGEN_STRONG_INLINE Packet4f pset1<Packet4f>(const unpacket_traits<Packet4f>::type& from) {
+  return mippCast(mipp::set1<unpacket_traits<Packet4f>::mippType>(rawValue<Packet4f>(from)));
 }
 template <>
-EIGEN_STRONG_INLINE Packet2d pset1<Packet2d>(const double& from) {
-  return mippCast(mipp::set1<double>(from));
+EIGEN_STRONG_INLINE Packet2d pset1<Packet2d>(const unpacket_traits<Packet2d>::type& from) {
+  return mippCast(mipp::set1<unpacket_traits<Packet2d>::mippType>(rawValue<Packet2d>(from)));
 }
 template <>
-EIGEN_STRONG_INLINE Packet4i pset1<Packet4i>(const int& from) {
-  return mippCast(mipp::set1<int>(from));
+EIGEN_STRONG_INLINE Packet4i pset1<Packet4i>(const unpacket_traits<Packet4i>::type& from) {
+  return mippCast(mipp::set1<unpacket_traits<Packet4i>::mippType>(rawValue<Packet4i>(from)));
 }
 template <>
-EIGEN_STRONG_INLINE Packet16b pset1<Packet16b>(const bool& from) {
-  return mippCast(mipp::set1<int8_t>(static_cast<char>(from)));
+EIGEN_STRONG_INLINE Packet16b pset1<Packet16b>(const unpacket_traits<Packet16b>::type& from) {
+  return mippCast(mipp::set1<unpacket_traits<Packet16b>::mippType>(rawValue<Packet16b>(from)));
 }
 
 template <>
@@ -2481,16 +2550,16 @@ EIGEN_STRONG_INLINE __m128i float2half(__m128 f) {
 #ifdef EIGEN_VECTORIZE_AVX
 
 template <>
-EIGEN_STRONG_INLINE Packet8f pset1<Packet8f>(const float& from) {
-  return mippCast(mipp::set1<float>(from));
+EIGEN_STRONG_INLINE Packet8f pset1<Packet8f>(const unpacket_traits<Packet8f>::type& from) {
+  return mippCast(mipp::set1<unpacket_traits<Packet8f>::mippType>(rawValue<Packet8f>(from)));
 }
 template <>
-EIGEN_STRONG_INLINE Packet4d pset1<Packet4d>(const double& from) {
-  return mippCast(mipp::set1<double>(from));
+EIGEN_STRONG_INLINE Packet4d pset1<Packet4d>(const unpacket_traits<Packet4d>::type& from) {
+  return mippCast(mipp::set1<unpacket_traits<Packet4d>::mippType>(rawValue<Packet4d>(from)));
 }
 template <>
-EIGEN_STRONG_INLINE Packet8i pset1<Packet8i>(const int& from) {
-  return mippCast(mipp::set1<int>(from));
+EIGEN_STRONG_INLINE Packet8i pset1<Packet8i>(const unpacket_traits<Packet8i>::type& from) {
+  return mippCast(mipp::set1<unpacket_traits<Packet8i>::mippType>(rawValue<Packet8i>(from)));
 }
 
 template <>
@@ -3617,8 +3686,8 @@ EIGEN_STRONG_INLINE Packet4d pblend(const Selector<4>& ifPacket, const Packet4d&
 // Packet math for Eigen::half
 
 template <>
-EIGEN_STRONG_INLINE Packet8h pset1<Packet8h>(const Eigen::half& from) {
-  return mippCast(mipp::set1<short>(numext::bit_cast<numext::uint16_t>(from)));
+EIGEN_STRONG_INLINE Packet8h pset1<Packet8h>(const unpacket_traits<Packet8h>::type& from) {
+  return mippCast(mipp::set1<unpacket_traits<Packet8h>::mippType>(rawValue<Packet8h>(from)));
 }
 
 template <>
@@ -3648,17 +3717,17 @@ EIGEN_STRONG_INLINE void pstoreu<Eigen::half>(Eigen::half* to, const Packet8h& f
 
 template <>
 EIGEN_STRONG_INLINE Packet8h ploaddup<Packet8h>(const Eigen::half* from) {
-  const numext::uint16_t a = numext::bit_cast<numext::uint16_t>(from[0]);
-  const numext::uint16_t b = numext::bit_cast<numext::uint16_t>(from[1]);
-  const numext::uint16_t c = numext::bit_cast<numext::uint16_t>(from[2]);
-  const numext::uint16_t d = numext::bit_cast<numext::uint16_t>(from[3]);
+  const numext::uint16_t a = from[0].x;
+  const numext::uint16_t b = from[1].x;
+  const numext::uint16_t c = from[2].x;
+  const numext::uint16_t d = from[3].x;
   return _mm_set_epi16(d, d, c, c, b, b, a, a);
 }
 
 template <>
 EIGEN_STRONG_INLINE Packet8h ploadquad<Packet8h>(const Eigen::half* from) {
-  const numext::uint16_t a = numext::bit_cast<numext::uint16_t>(from[0]);
-  const numext::uint16_t b = numext::bit_cast<numext::uint16_t>(from[1]);
+  const numext::uint16_t a = from[0].x;
+  const numext::uint16_t b = from[1].x;
   return _mm_set_epi16(b, b, b, b, a, a, a, a);
 }
 
@@ -3826,14 +3895,14 @@ EIGEN_STRONG_INLINE Packet8h pdiv<Packet8h>(const Packet8h& a, const Packet8h& b
 
 template <>
 EIGEN_STRONG_INLINE Packet8h pgather<Eigen::half, Packet8h>(const Eigen::half* from, Index stride) {
-  const numext::uint16_t s0 = numext::bit_cast<numext::uint16_t>(from[0 * stride]);
-  const numext::uint16_t s1 = numext::bit_cast<numext::uint16_t>(from[1 * stride]);
-  const numext::uint16_t s2 = numext::bit_cast<numext::uint16_t>(from[2 * stride]);
-  const numext::uint16_t s3 = numext::bit_cast<numext::uint16_t>(from[3 * stride]);
-  const numext::uint16_t s4 = numext::bit_cast<numext::uint16_t>(from[4 * stride]);
-  const numext::uint16_t s5 = numext::bit_cast<numext::uint16_t>(from[5 * stride]);
-  const numext::uint16_t s6 = numext::bit_cast<numext::uint16_t>(from[6 * stride]);
-  const numext::uint16_t s7 = numext::bit_cast<numext::uint16_t>(from[7 * stride]);
+  const numext::uint16_t s0 = from[0 * stride].x;
+  const numext::uint16_t s1 = from[1 * stride].x;
+  const numext::uint16_t s2 = from[2 * stride].x;
+  const numext::uint16_t s3 = from[3 * stride].x;
+  const numext::uint16_t s4 = from[4 * stride].x;
+  const numext::uint16_t s5 = from[5 * stride].x;
+  const numext::uint16_t s6 = from[6 * stride].x;
+  const numext::uint16_t s7 = from[7 * stride].x;
   return _mm_set_epi16(s7, s6, s5, s4, s3, s2, s1, s0);
 }
 
@@ -4019,8 +4088,8 @@ EIGEN_STRONG_INLINE Packet8bf F32ToBf16(const Packet8f& a) {
 }
 
 template <>
-EIGEN_STRONG_INLINE Packet8bf pset1<Packet8bf>(const bfloat16& from) {
-  return mippCast(mipp::set1<short>(numext::bit_cast<numext::uint16_t>(from)));
+EIGEN_STRONG_INLINE Packet8bf pset1<Packet8bf>(const unpacket_traits<Packet8bf>::type& from) {
+  return mippCast(mipp::set1<unpacket_traits<Packet8bf>::mippType>(rawValue<Packet8bf>(from)));
 }
 
 template <>
@@ -4050,17 +4119,17 @@ EIGEN_STRONG_INLINE void pstoreu<bfloat16>(bfloat16* to, const Packet8bf& from) 
 
 template <>
 EIGEN_STRONG_INLINE Packet8bf ploaddup<Packet8bf>(const bfloat16* from) {
-  const numext::uint16_t a = numext::bit_cast<numext::uint16_t>(from[0]);
-  const numext::uint16_t b = numext::bit_cast<numext::uint16_t>(from[1]);
-  const numext::uint16_t c = numext::bit_cast<numext::uint16_t>(from[2]);
-  const numext::uint16_t d = numext::bit_cast<numext::uint16_t>(from[3]);
+  const numext::uint16_t a = from[0].value;
+  const numext::uint16_t b = from[1].value;
+  const numext::uint16_t c = from[2].value;
+  const numext::uint16_t d = from[3].value;
   return _mm_set_epi16(d, d, c, c, b, b, a, a);
 }
 
 template <>
 EIGEN_STRONG_INLINE Packet8bf ploadquad<Packet8bf>(const bfloat16* from) {
-  const numext::uint16_t a = numext::bit_cast<numext::uint16_t>(from[0]);
-  const numext::uint16_t b = numext::bit_cast<numext::uint16_t>(from[1]);
+  const numext::uint16_t a = from[0].value;
+  const numext::uint16_t b = from[1].value;
   return _mm_set_epi16(b, b, b, b, a, a, a, a);
 }
 
@@ -4185,14 +4254,14 @@ EIGEN_STRONG_INLINE Packet8bf pdiv<Packet8bf>(const Packet8bf& a, const Packet8b
 
 template <>
 EIGEN_STRONG_INLINE Packet8bf pgather<bfloat16, Packet8bf>(const bfloat16* from, Index stride) {
-  const numext::uint16_t s0 = numext::bit_cast<numext::uint16_t>(from[0 * stride]);
-  const numext::uint16_t s1 = numext::bit_cast<numext::uint16_t>(from[1 * stride]);
-  const numext::uint16_t s2 = numext::bit_cast<numext::uint16_t>(from[2 * stride]);
-  const numext::uint16_t s3 = numext::bit_cast<numext::uint16_t>(from[3 * stride]);
-  const numext::uint16_t s4 = numext::bit_cast<numext::uint16_t>(from[4 * stride]);
-  const numext::uint16_t s5 = numext::bit_cast<numext::uint16_t>(from[5 * stride]);
-  const numext::uint16_t s6 = numext::bit_cast<numext::uint16_t>(from[6 * stride]);
-  const numext::uint16_t s7 = numext::bit_cast<numext::uint16_t>(from[7 * stride]);
+  const numext::uint16_t s0 = from[0 * stride].value;
+  const numext::uint16_t s1 = from[1 * stride].value;
+  const numext::uint16_t s2 = from[2 * stride].value;
+  const numext::uint16_t s3 = from[3 * stride].value;
+  const numext::uint16_t s4 = from[4 * stride].value;
+  const numext::uint16_t s5 = from[5 * stride].value;
+  const numext::uint16_t s6 = from[6 * stride].value;
+  const numext::uint16_t s7 = from[7 * stride].value;
   return _mm_set_epi16(s7, s6, s5, s4, s3, s2, s1, s0);
 }
 
@@ -4295,8 +4364,8 @@ EIGEN_STRONG_INLINE void ptranspose(PacketBlock<Packet8bf, 4>& kernel) {
 
 #ifdef EIGEN_VECTORIZE_AVX2
 template <>
-EIGEN_STRONG_INLINE Packet4l pset1<Packet4l>(const int64_t& from) {
-  return mippCast(mipp::set1<long>(from));
+EIGEN_STRONG_INLINE Packet4l pset1<Packet4l>(const unpacket_traits<Packet4l>::type& from) {
+  return mippCast(mipp::set1<unpacket_traits<Packet4l>::mippType>(rawValue<Packet4l>(from)));
 }
 template <>
 EIGEN_STRONG_INLINE Packet4l pzero(const Packet4l& /*a*/) {
