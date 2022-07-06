@@ -252,13 +252,13 @@ struct mippCast {
   EIGEN_ALWAYS_INLINE operator Packet4i() { return INT_CAST_128_FROM_MIPP(value); }
   EIGEN_ALWAYS_INLINE operator Packet16b() { return INT_CAST_128_FROM_MIPP(value); }
 #endif
-// #ifdef EIGEN_VECTORIZE_AVX
+#ifdef EIGEN_VECTORIZE_AVX
   EIGEN_ALWAYS_INLINE operator Packet8f() { return FLOAT_CAST_256_FROM_MIPP(value); }
   EIGEN_ALWAYS_INLINE operator Packet4d() { return DOUBLE_CAST_256_FROM_MIPP(value); }
   EIGEN_ALWAYS_INLINE operator Packet8i() { return INT_CAST_256_FROM_MIPP(value); }
   EIGEN_ALWAYS_INLINE operator Packet8h() { return INT_CAST_128_FROM_MIPP(value); }
   EIGEN_ALWAYS_INLINE operator Packet8bf() { return INT_CAST_128_FROM_MIPP(value); }
-// #endif
+#endif
 #ifdef EIGEN_VECTORIZE_AVX2
   EIGEN_ALWAYS_INLINE operator Packet4l() { return INT_CAST_256_FROM_MIPP(value); }
 #endif
