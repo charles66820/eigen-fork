@@ -62,17 +62,15 @@ typedef void (*test_fun)();
 static std::vector<test_fun> testFunctions;
 
 #if defined(DISABLE_PRINTING) && DISABLE_PRINTING == 1
-#define beginTest(str) \
-  hasFailed = false
+#define beginTest(str) hasFailed = false
 
-#define endTest() \
-  hasFailedGlobal |= hasFailed;
+#define endTest() hasFailedGlobal |= hasFailed;
 #else
 #define beginTest(str) \
   std::cout << str;    \
   hasFailed = false
 
-#define endTest() \
+#define endTest()                                    \
   if (!hasFailed) std::cout << " done" << std::endl; \
   hasFailedGlobal |= hasFailed;
 #endif
@@ -113,17 +111,17 @@ bool printWhenDiff(bool isDiffer, std::string msg, std::string newVal, std::stri
   }
 
 // Macros for test that return vector
-#define refSingleTypeGenericTest(type, name, eigenType, size, attr, args...)                                     \
-  {                                                                                                              \
-    type to[size] attr;                                                                                          \
-    memset(to, 0, sizeof to);                                                                                    \
-    type to_old[size] attr;                                                                                      \
-    memset(to_old, 0, sizeof to_old);                                                                            \
-                                                                                                                 \
-    name<eigenType>(to, args);                                                                                   \
-    name##_old<eigenType>(to_old, args);                                                                         \
-    hasFailed |= printWhenDiff(!std::equal(to, to + size, to_old), #name "<" #type ">(" + to_string(args) + ")", \
-                               to_stringTab(to, size), to_stringTab(to_old, size));                              \
+#define refSingleTypeGenericTest(type, name, eigenType, size, attr, args...)                                          \
+  {                                                                                                                   \
+    type to[size] attr;                                                                                               \
+    memset(to, 0, sizeof to);                                                                                         \
+    type to_old[size] attr;                                                                                           \
+    memset(to_old, 0, sizeof to_old);                                                                                 \
+                                                                                                                      \
+    name<eigenType>(to, args);                                                                                        \
+    name##_old<eigenType>(to_old, args);                                                                              \
+    hasFailed |= printWhenDiff(!std::equal(to, to + size, to_old), #name "<" #eigenType ">(" + to_string(args) + ")", \
+                               to_stringTab(to, size), to_stringTab(to_old, size));                                   \
   }
 
 #define refSingleType(name, type, size, args...) \

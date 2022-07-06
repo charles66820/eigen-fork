@@ -243,6 +243,13 @@ struct mippCast {
 #ifdef EIGEN_VECTORIZE_AVX2
   EIGEN_ALWAYS_INLINE mippCast(const Packet4l& v) : value(INT_CAST_256_TO_MIPP(v)) {}
 #endif
+#ifdef EIGEN_VECTORIZE_AVX512
+  EIGEN_ALWAYS_INLINE mippCast(const Packet16f& v) : value(FLOAT_CAST_512_TO_MIPP(v)) {}
+  EIGEN_ALWAYS_INLINE mippCast(const Packet8d& v) : value(DOUBLE_CAST_512_TO_MIPP(v)) {}
+  EIGEN_ALWAYS_INLINE mippCast(const Packet16i& v) : value(INT_CAST_512_TO_MIPP(v)) {}
+  EIGEN_ALWAYS_INLINE mippCast(const Packet16h& v) : value(INT_CAST_256_TO_MIPP(v)) {}
+  EIGEN_ALWAYS_INLINE mippCast(const Packet16bf& v) : value(INT_CAST_256_TO_MIPP(v)) {}
+#endif
 
   // Cast
   // EIGEN_ALWAYS_INLINE operator mipp::reg&() { return value; }
@@ -261,6 +268,13 @@ struct mippCast {
 #endif
 #ifdef EIGEN_VECTORIZE_AVX2
   EIGEN_ALWAYS_INLINE operator Packet4l() { return INT_CAST_256_FROM_MIPP(value); }
+#endif
+#ifdef EIGEN_VECTORIZE_AVX512
+  EIGEN_ALWAYS_INLINE operator Packet16f() { return FLOAT_CAST_512_FROM_MIPP(value); }
+  EIGEN_ALWAYS_INLINE operator Packet8d() { return DOUBLE_CAST_512_FROM_MIPP(value); }
+  EIGEN_ALWAYS_INLINE operator Packet16i() { return INT_CAST_512_FROM_MIPP(value); }
+  EIGEN_ALWAYS_INLINE operator Packet16h() { return INT_CAST_256_FROM_MIPP(value); }
+  EIGEN_ALWAYS_INLINE operator Packet16bf() { return INT_CAST_256_FROM_MIPP(value); }
 #endif
   mipp::reg value;
 };
