@@ -37,7 +37,36 @@ std::string printVecBits(std::string str, const __m256& var) {
   return res.str();
 }
 
+std::string printVecBits(std::string str, const __m512& var) {
+  std::stringstream res;
+  res << str << " bits = ";
+  res << "{ ";
+  res << printBytes((u_char*)&var[0], sizeof(float));
+  res << "|";
+  res << printBytes((u_char*)&var[1], sizeof(float));
+  res << "|";
+  res << printBytes((u_char*)&var[2], sizeof(float));
+  res << "|";
+  res << printBytes((u_char*)&var[3], sizeof(float));
+  res << "|";
+  res << printBytes((u_char*)&var[4], sizeof(float));
+  res << "|";
+  res << printBytes((u_char*)&var[5], sizeof(float));
+  res << "|";
+  res << printBytes((u_char*)&var[6], sizeof(float));
+  res << "|";
+  res << printBytes((u_char*)&var[7], sizeof(float));
+  res << "}\n";
+  return res.str();
+}
+
+std::string printVecsBits(const __m128& va, const __m128& vb) {
+  return "\n" + printVecBits("new", va) + printVecBits("old", vb);
+}
 std::string printVecsBits(const __m256& va, const __m256& vb) {
+  return "\n" + printVecBits("new", va) + printVecBits("old", vb);
+}
+std::string printVecsBits(const __m512& va, const __m512& vb) {
   return "\n" + printVecBits("new", va) + printVecBits("old", vb);
 }
 #endif  // EIGEN_MIPP_BITS_PRINTING_H
