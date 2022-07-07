@@ -101,14 +101,26 @@ bool printWhenDiff(bool isDiffer, std::string msg, std::string newVal, std::stri
   return isDiffer;
 }
 
-#define bitwiseEq(vA, vB) !mipp::testz(vA != vB)
+#if defined(__AVX512F__)
+#define bitwiseEq(vA, vB) !mipp::testz(vA != vB) // Bug with testz ?
+// #elif defined(__AVX2__)
+// #define bitwiseEq(vA, vB) !mipp::testz(vA != vB)
+#elif defined(__AVX__)
+#define bitwiseEq(vA, vB) _mm256_movemask_ps(_mm256_xor_ps(vA.r, vB.r)) != 0
+#elif defined(__SSE__)
+#define bitwiseEq(vA, vB) _mm_movemask_ps(_mm_xor_ps(vA.r, vB.r)) != 0
+#endif
+
+#include "bitsPrinting.h"
+
 // Macros for test that return vector
-#define vectorSingleTypeTest(type, cast, name, eigenType, args...)                                           \
-  {                                                                                                          \
-    mipp::Reg<type> rVar = cast(name<eigenType>(args));                                                      \
-    mipp::Reg<type> rVar_old = cast(name##_old<eigenType>(args));                                            \
-    hasFailed |= printWhenDiff(bitwiseEq(rVar, rVar_old), #name "<" #eigenType ">(" + to_string(args) + ")", \
-                               to_string(rVar), to_string(rVar_old));                                        \
+#define vectorSingleTypeTest(type, cast, name, eigenType, args...)                                                    \
+  {                                                                                                                   \
+    mipp::Reg<type> rVar = cast(name<eigenType>(args));                                                               \
+    mipp::Reg<type> rVar_old = cast(name##_old<eigenType>(args));                                                     \
+    hasFailed |= printWhenDiff(bitwiseEq(rVar, rVar_old),                                                             \
+                               #name "<" #eigenType ">(" + to_string(args) + ")" + printVecsBits(rVar.r, rVar_old.r), \
+                               to_string(rVar), to_string(rVar_old));                                                 \
   }
 
 // Macros for test that return vector
