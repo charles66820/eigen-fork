@@ -1219,20 +1219,28 @@ EIGEN_STRONG_INLINE Packet4f pnegate(const Packet4f& a) {
   // mipp::Reg<float> rb = rmask.r;
   // mipp::Reg<float> res = ra ^ rb;
   // return mippCast(res.r);
-  return psub(pzero(a), a);
+  mipp::Reg<float> ra = (mipp::reg)mippCast(a);
+  mipp::Reg<float> res = ra.neg(mipp::Msk<mipp::N<float>()>(true));
+  return mippCast(res.r);
+  // return psub(pzero(a), a); // don't work
 }
 template <>
 EIGEN_STRONG_INLINE Packet2d pnegate(const Packet2d& a) {
-  return psub(pzero(a), a);
+  mipp::Reg<double> ra = (mipp::reg)mippCast(a);
+  mipp::Reg<double> res = ra.neg(mipp::Msk<mipp::N<double>()>(true));
+  return mippCast(res.r);
+  // return psub(pzero(a), a); // don't work
 }
 template <>
 EIGEN_STRONG_INLINE Packet4i pnegate(const Packet4i& a) {
-  return psub(pset1<Packet4i>(0), a);
+  // return psub(pset1<Packet4i>(0), a);
+  return psub(pzero(a), a);
 }
 
 template <>
 EIGEN_STRONG_INLINE Packet16b pnegate(const Packet16b& a) {
-  return psub(pset1<Packet16b>(false), a);
+  // return psub(pset1<Packet16b>(false), a);
+  return psub(pzero(a), a);
 }
 
 template <>
