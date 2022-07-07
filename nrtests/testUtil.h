@@ -125,21 +125,28 @@ bool printWhenDiff(bool isDiffer, std::string msg, std::string newVal, std::stri
                         to_string(rVar), to_string(rVar_old));                                                 \
     } catch (const std::exception& e) {                                                                        \
       std::cerr << e.what() << std::endl;                                                                      \
+      std::cout << " failed" << std::endl;                                                                     \
     }                                                                                                          \
   }
 
 // Macros for test that return vector
-#define refSingleTypeGenericTest(type, name, eigenType, size, attr, args...)                                          \
-  {                                                                                                                   \
-    type to[size] attr;                                                                                               \
-    memset(to, 0, sizeof to);                                                                                         \
-    type to_old[size] attr;                                                                                           \
-    memset(to_old, 0, sizeof to_old);                                                                                 \
-                                                                                                                      \
-    name<eigenType>(to, args);                                                                                        \
-    name##_old<eigenType>(to_old, args);                                                                              \
-    hasFailed |= printWhenDiff(!std::equal(to, to + size, to_old), #name "<" #eigenType ">(" + to_string(args) + ")", \
-                               to_stringTab(to, size), to_stringTab(to_old, size));                                   \
+#define refSingleTypeGenericTest(type, name, eigenType, size, attr, args...)                                   \
+  {                                                                                                            \
+    try {                                                                                                      \
+      type to[size] attr;                                                                                      \
+      memset(to, 0, sizeof to);                                                                                \
+      type to_old[size] attr;                                                                                  \
+      memset(to_old, 0, sizeof to_old);                                                                        \
+                                                                                                               \
+      name<eigenType>(to, args);                                                                               \
+      name##_old<eigenType>(to_old, args);                                                                     \
+      hasFailed |=                                                                                             \
+          printWhenDiff(!std::equal(to, to + size, to_old), #name "<" #eigenType ">(" + to_string(args) + ")", \
+                        to_stringTab(to, size), to_stringTab(to_old, size));                                   \
+    } catch (const std::exception& e) {                                                                        \
+      std::cerr << e.what() << std::endl;                                                                      \
+      std::cout << " failed" << std::endl;                                                                     \
+    }                                                                                                          \
   }
 
 #define refSingleType(name, type, size, args...) \
@@ -148,12 +155,17 @@ bool printWhenDiff(bool isDiffer, std::string msg, std::string newVal, std::stri
 #define uRefSingleType(name, type, size, args...) refSingleTypeGenericTest(type, name, type, size, , args)
 
 // Macros for test that return scalar
-#define scalarSingleTypeGenericTest(type, name, eigenType, args...)                                               \
-  {                                                                                                               \
-    type val = name<eigenType>(args);                                                                             \
-    type val_old = name##_old<eigenType>(args);                                                                   \
-    hasFailed |= printWhenDiff(val != val_old, #name "<" #eigenType ">(" + to_string(args) + ")", to_string(val), \
-                               to_string(val_old));                                                               \
+#define scalarSingleTypeGenericTest(type, name, eigenType, args...)                                                 \
+  {                                                                                                                 \
+    try {                                                                                                           \
+      type val = name<eigenType>(args);                                                                             \
+      type val_old = name##_old<eigenType>(args);                                                                   \
+      hasFailed |= printWhenDiff(val != val_old, #name "<" #eigenType ">(" + to_string(args) + ")", to_string(val), \
+                                 to_string(val_old));                                                               \
+    } catch (const std::exception& e) {                                                                             \
+      std::cerr << e.what() << std::endl;                                                                           \
+      std::cout << " failed" << std::endl;                                                                          \
+    }                                                                                                               \
   }
 
 #define scalarSingleTypeTest(type, name, eigenType, args...) scalarSingleTypeGenericTest(type, name, eigenType, args)

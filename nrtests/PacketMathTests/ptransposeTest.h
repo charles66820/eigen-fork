@@ -7,37 +7,42 @@
 #undef FUN2TEST
 #define FUN2TEST ptranspose
 
-#define vectorMatTest_imp(type, cast, name, eigenType, N, tab)                                              \
-  {                                                                                                         \
-    MAT(eigenType, N, matC, tab);                                                                           \
-    MAT(eigenType, N, matC_old, tab);                                                                       \
-                                                                                                            \
-    std::stringstream matStr;                                                                               \
-    matStr << std::endl;                                                                                    \
-    for (size_t i = 0; i < N; i++) {                                                                        \
-      matStr << mipp::Reg<type>(cast(matC.packet[i])) << std::endl;                                         \
-    }                                                                                                       \
-                                                                                                            \
-    name(matC);                                                                                             \
-    name##_old(matC_old);                                                                                   \
-                                                                                                            \
-    std::stringstream matRStr;                                                                              \
-    std::stringstream matRStr_old;                                                                          \
-    matRStr << std::endl;                                                                                   \
-    matRStr_old << std::endl;                                                                               \
-                                                                                                            \
-    bool isEqual = false;                                                                                   \
-    for (size_t i = 0; i < N; i++) {                                                                        \
-      mipp::Reg<type> rMatR = cast(matC.packet[i]);                                                         \
-      mipp::Reg<type> rMatR_old = cast(matC_old.packet[i]);                                                 \
-                                                                                                            \
-      matRStr << rMatR << std::endl;                                                                        \
-      matRStr_old << rMatR_old << std::endl;                                                                \
-                                                                                                            \
-      isEqual |= !bitwiseEq(rMatR, rMatR_old);                                                           \
-    }                                                                                                       \
-                                                                                                            \
-    hasFailed |= printWhenDiff(!isEqual, #name "(" + matStr.str() + ")", matRStr.str(), matRStr_old.str()); \
+#define vectorMatTest_imp(type, cast, name, eigenType, N, tab)                                                \
+  {                                                                                                           \
+    try {                                                                                                     \
+      MAT(eigenType, N, matC, tab);                                                                           \
+      MAT(eigenType, N, matC_old, tab);                                                                       \
+                                                                                                              \
+      std::stringstream matStr;                                                                               \
+      matStr << std::endl;                                                                                    \
+      for (size_t i = 0; i < N; i++) {                                                                        \
+        matStr << mipp::Reg<type>(cast(matC.packet[i])) << std::endl;                                         \
+      }                                                                                                       \
+                                                                                                              \
+      name(matC);                                                                                             \
+      name##_old(matC_old);                                                                                   \
+                                                                                                              \
+      std::stringstream matRStr;                                                                              \
+      std::stringstream matRStr_old;                                                                          \
+      matRStr << std::endl;                                                                                   \
+      matRStr_old << std::endl;                                                                               \
+                                                                                                              \
+      bool isEqual = false;                                                                                   \
+      for (size_t i = 0; i < N; i++) {                                                                        \
+        mipp::Reg<type> rMatR = cast(matC.packet[i]);                                                         \
+        mipp::Reg<type> rMatR_old = cast(matC_old.packet[i]);                                                 \
+                                                                                                              \
+        matRStr << rMatR << std::endl;                                                                        \
+        matRStr_old << rMatR_old << std::endl;                                                                \
+                                                                                                              \
+        isEqual |= !bitwiseEq(rMatR, rMatR_old);                                                              \
+      }                                                                                                       \
+                                                                                                              \
+      hasFailed |= printWhenDiff(!isEqual, #name "(" + matStr.str() + ")", matRStr.str(), matRStr_old.str()); \
+    } catch (const std::exception& e) {                                                                       \
+      std::cerr << e.what() << std::endl;                                                                     \
+      std::cout << " failed" << std::endl;                                                                    \
+    }                                                                                                         \
   }
 
 #define vectorMatTest(type, cast, name, eigenType, args...) vectorMatTest_imp(type, cast, name, eigenType, args)
