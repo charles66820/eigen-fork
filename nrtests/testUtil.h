@@ -102,7 +102,7 @@ bool printWhenDiff(bool isDiffer, std::string msg, std::string newVal, std::stri
 }
 
 #if defined(__AVX512F__)
-#define bitwiseEq(vA, vB) !mipp::testz(vA != vB) // Bug with testz ?
+#define bitwiseEq(vA, vB) !mipp::testz(vA != vB)  // Bug with testz ?
 // #elif defined(__AVX2__)
 // #define bitwiseEq(vA, vB) !mipp::testz(vA != vB)
 #elif defined(__AVX__)
@@ -114,13 +114,18 @@ bool printWhenDiff(bool isDiffer, std::string msg, std::string newVal, std::stri
 #include "bitsPrinting.h"
 
 // Macros for test that return vector
-#define vectorSingleTypeTest(type, cast, name, eigenType, args...)                                                    \
-  {                                                                                                                   \
-    mipp::Reg<type> rVar = cast(name<eigenType>(args));                                                               \
-    mipp::Reg<type> rVar_old = cast(name##_old<eigenType>(args));                                                     \
-    hasFailed |= printWhenDiff(bitwiseEq(rVar, rVar_old),                                                             \
-                               #name "<" #eigenType ">(" + to_string(args) + ")" + printVecsBits(rVar.r, rVar_old.r), \
-                               to_string(rVar), to_string(rVar_old));                                                 \
+#define vectorSingleTypeTest(type, cast, name, eigenType, args...)                                             \
+  {                                                                                                            \
+    try {                                                                                                      \
+      mipp::Reg<type> rVar = cast(name<eigenType>(args));                                                      \
+      mipp::Reg<type> rVar_old = cast(name##_old<eigenType>(args));                                            \
+      hasFailed |=                                                                                             \
+          printWhenDiff(bitwiseEq(rVar, rVar_old),                                                             \
+                        #name "<" #eigenType ">(" + to_string(args) + ")" + printVecsBits(rVar.r, rVar_old.r), \
+                        to_string(rVar), to_string(rVar_old));                                                 \
+    } catch (const std::exception& e) {                                                                        \
+      std::cerr << e.what() << std::endl;                                                                      \
+    }                                                                                                          \
   }
 
 // Macros for test that return vector
