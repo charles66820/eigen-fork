@@ -1051,13 +1051,19 @@ struct rawValue<Packet16bf>
 
 #ifdef EIGEN_VECTORIZE_SSE
 
+template<typename Packet>
+EIGEN_DEVICE_FUNC inline Packet
+pset1_testfun(const typename unpacket_traits<Packet>::type& from) {
+  return mippCast(mipp::set1<typename unpacket_traits<Packet>::mippType>(rawValue<Packet>(from)));
+}
+
 template <>
-EIGEN_STRONG_INLINE Packet4f pset1<Packet4f>(const unpacket_traits<Packet4f>::type& from) {
-  return mippCast(mipp::set1<unpacket_traits<Packet4f>::mippType>(rawValue<Packet4f>(from)));
+EIGEN_STRONG_INLINE Packet4f pset1<Packet4f>(const typename unpacket_traits<Packet4f>::type& from) {
+  return pset1_testfun<Packet4f>(from);
 }
 template <>
-EIGEN_STRONG_INLINE Packet2d pset1<Packet2d>(const unpacket_traits<Packet2d>::type& from) {
-  return mippCast(mipp::set1<unpacket_traits<Packet2d>::mippType>(rawValue<Packet2d>(from)));
+EIGEN_STRONG_INLINE Packet2d pset1<Packet2d>(const typename unpacket_traits<Packet2d>::type& from) {
+  return pset1_testfun<Packet2d>(from);
 }
 template <>
 EIGEN_STRONG_INLINE Packet4i pset1<Packet4i>(const unpacket_traits<Packet4i>::type& from) {
