@@ -7,6 +7,9 @@
 
 #include "PacketMathOldFun.h"
 
+/*
+ * Test inlude. Comments / uncomments it to enable / disable the test !
+*/
 #include "PacketMathTests/pset1Test.h"
 #include "PacketMathTests/pzeroTest.h"
 #include "PacketMathTests/ploadTest.h"
